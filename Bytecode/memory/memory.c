@@ -12,6 +12,8 @@ void* reallocate(void* pointer, size_t oldSize, size_t newSize){
 
     void* result = realloc(pointer, newSize);
     if(result == NULL) exit(1);
+    if(newSize > oldSize)
+        memset(result + oldSize, 0, newSize - oldSize);
     return result;
 }
 

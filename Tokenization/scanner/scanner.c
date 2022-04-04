@@ -153,8 +153,7 @@ static void skipWhitespace(){
 //start: location in token, length: remaining # of chars in token
 //rest: remaining chars in token, type: type of token
 static TokenType checkKeyword(int16_t start, int16_t length, const int8_t* rest, TokenType type){
-    if(scanner.current - scanner.start == start + length && 
-       memcmp(scanner.start + start, rest, length) == 0){
+    if(scanner.current - scanner.start == start + length && memcmp(scanner.start + start, rest, length) == 0){
         return type;
     }
     return TOKEN_IDENTIFIER;
@@ -198,7 +197,7 @@ static TokenType identifierType(){  //V8 style!
         case 'i': 
             if(scanner.current - scanner.start > 1){
                 switch(scanner.start[1]){
-                    case 'f': return checkKeyword(2, 1, "f", TOKEN_IF);
+                    case 'f': return checkKeyword(2, 0, "", TOKEN_IF);
                     case 'n': return checkKeyword(2, 1, "n", TOKEN_IN);
                     case '=': return checkKeyword(2, 0, "", TOKEN_IEQ);
                 }
@@ -299,9 +298,13 @@ Token scanToken(){
     switch(c){
         //Parentheses+
         case '(': return makeToken(TOKEN_LEFT_PAREN);
-        case ')': return makeToken(TOKEN_RIGHT_PAREN);
+        case ')': 
+            if(compareChar('>')) return makeToken(TOKEN_RPARENGT);
+            return makeTwoCharToken('{', TOKEN_RPARENLBRACE, TOKEN_RIGHT_PAREN);
         case '{': return makeToken(TOKEN_LEFT_BRACE);
-        case '}': return makeToken(TOKEN_RIGHT_BRACE);
+        case '}':
+            if(compareChar('>')) return makeToken(TOKEN_RBRACEGT);
+            return makeTwoCharToken('(', TOKEN_RBRACELPAREN, TOKEN_RIGHT_BRACE);
         case '[': return makeToken(TOKEN_LEFT_BRACK);
         case ']': return makeToken(TOKEN_RIGHT_BRACK);
 
@@ -321,6 +324,8 @@ Token scanToken(){
         case '=': return makeTwoCharToken('=', TOKEN_EQEQ, TOKEN_EQ);
         case '<':                                   //Might need to modify for functions
             if(compareChar('<')) return makeToken(TOKEN_LTLT);
+            if(compareChar('{')) return makeToken(TOKEN_LTLBRACE);
+            if(compareChar('(')) return makeToken(TOKEN_LTLPAREN);
             return makeTwoCharToken('=', TOKEN_LTEQ, TOKEN_LT);
         case '>':                                   //Might need to modify for functions
             if(compareChar('>')) return makeTwoCharToken('>', TOKEN_GTGTGT, TOKEN_GTGT);

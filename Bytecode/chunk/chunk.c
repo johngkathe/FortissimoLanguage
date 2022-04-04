@@ -12,10 +12,10 @@ int16_t addConstant(Chunk* chunk, Value value){
 void initChunk(Chunk* chunk){
     chunk->count = 0;
     chunk->capacity = 0;
-    chunk->code = NULL;
+    chunk->code = NULL;     //HERE
     chunk->lineCount = 0;
     chunk->lineCapacity = 0;
-    chunk->lines = NULL;
+    chunk->lines = NULL;    //HERE
     initValueArray(&chunk->constants);
 }
 
@@ -67,7 +67,7 @@ void writeChunk(Chunk* chunk, uint8_t byte, int16_t line){
     chunk->code[chunk->count] = byte;
     chunk->count++;
 
-    if(chunk->lineCount > 0 && chunk->lines[chunk->lineCount -1].line == line){ return;}
+    if(chunk->lineCount > 0 && chunk->lines[chunk->lineCount - 1].line == line) return;
 
     if(chunk->lineCapacity < chunk->lineCount + 1){
         int16_t oldCapacity = chunk->lineCapacity;

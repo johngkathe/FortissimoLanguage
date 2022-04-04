@@ -11,6 +11,12 @@ typedef enum {
     TOKEN_RIGHT_BRACE,  //'}'                       @@@@@@@@@@@@@@@@@@@@
     TOKEN_LEFT_BRACK,   //'['                       @@@@@@@@@@@@@@@@@@@@
     TOKEN_RIGHT_BRACK,  //']'                       @@@@@@@@@@@@@@@@@@@@
+    TOKEN_LTLBRACE,     //'<{': Start parameterless function. @@@@@@@@@@
+    TOKEN_RBRACEGT,     //'}>': End void function.  @@@@@@@@@@@@@@@@@@@@
+    TOKEN_LTLPAREN,     //'<(': Start of parameterized function. @@@@@@@
+    TOKEN_RPARENLBRACE, //'){': Second half of start of parameterized function.
+    TOKEN_RBRACELPAREN, //'}(': Start of non-void return parameter of function.
+    TOKEN_RPARENGT,     //')>': Second half of return parameter of function.
 
     //Punctuation.
     TOKEN_BANG,         //'!'                       @@@@@@@@@@@@@@@@@@@@

@@ -2,8 +2,8 @@
 
 #Compiler and Flags
 CXX = gcc
-CXXFLAGS = -std=c99
-LDFLAGS = -Wall -Wextra -lm -ggdb3 -O0 -save-temps
+CXXFLAGS = -std=c99 -g -Wall -Wextra -ggdb3 -O0 -save-temps
+LDFLAGS = -lm 
 
 #Executable
 EXEC = fortissimo_bytecode
