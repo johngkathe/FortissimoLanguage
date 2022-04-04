@@ -85,7 +85,6 @@ static int16_t constantInstruction(const int8_t* name, Chunk* chunk, int16_t off
     if(&chunk->constants.values[constant] == NULL) printf("NULL");
     else printValue(chunk->constants.values[constant]);
     printf("'\n");
-    printf("debug\n");;
     return offset + 2;
 }
 
