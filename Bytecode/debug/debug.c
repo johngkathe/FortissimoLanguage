@@ -82,7 +82,8 @@ int16_t disassembleInstruction(Chunk* chunk, int16_t offset){
 static int16_t constantInstruction(const int8_t* name, Chunk* chunk, int16_t offset){
     uint8_t constant = chunk->code[offset + 1];
     printf("%-16s %4d '", name, constant);
-    if(&chunk->constants.values[constant] == NULL) printf("NULL");
+    if(!chunk->constants.values || &chunk->constants.values[constant] == NULL)
+        printf("NULL");
     else printValue(chunk->constants.values[constant]);
     printf("'\n");
     return offset + 2;
@@ -92,7 +93,9 @@ static int16_t longConstantInstruction(const int8_t* name, Chunk* chunk, int16_t
     uint32_t constant = chunk->code[offset + 1] | (chunk->code[offset + 2] << 8)
                                                | (chunk->code[offset + 3] << 16);
     printf("%-16s %4d '", name, constant);
-    printValue(chunk->constants.values[constant]);
+    if(!chunk->constants.values || &chunk->constants.values[constant] == NULL)
+        printf("NULL");
+    else printValue(chunk->constants.values[constant]);
     printf("'\n");
     return offset + 4;
 }
