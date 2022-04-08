@@ -41,13 +41,12 @@ isObjType:
 	.cfi_endproc
 .LFE0:
 	.size	isObjType, .-isObjType
-	.comm	vm,8288,32
-	.globl	initVM
-	.type	initVM, @function
-initVM:
+	.comm	scanner,24,16
+	.type	makeToken, @function
+makeToken:
 .LFB1:
-	.file 2 "VirtualMachine/vm/vm.c"
-	.loc 2 18 14
+	.file 2 "VirtualMachine/vm/../../Compilation/compiler/../../Tokenization/scanner/scanner.h"
+	.loc 2 193 39
 	.cfi_startproc
 	endbr64
 	pushq	%rbp
@@ -55,30 +54,51 @@ initVM:
 	.cfi_offset 6, -16
 	movq	%rsp, %rbp
 	.cfi_def_cfa_register 6
-	.loc 2 19 5
-	movl	$0, %eax
-	call	resetStack
-	.loc 2 20 16
-	movq	$0, 8280+vm(%rip)
-	.loc 2 22 5
-	leaq	8216+vm(%rip), %rdi
-	call	initTable@PLT
-	.loc 2 23 5
-	leaq	8256+vm(%rip), %rdi
-	call	initTable@PLT
-	.loc 2 24 1
-	nop
+	movq	%rdi, -40(%rbp)
+	movl	%esi, -44(%rbp)
+	.loc 2 195 16
+	movl	-44(%rbp), %eax
+	movl	%eax, -32(%rbp)
+	.loc 2 196 26
+	movq	scanner(%rip), %rax
+	.loc 2 196 17
+	movq	%rax, -24(%rbp)
+	.loc 2 197 37
+	movq	8+scanner(%rip), %rdx
+	.loc 2 197 55
+	movq	scanner(%rip), %rax
+	.loc 2 197 46
+	subq	%rax, %rdx
+	movq	%rdx, %rax
+	.loc 2 197 18
+	movw	%ax, -16(%rbp)
+	.loc 2 198 25
+	movzwl	16+scanner(%rip), %eax
+	.loc 2 198 16
+	movw	%ax, -14(%rbp)
+	.loc 2 199 12
+	movq	-40(%rbp), %rcx
+	movq	-32(%rbp), %rax
+	movq	-24(%rbp), %rdx
+	movq	%rax, (%rcx)
+	movq	%rdx, 8(%rcx)
+	movq	-16(%rbp), %rax
+	movq	%rax, 16(%rcx)
+	.loc 2 200 1
+	movq	-40(%rbp), %rax
 	popq	%rbp
 	.cfi_def_cfa 7, 8
 	ret
 	.cfi_endproc
 .LFE1:
-	.size	initVM, .-initVM
-	.globl	freeVM
-	.type	freeVM, @function
-freeVM:
+	.size	makeToken, .-makeToken
+	.comm	vm,8288,32
+	.globl	initVM
+	.type	initVM, @function
+initVM:
 .LFB2:
-	.loc 2 26 14
+	.file 3 "VirtualMachine/vm/vm.c"
+	.loc 3 18 14
 	.cfi_startproc
 	endbr64
 	pushq	%rbp
@@ -86,27 +106,30 @@ freeVM:
 	.cfi_offset 6, -16
 	movq	%rsp, %rbp
 	.cfi_def_cfa_register 6
-	.loc 2 28 5
-	leaq	8216+vm(%rip), %rdi
-	call	freeTable@PLT
-	.loc 2 29 5
-	leaq	8256+vm(%rip), %rdi
-	call	freeTable@PLT
-	.loc 2 30 5
+	.loc 3 19 5
 	movl	$0, %eax
-	call	freeObjects@PLT
-	.loc 2 31 1
+	call	resetStack
+	.loc 3 20 16
+	movq	$0, 8280+vm(%rip)
+	.loc 3 22 5
+	leaq	8216+vm(%rip), %rdi
+	call	initTable@PLT
+	.loc 3 23 5
+	leaq	8256+vm(%rip), %rdi
+	call	initTable@PLT
+	.loc 3 24 1
 	nop
 	popq	%rbp
 	.cfi_def_cfa 7, 8
 	ret
 	.cfi_endproc
 .LFE2:
-	.size	freeVM, .-freeVM
-	.type	resetStack, @function
-resetStack:
+	.size	initVM, .-initVM
+	.globl	freeVM
+	.type	freeVM, @function
+freeVM:
 .LFB3:
-	.loc 2 33 25
+	.loc 3 26 14
 	.cfi_startproc
 	endbr64
 	pushq	%rbp
@@ -114,16 +137,44 @@ resetStack:
 	.cfi_offset 6, -16
 	movq	%rsp, %rbp
 	.cfi_def_cfa_register 6
-	.loc 2 34 17
-	leaq	16+vm(%rip), %rax
-	movq	%rax, 8208+vm(%rip)
-	.loc 2 35 1
+	.loc 3 28 5
+	leaq	8216+vm(%rip), %rdi
+	call	freeTable@PLT
+	.loc 3 29 5
+	leaq	8256+vm(%rip), %rdi
+	call	freeTable@PLT
+	.loc 3 30 5
+	movl	$0, %eax
+	call	freeObjects@PLT
+	.loc 3 31 1
 	nop
 	popq	%rbp
 	.cfi_def_cfa 7, 8
 	ret
 	.cfi_endproc
 .LFE3:
+	.size	freeVM, .-freeVM
+	.type	resetStack, @function
+resetStack:
+.LFB4:
+	.loc 3 33 25
+	.cfi_startproc
+	endbr64
+	pushq	%rbp
+	.cfi_def_cfa_offset 16
+	.cfi_offset 6, -16
+	movq	%rsp, %rbp
+	.cfi_def_cfa_register 6
+	.loc 3 34 17
+	leaq	16+vm(%rip), %rax
+	movq	%rax, 8208+vm(%rip)
+	.loc 3 35 1
+	nop
+	popq	%rbp
+	.cfi_def_cfa 7, 8
+	ret
+	.cfi_endproc
+.LFE4:
 	.size	resetStack, .-resetStack
 	.section	.rodata
 .LC0:
@@ -131,8 +182,8 @@ resetStack:
 	.text
 	.type	runtimeError, @function
 runtimeError:
-.LFB4:
-	.loc 2 37 50
+.LFB5:
+	.loc 3 37 50
 	.cfi_startproc
 	endbr64
 	pushq	%rbp
@@ -148,7 +199,7 @@ runtimeError:
 	movq	%r8, -144(%rbp)
 	movq	%r9, -136(%rbp)
 	testb	%al, %al
-	je	.L9
+	je	.L11
 	movaps	%xmm0, -128(%rbp)
 	movaps	%xmm1, -112(%rbp)
 	movaps	%xmm2, -96(%rbp)
@@ -157,81 +208,81 @@ runtimeError:
 	movaps	%xmm5, -48(%rbp)
 	movaps	%xmm6, -32(%rbp)
 	movaps	%xmm7, -16(%rbp)
-.L9:
-	.loc 2 37 50
+.L11:
+	.loc 3 37 50
 	movq	%fs:40, %rax
 	movq	%rax, -184(%rbp)
 	xorl	%eax, %eax
-	.loc 2 39 4
+	.loc 3 39 4
 	movl	$8, -208(%rbp)
 	movl	$48, -204(%rbp)
 	leaq	16(%rbp), %rax
 	movq	%rax, -200(%rbp)
 	leaq	-176(%rbp), %rax
 	movq	%rax, -192(%rbp)
-	.loc 2 40 5
+	.loc 3 40 5
 	movq	stderr(%rip), %rax
 	leaq	-208(%rbp), %rdx
 	movq	-232(%rbp), %rcx
 	movq	%rcx, %rsi
 	movq	%rax, %rdi
 	call	vfprintf@PLT
-	.loc 2 42 5
+	.loc 3 42 5
 	movq	stderr(%rip), %rax
 	movq	%rax, %rsi
 	movl	$10, %edi
 	call	fputc@PLT
-	.loc 2 44 28
+	.loc 3 44 28
 	movq	8+vm(%rip), %rdx
-	.loc 2 44 35
+	.loc 3 44 35
 	movq	vm(%rip), %rax
-	.loc 2 44 41
+	.loc 3 44 41
 	movq	8(%rax), %rax
-	.loc 2 44 32
+	.loc 3 44 32
 	subq	%rax, %rdx
 	movq	%rdx, %rax
-	.loc 2 44 48
+	.loc 3 44 48
 	subq	$1, %rax
-	.loc 2 44 12
+	.loc 3 44 12
 	movq	%rax, -216(%rbp)
-	.loc 2 45 23
+	.loc 3 45 23
 	movq	vm(%rip), %rax
-	.loc 2 45 29
+	.loc 3 45 29
 	movq	40(%rax), %rax
-	.loc 2 45 36
+	.loc 3 45 36
 	movq	-216(%rbp), %rdx
 	salq	$2, %rdx
 	addq	%rdx, %rax
-	.loc 2 45 14
+	.loc 3 45 14
 	movzwl	2(%rax), %eax
 	movw	%ax, -218(%rbp)
-	.loc 2 46 5
+	.loc 3 46 5
 	movzwl	-218(%rbp), %edx
 	movq	stderr(%rip), %rax
 	leaq	.LC0(%rip), %rsi
 	movq	%rax, %rdi
 	movl	$0, %eax
 	call	fprintf@PLT
-	.loc 2 47 5
+	.loc 3 47 5
 	movl	$0, %eax
 	call	resetStack
-	.loc 2 48 1
+	.loc 3 48 1
 	nop
 	movq	-184(%rbp), %rax
 	xorq	%fs:40, %rax
-	je	.L10
+	je	.L12
 	call	__stack_chk_fail@PLT
-.L10:
+.L12:
 	leave
 	.cfi_def_cfa 7, 8
 	ret
 	.cfi_endproc
-.LFE4:
+.LFE5:
 	.size	runtimeError, .-runtimeError
 	.type	isFalsey, @function
 isFalsey:
-.LFB5:
-	.loc 2 50 33
+.LFB6:
+	.loc 3 50 33
 	.cfi_startproc
 	endbr64
 	pushq	%rbp
@@ -239,44 +290,44 @@ isFalsey:
 	.cfi_offset 6, -16
 	movq	%rsp, %rbp
 	.cfi_def_cfa_register 6
-	.loc 2 51 20
+	.loc 3 51 20
 	movl	16(%rbp), %eax
-	.loc 2 51 38
+	.loc 3 51 38
 	cmpl	$1, %eax
-	je	.L12
-	.loc 2 51 50 discriminator 2
+	je	.L14
+	.loc 3 51 50 discriminator 2
 	movl	16(%rbp), %eax
-	.loc 2 51 38 discriminator 2
+	.loc 3 51 38 discriminator 2
 	cmpl	$2, %eax
-	jne	.L13
-	.loc 2 51 84 discriminator 3
+	jne	.L15
+	.loc 3 51 84 discriminator 3
 	movzbl	32(%rbp), %eax
-	.loc 2 51 72 discriminator 3
+	.loc 3 51 72 discriminator 3
 	xorl	$1, %eax
-	.loc 2 51 69 discriminator 3
+	.loc 3 51 69 discriminator 3
 	testb	%al, %al
-	je	.L13
-.L12:
-	.loc 2 51 38 discriminator 5
-	movl	$1, %eax
-	jmp	.L14
-.L13:
-	.loc 2 51 38 is_stmt 0 discriminator 6
-	movl	$0, %eax
+	je	.L15
 .L14:
-	.loc 2 51 38 discriminator 8
+	.loc 3 51 38 discriminator 5
+	movl	$1, %eax
+	jmp	.L16
+.L15:
+	.loc 3 51 38 is_stmt 0 discriminator 6
+	movl	$0, %eax
+.L16:
+	.loc 3 51 38 discriminator 8
 	andl	$1, %eax
-	.loc 2 52 1 is_stmt 1 discriminator 8
+	.loc 3 52 1 is_stmt 1 discriminator 8
 	popq	%rbp
 	.cfi_def_cfa 7, 8
 	ret
 	.cfi_endproc
-.LFE5:
+.LFE6:
 	.size	isFalsey, .-isFalsey
 	.type	concatenate, @function
 concatenate:
-.LFB6:
-	.loc 2 54 26
+.LFB7:
+	.loc 3 54 26
 	.cfi_startproc
 	endbr64
 	pushq	%rbp
@@ -285,93 +336,93 @@ concatenate:
 	movq	%rsp, %rbp
 	.cfi_def_cfa_register 6
 	subq	$160, %rsp
-	.loc 2 54 26
+	.loc 3 54 26
 	movq	%fs:40, %rax
 	movq	%rax, -8(%rbp)
 	xorl	%eax, %eax
-	.loc 2 55 35
+	.loc 3 55 35
 	leaq	-80(%rbp), %rax
 	movq	%rax, %rdi
 	movl	$0, %eax
 	call	pop
-	.loc 2 55 16
+	.loc 3 55 16
 	movq	-64(%rbp), %rax
 	movq	%rax, -144(%rbp)
-	.loc 2 56 35
+	.loc 3 56 35
 	leaq	-48(%rbp), %rax
 	movq	%rax, %rdi
 	movl	$0, %eax
 	call	pop
-	.loc 2 56 16
+	.loc 3 56 16
 	movq	-32(%rbp), %rax
 	movq	%rax, -136(%rbp)
-	.loc 2 58 23
+	.loc 3 58 23
 	movq	-136(%rbp), %rax
 	movzwl	16(%rax), %eax
 	movl	%eax, %edx
-	.loc 2 58 35
+	.loc 3 58 35
 	movq	-144(%rbp), %rax
 	movzwl	16(%rax), %eax
-	.loc 2 58 32
+	.loc 3 58 32
 	addl	%edx, %eax
-	.loc 2 58 13
+	.loc 3 58 13
 	movw	%ax, -146(%rbp)
-	.loc 2 59 50
+	.loc 3 59 50
 	movswl	-146(%rbp), %eax
 	addl	$1, %eax
-	.loc 2 59 30
+	.loc 3 59 30
 	cltq
 	movq	%rax, %rdx
 	movl	$0, %esi
 	movl	$0, %edi
 	call	reallocate@PLT
 	movq	%rax, -128(%rbp)
-	.loc 2 60 30
+	.loc 3 60 30
 	movq	-136(%rbp), %rax
 	movzwl	16(%rax), %eax
-	.loc 2 60 5
+	.loc 3 60 5
 	movswq	%ax, %rdx
-	.loc 2 60 20
+	.loc 3 60 20
 	movq	-136(%rbp), %rax
 	movq	24(%rax), %rcx
-	.loc 2 60 5
+	.loc 3 60 5
 	movq	-128(%rbp), %rax
 	movq	%rcx, %rsi
 	movq	%rax, %rdi
 	call	memcpy@PLT
-	.loc 2 61 42
+	.loc 3 61 42
 	movq	-144(%rbp), %rax
 	movzwl	16(%rax), %eax
-	.loc 2 61 5
+	.loc 3 61 5
 	movswq	%ax, %rdx
-	.loc 2 61 32
+	.loc 3 61 32
 	movq	-144(%rbp), %rax
 	movq	24(%rax), %rax
-	.loc 2 61 21
+	.loc 3 61 21
 	movq	-136(%rbp), %rcx
 	movzwl	16(%rcx), %ecx
 	movswq	%cx, %rsi
-	.loc 2 61 18
+	.loc 3 61 18
 	movq	-128(%rbp), %rcx
 	addq	%rsi, %rcx
-	.loc 2 61 5
+	.loc 3 61 5
 	movq	%rax, %rsi
 	movq	%rcx, %rdi
 	call	memcpy@PLT
-	.loc 2 62 10
+	.loc 3 62 10
 	movswq	-146(%rbp), %rdx
 	movq	-128(%rbp), %rax
 	addq	%rdx, %rax
-	.loc 2 62 19
+	.loc 3 62 19
 	movb	$0, (%rax)
-	.loc 2 64 25
+	.loc 3 64 25
 	movswl	-146(%rbp), %edx
 	movq	-128(%rbp), %rax
 	movl	%edx, %esi
 	movq	%rax, %rdi
 	call	takeString@PLT
 	movq	%rax, -120(%rbp)
-	.loc 2 65 18
+	.loc 3 65 18
 	movq	$0, -112(%rbp)
 	movq	$0, -104(%rbp)
 	movq	$0, -96(%rbp)
@@ -379,25 +430,25 @@ concatenate:
 	movl	$14, -112(%rbp)
 	movq	-120(%rbp), %rax
 	movq	%rax, -96(%rbp)
-	.loc 2 65 5
+	.loc 3 65 5
 	pushq	-88(%rbp)
 	pushq	-96(%rbp)
 	pushq	-104(%rbp)
 	pushq	-112(%rbp)
 	call	push
 	addq	$32, %rsp
-	.loc 2 66 1
+	.loc 3 66 1
 	nop
 	movq	-8(%rbp), %rax
 	xorq	%fs:40, %rax
-	je	.L17
+	je	.L19
 	call	__stack_chk_fail@PLT
-.L17:
+.L19:
 	leave
 	.cfi_def_cfa 7, 8
 	ret
 	.cfi_endproc
-.LFE6:
+.LFE7:
 	.size	concatenate, .-concatenate
 	.section	.rodata
 .LC1:
@@ -418,8 +469,8 @@ concatenate:
 	.text
 	.type	run, @function
 run:
-.LFB7:
-	.loc 2 68 29
+.LFB8:
+	.loc 3 68 29
 	.cfi_startproc
 	endbr64
 	pushq	%rbp
@@ -432,28 +483,28 @@ run:
 	subq	$1536, %rsp
 	.cfi_offset 12, -24
 	.cfi_offset 3, -32
-	.loc 2 68 29
+	.loc 3 68 29
 	movq	%fs:40, %rax
 	movq	%rax, -24(%rbp)
 	xorl	%eax, %eax
-.L71:
+.L73:
 .LBB2:
-	.loc 2 106 5
+	.loc 3 106 5
 	leaq	.LC1(%rip), %rdi
 	movl	$0, %eax
 	call	printf@PLT
 .LBB3:
-	.loc 2 107 16
+	.loc 3 107 16
 	leaq	16+vm(%rip), %rax
 	movq	%rax, -1512(%rbp)
-	.loc 2 107 5
-	jmp	.L19
-.L20:
-	.loc 2 109 9 discriminator 3
+	.loc 3 107 5
+	jmp	.L21
+.L22:
+	.loc 3 109 9 discriminator 3
 	leaq	.LC2(%rip), %rdi
 	movl	$0, %eax
 	call	printf@PLT
-	.loc 2 110 9 discriminator 3
+	.loc 3 110 9 discriminator 3
 	movq	-1512(%rbp), %rax
 	pushq	24(%rax)
 	pushq	16(%rax)
@@ -461,105 +512,105 @@ run:
 	pushq	(%rax)
 	call	printValue@PLT
 	addq	$32, %rsp
-	.loc 2 111 9 discriminator 3
+	.loc 3 111 9 discriminator 3
 	leaq	.LC3(%rip), %rdi
 	movl	$0, %eax
 	call	printf@PLT
-	.loc 2 107 57 discriminator 3
+	.loc 3 107 57 discriminator 3
 	addq	$32, -1512(%rbp)
-.L19:
-	.loc 2 107 42 discriminator 1
+.L21:
+	.loc 3 107 42 discriminator 1
 	movq	8208+vm(%rip), %rax
-	.loc 2 107 5 discriminator 1
+	.loc 3 107 5 discriminator 1
 	cmpq	%rax, -1512(%rbp)
-	jb	.L20
+	jb	.L22
 .LBE3:
-	.loc 2 113 5
+	.loc 3 113 5
 	movl	$10, %edi
 	call	putchar@PLT
-	.loc 2 114 50
+	.loc 3 114 50
 	movq	8+vm(%rip), %rdx
-	.loc 2 114 58
+	.loc 3 114 58
 	movq	vm(%rip), %rax
-	.loc 2 114 64
+	.loc 3 114 64
 	movq	8(%rax), %rax
-	.loc 2 114 54
+	.loc 3 114 54
 	subq	%rax, %rdx
 	movq	%rdx, %rax
-	.loc 2 114 5
+	.loc 3 114 5
 	movswl	%ax, %edx
 	movq	vm(%rip), %rax
 	movl	%edx, %esi
 	movq	%rax, %rdi
 	call	disassembleInstruction@PLT
-	.loc 2 118 34
+	.loc 3 118 34
 	movq	8+vm(%rip), %rax
-	.loc 2 118 37
+	.loc 3 118 37
 	leaq	1(%rax), %rdx
 	movq	%rdx, 8+vm(%rip)
-	.loc 2 118 28
+	.loc 3 118 28
 	movzbl	(%rax), %eax
 	movb	%al, -1518(%rbp)
 	movzbl	-1518(%rbp), %eax
 	cmpl	$24, %eax
-	ja	.L71
+	ja	.L73
 	movl	%eax, %eax
 	leaq	0(,%rax,4), %rdx
-	leaq	.L23(%rip), %rax
+	leaq	.L25(%rip), %rax
 	movl	(%rdx,%rax), %eax
 	cltq
-	leaq	.L23(%rip), %rdx
+	leaq	.L25(%rip), %rdx
 	addq	%rdx, %rax
 	notrack jmp	*%rax
 	.section	.rodata
 	.align 4
 	.align 4
-.L23:
-	.long	.L46-.L23
-	.long	.L71-.L23
-	.long	.L45-.L23
-	.long	.L44-.L23
-	.long	.L43-.L23
-	.long	.L42-.L23
-	.long	.L41-.L23
-	.long	.L40-.L23
-	.long	.L39-.L23
-	.long	.L38-.L23
-	.long	.L37-.L23
-	.long	.L36-.L23
-	.long	.L35-.L23
-	.long	.L34-.L23
-	.long	.L33-.L23
-	.long	.L32-.L23
-	.long	.L31-.L23
-	.long	.L30-.L23
-	.long	.L29-.L23
-	.long	.L28-.L23
-	.long	.L27-.L23
-	.long	.L26-.L23
-	.long	.L25-.L23
-	.long	.L24-.L23
-	.long	.L22-.L23
+.L25:
+	.long	.L48-.L25
+	.long	.L73-.L25
+	.long	.L47-.L25
+	.long	.L46-.L25
+	.long	.L45-.L25
+	.long	.L44-.L25
+	.long	.L43-.L25
+	.long	.L42-.L25
+	.long	.L41-.L25
+	.long	.L40-.L25
+	.long	.L39-.L25
+	.long	.L38-.L25
+	.long	.L37-.L25
+	.long	.L36-.L25
+	.long	.L35-.L25
+	.long	.L34-.L25
+	.long	.L33-.L25
+	.long	.L32-.L25
+	.long	.L31-.L25
+	.long	.L30-.L25
+	.long	.L29-.L25
+	.long	.L28-.L25
+	.long	.L27-.L25
+	.long	.L26-.L25
+	.long	.L24-.L25
 	.text
-.L46:
+.L48:
 .LBB4:
 .LBB5:
-	.loc 2 120 37
+	.loc 3 120 37
 	movq	vm(%rip), %rax
-	.loc 2 120 54
+	.loc 3 120 54
 	movq	24(%rax), %rcx
-	.loc 2 120 66
+	.loc 3 120 66
 	movq	8+vm(%rip), %rax
-	.loc 2 120 69
+	.loc 3 120 69
 	leaq	1(%rax), %rdx
 	movq	%rdx, 8+vm(%rip)
-	.loc 2 120 63
+	.loc 3 120 63
 	movzbl	(%rax), %eax
 	movzbl	%al, %eax
-	.loc 2 120 61
+	.loc 3 120 61
 	salq	$5, %rax
 	addq	%rax, %rcx
-	.loc 2 120 23
+	.loc 3 120 23
 	movq	(%rcx), %rax
 	movq	8(%rcx), %rdx
 	movq	%rax, -1312(%rbp)
@@ -568,88 +619,88 @@ run:
 	movq	24(%rcx), %rdx
 	movq	%rax, -1296(%rbp)
 	movq	%rdx, -1288(%rbp)
-	.loc 2 121 17
+	.loc 3 121 17
 	pushq	-1288(%rbp)
 	pushq	-1296(%rbp)
 	pushq	-1304(%rbp)
 	pushq	-1312(%rbp)
 	call	push
 	addq	$32, %rsp
-	.loc 2 122 17
-	jmp	.L21
-.L45:
+	.loc 3 122 17
+	jmp	.L23
+.L47:
 .LBE5:
-	.loc 2 124 39
+	.loc 3 124 39
 	movq	$0, -1312(%rbp)
 	movq	$0, -1304(%rbp)
 	movq	$0, -1296(%rbp)
 	movq	$0, -1288(%rbp)
 	movl	$1, -1312(%rbp)
-	.loc 2 124 26
+	.loc 3 124 26
 	pushq	-1288(%rbp)
 	pushq	-1296(%rbp)
 	pushq	-1304(%rbp)
 	pushq	-1312(%rbp)
 	call	push
 	addq	$32, %rsp
-	.loc 2 124 13
-	jmp	.L21
-.L44:
-	.loc 2 125 40
+	.loc 3 124 13
+	jmp	.L23
+.L46:
+	.loc 3 125 40
 	movq	$0, -1312(%rbp)
 	movq	$0, -1304(%rbp)
 	movq	$0, -1296(%rbp)
 	movq	$0, -1288(%rbp)
 	movl	$2, -1312(%rbp)
 	movb	$1, -1296(%rbp)
-	.loc 2 125 27
+	.loc 3 125 27
 	pushq	-1288(%rbp)
 	pushq	-1296(%rbp)
 	pushq	-1304(%rbp)
 	pushq	-1312(%rbp)
 	call	push
 	addq	$32, %rsp
-	.loc 2 125 37
-	jmp	.L21
-.L43:
-	.loc 2 126 41
+	.loc 3 125 37
+	jmp	.L23
+.L45:
+	.loc 3 126 41
 	movq	$0, -1312(%rbp)
 	movq	$0, -1304(%rbp)
 	movq	$0, -1296(%rbp)
 	movq	$0, -1288(%rbp)
 	movl	$2, -1312(%rbp)
-	.loc 2 126 28
+	.loc 3 126 28
 	pushq	-1288(%rbp)
 	pushq	-1296(%rbp)
 	pushq	-1304(%rbp)
 	pushq	-1312(%rbp)
 	call	push
 	addq	$32, %rsp
-	.loc 2 126 37
-	jmp	.L21
-.L42:
-	.loc 2 127 26
+	.loc 3 126 37
+	jmp	.L23
+.L44:
+	.loc 3 127 26
 	leaq	-1552(%rbp), %rax
 	movq	%rax, %rdi
 	movl	$0, %eax
 	call	pop
-	.loc 2 127 13
-	jmp	.L21
-.L41:
-	.loc 2 129 32
+	.loc 3 127 13
+	jmp	.L23
+.L43:
+	.loc 3 129 32
 	movq	8248+vm(%rip), %rcx
-	.loc 2 129 44
+	.loc 3 129 44
 	movq	8+vm(%rip), %rax
-	.loc 2 129 47
+	.loc 3 129 47
 	leaq	1(%rax), %rdx
 	movq	%rdx, 8+vm(%rip)
-	.loc 2 129 41
+	.loc 3 129 41
 	movzbl	(%rax), %eax
 	movzbl	%al, %eax
-	.loc 2 129 39
+	.loc 3 129 39
 	salq	$5, %rax
 	leaq	(%rcx,%rax), %rbx
-	.loc 2 129 54
+	.loc 3 129 54
 	leaq	-1552(%rbp), %rax
 	movq	%rax, %rdi
 	movl	$0, %eax
@@ -662,44 +713,44 @@ run:
 	movq	-1528(%rbp), %rdx
 	movq	%rax, 16(%rbx)
 	movq	%rdx, 24(%rbx)
-	.loc 2 130 17
-	jmp	.L21
-.L40:
+	.loc 3 130 17
+	jmp	.L23
+.L42:
 .LBB6:
-	.loc 2 133 37
+	.loc 3 133 37
 	movq	8+vm(%rip), %rax
-	.loc 2 133 40
+	.loc 3 133 40
 	leaq	1(%rax), %rdx
 	movq	%rdx, 8+vm(%rip)
-	.loc 2 133 25
+	.loc 3 133 25
 	movzbl	(%rax), %eax
 	movb	%al, -1515(%rbp)
-	.loc 2 134 37
+	.loc 3 134 37
 	movq	8248+vm(%rip), %rax
-	.loc 2 134 44
+	.loc 3 134 44
 	movzbl	-1515(%rbp), %edx
 	salq	$5, %rdx
 	addq	%rdx, %rax
-	.loc 2 134 52
+	.loc 3 134 52
 	movl	(%rax), %eax
-	.loc 2 134 19
+	.loc 3 134 19
 	testl	%eax, %eax
-	jne	.L48
-	.loc 2 135 21
+	jne	.L50
+	.loc 3 135 21
 	leaq	.LC4(%rip), %rdi
 	movl	$0, %eax
 	call	runtimeError
-	.loc 2 136 28
+	.loc 3 136 28
 	movl	$2, %eax
-	jmp	.L70
-.L48:
-	.loc 2 138 32
+	jmp	.L72
+.L50:
+	.loc 3 138 32
 	movq	8248+vm(%rip), %rax
-	.loc 2 138 39
+	.loc 3 138 39
 	movzbl	-1515(%rbp), %edx
 	salq	$5, %rdx
 	leaq	(%rax,%rdx), %rbx
-	.loc 2 138 49
+	.loc 3 138 49
 	leaq	-1552(%rbp), %rax
 	movl	$0, %esi
 	movq	%rax, %rdi
@@ -712,25 +763,25 @@ run:
 	movq	-1528(%rbp), %rdx
 	movq	%rax, 16(%rbx)
 	movq	%rdx, 24(%rbx)
-	.loc 2 139 17
-	jmp	.L21
-.L39:
+	.loc 3 139 17
+	jmp	.L23
+.L41:
 .LBE6:
 .LBB7:
-	.loc 2 142 46
+	.loc 3 142 46
 	movq	8248+vm(%rip), %rcx
-	.loc 2 142 58
+	.loc 3 142 58
 	movq	8+vm(%rip), %rax
-	.loc 2 142 61
+	.loc 3 142 61
 	leaq	1(%rax), %rdx
 	movq	%rdx, 8+vm(%rip)
-	.loc 2 142 55
+	.loc 3 142 55
 	movzbl	(%rax), %eax
 	movzbl	%al, %eax
-	.loc 2 142 53
+	.loc 3 142 53
 	salq	$5, %rax
 	addq	%rax, %rcx
-	.loc 2 142 23
+	.loc 3 142 23
 	movq	(%rcx), %rax
 	movq	8(%rcx), %rdx
 	movq	%rax, -1312(%rbp)
@@ -739,44 +790,44 @@ run:
 	movq	24(%rcx), %rdx
 	movq	%rax, -1296(%rbp)
 	movq	%rdx, -1288(%rbp)
-	.loc 2 143 28
+	.loc 3 143 28
 	movl	-1312(%rbp), %eax
-	.loc 2 143 19
+	.loc 3 143 19
 	testl	%eax, %eax
-	jne	.L50
-	.loc 2 144 21
+	jne	.L52
+	.loc 3 144 21
 	leaq	.LC4(%rip), %rdi
 	movl	$0, %eax
 	call	runtimeError
-	.loc 2 145 28
+	.loc 3 145 28
 	movl	$2, %eax
 .LBE7:
-	.loc 2 136 28
-	jmp	.L70
-.L50:
+	.loc 3 136 28
+	jmp	.L72
+.L52:
 .LBB8:
-	.loc 2 147 17
+	.loc 3 147 17
 	pushq	-1288(%rbp)
 	pushq	-1296(%rbp)
 	pushq	-1304(%rbp)
 	pushq	-1312(%rbp)
 	call	push
 	addq	$32, %rsp
-	jmp	.L71
-.L38:
+	jmp	.L73
+.L40:
 .LBE8:
 .LBB9:
-	.loc 2 151 36
+	.loc 3 151 36
 	movq	8+vm(%rip), %rax
-	.loc 2 151 39
+	.loc 3 151 39
 	leaq	1(%rax), %rdx
 	movq	%rdx, 8+vm(%rip)
-	.loc 2 151 25
+	.loc 3 151 25
 	movzbl	(%rax), %eax
 	movb	%al, -1516(%rbp)
-	.loc 2 152 25
+	.loc 3 152 25
 	movzbl	-1516(%rbp), %eax
-	.loc 2 152 34
+	.loc 3 152 34
 	cltq
 	salq	$5, %rax
 	movq	%rax, %r12
@@ -793,20 +844,20 @@ run:
 	movq	-1528(%rbp), %rdx
 	movq	%rax, 16(%r12,%rbx)
 	movq	%rdx, 24(%r12,%rbx)
-	.loc 2 153 17
-	jmp	.L21
-.L37:
+	.loc 3 153 17
+	jmp	.L23
+.L39:
 .LBE9:
 .LBB10:
-	.loc 2 156 36
+	.loc 3 156 36
 	movq	8+vm(%rip), %rax
-	.loc 2 156 39
+	.loc 3 156 39
 	leaq	1(%rax), %rdx
 	movq	%rdx, 8+vm(%rip)
-	.loc 2 156 25
+	.loc 3 156 25
 	movzbl	(%rax), %eax
 	movb	%al, -1517(%rbp)
-	.loc 2 157 17
+	.loc 3 157 17
 	movzbl	-1517(%rbp), %eax
 	cltq
 	salq	$5, %rax
@@ -818,28 +869,28 @@ run:
 	pushq	(%rdx,%rax)
 	call	push
 	addq	$32, %rsp
-	.loc 2 158 17
-	jmp	.L21
-.L36:
+	.loc 3 158 17
+	jmp	.L23
+.L38:
 .LBE10:
 .LBB11:
-	.loc 2 161 27
+	.loc 3 161 27
 	leaq	-1376(%rbp), %rax
 	movq	%rax, %rdi
 	movl	$0, %eax
 	call	pop
-	.loc 2 162 27
+	.loc 3 162 27
 	leaq	-1344(%rbp), %rax
 	movq	%rax, %rdi
 	movl	$0, %eax
 	call	pop
-	.loc 2 163 30
+	.loc 3 163 30
 	movq	$0, -1312(%rbp)
 	movq	$0, -1304(%rbp)
 	movq	$0, -1296(%rbp)
 	movq	$0, -1288(%rbp)
 	movl	$2, -1312(%rbp)
-	.loc 2 163 53
+	.loc 3 163 53
 	pushq	-1352(%rbp)
 	pushq	-1360(%rbp)
 	pushq	-1368(%rbp)
@@ -850,81 +901,81 @@ run:
 	pushq	-1344(%rbp)
 	call	valuesEqual@PLT
 	addq	$64, %rsp
-	.loc 2 163 30
+	.loc 3 163 30
 	movb	%al, -1296(%rbp)
-	.loc 2 163 17
+	.loc 3 163 17
 	pushq	-1288(%rbp)
 	pushq	-1296(%rbp)
 	pushq	-1304(%rbp)
 	pushq	-1312(%rbp)
 	call	push
 	addq	$32, %rsp
-	.loc 2 164 17
-	jmp	.L21
-.L34:
+	.loc 3 164 17
+	jmp	.L23
+.L36:
 .LBE11:
 .LBB12:
-	.loc 2 166 37
+	.loc 3 166 37
 	leaq	-1280(%rbp), %rax
 	movl	$0, %esi
 	movq	%rax, %rdi
 	call	check
-	.loc 2 166 46
+	.loc 3 166 46
 	movl	-1280(%rbp), %eax
-	.loc 2 166 33
+	.loc 3 166 33
 	cmpl	$12, %eax
-	jne	.L51
-	.loc 2 166 73 discriminator 2
+	jne	.L53
+	.loc 3 166 70 discriminator 2
 	leaq	-1248(%rbp), %rax
 	movl	$1, %esi
 	movq	%rax, %rdi
 	call	check
-	.loc 2 166 82 discriminator 2
+	.loc 3 166 79 discriminator 2
 	movl	-1248(%rbp), %eax
-	.loc 2 166 67 discriminator 2
+	.loc 3 166 64 discriminator 2
 	cmpl	$12, %eax
-	je	.L52
-.L51:
-	.loc 2 166 105 discriminator 3
+	je	.L54
+.L53:
+	.loc 3 166 99 discriminator 3
 	leaq	.LC5(%rip), %rdi
 	movl	$0, %eax
 	call	runtimeError
-	.loc 2 166 155 discriminator 3
+	.loc 3 166 149 discriminator 3
 	movl	$2, %eax
 .LBE12:
-	.loc 2 136 28 discriminator 3
-	jmp	.L70
-.L52:
+	.loc 3 136 28 discriminator 3
+	jmp	.L72
+.L54:
 .LBB13:
-	.loc 2 166 195 discriminator 4
+	.loc 3 166 189 discriminator 4
 	leaq	-1216(%rbp), %rax
 	movq	%rax, %rdi
 	movl	$0, %eax
 	call	pop
-	.loc 2 166 189 discriminator 4
+	.loc 3 166 183 discriminator 4
 	movsd	-1200(%rbp), %xmm0
 	movsd	%xmm0, -1408(%rbp)
-	.loc 2 166 224 discriminator 4
+	.loc 3 166 218 discriminator 4
 	leaq	-1184(%rbp), %rax
 	movq	%rax, %rdi
 	movl	$0, %eax
 	call	pop
-	.loc 2 166 218 discriminator 4
+	.loc 3 166 212 discriminator 4
 	movsd	-1168(%rbp), %xmm0
 	movsd	%xmm0, -1400(%rbp)
-	.loc 2 166 253 discriminator 4
+	.loc 3 166 247 discriminator 4
 	movq	$0, -1312(%rbp)
 	movq	$0, -1304(%rbp)
 	movq	$0, -1296(%rbp)
 	movq	$0, -1288(%rbp)
 	movl	$2, -1312(%rbp)
-	.loc 2 166 278 discriminator 4
+	.loc 3 166 272 discriminator 4
 	movsd	-1408(%rbp), %xmm0
 	comisd	-1400(%rbp), %xmm0
 	seta	%al
-	.loc 2 166 253 discriminator 4
+	.loc 3 166 247 discriminator 4
 	movb	%al, -1296(%rbp)
-	.loc 2 166 240 discriminator 4
+	.loc 3 166 234 discriminator 4
 	pushq	-1288(%rbp)
 	pushq	-1296(%rbp)
 	pushq	-1304(%rbp)
@@ -932,71 +983,71 @@ run:
 	call	push
 	addq	$32, %rsp
 .LBE13:
-	.loc 2 166 32 discriminator 4
-	jmp	.L21
-.L35:
+	.loc 3 166 32 discriminator 4
+	jmp	.L23
+.L37:
 .LBB14:
-	.loc 2 167 40
+	.loc 3 167 40
 	leaq	-1152(%rbp), %rax
 	movl	$0, %esi
 	movq	%rax, %rdi
 	call	check
-	.loc 2 167 49
+	.loc 3 167 49
 	movl	-1152(%rbp), %eax
-	.loc 2 167 36
+	.loc 3 167 36
 	cmpl	$12, %eax
-	jne	.L53
-	.loc 2 167 76 discriminator 2
+	jne	.L55
+	.loc 3 167 73 discriminator 2
 	leaq	-1120(%rbp), %rax
 	movl	$1, %esi
 	movq	%rax, %rdi
 	call	check
-	.loc 2 167 85 discriminator 2
+	.loc 3 167 82 discriminator 2
 	movl	-1120(%rbp), %eax
-	.loc 2 167 70 discriminator 2
+	.loc 3 167 67 discriminator 2
 	cmpl	$12, %eax
-	je	.L54
-.L53:
-	.loc 2 167 108 discriminator 3
+	je	.L56
+.L55:
+	.loc 3 167 102 discriminator 3
 	leaq	.LC5(%rip), %rdi
 	movl	$0, %eax
 	call	runtimeError
-	.loc 2 167 158 discriminator 3
+	.loc 3 167 152 discriminator 3
 	movl	$2, %eax
 .LBE14:
-	.loc 2 136 28 discriminator 3
-	jmp	.L70
-.L54:
+	.loc 3 136 28 discriminator 3
+	jmp	.L72
+.L56:
 .LBB15:
-	.loc 2 167 198 discriminator 4
+	.loc 3 167 192 discriminator 4
 	leaq	-1088(%rbp), %rax
 	movq	%rax, %rdi
 	movl	$0, %eax
 	call	pop
-	.loc 2 167 192 discriminator 4
+	.loc 3 167 186 discriminator 4
 	movsd	-1072(%rbp), %xmm0
 	movsd	%xmm0, -1392(%rbp)
-	.loc 2 167 227 discriminator 4
+	.loc 3 167 221 discriminator 4
 	leaq	-1056(%rbp), %rax
 	movq	%rax, %rdi
 	movl	$0, %eax
 	call	pop
-	.loc 2 167 221 discriminator 4
+	.loc 3 167 215 discriminator 4
 	movsd	-1040(%rbp), %xmm0
 	movsd	%xmm0, -1384(%rbp)
-	.loc 2 167 256 discriminator 4
+	.loc 3 167 250 discriminator 4
 	movq	$0, -1312(%rbp)
 	movq	$0, -1304(%rbp)
 	movq	$0, -1296(%rbp)
 	movq	$0, -1288(%rbp)
 	movl	$2, -1312(%rbp)
-	.loc 2 167 281 discriminator 4
+	.loc 3 167 275 discriminator 4
 	movsd	-1384(%rbp), %xmm0
 	comisd	-1392(%rbp), %xmm0
 	seta	%al
-	.loc 2 167 256 discriminator 4
+	.loc 3 167 250 discriminator 4
 	movb	%al, -1296(%rbp)
-	.loc 2 167 243 discriminator 4
+	.loc 3 167 237 discriminator 4
 	pushq	-1288(%rbp)
 	pushq	-1296(%rbp)
 	pushq	-1304(%rbp)
@@ -1004,10 +1055,10 @@ run:
 	call	push
 	addq	$32, %rsp
 .LBE15:
-	.loc 2 167 32 discriminator 4
-	jmp	.L21
-.L33:
-	.loc 2 169 20
+	.loc 3 167 32 discriminator 4
+	jmp	.L23
+.L35:
+	.loc 3 169 20
 	leaq	-1024(%rbp), %rax
 	movl	$0, %esi
 	movq	%rax, %rdi
@@ -1019,10 +1070,10 @@ run:
 	movl	$0, %edi
 	call	isObjType
 	addq	$32, %rsp
-	.loc 2 169 19
+	.loc 3 169 19
 	testb	%al, %al
-	je	.L55
-	.loc 2 169 55 discriminator 1
+	je	.L57
+	.loc 3 169 55 discriminator 1
 	leaq	-992(%rbp), %rax
 	movl	$1, %esi
 	movq	%rax, %rdi
@@ -1034,63 +1085,63 @@ run:
 	movl	$0, %edi
 	call	isObjType
 	addq	$32, %rsp
-	.loc 2 169 52 discriminator 1
+	.loc 3 169 52 discriminator 1
 	testb	%al, %al
-	je	.L55
-	.loc 2 170 21
+	je	.L57
+	.loc 3 170 21
 	movl	$0, %eax
 	call	concatenate
-	jmp	.L56
-.L55:
-	.loc 2 171 30
+	jmp	.L58
+.L57:
+	.loc 3 171 30
 	leaq	-960(%rbp), %rax
 	movl	$0, %esi
 	movq	%rax, %rdi
 	call	check
-	.loc 2 171 39
+	.loc 3 171 39
 	movl	-960(%rbp), %eax
-	.loc 2 171 27
+	.loc 3 171 27
 	cmpl	$12, %eax
-	jne	.L57
-	.loc 2 171 65 discriminator 1
+	jne	.L59
+	.loc 3 171 62 discriminator 1
 	leaq	-928(%rbp), %rax
 	movl	$1, %esi
 	movq	%rax, %rdi
 	call	check
-	.loc 2 171 74 discriminator 1
+	.loc 3 171 71 discriminator 1
 	movl	-928(%rbp), %eax
-	.loc 2 171 60 discriminator 1
+	.loc 3 171 57 discriminator 1
 	cmpl	$12, %eax
-	jne	.L57
+	jne	.L59
 .LBB16:
-	.loc 2 172 34
+	.loc 3 172 34
 	leaq	-896(%rbp), %rax
 	movq	%rax, %rdi
 	movl	$0, %eax
 	call	pop
-	.loc 2 172 28
+	.loc 3 172 28
 	movsd	-880(%rbp), %xmm0
 	movsd	%xmm0, -1424(%rbp)
-	.loc 2 173 34
+	.loc 3 173 34
 	leaq	-864(%rbp), %rax
 	movq	%rax, %rdi
 	movl	$0, %eax
 	call	pop
-	.loc 2 173 28
+	.loc 3 173 28
 	movsd	-848(%rbp), %xmm0
 	movsd	%xmm0, -1416(%rbp)
-	.loc 2 174 34
+	.loc 3 174 34
 	movq	$0, -1312(%rbp)
 	movq	$0, -1304(%rbp)
 	movq	$0, -1296(%rbp)
 	movq	$0, -1288(%rbp)
 	movl	$12, -1312(%rbp)
-	.loc 2 174 57
+	.loc 3 174 54
 	movsd	-1416(%rbp), %xmm0
 	addsd	-1424(%rbp), %xmm0
-	.loc 2 174 34
+	.loc 3 174 34
 	movsd	%xmm0, -1296(%rbp)
-	.loc 2 174 21
+	.loc 3 174 21
 	pushq	-1288(%rbp)
 	pushq	-1296(%rbp)
 	pushq	-1304(%rbp)
@@ -1098,81 +1149,81 @@ run:
 	call	push
 	addq	$32, %rsp
 .LBE16:
-	.loc 2 171 95
-	jmp	.L56
-.L57:
-	.loc 2 176 21
+	.loc 3 171 89
+	jmp	.L58
+.L59:
+	.loc 3 176 21
 	leaq	.LC6(%rip), %rdi
 	movl	$0, %eax
 	call	runtimeError
-	.loc 2 177 28
+	.loc 3 177 28
 	movl	$2, %eax
-	jmp	.L70
-.L56:
-	.loc 2 179 17 discriminator 5
-	jmp	.L21
-.L32:
+	jmp	.L72
+.L58:
+	.loc 3 179 17 discriminator 5
+	jmp	.L23
+.L34:
 .LBB17:
-	.loc 2 180 41
+	.loc 3 180 41
 	leaq	-832(%rbp), %rax
 	movl	$0, %esi
 	movq	%rax, %rdi
 	call	check
-	.loc 2 180 50
+	.loc 3 180 50
 	movl	-832(%rbp), %eax
-	.loc 2 180 37
+	.loc 3 180 37
 	cmpl	$12, %eax
-	jne	.L58
-	.loc 2 180 77 discriminator 2
+	jne	.L60
+	.loc 3 180 74 discriminator 2
 	leaq	-800(%rbp), %rax
 	movl	$1, %esi
 	movq	%rax, %rdi
 	call	check
-	.loc 2 180 86 discriminator 2
+	.loc 3 180 83 discriminator 2
 	movl	-800(%rbp), %eax
-	.loc 2 180 71 discriminator 2
+	.loc 3 180 68 discriminator 2
 	cmpl	$12, %eax
-	je	.L59
-.L58:
-	.loc 2 180 109 discriminator 3
+	je	.L61
+.L60:
+	.loc 3 180 103 discriminator 3
 	leaq	.LC5(%rip), %rdi
 	movl	$0, %eax
 	call	runtimeError
-	.loc 2 180 159 discriminator 3
+	.loc 3 180 153 discriminator 3
 	movl	$2, %eax
 .LBE17:
-	.loc 2 136 28 discriminator 3
-	jmp	.L70
-.L59:
+	.loc 3 136 28 discriminator 3
+	jmp	.L72
+.L61:
 .LBB18:
-	.loc 2 180 199 discriminator 4
+	.loc 3 180 193 discriminator 4
 	leaq	-768(%rbp), %rax
 	movq	%rax, %rdi
 	movl	$0, %eax
 	call	pop
-	.loc 2 180 193 discriminator 4
+	.loc 3 180 187 discriminator 4
 	movsd	-752(%rbp), %xmm0
 	movsd	%xmm0, -1440(%rbp)
-	.loc 2 180 228 discriminator 4
+	.loc 3 180 222 discriminator 4
 	leaq	-736(%rbp), %rax
 	movq	%rax, %rdi
 	movl	$0, %eax
 	call	pop
-	.loc 2 180 222 discriminator 4
+	.loc 3 180 216 discriminator 4
 	movsd	-720(%rbp), %xmm0
 	movsd	%xmm0, -1432(%rbp)
-	.loc 2 180 257 discriminator 4
+	.loc 3 180 251 discriminator 4
 	movq	$0, -1312(%rbp)
 	movq	$0, -1304(%rbp)
 	movq	$0, -1296(%rbp)
 	movq	$0, -1288(%rbp)
 	movl	$12, -1312(%rbp)
-	.loc 2 180 280 discriminator 4
+	.loc 3 180 271 discriminator 4
 	movsd	-1432(%rbp), %xmm0
 	subsd	-1440(%rbp), %xmm0
-	.loc 2 180 257 discriminator 4
+	.loc 3 180 251 discriminator 4
 	movsd	%xmm0, -1296(%rbp)
-	.loc 2 180 244 discriminator 4
+	.loc 3 180 238 discriminator 4
 	pushq	-1288(%rbp)
 	pushq	-1296(%rbp)
 	pushq	-1304(%rbp)
@@ -1180,70 +1231,70 @@ run:
 	call	push
 	addq	$32, %rsp
 .LBE18:
-	.loc 2 180 32 discriminator 4
-	jmp	.L21
-.L31:
+	.loc 3 180 32 discriminator 4
+	jmp	.L23
+.L33:
 .LBB19:
-	.loc 2 181 41
+	.loc 3 181 41
 	leaq	-704(%rbp), %rax
 	movl	$0, %esi
 	movq	%rax, %rdi
 	call	check
-	.loc 2 181 50
+	.loc 3 181 50
 	movl	-704(%rbp), %eax
-	.loc 2 181 37
+	.loc 3 181 37
 	cmpl	$12, %eax
-	jne	.L60
-	.loc 2 181 77 discriminator 2
+	jne	.L62
+	.loc 3 181 74 discriminator 2
 	leaq	-672(%rbp), %rax
 	movl	$1, %esi
 	movq	%rax, %rdi
 	call	check
-	.loc 2 181 86 discriminator 2
+	.loc 3 181 83 discriminator 2
 	movl	-672(%rbp), %eax
-	.loc 2 181 71 discriminator 2
+	.loc 3 181 68 discriminator 2
 	cmpl	$12, %eax
-	je	.L61
-.L60:
-	.loc 2 181 109 discriminator 3
+	je	.L63
+.L62:
+	.loc 3 181 103 discriminator 3
 	leaq	.LC5(%rip), %rdi
 	movl	$0, %eax
 	call	runtimeError
-	.loc 2 181 159 discriminator 3
+	.loc 3 181 153 discriminator 3
 	movl	$2, %eax
 .LBE19:
-	.loc 2 136 28 discriminator 3
-	jmp	.L70
-.L61:
+	.loc 3 136 28 discriminator 3
+	jmp	.L72
+.L63:
 .LBB20:
-	.loc 2 181 199 discriminator 4
+	.loc 3 181 193 discriminator 4
 	leaq	-640(%rbp), %rax
 	movq	%rax, %rdi
 	movl	$0, %eax
 	call	pop
-	.loc 2 181 193 discriminator 4
+	.loc 3 181 187 discriminator 4
 	movsd	-624(%rbp), %xmm0
 	movsd	%xmm0, -1456(%rbp)
-	.loc 2 181 228 discriminator 4
+	.loc 3 181 222 discriminator 4
 	leaq	-608(%rbp), %rax
 	movq	%rax, %rdi
 	movl	$0, %eax
 	call	pop
-	.loc 2 181 222 discriminator 4
+	.loc 3 181 216 discriminator 4
 	movsd	-592(%rbp), %xmm0
 	movsd	%xmm0, -1448(%rbp)
-	.loc 2 181 257 discriminator 4
+	.loc 3 181 251 discriminator 4
 	movq	$0, -1312(%rbp)
 	movq	$0, -1304(%rbp)
 	movq	$0, -1296(%rbp)
 	movq	$0, -1288(%rbp)
 	movl	$12, -1312(%rbp)
-	.loc 2 181 280 discriminator 4
+	.loc 3 181 271 discriminator 4
 	movsd	-1448(%rbp), %xmm0
 	mulsd	-1456(%rbp), %xmm0
-	.loc 2 181 257 discriminator 4
+	.loc 3 181 251 discriminator 4
 	movsd	%xmm0, -1296(%rbp)
-	.loc 2 181 244 discriminator 4
+	.loc 3 181 238 discriminator 4
 	pushq	-1288(%rbp)
 	pushq	-1296(%rbp)
 	pushq	-1304(%rbp)
@@ -1251,70 +1302,70 @@ run:
 	call	push
 	addq	$32, %rsp
 .LBE20:
-	.loc 2 181 32 discriminator 4
-	jmp	.L21
-.L30:
+	.loc 3 181 32 discriminator 4
+	jmp	.L23
+.L32:
 .LBB21:
-	.loc 2 182 39
+	.loc 3 182 39
 	leaq	-576(%rbp), %rax
 	movl	$0, %esi
 	movq	%rax, %rdi
 	call	check
-	.loc 2 182 48
+	.loc 3 182 48
 	movl	-576(%rbp), %eax
-	.loc 2 182 35
+	.loc 3 182 35
 	cmpl	$12, %eax
-	jne	.L62
-	.loc 2 182 75 discriminator 2
+	jne	.L64
+	.loc 3 182 72 discriminator 2
 	leaq	-544(%rbp), %rax
 	movl	$1, %esi
 	movq	%rax, %rdi
 	call	check
-	.loc 2 182 84 discriminator 2
+	.loc 3 182 81 discriminator 2
 	movl	-544(%rbp), %eax
-	.loc 2 182 69 discriminator 2
+	.loc 3 182 66 discriminator 2
 	cmpl	$12, %eax
-	je	.L63
-.L62:
-	.loc 2 182 107 discriminator 3
+	je	.L65
+.L64:
+	.loc 3 182 101 discriminator 3
 	leaq	.LC5(%rip), %rdi
 	movl	$0, %eax
 	call	runtimeError
-	.loc 2 182 157 discriminator 3
+	.loc 3 182 151 discriminator 3
 	movl	$2, %eax
 .LBE21:
-	.loc 2 136 28 discriminator 3
-	jmp	.L70
-.L63:
+	.loc 3 136 28 discriminator 3
+	jmp	.L72
+.L65:
 .LBB22:
-	.loc 2 182 197 discriminator 4
+	.loc 3 182 191 discriminator 4
 	leaq	-512(%rbp), %rax
 	movq	%rax, %rdi
 	movl	$0, %eax
 	call	pop
-	.loc 2 182 191 discriminator 4
+	.loc 3 182 185 discriminator 4
 	movsd	-496(%rbp), %xmm0
 	movsd	%xmm0, -1472(%rbp)
-	.loc 2 182 226 discriminator 4
+	.loc 3 182 220 discriminator 4
 	leaq	-480(%rbp), %rax
 	movq	%rax, %rdi
 	movl	$0, %eax
 	call	pop
-	.loc 2 182 220 discriminator 4
+	.loc 3 182 214 discriminator 4
 	movsd	-464(%rbp), %xmm0
 	movsd	%xmm0, -1464(%rbp)
-	.loc 2 182 255 discriminator 4
+	.loc 3 182 249 discriminator 4
 	movq	$0, -1312(%rbp)
 	movq	$0, -1304(%rbp)
 	movq	$0, -1296(%rbp)
 	movq	$0, -1288(%rbp)
 	movl	$12, -1312(%rbp)
-	.loc 2 182 278 discriminator 4
+	.loc 3 182 269 discriminator 4
 	movsd	-1464(%rbp), %xmm0
 	divsd	-1472(%rbp), %xmm0
-	.loc 2 182 255 discriminator 4
+	.loc 3 182 249 discriminator 4
 	movsd	%xmm0, -1296(%rbp)
-	.loc 2 182 242 discriminator 4
+	.loc 3 182 236 discriminator 4
 	pushq	-1288(%rbp)
 	pushq	-1296(%rbp)
 	pushq	-1304(%rbp)
@@ -1322,74 +1373,74 @@ run:
 	call	push
 	addq	$32, %rsp
 .LBE22:
-	.loc 2 182 32 discriminator 4
-	jmp	.L21
-.L28:
+	.loc 3 182 32 discriminator 4
+	jmp	.L23
+.L30:
 .LBB23:
-	.loc 2 183 45
+	.loc 3 183 45
 	leaq	-448(%rbp), %rax
 	movl	$0, %esi
 	movq	%rax, %rdi
 	call	check
-	.loc 2 183 54
+	.loc 3 183 54
 	movl	-448(%rbp), %eax
-	.loc 2 183 41
+	.loc 3 183 41
 	cmpl	$12, %eax
-	jne	.L64
-	.loc 2 183 81 discriminator 2
+	jne	.L66
+	.loc 3 183 78 discriminator 2
 	leaq	-416(%rbp), %rax
 	movl	$1, %esi
 	movq	%rax, %rdi
 	call	check
-	.loc 2 183 90 discriminator 2
+	.loc 3 183 87 discriminator 2
 	movl	-416(%rbp), %eax
-	.loc 2 183 75 discriminator 2
+	.loc 3 183 72 discriminator 2
 	cmpl	$12, %eax
-	je	.L65
-.L64:
-	.loc 2 183 113 discriminator 3
+	je	.L67
+.L66:
+	.loc 3 183 107 discriminator 3
 	leaq	.LC5(%rip), %rdi
 	movl	$0, %eax
 	call	runtimeError
-	.loc 2 183 163 discriminator 3
+	.loc 3 183 157 discriminator 3
 	movl	$2, %eax
 .LBE23:
-	.loc 2 136 28 discriminator 3
-	jmp	.L70
-.L65:
+	.loc 3 136 28 discriminator 3
+	jmp	.L72
+.L67:
 .LBB24:
-	.loc 2 183 203 discriminator 4
+	.loc 3 183 197 discriminator 4
 	leaq	-384(%rbp), %rax
 	movq	%rax, %rdi
 	movl	$0, %eax
 	call	pop
-	.loc 2 183 197 discriminator 4
+	.loc 3 183 191 discriminator 4
 	movsd	-368(%rbp), %xmm0
 	movsd	%xmm0, -1504(%rbp)
-	.loc 2 183 232 discriminator 4
+	.loc 3 183 226 discriminator 4
 	leaq	-352(%rbp), %rax
 	movq	%rax, %rdi
 	movl	$0, %eax
 	call	pop
-	.loc 2 183 226 discriminator 4
+	.loc 3 183 220 discriminator 4
 	movsd	-336(%rbp), %xmm0
 	movsd	%xmm0, -1496(%rbp)
-	.loc 2 183 261 discriminator 4
+	.loc 3 183 255 discriminator 4
 	movq	$0, -1312(%rbp)
 	movq	$0, -1304(%rbp)
 	movq	$0, -1296(%rbp)
 	movq	$0, -1288(%rbp)
 	movl	$12, -1312(%rbp)
-	.loc 2 183 282 discriminator 4
+	.loc 3 183 273 discriminator 4
 	movsd	-1504(%rbp), %xmm0
 	movq	-1496(%rbp), %rax
 	movapd	%xmm0, %xmm1
 	movq	%rax, %xmm0
 	call	pow@PLT
 	movq	%xmm0, %rax
-	.loc 2 183 261 discriminator 4
+	.loc 3 183 255 discriminator 4
 	movq	%rax, -1296(%rbp)
-	.loc 2 183 248 discriminator 4
+	.loc 3 183 242 discriminator 4
 	pushq	-1288(%rbp)
 	pushq	-1296(%rbp)
 	pushq	-1304(%rbp)
@@ -1397,74 +1448,74 @@ run:
 	call	push
 	addq	$32, %rsp
 .LBE24:
-	.loc 2 183 34 discriminator 4
-	jmp	.L21
-.L29:
+	.loc 3 183 34 discriminator 4
+	jmp	.L23
+.L31:
 .LBB25:
-	.loc 2 184 41
+	.loc 3 184 41
 	leaq	-320(%rbp), %rax
 	movl	$0, %esi
 	movq	%rax, %rdi
 	call	check
-	.loc 2 184 50
+	.loc 3 184 50
 	movl	-320(%rbp), %eax
-	.loc 2 184 37
+	.loc 3 184 37
 	cmpl	$12, %eax
-	jne	.L66
-	.loc 2 184 77 discriminator 2
+	jne	.L68
+	.loc 3 184 74 discriminator 2
 	leaq	-288(%rbp), %rax
 	movl	$1, %esi
 	movq	%rax, %rdi
 	call	check
-	.loc 2 184 86 discriminator 2
+	.loc 3 184 83 discriminator 2
 	movl	-288(%rbp), %eax
-	.loc 2 184 71 discriminator 2
+	.loc 3 184 68 discriminator 2
 	cmpl	$12, %eax
-	je	.L67
-.L66:
-	.loc 2 184 109 discriminator 3
+	je	.L69
+.L68:
+	.loc 3 184 103 discriminator 3
 	leaq	.LC5(%rip), %rdi
 	movl	$0, %eax
 	call	runtimeError
-	.loc 2 184 159 discriminator 3
+	.loc 3 184 153 discriminator 3
 	movl	$2, %eax
 .LBE25:
-	.loc 2 136 28 discriminator 3
-	jmp	.L70
-.L67:
+	.loc 3 136 28 discriminator 3
+	jmp	.L72
+.L69:
 .LBB26:
-	.loc 2 184 199 discriminator 4
+	.loc 3 184 193 discriminator 4
 	leaq	-256(%rbp), %rax
 	movq	%rax, %rdi
 	movl	$0, %eax
 	call	pop
-	.loc 2 184 193 discriminator 4
+	.loc 3 184 187 discriminator 4
 	movsd	-240(%rbp), %xmm0
 	movsd	%xmm0, -1488(%rbp)
-	.loc 2 184 228 discriminator 4
+	.loc 3 184 222 discriminator 4
 	leaq	-224(%rbp), %rax
 	movq	%rax, %rdi
 	movl	$0, %eax
 	call	pop
-	.loc 2 184 222 discriminator 4
+	.loc 3 184 216 discriminator 4
 	movsd	-208(%rbp), %xmm0
 	movsd	%xmm0, -1480(%rbp)
-	.loc 2 184 257 discriminator 4
+	.loc 3 184 251 discriminator 4
 	movq	$0, -1312(%rbp)
 	movq	$0, -1304(%rbp)
 	movq	$0, -1296(%rbp)
 	movq	$0, -1288(%rbp)
 	movl	$12, -1312(%rbp)
-	.loc 2 184 278 discriminator 4
+	.loc 3 184 269 discriminator 4
 	movsd	-1488(%rbp), %xmm0
 	movq	-1480(%rbp), %rax
 	movapd	%xmm0, %xmm1
 	movq	%rax, %xmm0
 	call	fmod@PLT
 	movq	%xmm0, %rax
-	.loc 2 184 257 discriminator 4
+	.loc 3 184 251 discriminator 4
 	movq	%rax, -1296(%rbp)
-	.loc 2 184 244 discriminator 4
+	.loc 3 184 238 discriminator 4
 	pushq	-1288(%rbp)
 	pushq	-1296(%rbp)
 	pushq	-1304(%rbp)
@@ -1472,16 +1523,16 @@ run:
 	call	push
 	addq	$32, %rsp
 .LBE26:
-	.loc 2 184 32 discriminator 4
-	jmp	.L21
-.L27:
-	.loc 2 185 39
+	.loc 3 184 32 discriminator 4
+	jmp	.L23
+.L29:
+	.loc 3 185 39
 	movq	$0, -1312(%rbp)
 	movq	$0, -1304(%rbp)
 	movq	$0, -1296(%rbp)
 	movq	$0, -1288(%rbp)
 	movl	$2, -1312(%rbp)
-	.loc 2 185 62
+	.loc 3 185 62
 	leaq	-192(%rbp), %rax
 	movq	%rax, %rdi
 	movl	$0, %eax
@@ -1492,59 +1543,59 @@ run:
 	pushq	-192(%rbp)
 	call	isFalsey
 	addq	$32, %rsp
-	.loc 2 185 39
+	.loc 3 185 39
 	movb	%al, -1296(%rbp)
-	.loc 2 185 26
+	.loc 3 185 26
 	pushq	-1288(%rbp)
 	pushq	-1296(%rbp)
 	pushq	-1304(%rbp)
 	pushq	-1312(%rbp)
 	call	push
 	addq	$32, %rsp
-	.loc 2 185 13
-	jmp	.L21
-.L26:
+	.loc 3 185 13
+	jmp	.L23
+.L28:
 .LBB27:
-	.loc 2 187 23
+	.loc 3 187 23
 	leaq	-160(%rbp), %rax
 	movl	$0, %esi
 	movq	%rax, %rdi
 	call	check
-	.loc 2 187 32
+	.loc 3 187 32
 	movl	-160(%rbp), %eax
-	.loc 2 187 19
+	.loc 3 187 19
 	cmpl	$12, %eax
-	je	.L68
-	.loc 2 188 21
+	je	.L70
+	.loc 3 188 21
 	leaq	.LC7(%rip), %rdi
 	movl	$0, %eax
 	call	runtimeError
-	.loc 2 189 28
+	.loc 3 189 28
 	movl	$2, %eax
 .LBE27:
-	.loc 2 136 28
-	jmp	.L70
-.L68:
+	.loc 3 136 28
+	jmp	.L72
+.L70:
 .LBB28:
-	.loc 2 191 30
+	.loc 3 191 30
 	movq	$0, -1312(%rbp)
 	movq	$0, -1304(%rbp)
 	movq	$0, -1296(%rbp)
 	movq	$0, -1288(%rbp)
 	movl	$12, -1312(%rbp)
-	.loc 2 191 54
+	.loc 3 191 51
 	leaq	-128(%rbp), %rax
 	movq	%rax, %rdi
 	movl	$0, %eax
 	call	pop
-	.loc 2 191 63
+	.loc 3 191 60
 	movsd	-112(%rbp), %xmm0
-	.loc 2 191 51
+	.loc 3 191 48
 	movq	.LC8(%rip), %xmm1
 	xorpd	%xmm1, %xmm0
-	.loc 2 191 30
+	.loc 3 191 30
 	movsd	%xmm0, -1296(%rbp)
-	.loc 2 191 17
+	.loc 3 191 17
 	pushq	-1288(%rbp)
 	pushq	-1296(%rbp)
 	pushq	-1304(%rbp)
@@ -1552,10 +1603,10 @@ run:
 	call	push
 	addq	$32, %rsp
 .LBE28:
-	.loc 2 193 17
-	jmp	.L21
-.L25:
-	.loc 2 195 17
+	.loc 3 193 17
+	jmp	.L23
+.L27:
+	.loc 3 195 17
 	leaq	-96(%rbp), %rax
 	movq	%rax, %rdi
 	movl	$0, %eax
@@ -1566,38 +1617,38 @@ run:
 	pushq	-96(%rbp)
 	call	printValue@PLT
 	addq	$32, %rsp
-	.loc 2 196 17
+	.loc 3 196 17
 	movl	$10, %edi
 	call	putchar@PLT
-	.loc 2 197 17
-	jmp	.L21
-.L24:
+	.loc 3 197 17
+	jmp	.L23
+.L26:
 .LBB29:
-	.loc 2 200 42
+	.loc 3 200 42
 	movq	8+vm(%rip), %rax
 	addq	$2, %rax
 	movq	%rax, 8+vm(%rip)
-	.loc 2 200 62
+	.loc 3 200 62
 	movq	8+vm(%rip), %rax
-	.loc 2 200 65
+	.loc 3 200 65
 	subq	$2, %rax
 	movzbl	(%rax), %eax
 	movzbl	%al, %eax
-	.loc 2 200 70
+	.loc 3 200 70
 	sall	$8, %eax
-	.loc 2 200 76
+	.loc 3 200 76
 	movl	%eax, %edx
-	.loc 2 200 80
+	.loc 3 200 80
 	movq	8+vm(%rip), %rax
-	.loc 2 200 83
+	.loc 3 200 83
 	subq	$1, %rax
 	movzbl	(%rax), %eax
 	movzbl	%al, %eax
-	.loc 2 200 76
+	.loc 3 200 76
 	orl	%edx, %eax
-	.loc 2 200 26
+	.loc 3 200 26
 	movw	%ax, -1514(%rbp)
-	.loc 2 201 20
+	.loc 3 201 20
 	leaq	-64(%rbp), %rax
 	movl	$0, %esi
 	movq	%rax, %rdi
@@ -1608,38 +1659,38 @@ run:
 	pushq	-64(%rbp)
 	call	isFalsey
 	addq	$32, %rsp
-	.loc 2 201 19
+	.loc 3 201 19
 	testb	%al, %al
-	je	.L73
-	.loc 2 201 46 discriminator 1
+	je	.L75
+	.loc 3 201 46 discriminator 1
 	movq	8+vm(%rip), %rdx
 	movzwl	-1514(%rbp), %eax
 	addq	%rdx, %rax
 	movq	%rax, 8+vm(%rip)
-	.loc 2 202 17 discriminator 1
-	jmp	.L73
-.L22:
+	.loc 3 202 17 discriminator 1
+	jmp	.L75
+.L24:
 .LBE29:
-	.loc 2 205 24
+	.loc 3 205 24
 	movl	$0, %eax
-	jmp	.L70
-.L73:
+	jmp	.L72
+.L75:
 .LBB30:
-	.loc 2 202 17
+	.loc 3 202 17
 	nop
-.L21:
+.L23:
 .LBE30:
 .LBE4:
 .LBE2:
-	.loc 2 104 12
-	jmp	.L71
-.L70:
-	.loc 2 216 1
+	.loc 3 104 12
+	jmp	.L73
+.L72:
+	.loc 3 216 1
 	movq	-24(%rbp), %rbx
 	xorq	%fs:40, %rbx
-	je	.L72
+	je	.L74
 	call	__stack_chk_fail@PLT
-.L72:
+.L74:
 	leaq	-16(%rbp), %rsp
 	popq	%rbx
 	popq	%r12
@@ -1647,13 +1698,13 @@ run:
 	.cfi_def_cfa 7, 8
 	ret
 	.cfi_endproc
-.LFE7:
+.LFE8:
 	.size	run, .-run
 	.globl	interpret
 	.type	interpret, @function
 interpret:
-.LFB8:
-	.loc 2 218 48
+.LFB9:
+	.loc 3 218 48
 	.cfi_startproc
 	endbr64
 	pushq	%rbp
@@ -1663,71 +1714,71 @@ interpret:
 	.cfi_def_cfa_register 6
 	subq	$96, %rsp
 	movq	%rdi, -88(%rbp)
-	.loc 2 218 48
+	.loc 3 218 48
 	movq	%fs:40, %rax
 	movq	%rax, -8(%rbp)
 	xorl	%eax, %eax
-	.loc 2 220 5
+	.loc 3 220 5
 	leaq	-64(%rbp), %rax
 	movq	%rax, %rdi
 	call	initChunk@PLT
-	.loc 2 222 9
+	.loc 3 222 9
 	leaq	-64(%rbp), %rdx
 	movq	-88(%rbp), %rax
 	movq	%rdx, %rsi
 	movq	%rax, %rdi
 	call	compile@PLT
-	.loc 2 222 8
+	.loc 3 222 8
 	xorl	$1, %eax
-	.loc 2 222 7
+	.loc 3 222 7
 	testb	%al, %al
-	je	.L75
-	.loc 2 223 9
+	je	.L77
+	.loc 3 223 9
 	leaq	-64(%rbp), %rax
 	movq	%rax, %rdi
 	call	freeChunk@PLT
-	.loc 2 224 16
+	.loc 3 224 16
 	movl	$1, %eax
-	jmp	.L77
-.L75:
-	.loc 2 227 14
+	jmp	.L79
+.L77:
+	.loc 3 227 14
 	leaq	-64(%rbp), %rax
 	movq	%rax, vm(%rip)
-	.loc 2 228 15
+	.loc 3 228 15
 	movq	vm(%rip), %rax
-	.loc 2 228 21
+	.loc 3 228 21
 	movq	8(%rax), %rax
-	.loc 2 228 11
+	.loc 3 228 11
 	movq	%rax, 8+vm(%rip)
-	.loc 2 230 30
+	.loc 3 230 30
 	movl	$0, %eax
 	call	run
 	movl	%eax, -68(%rbp)
-	.loc 2 232 5
+	.loc 3 232 5
 	leaq	-64(%rbp), %rax
 	movq	%rax, %rdi
 	call	freeChunk@PLT
-	.loc 2 233 12
+	.loc 3 233 12
 	movl	-68(%rbp), %eax
-.L77:
-	.loc 2 234 1 discriminator 1
+.L79:
+	.loc 3 234 1 discriminator 1
 	movq	-8(%rbp), %rcx
 	xorq	%fs:40, %rcx
-	je	.L78
-	.loc 2 234 1 is_stmt 0
+	je	.L80
+	.loc 3 234 1 is_stmt 0
 	call	__stack_chk_fail@PLT
-.L78:
+.L80:
 	leave
 	.cfi_def_cfa 7, 8
 	ret
 	.cfi_endproc
-.LFE8:
+.LFE9:
 	.size	interpret, .-interpret
 	.globl	push
 	.type	push, @function
 push:
-.LFB9:
-	.loc 2 236 23 is_stmt 1
+.LFB10:
+	.loc 3 236 23 is_stmt 1
 	.cfi_startproc
 	endbr64
 	pushq	%rbp
@@ -1735,9 +1786,9 @@ push:
 	.cfi_offset 6, -16
 	movq	%rsp, %rbp
 	.cfi_def_cfa_register 6
-	.loc 2 237 8
+	.loc 3 237 8
 	movq	8208+vm(%rip), %rcx
-	.loc 2 237 18
+	.loc 3 237 18
 	movq	16(%rbp), %rax
 	movq	24(%rbp), %rdx
 	movq	%rax, (%rcx)
@@ -1746,24 +1797,24 @@ push:
 	movq	40(%rbp), %rdx
 	movq	%rax, 16(%rcx)
 	movq	%rdx, 24(%rcx)
-	.loc 2 238 7
+	.loc 3 238 7
 	movq	8208+vm(%rip), %rax
-	.loc 2 238 16
+	.loc 3 238 16
 	addq	$32, %rax
 	movq	%rax, 8208+vm(%rip)
-	.loc 2 239 1
+	.loc 3 239 1
 	nop
 	popq	%rbp
 	.cfi_def_cfa 7, 8
 	ret
 	.cfi_endproc
-.LFE9:
+.LFE10:
 	.size	push, .-push
 	.globl	pop
 	.type	pop, @function
 pop:
-.LFB10:
-	.loc 2 241 12
+.LFB11:
+	.loc 3 241 12
 	.cfi_startproc
 	endbr64
 	pushq	%rbp
@@ -1772,14 +1823,14 @@ pop:
 	movq	%rsp, %rbp
 	.cfi_def_cfa_register 6
 	movq	%rdi, -8(%rbp)
-	.loc 2 242 7
+	.loc 3 242 7
 	movq	8208+vm(%rip), %rax
-	.loc 2 242 16
+	.loc 3 242 16
 	subq	$32, %rax
 	movq	%rax, 8208+vm(%rip)
-	.loc 2 243 15
+	.loc 3 243 15
 	movq	8208+vm(%rip), %rsi
-	.loc 2 243 12
+	.loc 3 243 12
 	movq	-8(%rbp), %rcx
 	movq	(%rsi), %rax
 	movq	8(%rsi), %rdx
@@ -1789,18 +1840,18 @@ pop:
 	movq	24(%rsi), %rdx
 	movq	%rax, 16(%rcx)
 	movq	%rdx, 24(%rcx)
-	.loc 2 247 1
+	.loc 3 247 1
 	movq	-8(%rbp), %rax
 	popq	%rbp
 	.cfi_def_cfa 7, 8
 	ret
 	.cfi_endproc
-.LFE10:
+.LFE11:
 	.size	pop, .-pop
 	.type	check, @function
 check:
-.LFB11:
-	.loc 2 249 37
+.LFB12:
+	.loc 3 249 37
 	.cfi_startproc
 	endbr64
 	pushq	%rbp
@@ -1811,13 +1862,13 @@ check:
 	movq	%rdi, -8(%rbp)
 	movl	%esi, %eax
 	movw	%ax, -12(%rbp)
-	.loc 2 250 14
+	.loc 3 250 14
 	movq	8208+vm(%rip), %rax
-	.loc 2 250 27
+	.loc 3 250 27
 	movswl	-12(%rbp), %edx
 	notl	%edx
 	movslq	%edx, %rdx
-	.loc 2 250 23
+	.loc 3 250 23
 	salq	$5, %rdx
 	leaq	(%rax,%rdx), %rsi
 	movq	-8(%rbp), %rcx
@@ -1829,13 +1880,13 @@ check:
 	movq	24(%rsi), %rdx
 	movq	%rax, 16(%rcx)
 	movq	%rdx, 24(%rcx)
-	.loc 2 251 1
+	.loc 3 251 1
 	movq	-8(%rbp), %rax
 	popq	%rbp
 	.cfi_def_cfa 7, 8
 	ret
 	.cfi_endproc
-.LFE11:
+.LFE12:
 	.size	check, .-check
 	.section	.rodata
 	.align 16
@@ -1846,30 +1897,30 @@ check:
 	.long	0
 	.text
 .Letext0:
-	.file 3 "/usr/lib/gcc/x86_64-linux-gnu/9/include/stddef.h"
-	.file 4 "/usr/include/x86_64-linux-gnu/bits/types.h"
-	.file 5 "/usr/include/x86_64-linux-gnu/bits/stdint-intn.h"
-	.file 6 "/usr/include/x86_64-linux-gnu/bits/stdint-uintn.h"
-	.file 7 "VirtualMachine/vm/../../Bytecode/debug/../chunk/../value/value.h"
-	.file 8 "VirtualMachine/vm/../../Bytecode/debug/../chunk/chunk.h"
-	.file 9 "VirtualMachine/vm/../../Compilation/compiler/../../VirtualMachine/vm/../../Language/table/table.h"
-	.file 10 "VirtualMachine/vm/../../Compilation/compiler/../../VirtualMachine/vm/vm.h"
-	.file 11 "/usr/lib/gcc/x86_64-linux-gnu/9/include/stdarg.h"
-	.file 12 "<built-in>"
-	.file 13 "/usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h"
-	.file 14 "/usr/include/x86_64-linux-gnu/bits/types/FILE.h"
-	.file 15 "/usr/include/stdio.h"
+	.file 4 "/usr/lib/gcc/x86_64-linux-gnu/9/include/stddef.h"
+	.file 5 "/usr/include/x86_64-linux-gnu/bits/types.h"
+	.file 6 "/usr/include/x86_64-linux-gnu/bits/stdint-intn.h"
+	.file 7 "/usr/include/x86_64-linux-gnu/bits/stdint-uintn.h"
+	.file 8 "VirtualMachine/vm/../../Bytecode/debug/../chunk/../value/value.h"
+	.file 9 "VirtualMachine/vm/../../Bytecode/debug/../chunk/chunk.h"
+	.file 10 "VirtualMachine/vm/../../Compilation/compiler/../../VirtualMachine/vm/../../Language/table/table.h"
+	.file 11 "VirtualMachine/vm/../../Compilation/compiler/../../VirtualMachine/vm/vm.h"
+	.file 12 "/usr/lib/gcc/x86_64-linux-gnu/9/include/stdarg.h"
+	.file 13 "<built-in>"
+	.file 14 "/usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h"
+	.file 15 "/usr/include/x86_64-linux-gnu/bits/types/FILE.h"
+	.file 16 "/usr/include/stdio.h"
 	.section	.debug_info,"",@progbits
 .Ldebug_info0:
-	.long	0xdf2
+	.long	0x11df
 	.value	0x4
 	.long	.Ldebug_abbrev0
 	.byte	0x8
 	.uleb128 0x1
-	.long	.LASF1141
+	.long	.LASF1272
 	.byte	0xc
-	.long	.LASF1142
-	.long	.LASF1143
+	.long	.LASF1273
+	.long	.LASF1274
 	.quad	.Ltext0
 	.quad	.Letext0-.Ltext0
 	.long	.Ldebug_line0
@@ -1880,7 +1931,7 @@ check:
 	.long	.LASF969
 	.uleb128 0x3
 	.long	.LASF974
-	.byte	0x3
+	.byte	0x4
 	.byte	0xd1
 	.byte	0x1b
 	.long	0x44
@@ -1906,7 +1957,7 @@ check:
 	.long	.LASF973
 	.uleb128 0x3
 	.long	.LASF975
-	.byte	0x4
+	.byte	0x5
 	.byte	0x25
 	.byte	0x15
 	.long	0x73
@@ -1916,13 +1967,13 @@ check:
 	.long	.LASF976
 	.uleb128 0x3
 	.long	.LASF977
-	.byte	0x4
+	.byte	0x5
 	.byte	0x26
 	.byte	0x17
 	.long	0x52
 	.uleb128 0x3
 	.long	.LASF978
-	.byte	0x4
+	.byte	0x5
 	.byte	0x27
 	.byte	0x1a
 	.long	0x92
@@ -1932,43 +1983,43 @@ check:
 	.long	.LASF979
 	.uleb128 0x3
 	.long	.LASF980
-	.byte	0x4
+	.byte	0x5
 	.byte	0x28
 	.byte	0x1c
 	.long	0x59
 	.uleb128 0x3
 	.long	.LASF981
-	.byte	0x4
+	.byte	0x5
 	.byte	0x29
 	.byte	0x14
 	.long	0x4b
 	.uleb128 0x3
 	.long	.LASF982
-	.byte	0x4
+	.byte	0x5
 	.byte	0x2a
 	.byte	0x16
 	.long	0x60
 	.uleb128 0x3
 	.long	.LASF983
-	.byte	0x4
+	.byte	0x5
 	.byte	0x2c
 	.byte	0x19
 	.long	0x31
 	.uleb128 0x3
 	.long	.LASF984
-	.byte	0x4
+	.byte	0x5
 	.byte	0x2d
 	.byte	0x1b
 	.long	0x44
 	.uleb128 0x3
 	.long	.LASF985
-	.byte	0x4
+	.byte	0x5
 	.byte	0x98
 	.byte	0x12
 	.long	0x31
 	.uleb128 0x3
 	.long	.LASF986
-	.byte	0x4
+	.byte	0x5
 	.byte	0x99
 	.byte	0x12
 	.long	0x31
@@ -1985,7 +2036,7 @@ check:
 	.long	0xf5
 	.uleb128 0x3
 	.long	.LASF988
-	.byte	0x5
+	.byte	0x6
 	.byte	0x18
 	.byte	0x12
 	.long	0x67
@@ -1993,49 +2044,49 @@ check:
 	.long	0x101
 	.uleb128 0x3
 	.long	.LASF989
-	.byte	0x5
+	.byte	0x6
 	.byte	0x19
 	.byte	0x13
 	.long	0x86
 	.uleb128 0x3
 	.long	.LASF990
-	.byte	0x5
+	.byte	0x6
 	.byte	0x1a
 	.byte	0x13
 	.long	0xa5
 	.uleb128 0x3
 	.long	.LASF991
-	.byte	0x5
+	.byte	0x6
 	.byte	0x1b
 	.byte	0x13
 	.long	0xbd
 	.uleb128 0x3
 	.long	.LASF992
-	.byte	0x6
+	.byte	0x7
 	.byte	0x18
 	.byte	0x13
 	.long	0x7a
 	.uleb128 0x3
 	.long	.LASF993
-	.byte	0x6
+	.byte	0x7
 	.byte	0x19
 	.byte	0x14
 	.long	0x99
 	.uleb128 0x3
 	.long	.LASF994
-	.byte	0x6
+	.byte	0x7
 	.byte	0x1a
 	.byte	0x14
 	.long	0xb1
 	.uleb128 0x3
 	.long	.LASF995
-	.byte	0x6
+	.byte	0x7
 	.byte	0x1b
 	.byte	0x14
 	.long	0xc9
 	.uleb128 0x8
 	.string	"Obj"
-	.byte	0x7
+	.byte	0x8
 	.byte	0x9
 	.byte	0x14
 	.long	0x172
@@ -2063,7 +2114,7 @@ check:
 	.byte	0
 	.uleb128 0x3
 	.long	.LASF998
-	.byte	0x7
+	.byte	0x8
 	.byte	0xa
 	.byte	0x1a
 	.long	0x1a6
@@ -2107,7 +2158,7 @@ check:
 	.byte	0x7
 	.byte	0x4
 	.long	0x60
-	.byte	0x7
+	.byte	0x8
 	.byte	0x38
 	.byte	0xe
 	.long	0x251
@@ -2159,91 +2210,91 @@ check:
 	.byte	0
 	.uleb128 0x3
 	.long	.LASF1017
-	.byte	0x7
+	.byte	0x8
 	.byte	0x48
 	.byte	0x3
 	.long	0x1e8
 	.uleb128 0xf
 	.byte	0x10
-	.byte	0x7
+	.byte	0x8
 	.byte	0x4c
 	.byte	0x5
 	.long	0x301
 	.uleb128 0x10
 	.long	.LASF1018
-	.byte	0x7
+	.byte	0x8
 	.byte	0x4d
 	.byte	0xd
 	.long	0x301
 	.uleb128 0x11
-	.string	"ch"
-	.byte	0x7
+	.string	"i8"
+	.byte	0x8
 	.byte	0x4e
 	.byte	0x10
 	.long	0x101
 	.uleb128 0x11
-	.string	"uCh"
-	.byte	0x7
+	.string	"u8"
+	.byte	0x8
 	.byte	0x4f
 	.byte	0x11
 	.long	0x136
 	.uleb128 0x11
-	.string	"in"
-	.byte	0x7
+	.string	"i16"
+	.byte	0x8
 	.byte	0x50
 	.byte	0x11
 	.long	0x112
 	.uleb128 0x11
-	.string	"uIn"
-	.byte	0x7
+	.string	"u16"
+	.byte	0x8
 	.byte	0x51
 	.byte	0x12
 	.long	0x142
 	.uleb128 0x11
-	.string	"lng"
-	.byte	0x7
+	.string	"i32"
+	.byte	0x8
 	.byte	0x52
 	.byte	0x11
 	.long	0x11e
-	.uleb128 0x10
-	.long	.LASF1019
-	.byte	0x7
+	.uleb128 0x11
+	.string	"u32"
+	.byte	0x8
 	.byte	0x53
 	.byte	0x12
 	.long	0x14e
 	.uleb128 0x11
-	.string	"flt"
-	.byte	0x7
+	.string	"i64"
+	.byte	0x8
 	.byte	0x54
-	.byte	0xf
-	.long	0x308
-	.uleb128 0x10
-	.long	.LASF1020
-	.byte	0x7
-	.byte	0x55
 	.byte	0x11
 	.long	0x12a
-	.uleb128 0x10
-	.long	.LASF1021
-	.byte	0x7
-	.byte	0x56
+	.uleb128 0x11
+	.string	"u64"
+	.byte	0x8
+	.byte	0x55
 	.byte	0x12
 	.long	0x15a
 	.uleb128 0x11
-	.string	"dbl"
-	.byte	0x7
+	.string	"f32"
+	.byte	0x8
+	.byte	0x56
+	.byte	0xf
+	.long	0x308
+	.uleb128 0x11
+	.string	"f64"
+	.byte	0x8
 	.byte	0x57
 	.byte	0x10
 	.long	0x30f
 	.uleb128 0x10
-	.long	.LASF1022
-	.byte	0x7
+	.long	.LASF1019
+	.byte	0x8
 	.byte	0x58
 	.byte	0x15
 	.long	0x316
 	.uleb128 0x11
 	.string	"obj"
-	.byte	0x7
+	.byte	0x8
 	.byte	0x59
 	.byte	0xe
 	.long	0x31d
@@ -2251,72 +2302,72 @@ check:
 	.uleb128 0x2
 	.byte	0x1
 	.byte	0x2
-	.long	.LASF1023
+	.long	.LASF1020
 	.uleb128 0x2
 	.byte	0x4
 	.byte	0x4
-	.long	.LASF1024
+	.long	.LASF1021
 	.uleb128 0x2
 	.byte	0x8
 	.byte	0x4
-	.long	.LASF1025
+	.long	.LASF1022
 	.uleb128 0x2
 	.byte	0x10
 	.byte	0x4
-	.long	.LASF1026
+	.long	.LASF1023
 	.uleb128 0x6
 	.byte	0x8
 	.long	0x166
 	.uleb128 0x12
 	.byte	0x20
-	.byte	0x7
+	.byte	0x8
 	.byte	0x4a
 	.byte	0x9
 	.long	0x346
 	.uleb128 0xa
 	.long	.LASF996
-	.byte	0x7
+	.byte	0x8
 	.byte	0x4b
 	.byte	0xf
 	.long	0x251
 	.byte	0
 	.uleb128 0xc
 	.string	"as"
-	.byte	0x7
+	.byte	0x8
 	.byte	0x5a
 	.byte	0x7
 	.long	0x25d
 	.byte	0x10
 	.byte	0
 	.uleb128 0x3
-	.long	.LASF1027
-	.byte	0x7
+	.long	.LASF1024
+	.byte	0x8
 	.byte	0x5b
 	.byte	0x3
 	.long	0x323
 	.uleb128 0x12
 	.byte	0x10
-	.byte	0x7
+	.byte	0x8
 	.byte	0x8e
 	.byte	0x9
 	.long	0x383
 	.uleb128 0xa
-	.long	.LASF1028
-	.byte	0x7
+	.long	.LASF1025
+	.byte	0x8
 	.byte	0x8f
 	.byte	0xd
 	.long	0x112
 	.byte	0
 	.uleb128 0xa
-	.long	.LASF1029
-	.byte	0x7
+	.long	.LASF1026
+	.byte	0x8
 	.byte	0x90
 	.byte	0xd
 	.long	0x112
 	.byte	0x2
 	.uleb128 0xa
-	.long	.LASF1030
-	.byte	0x7
+	.long	.LASF1027
+	.byte	0x8
 	.byte	0x91
 	.byte	0xc
 	.long	0x383
@@ -2326,8 +2377,8 @@ check:
 	.byte	0x8
 	.long	0x346
 	.uleb128 0x3
-	.long	.LASF1031
-	.byte	0x7
+	.long	.LASF1028
+	.byte	0x8
 	.byte	0x92
 	.byte	0x3
 	.long	0x352
@@ -2335,164 +2386,164 @@ check:
 	.byte	0x7
 	.byte	0x4
 	.long	0x60
-	.byte	0x8
+	.byte	0x9
 	.byte	0x9
 	.byte	0xe
 	.long	0x43a
 	.uleb128 0xe
-	.long	.LASF1032
+	.long	.LASF1029
 	.byte	0
 	.uleb128 0xe
-	.long	.LASF1033
+	.long	.LASF1030
 	.byte	0x1
 	.uleb128 0xe
-	.long	.LASF1034
+	.long	.LASF1031
 	.byte	0x2
 	.uleb128 0xe
-	.long	.LASF1035
+	.long	.LASF1032
 	.byte	0x3
 	.uleb128 0xe
-	.long	.LASF1036
+	.long	.LASF1033
 	.byte	0x4
 	.uleb128 0xe
-	.long	.LASF1037
+	.long	.LASF1034
 	.byte	0x5
 	.uleb128 0xe
-	.long	.LASF1038
+	.long	.LASF1035
 	.byte	0x6
 	.uleb128 0xe
-	.long	.LASF1039
+	.long	.LASF1036
 	.byte	0x7
 	.uleb128 0xe
-	.long	.LASF1040
+	.long	.LASF1037
 	.byte	0x8
 	.uleb128 0xe
-	.long	.LASF1041
+	.long	.LASF1038
 	.byte	0x9
 	.uleb128 0xe
-	.long	.LASF1042
+	.long	.LASF1039
 	.byte	0xa
 	.uleb128 0xe
-	.long	.LASF1043
+	.long	.LASF1040
 	.byte	0xb
 	.uleb128 0xe
-	.long	.LASF1044
+	.long	.LASF1041
 	.byte	0xc
 	.uleb128 0xe
-	.long	.LASF1045
+	.long	.LASF1042
 	.byte	0xd
 	.uleb128 0xe
-	.long	.LASF1046
+	.long	.LASF1043
 	.byte	0xe
 	.uleb128 0xe
-	.long	.LASF1047
+	.long	.LASF1044
 	.byte	0xf
 	.uleb128 0xe
-	.long	.LASF1048
+	.long	.LASF1045
 	.byte	0x10
 	.uleb128 0xe
-	.long	.LASF1049
+	.long	.LASF1046
 	.byte	0x11
 	.uleb128 0xe
-	.long	.LASF1050
+	.long	.LASF1047
 	.byte	0x12
 	.uleb128 0xe
-	.long	.LASF1051
+	.long	.LASF1048
 	.byte	0x13
 	.uleb128 0xe
-	.long	.LASF1052
+	.long	.LASF1049
 	.byte	0x14
 	.uleb128 0xe
-	.long	.LASF1053
+	.long	.LASF1050
 	.byte	0x15
 	.uleb128 0xe
-	.long	.LASF1054
+	.long	.LASF1051
 	.byte	0x16
 	.uleb128 0xe
-	.long	.LASF1055
+	.long	.LASF1052
 	.byte	0x17
 	.uleb128 0xe
-	.long	.LASF1056
+	.long	.LASF1053
 	.byte	0x18
 	.byte	0
 	.uleb128 0x12
 	.byte	0x4
-	.byte	0x8
+	.byte	0x9
 	.byte	0x25
 	.byte	0x9
 	.long	0x45e
 	.uleb128 0xa
-	.long	.LASF1057
-	.byte	0x8
+	.long	.LASF1054
+	.byte	0x9
 	.byte	0x26
 	.byte	0xd
 	.long	0x112
 	.byte	0
 	.uleb128 0xa
-	.long	.LASF1058
-	.byte	0x8
+	.long	.LASF1055
+	.byte	0x9
 	.byte	0x27
 	.byte	0xe
 	.long	0x142
 	.byte	0x2
 	.byte	0
 	.uleb128 0x3
-	.long	.LASF1059
-	.byte	0x8
+	.long	.LASF1056
+	.byte	0x9
 	.byte	0x28
 	.byte	0x3
 	.long	0x43a
 	.uleb128 0x12
 	.byte	0x30
-	.byte	0x8
+	.byte	0x9
 	.byte	0x2a
 	.byte	0x9
 	.long	0x4cf
 	.uleb128 0xa
-	.long	.LASF1029
-	.byte	0x8
+	.long	.LASF1026
+	.byte	0x9
 	.byte	0x2b
 	.byte	0xd
 	.long	0x112
 	.byte	0
 	.uleb128 0xa
-	.long	.LASF1028
-	.byte	0x8
+	.long	.LASF1025
+	.byte	0x9
 	.byte	0x2c
 	.byte	0xd
 	.long	0x112
 	.byte	0x2
 	.uleb128 0xa
-	.long	.LASF1060
-	.byte	0x8
+	.long	.LASF1057
+	.byte	0x9
 	.byte	0x2d
 	.byte	0xe
 	.long	0x4cf
 	.byte	0x8
 	.uleb128 0xa
-	.long	.LASF1061
-	.byte	0x8
+	.long	.LASF1058
+	.byte	0x9
 	.byte	0x2e
 	.byte	0x10
 	.long	0x389
 	.byte	0x10
 	.uleb128 0xa
-	.long	.LASF1062
-	.byte	0x8
+	.long	.LASF1059
+	.byte	0x9
 	.byte	0x2f
 	.byte	0xd
 	.long	0x112
 	.byte	0x20
 	.uleb128 0xa
-	.long	.LASF1063
-	.byte	0x8
+	.long	.LASF1060
+	.byte	0x9
 	.byte	0x30
 	.byte	0xd
 	.long	0x112
 	.byte	0x22
 	.uleb128 0xa
-	.long	.LASF1064
-	.byte	0x8
+	.long	.LASF1061
+	.byte	0x9
 	.byte	0x31
 	.byte	0x10
 	.long	0x4d5
@@ -2505,8 +2556,8 @@ check:
 	.byte	0x8
 	.long	0x45e
 	.uleb128 0x3
-	.long	.LASF1065
-	.byte	0x8
+	.long	.LASF1062
+	.byte	0x9
 	.byte	0x32
 	.byte	0x3
 	.long	0x46a
@@ -2519,11 +2570,11 @@ check:
 	.byte	0xe
 	.long	0x4fc
 	.uleb128 0xe
-	.long	.LASF1066
+	.long	.LASF1063
 	.byte	0
 	.byte	0
 	.uleb128 0x3
-	.long	.LASF1067
+	.long	.LASF1064
 	.byte	0x1
 	.byte	0x12
 	.byte	0x3
@@ -2534,25 +2585,502 @@ check:
 	.uleb128 0x6
 	.byte	0x8
 	.long	0x101
+	.uleb128 0xd
+	.byte	0x7
+	.byte	0x4
+	.long	0x60
+	.byte	0x2
+	.byte	0x6
+	.byte	0xe
+	.long	0x817
+	.uleb128 0xe
+	.long	.LASF1065
+	.byte	0
+	.uleb128 0xe
+	.long	.LASF1066
+	.byte	0x1
+	.uleb128 0xe
+	.long	.LASF1067
+	.byte	0x2
+	.uleb128 0xe
+	.long	.LASF1068
+	.byte	0x3
+	.uleb128 0xe
+	.long	.LASF1069
+	.byte	0x4
+	.uleb128 0xe
+	.long	.LASF1070
+	.byte	0x5
+	.uleb128 0xe
+	.long	.LASF1071
+	.byte	0x6
+	.uleb128 0xe
+	.long	.LASF1072
+	.byte	0x7
+	.uleb128 0xe
+	.long	.LASF1073
+	.byte	0x8
+	.uleb128 0xe
+	.long	.LASF1074
+	.byte	0x9
+	.uleb128 0xe
+	.long	.LASF1075
+	.byte	0xa
+	.uleb128 0xe
+	.long	.LASF1076
+	.byte	0xb
+	.uleb128 0xe
+	.long	.LASF1077
+	.byte	0xc
+	.uleb128 0xe
+	.long	.LASF1078
+	.byte	0xd
+	.uleb128 0xe
+	.long	.LASF1079
+	.byte	0xe
+	.uleb128 0xe
+	.long	.LASF1080
+	.byte	0xf
+	.uleb128 0xe
+	.long	.LASF1081
+	.byte	0x10
+	.uleb128 0xe
+	.long	.LASF1082
+	.byte	0x11
+	.uleb128 0xe
+	.long	.LASF1083
+	.byte	0x12
+	.uleb128 0xe
+	.long	.LASF1084
+	.byte	0x13
+	.uleb128 0xe
+	.long	.LASF1085
+	.byte	0x14
+	.uleb128 0xe
+	.long	.LASF1086
+	.byte	0x15
+	.uleb128 0xe
+	.long	.LASF1087
+	.byte	0x16
+	.uleb128 0xe
+	.long	.LASF1088
+	.byte	0x17
+	.uleb128 0xe
+	.long	.LASF1089
+	.byte	0x18
+	.uleb128 0xe
+	.long	.LASF1090
+	.byte	0x19
+	.uleb128 0xe
+	.long	.LASF1091
+	.byte	0x1a
+	.uleb128 0xe
+	.long	.LASF1092
+	.byte	0x1b
+	.uleb128 0xe
+	.long	.LASF1093
+	.byte	0x1c
+	.uleb128 0xe
+	.long	.LASF1094
+	.byte	0x1d
+	.uleb128 0xe
+	.long	.LASF1095
+	.byte	0x1e
+	.uleb128 0xe
+	.long	.LASF1096
+	.byte	0x1f
+	.uleb128 0xe
+	.long	.LASF1097
+	.byte	0x20
+	.uleb128 0xe
+	.long	.LASF1098
+	.byte	0x21
+	.uleb128 0xe
+	.long	.LASF1099
+	.byte	0x22
+	.uleb128 0xe
+	.long	.LASF1100
+	.byte	0x23
+	.uleb128 0xe
+	.long	.LASF1101
+	.byte	0x24
+	.uleb128 0xe
+	.long	.LASF1102
+	.byte	0x25
+	.uleb128 0xe
+	.long	.LASF1103
+	.byte	0x26
+	.uleb128 0xe
+	.long	.LASF1104
+	.byte	0x27
+	.uleb128 0xe
+	.long	.LASF1105
+	.byte	0x28
+	.uleb128 0xe
+	.long	.LASF1106
+	.byte	0x29
+	.uleb128 0xe
+	.long	.LASF1107
+	.byte	0x2a
+	.uleb128 0xe
+	.long	.LASF1108
+	.byte	0x2b
+	.uleb128 0xe
+	.long	.LASF1109
+	.byte	0x2c
+	.uleb128 0xe
+	.long	.LASF1110
+	.byte	0x2d
+	.uleb128 0xe
+	.long	.LASF1111
+	.byte	0x2e
+	.uleb128 0xe
+	.long	.LASF1112
+	.byte	0x2f
+	.uleb128 0xe
+	.long	.LASF1113
+	.byte	0x30
+	.uleb128 0xe
+	.long	.LASF1114
+	.byte	0x31
+	.uleb128 0xe
+	.long	.LASF1115
+	.byte	0x32
+	.uleb128 0xe
+	.long	.LASF1116
+	.byte	0x33
+	.uleb128 0xe
+	.long	.LASF1117
+	.byte	0x34
+	.uleb128 0xe
+	.long	.LASF1118
+	.byte	0x35
+	.uleb128 0xe
+	.long	.LASF1119
+	.byte	0x36
+	.uleb128 0xe
+	.long	.LASF1120
+	.byte	0x37
+	.uleb128 0xe
+	.long	.LASF1121
+	.byte	0x38
+	.uleb128 0xe
+	.long	.LASF1122
+	.byte	0x39
+	.uleb128 0xe
+	.long	.LASF1123
+	.byte	0x3a
+	.uleb128 0xe
+	.long	.LASF1124
+	.byte	0x3b
+	.uleb128 0xe
+	.long	.LASF1125
+	.byte	0x3c
+	.uleb128 0xe
+	.long	.LASF1126
+	.byte	0x3d
+	.uleb128 0xe
+	.long	.LASF1127
+	.byte	0x3e
+	.uleb128 0xe
+	.long	.LASF1128
+	.byte	0x3f
+	.uleb128 0xe
+	.long	.LASF1129
+	.byte	0x40
+	.uleb128 0xe
+	.long	.LASF1130
+	.byte	0x41
+	.uleb128 0xe
+	.long	.LASF1131
+	.byte	0x42
+	.uleb128 0xe
+	.long	.LASF1132
+	.byte	0x43
+	.uleb128 0xe
+	.long	.LASF1133
+	.byte	0x44
+	.uleb128 0xe
+	.long	.LASF1134
+	.byte	0x45
+	.uleb128 0xe
+	.long	.LASF1135
+	.byte	0x46
+	.uleb128 0xe
+	.long	.LASF1136
+	.byte	0x47
+	.uleb128 0xe
+	.long	.LASF1137
+	.byte	0x48
+	.uleb128 0xe
+	.long	.LASF1138
+	.byte	0x49
+	.uleb128 0xe
+	.long	.LASF1139
+	.byte	0x4a
+	.uleb128 0xe
+	.long	.LASF1140
+	.byte	0x4b
+	.uleb128 0xe
+	.long	.LASF1141
+	.byte	0x4c
+	.uleb128 0xe
+	.long	.LASF1142
+	.byte	0x4d
+	.uleb128 0xe
+	.long	.LASF1143
+	.byte	0x4e
+	.uleb128 0xe
+	.long	.LASF1144
+	.byte	0x4f
+	.uleb128 0xe
+	.long	.LASF1145
+	.byte	0x50
+	.uleb128 0xe
+	.long	.LASF1146
+	.byte	0x51
+	.uleb128 0xe
+	.long	.LASF1147
+	.byte	0x52
+	.uleb128 0xe
+	.long	.LASF1148
+	.byte	0x53
+	.uleb128 0xe
+	.long	.LASF1149
+	.byte	0x54
+	.uleb128 0xe
+	.long	.LASF1150
+	.byte	0x55
+	.uleb128 0xe
+	.long	.LASF1151
+	.byte	0x56
+	.uleb128 0xe
+	.long	.LASF1152
+	.byte	0x57
+	.uleb128 0xe
+	.long	.LASF1153
+	.byte	0x58
+	.uleb128 0xe
+	.long	.LASF1154
+	.byte	0x59
+	.uleb128 0xe
+	.long	.LASF1155
+	.byte	0x5a
+	.uleb128 0xe
+	.long	.LASF1156
+	.byte	0x5b
+	.uleb128 0xe
+	.long	.LASF1157
+	.byte	0x5c
+	.uleb128 0xe
+	.long	.LASF1158
+	.byte	0x5d
+	.uleb128 0xe
+	.long	.LASF1159
+	.byte	0x5e
+	.uleb128 0xe
+	.long	.LASF1160
+	.byte	0x5f
+	.uleb128 0xe
+	.long	.LASF1161
+	.byte	0x60
+	.uleb128 0xe
+	.long	.LASF1162
+	.byte	0x61
+	.uleb128 0xe
+	.long	.LASF1163
+	.byte	0x62
+	.uleb128 0xe
+	.long	.LASF1164
+	.byte	0x63
+	.uleb128 0xe
+	.long	.LASF1165
+	.byte	0x64
+	.uleb128 0xe
+	.long	.LASF1166
+	.byte	0x65
+	.uleb128 0xe
+	.long	.LASF1167
+	.byte	0x66
+	.uleb128 0xe
+	.long	.LASF1168
+	.byte	0x67
+	.uleb128 0xe
+	.long	.LASF1169
+	.byte	0x68
+	.uleb128 0xe
+	.long	.LASF1170
+	.byte	0x69
+	.uleb128 0xe
+	.long	.LASF1171
+	.byte	0x6a
+	.uleb128 0xe
+	.long	.LASF1172
+	.byte	0x6b
+	.uleb128 0xe
+	.long	.LASF1173
+	.byte	0x6c
+	.uleb128 0xe
+	.long	.LASF1174
+	.byte	0x6d
+	.uleb128 0xe
+	.long	.LASF1175
+	.byte	0x6e
+	.uleb128 0xe
+	.long	.LASF1176
+	.byte	0x6f
+	.uleb128 0xe
+	.long	.LASF1177
+	.byte	0x70
+	.uleb128 0xe
+	.long	.LASF1178
+	.byte	0x71
+	.uleb128 0xe
+	.long	.LASF1179
+	.byte	0x72
+	.uleb128 0xe
+	.long	.LASF1180
+	.byte	0x73
+	.uleb128 0xe
+	.long	.LASF1181
+	.byte	0x74
+	.uleb128 0xe
+	.long	.LASF1182
+	.byte	0x75
+	.uleb128 0xe
+	.long	.LASF1183
+	.byte	0x76
+	.uleb128 0xe
+	.long	.LASF1184
+	.byte	0x77
+	.uleb128 0xe
+	.long	.LASF1185
+	.byte	0x78
+	.uleb128 0xe
+	.long	.LASF1186
+	.byte	0x79
+	.uleb128 0xe
+	.long	.LASF1187
+	.byte	0x7a
+	.uleb128 0xe
+	.long	.LASF1188
+	.byte	0x7b
+	.uleb128 0xe
+	.long	.LASF1189
+	.byte	0x7c
+	.uleb128 0xe
+	.long	.LASF1190
+	.byte	0x7d
+	.byte	0
+	.uleb128 0x3
+	.long	.LASF1191
+	.byte	0x2
+	.byte	0xa2
+	.byte	0x3
+	.long	0x514
+	.uleb128 0x12
+	.byte	0x18
+	.byte	0x2
+	.byte	0xa4
+	.byte	0x9
+	.long	0x861
+	.uleb128 0xa
+	.long	.LASF996
+	.byte	0x2
+	.byte	0xa5
+	.byte	0xf
+	.long	0x817
+	.byte	0
+	.uleb128 0xa
+	.long	.LASF1192
+	.byte	0x2
+	.byte	0xa6
+	.byte	0x13
+	.long	0x861
+	.byte	0x8
+	.uleb128 0xa
+	.long	.LASF999
+	.byte	0x2
+	.byte	0xa7
+	.byte	0xd
+	.long	0x112
+	.byte	0x10
+	.uleb128 0xa
+	.long	.LASF1055
+	.byte	0x2
+	.byte	0xa8
+	.byte	0xd
+	.long	0x112
+	.byte	0x12
+	.byte	0
 	.uleb128 0x6
 	.byte	0x8
 	.long	0x10d
+	.uleb128 0x3
+	.long	.LASF1193
+	.byte	0x2
+	.byte	0xa9
+	.byte	0x3
+	.long	0x823
 	.uleb128 0x12
-	.byte	0x30
+	.byte	0x18
+	.byte	0x2
+	.byte	0xab
 	.byte	0x9
-	.byte	0xa
-	.byte	0x9
-	.long	0x53e
-	.uleb128 0xc
-	.string	"key"
-	.byte	0x9
-	.byte	0xb
-	.byte	0x10
-	.long	0x53e
+	.long	0x8a4
+	.uleb128 0xa
+	.long	.LASF1192
+	.byte	0x2
+	.byte	0xac
+	.byte	0x13
+	.long	0x861
 	.byte	0
 	.uleb128 0xa
-	.long	.LASF1068
+	.long	.LASF1194
+	.byte	0x2
+	.byte	0xad
+	.byte	0x13
+	.long	0x861
+	.byte	0x8
+	.uleb128 0xa
+	.long	.LASF1055
+	.byte	0x2
+	.byte	0xae
+	.byte	0xd
+	.long	0x112
+	.byte	0x10
+	.byte	0
+	.uleb128 0x3
+	.long	.LASF1195
+	.byte	0x2
+	.byte	0xaf
+	.byte	0x3
+	.long	0x873
+	.uleb128 0x13
+	.long	.LASF1211
+	.byte	0x2
+	.byte	0xb1
 	.byte	0x9
+	.long	0x8a4
+	.uleb128 0x9
+	.byte	0x3
+	.quad	scanner
+	.uleb128 0x12
+	.byte	0x30
+	.byte	0xa
+	.byte	0xa
+	.byte	0x9
+	.long	0x8ea
+	.uleb128 0xc
+	.string	"key"
+	.byte	0xa
+	.byte	0xb
+	.byte	0x10
+	.long	0x8ea
+	.byte	0
+	.uleb128 0xa
+	.long	.LASF1196
+	.byte	0xa
 	.byte	0xc
 	.byte	0xb
 	.long	0x346
@@ -2562,106 +3090,106 @@ check:
 	.byte	0x8
 	.long	0x19a
 	.uleb128 0x3
-	.long	.LASF1069
-	.byte	0x9
+	.long	.LASF1197
+	.byte	0xa
 	.byte	0xd
 	.byte	0x3
-	.long	0x51a
+	.long	0x8c6
 	.uleb128 0x12
 	.byte	0x18
-	.byte	0x9
+	.byte	0xa
 	.byte	0xf
 	.byte	0x9
-	.long	0x581
+	.long	0x92d
 	.uleb128 0xa
-	.long	.LASF1029
-	.byte	0x9
+	.long	.LASF1026
+	.byte	0xa
 	.byte	0x10
 	.byte	0xc
 	.long	0x38
 	.byte	0
 	.uleb128 0xa
-	.long	.LASF1028
-	.byte	0x9
+	.long	.LASF1025
+	.byte	0xa
 	.byte	0x11
 	.byte	0xc
 	.long	0x38
 	.byte	0x8
 	.uleb128 0xa
-	.long	.LASF1070
-	.byte	0x9
+	.long	.LASF1198
+	.byte	0xa
 	.byte	0x12
 	.byte	0xc
-	.long	0x581
+	.long	0x92d
 	.byte	0x10
 	.byte	0
 	.uleb128 0x6
 	.byte	0x8
-	.long	0x544
+	.long	0x8f0
 	.uleb128 0x3
-	.long	.LASF1071
-	.byte	0x9
+	.long	.LASF1199
+	.byte	0xa
 	.byte	0x13
 	.byte	0x3
-	.long	0x550
-	.uleb128 0x13
+	.long	0x8fc
+	.uleb128 0x14
 	.value	0x2060
-	.byte	0xa
+	.byte	0xb
 	.byte	0xc
 	.byte	0x9
-	.long	0x60a
+	.long	0x9b6
 	.uleb128 0xa
-	.long	.LASF1072
-	.byte	0xa
+	.long	.LASF1200
+	.byte	0xb
 	.byte	0xd
 	.byte	0xc
-	.long	0x60a
+	.long	0x9b6
 	.byte	0
 	.uleb128 0xc
 	.string	"ip"
-	.byte	0xa
+	.byte	0xb
 	.byte	0xe
 	.byte	0xe
 	.long	0x4cf
 	.byte	0x8
 	.uleb128 0xa
-	.long	.LASF1073
-	.byte	0xa
+	.long	.LASF1201
+	.byte	0xb
 	.byte	0xf
 	.byte	0xb
-	.long	0x610
+	.long	0x9bc
 	.byte	0x10
-	.uleb128 0x14
-	.long	.LASF1074
-	.byte	0xa
+	.uleb128 0x15
+	.long	.LASF1202
+	.byte	0xb
 	.byte	0x10
 	.byte	0xc
 	.long	0x383
 	.value	0x2010
-	.uleb128 0x14
-	.long	.LASF1075
-	.byte	0xa
+	.uleb128 0x15
+	.long	.LASF1203
+	.byte	0xb
 	.byte	0x12
 	.byte	0xb
-	.long	0x587
+	.long	0x933
 	.value	0x2018
-	.uleb128 0x14
-	.long	.LASF1076
-	.byte	0xa
+	.uleb128 0x15
+	.long	.LASF1204
+	.byte	0xb
 	.byte	0x13
 	.byte	0x10
 	.long	0x389
 	.value	0x2030
-	.uleb128 0x14
-	.long	.LASF1077
-	.byte	0xa
+	.uleb128 0x15
+	.long	.LASF1205
+	.byte	0xb
 	.byte	0x14
 	.byte	0xb
-	.long	0x587
+	.long	0x933
 	.value	0x2040
-	.uleb128 0x14
-	.long	.LASF1078
-	.byte	0xa
+	.uleb128 0x15
+	.long	.LASF1206
+	.byte	0xb
 	.byte	0x15
 	.byte	0xa
 	.long	0x31d
@@ -2670,402 +3198,402 @@ check:
 	.uleb128 0x6
 	.byte	0x8
 	.long	0x4db
-	.uleb128 0x15
-	.long	0x346
-	.long	0x620
 	.uleb128 0x16
+	.long	0x346
+	.long	0x9cc
+	.uleb128 0x17
 	.long	0x44
 	.byte	0xff
 	.byte	0
 	.uleb128 0x8
 	.string	"VM"
-	.byte	0xa
+	.byte	0xb
 	.byte	0x16
 	.byte	0x3
-	.long	0x593
+	.long	0x93f
 	.uleb128 0xd
 	.byte	0x7
 	.byte	0x4
 	.long	0x60
-	.byte	0xa
+	.byte	0xb
 	.byte	0x18
 	.byte	0xe
-	.long	0x64c
+	.long	0x9f8
 	.uleb128 0xe
-	.long	.LASF1079
+	.long	.LASF1207
 	.byte	0
 	.uleb128 0xe
-	.long	.LASF1080
+	.long	.LASF1208
 	.byte	0x1
 	.uleb128 0xe
-	.long	.LASF1081
+	.long	.LASF1209
 	.byte	0x2
 	.byte	0
 	.uleb128 0x3
-	.long	.LASF1082
-	.byte	0xa
+	.long	.LASF1210
+	.byte	0xb
 	.byte	0x1c
 	.byte	0x3
-	.long	0x62b
-	.uleb128 0x17
+	.long	0x9d7
+	.uleb128 0x18
 	.string	"vm"
-	.byte	0xa
+	.byte	0xb
 	.byte	0x1e
 	.byte	0xb
-	.long	0x620
+	.long	0x9cc
 	.uleb128 0x3
-	.long	.LASF1083
-	.byte	0xb
+	.long	.LASF1212
+	.byte	0xc
 	.byte	0x28
 	.byte	0x1b
-	.long	0x66f
-	.uleb128 0x18
-	.long	.LASF1144
-	.long	0x678
-	.uleb128 0x15
-	.long	0x688
-	.long	0x688
+	.long	0xa1b
+	.uleb128 0x19
+	.long	.LASF1275
+	.long	0xa24
 	.uleb128 0x16
+	.long	0xa34
+	.long	0xa34
+	.uleb128 0x17
 	.long	0x44
 	.byte	0
 	.byte	0
-	.uleb128 0x19
-	.long	.LASF1145
-	.byte	0x18
-	.byte	0xc
-	.byte	0
-	.long	0x6c5
 	.uleb128 0x1a
-	.long	.LASF1084
-	.byte	0xc
+	.long	.LASF1276
+	.byte	0x18
+	.byte	0xd
+	.byte	0
+	.long	0xa71
+	.uleb128 0x1b
+	.long	.LASF1213
+	.byte	0xd
 	.byte	0
 	.long	0x60
 	.byte	0
-	.uleb128 0x1a
-	.long	.LASF1085
-	.byte	0xc
+	.uleb128 0x1b
+	.long	.LASF1214
+	.byte	0xd
 	.byte	0
 	.long	0x60
 	.byte	0x4
-	.uleb128 0x1a
-	.long	.LASF1086
-	.byte	0xc
+	.uleb128 0x1b
+	.long	.LASF1215
+	.byte	0xd
 	.byte	0
 	.long	0xed
 	.byte	0x8
-	.uleb128 0x1a
-	.long	.LASF1087
-	.byte	0xc
+	.uleb128 0x1b
+	.long	.LASF1216
+	.byte	0xd
 	.byte	0
 	.long	0xed
 	.byte	0x10
 	.byte	0
 	.uleb128 0x3
-	.long	.LASF1088
-	.byte	0xb
+	.long	.LASF1217
+	.byte	0xc
 	.byte	0x63
 	.byte	0x18
-	.long	0x663
+	.long	0xa0f
 	.uleb128 0xb
-	.long	.LASF1089
+	.long	.LASF1218
 	.byte	0xd8
-	.byte	0xd
+	.byte	0xe
 	.byte	0x31
 	.byte	0x8
-	.long	0x858
+	.long	0xc04
 	.uleb128 0xa
-	.long	.LASF1090
-	.byte	0xd
+	.long	.LASF1219
+	.byte	0xe
 	.byte	0x33
 	.byte	0x7
 	.long	0x4b
 	.byte	0
 	.uleb128 0xa
-	.long	.LASF1091
-	.byte	0xd
+	.long	.LASF1220
+	.byte	0xe
 	.byte	0x36
 	.byte	0x9
 	.long	0xef
 	.byte	0x8
 	.uleb128 0xa
-	.long	.LASF1092
-	.byte	0xd
+	.long	.LASF1221
+	.byte	0xe
 	.byte	0x37
 	.byte	0x9
 	.long	0xef
 	.byte	0x10
 	.uleb128 0xa
-	.long	.LASF1093
-	.byte	0xd
+	.long	.LASF1222
+	.byte	0xe
 	.byte	0x38
 	.byte	0x9
 	.long	0xef
 	.byte	0x18
 	.uleb128 0xa
-	.long	.LASF1094
-	.byte	0xd
+	.long	.LASF1223
+	.byte	0xe
 	.byte	0x39
 	.byte	0x9
 	.long	0xef
 	.byte	0x20
 	.uleb128 0xa
-	.long	.LASF1095
-	.byte	0xd
+	.long	.LASF1224
+	.byte	0xe
 	.byte	0x3a
 	.byte	0x9
 	.long	0xef
 	.byte	0x28
 	.uleb128 0xa
-	.long	.LASF1096
-	.byte	0xd
+	.long	.LASF1225
+	.byte	0xe
 	.byte	0x3b
 	.byte	0x9
 	.long	0xef
 	.byte	0x30
 	.uleb128 0xa
-	.long	.LASF1097
-	.byte	0xd
+	.long	.LASF1226
+	.byte	0xe
 	.byte	0x3c
 	.byte	0x9
 	.long	0xef
 	.byte	0x38
 	.uleb128 0xa
-	.long	.LASF1098
-	.byte	0xd
+	.long	.LASF1227
+	.byte	0xe
 	.byte	0x3d
 	.byte	0x9
 	.long	0xef
 	.byte	0x40
 	.uleb128 0xa
-	.long	.LASF1099
-	.byte	0xd
+	.long	.LASF1228
+	.byte	0xe
 	.byte	0x40
 	.byte	0x9
 	.long	0xef
 	.byte	0x48
 	.uleb128 0xa
-	.long	.LASF1100
-	.byte	0xd
+	.long	.LASF1229
+	.byte	0xe
 	.byte	0x41
 	.byte	0x9
 	.long	0xef
 	.byte	0x50
 	.uleb128 0xa
-	.long	.LASF1101
-	.byte	0xd
+	.long	.LASF1230
+	.byte	0xe
 	.byte	0x42
 	.byte	0x9
 	.long	0xef
 	.byte	0x58
 	.uleb128 0xa
-	.long	.LASF1102
-	.byte	0xd
+	.long	.LASF1231
+	.byte	0xe
 	.byte	0x44
 	.byte	0x16
-	.long	0x871
+	.long	0xc1d
 	.byte	0x60
 	.uleb128 0xa
-	.long	.LASF1103
-	.byte	0xd
+	.long	.LASF1232
+	.byte	0xe
 	.byte	0x46
 	.byte	0x14
-	.long	0x877
+	.long	0xc23
 	.byte	0x68
 	.uleb128 0xa
-	.long	.LASF1104
-	.byte	0xd
+	.long	.LASF1233
+	.byte	0xe
 	.byte	0x48
 	.byte	0x7
 	.long	0x4b
 	.byte	0x70
 	.uleb128 0xa
-	.long	.LASF1105
-	.byte	0xd
+	.long	.LASF1234
+	.byte	0xe
 	.byte	0x49
 	.byte	0x7
 	.long	0x4b
 	.byte	0x74
 	.uleb128 0xa
-	.long	.LASF1106
-	.byte	0xd
+	.long	.LASF1235
+	.byte	0xe
 	.byte	0x4a
 	.byte	0xb
 	.long	0xd5
 	.byte	0x78
 	.uleb128 0xa
-	.long	.LASF1107
-	.byte	0xd
+	.long	.LASF1236
+	.byte	0xe
 	.byte	0x4d
 	.byte	0x12
 	.long	0x59
 	.byte	0x80
 	.uleb128 0xa
-	.long	.LASF1108
-	.byte	0xd
+	.long	.LASF1237
+	.byte	0xe
 	.byte	0x4e
 	.byte	0xf
 	.long	0x73
 	.byte	0x82
 	.uleb128 0xa
-	.long	.LASF1109
-	.byte	0xd
+	.long	.LASF1238
+	.byte	0xe
 	.byte	0x4f
 	.byte	0x8
-	.long	0x87d
+	.long	0xc29
 	.byte	0x83
 	.uleb128 0xa
-	.long	.LASF1110
-	.byte	0xd
+	.long	.LASF1239
+	.byte	0xe
 	.byte	0x51
 	.byte	0xf
-	.long	0x88d
+	.long	0xc39
 	.byte	0x88
 	.uleb128 0xa
-	.long	.LASF1111
-	.byte	0xd
+	.long	.LASF1240
+	.byte	0xe
 	.byte	0x59
 	.byte	0xd
 	.long	0xe1
 	.byte	0x90
 	.uleb128 0xa
-	.long	.LASF1112
-	.byte	0xd
+	.long	.LASF1241
+	.byte	0xe
 	.byte	0x5b
 	.byte	0x17
-	.long	0x898
+	.long	0xc44
 	.byte	0x98
 	.uleb128 0xa
-	.long	.LASF1113
-	.byte	0xd
+	.long	.LASF1242
+	.byte	0xe
 	.byte	0x5c
 	.byte	0x19
-	.long	0x8a3
+	.long	0xc4f
 	.byte	0xa0
 	.uleb128 0xa
-	.long	.LASF1114
-	.byte	0xd
+	.long	.LASF1243
+	.byte	0xe
 	.byte	0x5d
 	.byte	0x14
-	.long	0x877
+	.long	0xc23
 	.byte	0xa8
 	.uleb128 0xa
-	.long	.LASF1115
-	.byte	0xd
+	.long	.LASF1244
+	.byte	0xe
 	.byte	0x5e
 	.byte	0x9
 	.long	0xed
 	.byte	0xb0
 	.uleb128 0xa
-	.long	.LASF1116
-	.byte	0xd
+	.long	.LASF1245
+	.byte	0xe
 	.byte	0x5f
 	.byte	0xa
 	.long	0x38
 	.byte	0xb8
 	.uleb128 0xa
-	.long	.LASF1117
-	.byte	0xd
+	.long	.LASF1246
+	.byte	0xe
 	.byte	0x60
 	.byte	0x7
 	.long	0x4b
 	.byte	0xc0
 	.uleb128 0xa
-	.long	.LASF1118
-	.byte	0xd
+	.long	.LASF1247
+	.byte	0xe
 	.byte	0x62
 	.byte	0x8
-	.long	0x8a9
+	.long	0xc55
 	.byte	0xc4
 	.byte	0
 	.uleb128 0x3
-	.long	.LASF1119
-	.byte	0xe
+	.long	.LASF1248
+	.byte	0xf
 	.byte	0x7
 	.byte	0x19
-	.long	0x6d1
-	.uleb128 0x1b
-	.long	.LASF1146
-	.byte	0xd
+	.long	0xa7d
+	.uleb128 0x1c
+	.long	.LASF1277
+	.byte	0xe
 	.byte	0x2b
 	.byte	0xe
-	.uleb128 0x1c
-	.long	.LASF1120
+	.uleb128 0x1d
+	.long	.LASF1249
 	.uleb128 0x6
 	.byte	0x8
-	.long	0x86c
+	.long	0xc18
 	.uleb128 0x6
 	.byte	0x8
-	.long	0x6d1
-	.uleb128 0x15
-	.long	0xf5
-	.long	0x88d
+	.long	0xa7d
 	.uleb128 0x16
+	.long	0xf5
+	.long	0xc39
+	.uleb128 0x17
 	.long	0x44
 	.byte	0
 	.byte	0
 	.uleb128 0x6
 	.byte	0x8
-	.long	0x864
-	.uleb128 0x1c
-	.long	.LASF1121
+	.long	0xc10
+	.uleb128 0x1d
+	.long	.LASF1250
 	.uleb128 0x6
 	.byte	0x8
-	.long	0x893
-	.uleb128 0x1c
-	.long	.LASF1122
+	.long	0xc3f
+	.uleb128 0x1d
+	.long	.LASF1251
 	.uleb128 0x6
 	.byte	0x8
-	.long	0x89e
-	.uleb128 0x15
-	.long	0xf5
-	.long	0x8b9
+	.long	0xc4a
 	.uleb128 0x16
+	.long	0xf5
+	.long	0xc65
+	.uleb128 0x17
 	.long	0x44
 	.byte	0x13
 	.byte	0
-	.uleb128 0x1d
-	.long	.LASF1123
-	.byte	0xf
+	.uleb128 0x1e
+	.long	.LASF1252
+	.byte	0x10
 	.byte	0x89
 	.byte	0xe
-	.long	0x8c5
+	.long	0xc71
 	.uleb128 0x6
 	.byte	0x8
-	.long	0x858
-	.uleb128 0x1d
-	.long	.LASF1124
-	.byte	0xf
+	.long	0xc04
+	.uleb128 0x1e
+	.long	.LASF1253
+	.byte	0x10
 	.byte	0x8a
 	.byte	0xe
-	.long	0x8c5
-	.uleb128 0x1d
-	.long	.LASF1125
-	.byte	0xf
+	.long	0xc71
+	.uleb128 0x1e
+	.long	.LASF1254
+	.byte	0x10
 	.byte	0x8b
 	.byte	0xe
-	.long	0x8c5
-	.uleb128 0x1e
-	.long	0x658
-	.byte	0x2
+	.long	0xc71
+	.uleb128 0x1f
+	.long	0xa04
+	.byte	0x3
 	.byte	0x10
 	.byte	0x4
 	.uleb128 0x9
 	.byte	0x3
 	.quad	vm
-	.uleb128 0x1f
-	.long	.LASF1133
-	.byte	0x2
+	.uleb128 0x20
+	.long	.LASF1262
+	.byte	0x3
 	.byte	0xf9
 	.byte	0xe
 	.long	0x346
-	.quad	.LFB11
-	.quad	.LFE11-.LFB11
+	.quad	.LFB12
+	.quad	.LFE12-.LFB12
 	.uleb128 0x1
 	.byte	0x9c
-	.long	0x927
-	.uleb128 0x20
-	.long	.LASF1126
-	.byte	0x2
+	.long	0xcd3
+	.uleb128 0x21
+	.long	.LASF1255
+	.byte	0x3
 	.byte	0xf9
 	.byte	0x1c
 	.long	0x112
@@ -3073,29 +3601,29 @@ check:
 	.byte	0x91
 	.sleb128 -28
 	.byte	0
-	.uleb128 0x21
+	.uleb128 0x22
 	.string	"pop"
-	.byte	0x2
+	.byte	0x3
 	.byte	0xf1
 	.byte	0x7
 	.long	0x346
+	.quad	.LFB11
+	.quad	.LFE11-.LFB11
+	.uleb128 0x1
+	.byte	0x9c
+	.uleb128 0x23
+	.long	.LASF1278
+	.byte	0x3
+	.byte	0xec
+	.byte	0x6
 	.quad	.LFB10
 	.quad	.LFE10-.LFB10
 	.uleb128 0x1
 	.byte	0x9c
-	.uleb128 0x22
-	.long	.LASF1147
-	.byte	0x2
-	.byte	0xec
-	.byte	0x6
-	.quad	.LFB9
-	.quad	.LFE9-.LFB9
-	.uleb128 0x1
-	.byte	0x9c
-	.long	0x973
-	.uleb128 0x20
-	.long	.LASF1068
-	.byte	0x2
+	.long	0xd1f
+	.uleb128 0x21
+	.long	.LASF1196
+	.byte	0x3
 	.byte	0xec
 	.byte	0x11
 	.long	0x346
@@ -3103,75 +3631,75 @@ check:
 	.byte	0x91
 	.sleb128 0
 	.byte	0
-	.uleb128 0x23
-	.long	.LASF1148
-	.byte	0x2
+	.uleb128 0x24
+	.long	.LASF1279
+	.byte	0x3
 	.byte	0xda
 	.byte	0x11
-	.long	0x64c
-	.quad	.LFB8
-	.quad	.LFE8-.LFB8
+	.long	0x9f8
+	.quad	.LFB9
+	.quad	.LFE9-.LFB9
 	.uleb128 0x1
 	.byte	0x9c
-	.long	0x9c6
-	.uleb128 0x20
-	.long	.LASF1127
-	.byte	0x2
+	.long	0xd72
+	.uleb128 0x21
+	.long	.LASF1256
+	.byte	0x3
 	.byte	0xda
 	.byte	0x29
-	.long	0x514
+	.long	0x861
 	.uleb128 0x3
 	.byte	0x91
 	.sleb128 -104
-	.uleb128 0x24
-	.long	.LASF1072
-	.byte	0x2
+	.uleb128 0x25
+	.long	.LASF1200
+	.byte	0x3
 	.byte	0xdb
 	.byte	0xb
 	.long	0x4db
 	.uleb128 0x3
 	.byte	0x91
 	.sleb128 -80
-	.uleb128 0x24
-	.long	.LASF1128
-	.byte	0x2
+	.uleb128 0x25
+	.long	.LASF1257
+	.byte	0x3
 	.byte	0xe6
 	.byte	0x15
-	.long	0x64c
+	.long	0x9f8
 	.uleb128 0x3
 	.byte	0x91
 	.sleb128 -84
 	.byte	0
-	.uleb128 0x25
+	.uleb128 0x26
 	.string	"run"
-	.byte	0x2
+	.byte	0x3
 	.byte	0x44
 	.byte	0x18
-	.long	0x64c
-	.quad	.LFB7
-	.quad	.LFE7-.LFB7
+	.long	0x9f8
+	.quad	.LFB8
+	.quad	.LFE8-.LFB8
 	.uleb128 0x1
 	.byte	0x9c
-	.long	0xc67
-	.uleb128 0x26
+	.long	0x1013
+	.uleb128 0x27
 	.quad	.LBB2
 	.quad	.LBE2-.LBB2
-	.uleb128 0x24
-	.long	.LASF1129
-	.byte	0x2
+	.uleb128 0x25
+	.long	.LASF1258
+	.byte	0x3
 	.byte	0x75
 	.byte	0x11
 	.long	0x136
 	.uleb128 0x3
 	.byte	0x91
 	.sleb128 -1534
-	.uleb128 0x27
+	.uleb128 0x28
 	.quad	.LBB3
 	.quad	.LBE3-.LBB3
-	.long	0xa2f
-	.uleb128 0x24
-	.long	.LASF1130
-	.byte	0x2
+	.long	0xddb
+	.uleb128 0x25
+	.long	.LASF1259
+	.byte	0x3
 	.byte	0x6b
 	.byte	0x10
 	.long	0x383
@@ -3179,13 +3707,13 @@ check:
 	.byte	0x91
 	.sleb128 -1528
 	.byte	0
-	.uleb128 0x27
+	.uleb128 0x28
 	.quad	.LBB5
 	.quad	.LBE5-.LBB5
-	.long	0xa55
-	.uleb128 0x24
-	.long	.LASF1131
-	.byte	0x2
+	.long	0xe01
+	.uleb128 0x25
+	.long	.LASF1260
+	.byte	0x3
 	.byte	0x78
 	.byte	0x17
 	.long	0x346
@@ -3193,13 +3721,13 @@ check:
 	.byte	0x91
 	.sleb128 -1328
 	.byte	0
-	.uleb128 0x27
+	.uleb128 0x28
 	.quad	.LBB6
 	.quad	.LBE6-.LBB6
-	.long	0xa7b
-	.uleb128 0x24
-	.long	.LASF1132
-	.byte	0x2
+	.long	0xe27
+	.uleb128 0x25
+	.long	.LASF1261
+	.byte	0x3
 	.byte	0x85
 	.byte	0x19
 	.long	0x136
@@ -3207,12 +3735,12 @@ check:
 	.byte	0x91
 	.sleb128 -1531
 	.byte	0
-	.uleb128 0x28
+	.uleb128 0x29
 	.long	.Ldebug_ranges0+0
-	.long	0xa95
-	.uleb128 0x24
-	.long	.LASF1068
-	.byte	0x2
+	.long	0xe41
+	.uleb128 0x25
+	.long	.LASF1196
+	.byte	0x3
 	.byte	0x8e
 	.byte	0x17
 	.long	0x346
@@ -3220,13 +3748,13 @@ check:
 	.byte	0x91
 	.sleb128 -1328
 	.byte	0
-	.uleb128 0x27
+	.uleb128 0x28
 	.quad	.LBB9
 	.quad	.LBE9-.LBB9
-	.long	0xabb
-	.uleb128 0x24
-	.long	.LASF1130
-	.byte	0x2
+	.long	0xe67
+	.uleb128 0x25
+	.long	.LASF1259
+	.byte	0x3
 	.byte	0x97
 	.byte	0x19
 	.long	0x136
@@ -3234,13 +3762,13 @@ check:
 	.byte	0x91
 	.sleb128 -1532
 	.byte	0
-	.uleb128 0x27
+	.uleb128 0x28
 	.quad	.LBB10
 	.quad	.LBE10-.LBB10
-	.long	0xae1
-	.uleb128 0x24
-	.long	.LASF1130
-	.byte	0x2
+	.long	0xe8d
+	.uleb128 0x25
+	.long	.LASF1259
+	.byte	0x3
 	.byte	0x9c
 	.byte	0x19
 	.long	0x136
@@ -3248,22 +3776,22 @@ check:
 	.byte	0x91
 	.sleb128 -1533
 	.byte	0
-	.uleb128 0x27
+	.uleb128 0x28
 	.quad	.LBB11
 	.quad	.LBE11-.LBB11
-	.long	0xb13
-	.uleb128 0x29
+	.long	0xebf
+	.uleb128 0x2a
 	.string	"b"
-	.byte	0x2
+	.byte	0x3
 	.byte	0xa1
 	.byte	0x17
 	.long	0x346
 	.uleb128 0x3
 	.byte	0x91
 	.sleb128 -1392
-	.uleb128 0x29
+	.uleb128 0x2a
 	.string	"a"
-	.byte	0x2
+	.byte	0x3
 	.byte	0xa2
 	.byte	0x17
 	.long	0x346
@@ -3271,66 +3799,66 @@ check:
 	.byte	0x91
 	.sleb128 -1360
 	.byte	0
-	.uleb128 0x28
-	.long	.Ldebug_ranges0+0x30
-	.long	0xb39
 	.uleb128 0x29
+	.long	.Ldebug_ranges0+0x30
+	.long	0xee5
+	.uleb128 0x2a
 	.string	"b"
-	.byte	0x2
+	.byte	0x3
 	.byte	0xa6
-	.byte	0xbd
+	.byte	0xb7
 	.long	0x30f
 	.uleb128 0x3
 	.byte	0x91
 	.sleb128 -1424
-	.uleb128 0x29
+	.uleb128 0x2a
 	.string	"a"
-	.byte	0x2
+	.byte	0x3
 	.byte	0xa6
-	.byte	0xda
+	.byte	0xd4
 	.long	0x30f
 	.uleb128 0x3
 	.byte	0x91
 	.sleb128 -1416
 	.byte	0
-	.uleb128 0x28
-	.long	.Ldebug_ranges0+0x60
-	.long	0xb5f
 	.uleb128 0x29
+	.long	.Ldebug_ranges0+0x60
+	.long	0xf0b
+	.uleb128 0x2a
 	.string	"b"
-	.byte	0x2
+	.byte	0x3
 	.byte	0xa7
-	.byte	0xc0
+	.byte	0xba
 	.long	0x30f
 	.uleb128 0x3
 	.byte	0x91
 	.sleb128 -1408
-	.uleb128 0x29
+	.uleb128 0x2a
 	.string	"a"
-	.byte	0x2
+	.byte	0x3
 	.byte	0xa7
-	.byte	0xdd
+	.byte	0xd7
 	.long	0x30f
 	.uleb128 0x3
 	.byte	0x91
 	.sleb128 -1400
 	.byte	0
-	.uleb128 0x27
+	.uleb128 0x28
 	.quad	.LBB16
 	.quad	.LBE16-.LBB16
-	.long	0xb91
-	.uleb128 0x29
+	.long	0xf3d
+	.uleb128 0x2a
 	.string	"b"
-	.byte	0x2
+	.byte	0x3
 	.byte	0xac
 	.byte	0x1c
 	.long	0x30f
 	.uleb128 0x3
 	.byte	0x91
 	.sleb128 -1440
-	.uleb128 0x29
+	.uleb128 0x2a
 	.string	"a"
-	.byte	0x2
+	.byte	0x3
 	.byte	0xad
 	.byte	0x1c
 	.long	0x30f
@@ -3338,121 +3866,121 @@ check:
 	.byte	0x91
 	.sleb128 -1432
 	.byte	0
-	.uleb128 0x28
-	.long	.Ldebug_ranges0+0x90
-	.long	0xbb7
 	.uleb128 0x29
+	.long	.Ldebug_ranges0+0x90
+	.long	0xf63
+	.uleb128 0x2a
 	.string	"b"
-	.byte	0x2
+	.byte	0x3
 	.byte	0xb4
-	.byte	0xc1
+	.byte	0xbb
 	.long	0x30f
 	.uleb128 0x3
 	.byte	0x91
 	.sleb128 -1456
-	.uleb128 0x29
+	.uleb128 0x2a
 	.string	"a"
-	.byte	0x2
+	.byte	0x3
 	.byte	0xb4
-	.byte	0xde
+	.byte	0xd8
 	.long	0x30f
 	.uleb128 0x3
 	.byte	0x91
 	.sleb128 -1448
 	.byte	0
-	.uleb128 0x28
-	.long	.Ldebug_ranges0+0xc0
-	.long	0xbdd
 	.uleb128 0x29
+	.long	.Ldebug_ranges0+0xc0
+	.long	0xf89
+	.uleb128 0x2a
 	.string	"b"
-	.byte	0x2
+	.byte	0x3
 	.byte	0xb5
-	.byte	0xc1
+	.byte	0xbb
 	.long	0x30f
 	.uleb128 0x3
 	.byte	0x91
 	.sleb128 -1472
-	.uleb128 0x29
+	.uleb128 0x2a
 	.string	"a"
-	.byte	0x2
+	.byte	0x3
 	.byte	0xb5
-	.byte	0xde
+	.byte	0xd8
 	.long	0x30f
 	.uleb128 0x3
 	.byte	0x91
 	.sleb128 -1464
 	.byte	0
-	.uleb128 0x28
-	.long	.Ldebug_ranges0+0xf0
-	.long	0xc03
 	.uleb128 0x29
+	.long	.Ldebug_ranges0+0xf0
+	.long	0xfaf
+	.uleb128 0x2a
 	.string	"b"
-	.byte	0x2
+	.byte	0x3
 	.byte	0xb6
-	.byte	0xbf
+	.byte	0xb9
 	.long	0x30f
 	.uleb128 0x3
 	.byte	0x91
 	.sleb128 -1488
-	.uleb128 0x29
+	.uleb128 0x2a
 	.string	"a"
-	.byte	0x2
+	.byte	0x3
 	.byte	0xb6
-	.byte	0xdc
+	.byte	0xd6
 	.long	0x30f
 	.uleb128 0x3
 	.byte	0x91
 	.sleb128 -1480
 	.byte	0
-	.uleb128 0x28
-	.long	.Ldebug_ranges0+0x120
-	.long	0xc29
 	.uleb128 0x29
+	.long	.Ldebug_ranges0+0x120
+	.long	0xfd5
+	.uleb128 0x2a
 	.string	"b"
-	.byte	0x2
+	.byte	0x3
 	.byte	0xb7
-	.byte	0xc5
+	.byte	0xbf
 	.long	0x30f
 	.uleb128 0x3
 	.byte	0x91
 	.sleb128 -1520
-	.uleb128 0x29
+	.uleb128 0x2a
 	.string	"a"
-	.byte	0x2
+	.byte	0x3
 	.byte	0xb7
-	.byte	0xe2
+	.byte	0xdc
 	.long	0x30f
 	.uleb128 0x3
 	.byte	0x91
 	.sleb128 -1512
 	.byte	0
-	.uleb128 0x28
-	.long	.Ldebug_ranges0+0x150
-	.long	0xc4f
 	.uleb128 0x29
+	.long	.Ldebug_ranges0+0x150
+	.long	0xffb
+	.uleb128 0x2a
 	.string	"b"
-	.byte	0x2
+	.byte	0x3
 	.byte	0xb8
-	.byte	0xc1
+	.byte	0xbb
 	.long	0x30f
 	.uleb128 0x3
 	.byte	0x91
 	.sleb128 -1504
-	.uleb128 0x29
+	.uleb128 0x2a
 	.string	"a"
-	.byte	0x2
+	.byte	0x3
 	.byte	0xb8
-	.byte	0xde
+	.byte	0xd8
 	.long	0x30f
 	.uleb128 0x3
 	.byte	0x91
 	.sleb128 -1496
 	.byte	0
-	.uleb128 0x2a
+	.uleb128 0x2b
 	.long	.Ldebug_ranges0+0x180
-	.uleb128 0x24
-	.long	.LASF1057
-	.byte	0x2
+	.uleb128 0x25
+	.long	.LASF1054
+	.byte	0x3
 	.byte	0xc8
 	.byte	0x1a
 	.long	0x142
@@ -3462,76 +3990,76 @@ check:
 	.byte	0
 	.byte	0
 	.byte	0
-	.uleb128 0x2b
-	.long	.LASF1149
-	.byte	0x2
+	.uleb128 0x2c
+	.long	.LASF1280
+	.byte	0x3
 	.byte	0x36
 	.byte	0xd
-	.quad	.LFB6
-	.quad	.LFE6-.LFB6
+	.quad	.LFB7
+	.quad	.LFE7-.LFB7
 	.uleb128 0x1
 	.byte	0x9c
-	.long	0xcd2
-	.uleb128 0x29
+	.long	0x107e
+	.uleb128 0x2a
 	.string	"b"
-	.byte	0x2
+	.byte	0x3
 	.byte	0x37
 	.byte	0x10
-	.long	0x53e
+	.long	0x8ea
 	.uleb128 0x3
 	.byte	0x91
 	.sleb128 -160
-	.uleb128 0x29
+	.uleb128 0x2a
 	.string	"a"
-	.byte	0x2
+	.byte	0x3
 	.byte	0x38
 	.byte	0x10
-	.long	0x53e
+	.long	0x8ea
 	.uleb128 0x3
 	.byte	0x91
 	.sleb128 -152
-	.uleb128 0x24
+	.uleb128 0x25
 	.long	.LASF999
-	.byte	0x2
+	.byte	0x3
 	.byte	0x3a
 	.byte	0xd
 	.long	0x112
 	.uleb128 0x3
 	.byte	0x91
 	.sleb128 -162
-	.uleb128 0x24
+	.uleb128 0x25
 	.long	.LASF1000
-	.byte	0x2
+	.byte	0x3
 	.byte	0x3b
 	.byte	0xd
 	.long	0x50e
 	.uleb128 0x3
 	.byte	0x91
 	.sleb128 -144
-	.uleb128 0x24
-	.long	.LASF1128
-	.byte	0x2
+	.uleb128 0x25
+	.long	.LASF1257
+	.byte	0x3
 	.byte	0x40
 	.byte	0x10
-	.long	0x53e
+	.long	0x8ea
 	.uleb128 0x3
 	.byte	0x91
 	.sleb128 -136
 	.byte	0
-	.uleb128 0x1f
-	.long	.LASF1134
-	.byte	0x2
+	.uleb128 0x20
+	.long	.LASF1263
+	.byte	0x3
 	.byte	0x32
 	.byte	0xc
 	.long	0x301
-	.quad	.LFB5
-	.quad	.LFE5-.LFB5
+	.quad	.LFB6
+	.quad	.LFE6-.LFB6
 	.uleb128 0x1
 	.byte	0x9c
-	.long	0xd04
-	.uleb128 0x20
-	.long	.LASF1068
-	.byte	0x2
+	.long	0x10b0
+	.uleb128 0x21
+	.long	.LASF1196
+	.byte	0x3
 	.byte	0x32
 	.byte	0x1b
 	.long	0x346
@@ -3539,47 +4067,47 @@ check:
 	.byte	0x91
 	.sleb128 0
 	.byte	0
-	.uleb128 0x2c
-	.long	.LASF1135
-	.byte	0x2
+	.uleb128 0x2d
+	.long	.LASF1264
+	.byte	0x3
 	.byte	0x25
 	.byte	0xd
-	.quad	.LFB4
-	.quad	.LFE4-.LFB4
+	.quad	.LFB5
+	.quad	.LFE5-.LFB5
 	.uleb128 0x1
 	.byte	0x9c
-	.long	0xd64
-	.uleb128 0x20
-	.long	.LASF1136
-	.byte	0x2
+	.long	0x1110
+	.uleb128 0x21
+	.long	.LASF1265
+	.byte	0x3
 	.byte	0x25
 	.byte	0x26
-	.long	0xd64
+	.long	0x1110
 	.uleb128 0x3
 	.byte	0x91
 	.sleb128 -248
-	.uleb128 0x2d
-	.uleb128 0x24
-	.long	.LASF1137
-	.byte	0x2
+	.uleb128 0x2e
+	.uleb128 0x25
+	.long	.LASF1266
+	.byte	0x3
 	.byte	0x26
 	.byte	0xd
-	.long	0x6c5
+	.long	0xa71
 	.uleb128 0x3
 	.byte	0x91
 	.sleb128 -224
-	.uleb128 0x24
-	.long	.LASF1129
-	.byte	0x2
+	.uleb128 0x25
+	.long	.LASF1258
+	.byte	0x3
 	.byte	0x2c
 	.byte	0xc
 	.long	0x38
 	.uleb128 0x3
 	.byte	0x91
 	.sleb128 -232
-	.uleb128 0x24
-	.long	.LASF1058
-	.byte	0x2
+	.uleb128 0x25
+	.long	.LASF1055
+	.byte	0x3
 	.byte	0x2d
 	.byte	0xe
 	.long	0x142
@@ -3590,35 +4118,65 @@ check:
 	.uleb128 0x6
 	.byte	0x8
 	.long	0xfc
-	.uleb128 0x2e
-	.long	.LASF1150
-	.byte	0x2
+	.uleb128 0x2f
+	.long	.LASF1281
+	.byte	0x3
 	.byte	0x21
 	.byte	0xd
+	.quad	.LFB4
+	.quad	.LFE4-.LFB4
+	.uleb128 0x1
+	.byte	0x9c
+	.uleb128 0x30
+	.long	.LASF1267
+	.byte	0x3
+	.byte	0x1a
+	.byte	0x6
 	.quad	.LFB3
 	.quad	.LFE3-.LFB3
 	.uleb128 0x1
 	.byte	0x9c
-	.uleb128 0x2f
-	.long	.LASF1138
-	.byte	0x2
-	.byte	0x1a
+	.uleb128 0x30
+	.long	.LASF1268
+	.byte	0x3
+	.byte	0x12
 	.byte	0x6
 	.quad	.LFB2
 	.quad	.LFE2-.LFB2
 	.uleb128 0x1
 	.byte	0x9c
-	.uleb128 0x2f
-	.long	.LASF1139
+	.uleb128 0x20
+	.long	.LASF1269
 	.byte	0x2
-	.byte	0x12
-	.byte	0x6
+	.byte	0xc1
+	.byte	0xe
+	.long	0x867
 	.quad	.LFB1
 	.quad	.LFE1-.LFB1
 	.uleb128 0x1
 	.byte	0x9c
-	.uleb128 0x30
-	.long	.LASF1140
+	.long	0x11a5
+	.uleb128 0x21
+	.long	.LASF996
+	.byte	0x2
+	.byte	0xc1
+	.byte	0x22
+	.long	0x817
+	.uleb128 0x2
+	.byte	0x91
+	.sleb128 -60
+	.uleb128 0x25
+	.long	.LASF1270
+	.byte	0x2
+	.byte	0xc2
+	.byte	0xb
+	.long	0x867
+	.uleb128 0x2
+	.byte	0x91
+	.sleb128 -48
+	.byte	0
+	.uleb128 0x31
+	.long	.LASF1271
 	.byte	0x1
 	.byte	0x24
 	.byte	0x13
@@ -3627,8 +4185,8 @@ check:
 	.quad	.LFE0-.LFB0
 	.uleb128 0x1
 	.byte	0x9c
-	.uleb128 0x20
-	.long	.LASF1068
+	.uleb128 0x21
+	.long	.LASF1196
 	.byte	0x1
 	.byte	0x24
 	.byte	0x23
@@ -3636,7 +4194,7 @@ check:
 	.uleb128 0x2
 	.byte	0x91
 	.sleb128 0
-	.uleb128 0x20
+	.uleb128 0x21
 	.long	.LASF996
 	.byte	0x1
 	.byte	0x24
@@ -3902,6 +4460,25 @@ check:
 	.byte	0
 	.byte	0
 	.uleb128 0x13
+	.uleb128 0x34
+	.byte	0
+	.uleb128 0x3
+	.uleb128 0xe
+	.uleb128 0x3a
+	.uleb128 0xb
+	.uleb128 0x3b
+	.uleb128 0xb
+	.uleb128 0x39
+	.uleb128 0xb
+	.uleb128 0x49
+	.uleb128 0x13
+	.uleb128 0x3f
+	.uleb128 0x19
+	.uleb128 0x2
+	.uleb128 0x18
+	.byte	0
+	.byte	0
+	.uleb128 0x14
 	.uleb128 0x13
 	.byte	0x1
 	.uleb128 0xb
@@ -3916,7 +4493,7 @@ check:
 	.uleb128 0x13
 	.byte	0
 	.byte	0
-	.uleb128 0x14
+	.uleb128 0x15
 	.uleb128 0xd
 	.byte	0
 	.uleb128 0x3
@@ -3933,7 +4510,7 @@ check:
 	.uleb128 0x5
 	.byte	0
 	.byte	0
-	.uleb128 0x15
+	.uleb128 0x16
 	.uleb128 0x1
 	.byte	0x1
 	.uleb128 0x49
@@ -3942,7 +4519,7 @@ check:
 	.uleb128 0x13
 	.byte	0
 	.byte	0
-	.uleb128 0x16
+	.uleb128 0x17
 	.uleb128 0x21
 	.byte	0
 	.uleb128 0x49
@@ -3951,7 +4528,7 @@ check:
 	.uleb128 0xb
 	.byte	0
 	.byte	0
-	.uleb128 0x17
+	.uleb128 0x18
 	.uleb128 0x34
 	.byte	0
 	.uleb128 0x3
@@ -3970,7 +4547,7 @@ check:
 	.uleb128 0x19
 	.byte	0
 	.byte	0
-	.uleb128 0x18
+	.uleb128 0x19
 	.uleb128 0x16
 	.byte	0
 	.uleb128 0x3
@@ -3979,7 +4556,7 @@ check:
 	.uleb128 0x13
 	.byte	0
 	.byte	0
-	.uleb128 0x19
+	.uleb128 0x1a
 	.uleb128 0x13
 	.byte	0x1
 	.uleb128 0x3
@@ -3994,7 +4571,7 @@ check:
 	.uleb128 0x13
 	.byte	0
 	.byte	0
-	.uleb128 0x1a
+	.uleb128 0x1b
 	.uleb128 0xd
 	.byte	0
 	.uleb128 0x3
@@ -4009,7 +4586,7 @@ check:
 	.uleb128 0xb
 	.byte	0
 	.byte	0
-	.uleb128 0x1b
+	.uleb128 0x1c
 	.uleb128 0x16
 	.byte	0
 	.uleb128 0x3
@@ -4022,7 +4599,7 @@ check:
 	.uleb128 0xb
 	.byte	0
 	.byte	0
-	.uleb128 0x1c
+	.uleb128 0x1d
 	.uleb128 0x13
 	.byte	0
 	.uleb128 0x3
@@ -4031,7 +4608,7 @@ check:
 	.uleb128 0x19
 	.byte	0
 	.byte	0
-	.uleb128 0x1d
+	.uleb128 0x1e
 	.uleb128 0x34
 	.byte	0
 	.uleb128 0x3
@@ -4050,7 +4627,7 @@ check:
 	.uleb128 0x19
 	.byte	0
 	.byte	0
-	.uleb128 0x1e
+	.uleb128 0x1f
 	.uleb128 0x34
 	.byte	0
 	.uleb128 0x47
@@ -4065,7 +4642,7 @@ check:
 	.uleb128 0x18
 	.byte	0
 	.byte	0
-	.uleb128 0x1f
+	.uleb128 0x20
 	.uleb128 0x2e
 	.byte	0x1
 	.uleb128 0x3
@@ -4092,7 +4669,7 @@ check:
 	.uleb128 0x13
 	.byte	0
 	.byte	0
-	.uleb128 0x20
+	.uleb128 0x21
 	.uleb128 0x5
 	.byte	0
 	.uleb128 0x3
@@ -4109,7 +4686,7 @@ check:
 	.uleb128 0x18
 	.byte	0
 	.byte	0
-	.uleb128 0x21
+	.uleb128 0x22
 	.uleb128 0x2e
 	.byte	0
 	.uleb128 0x3f
@@ -4132,33 +4709,6 @@ check:
 	.uleb128 0x18
 	.uleb128 0x2117
 	.uleb128 0x19
-	.byte	0
-	.byte	0
-	.uleb128 0x22
-	.uleb128 0x2e
-	.byte	0x1
-	.uleb128 0x3f
-	.uleb128 0x19
-	.uleb128 0x3
-	.uleb128 0xe
-	.uleb128 0x3a
-	.uleb128 0xb
-	.uleb128 0x3b
-	.uleb128 0xb
-	.uleb128 0x39
-	.uleb128 0xb
-	.uleb128 0x27
-	.uleb128 0x19
-	.uleb128 0x11
-	.uleb128 0x1
-	.uleb128 0x12
-	.uleb128 0x7
-	.uleb128 0x40
-	.uleb128 0x18
-	.uleb128 0x2117
-	.uleb128 0x19
-	.uleb128 0x1
-	.uleb128 0x13
 	.byte	0
 	.byte	0
 	.uleb128 0x23
@@ -4176,6 +4726,33 @@ check:
 	.uleb128 0xb
 	.uleb128 0x27
 	.uleb128 0x19
+	.uleb128 0x11
+	.uleb128 0x1
+	.uleb128 0x12
+	.uleb128 0x7
+	.uleb128 0x40
+	.uleb128 0x18
+	.uleb128 0x2117
+	.uleb128 0x19
+	.uleb128 0x1
+	.uleb128 0x13
+	.byte	0
+	.byte	0
+	.uleb128 0x24
+	.uleb128 0x2e
+	.byte	0x1
+	.uleb128 0x3f
+	.uleb128 0x19
+	.uleb128 0x3
+	.uleb128 0xe
+	.uleb128 0x3a
+	.uleb128 0xb
+	.uleb128 0x3b
+	.uleb128 0xb
+	.uleb128 0x39
+	.uleb128 0xb
+	.uleb128 0x27
+	.uleb128 0x19
 	.uleb128 0x49
 	.uleb128 0x13
 	.uleb128 0x11
@@ -4190,7 +4767,7 @@ check:
 	.uleb128 0x13
 	.byte	0
 	.byte	0
-	.uleb128 0x24
+	.uleb128 0x25
 	.uleb128 0x34
 	.byte	0
 	.uleb128 0x3
@@ -4207,7 +4784,7 @@ check:
 	.uleb128 0x18
 	.byte	0
 	.byte	0
-	.uleb128 0x25
+	.uleb128 0x26
 	.uleb128 0x2e
 	.byte	0x1
 	.uleb128 0x3
@@ -4230,15 +4807,6 @@ check:
 	.uleb128 0x19
 	.uleb128 0x1
 	.uleb128 0x13
-	.byte	0
-	.byte	0
-	.uleb128 0x26
-	.uleb128 0xb
-	.byte	0x1
-	.uleb128 0x11
-	.uleb128 0x1
-	.uleb128 0x12
-	.uleb128 0x7
 	.byte	0
 	.byte	0
 	.uleb128 0x27
@@ -4248,11 +4816,20 @@ check:
 	.uleb128 0x1
 	.uleb128 0x12
 	.uleb128 0x7
+	.byte	0
+	.byte	0
+	.uleb128 0x28
+	.uleb128 0xb
+	.byte	0x1
+	.uleb128 0x11
+	.uleb128 0x1
+	.uleb128 0x12
+	.uleb128 0x7
 	.uleb128 0x1
 	.uleb128 0x13
 	.byte	0
 	.byte	0
-	.uleb128 0x28
+	.uleb128 0x29
 	.uleb128 0xb
 	.byte	0x1
 	.uleb128 0x55
@@ -4261,7 +4838,7 @@ check:
 	.uleb128 0x13
 	.byte	0
 	.byte	0
-	.uleb128 0x29
+	.uleb128 0x2a
 	.uleb128 0x34
 	.byte	0
 	.uleb128 0x3
@@ -4278,34 +4855,11 @@ check:
 	.uleb128 0x18
 	.byte	0
 	.byte	0
-	.uleb128 0x2a
+	.uleb128 0x2b
 	.uleb128 0xb
 	.byte	0x1
 	.uleb128 0x55
 	.uleb128 0x17
-	.byte	0
-	.byte	0
-	.uleb128 0x2b
-	.uleb128 0x2e
-	.byte	0x1
-	.uleb128 0x3
-	.uleb128 0xe
-	.uleb128 0x3a
-	.uleb128 0xb
-	.uleb128 0x3b
-	.uleb128 0xb
-	.uleb128 0x39
-	.uleb128 0xb
-	.uleb128 0x11
-	.uleb128 0x1
-	.uleb128 0x12
-	.uleb128 0x7
-	.uleb128 0x40
-	.uleb128 0x18
-	.uleb128 0x2116
-	.uleb128 0x19
-	.uleb128 0x1
-	.uleb128 0x13
 	.byte	0
 	.byte	0
 	.uleb128 0x2c
@@ -4319,6 +4873,29 @@ check:
 	.uleb128 0xb
 	.uleb128 0x39
 	.uleb128 0xb
+	.uleb128 0x11
+	.uleb128 0x1
+	.uleb128 0x12
+	.uleb128 0x7
+	.uleb128 0x40
+	.uleb128 0x18
+	.uleb128 0x2116
+	.uleb128 0x19
+	.uleb128 0x1
+	.uleb128 0x13
+	.byte	0
+	.byte	0
+	.uleb128 0x2d
+	.uleb128 0x2e
+	.byte	0x1
+	.uleb128 0x3
+	.uleb128 0xe
+	.uleb128 0x3a
+	.uleb128 0xb
+	.uleb128 0x3b
+	.uleb128 0xb
+	.uleb128 0x39
+	.uleb128 0xb
 	.uleb128 0x27
 	.uleb128 0x19
 	.uleb128 0x11
@@ -4333,12 +4910,12 @@ check:
 	.uleb128 0x13
 	.byte	0
 	.byte	0
-	.uleb128 0x2d
+	.uleb128 0x2e
 	.uleb128 0x18
 	.byte	0
 	.byte	0
 	.byte	0
-	.uleb128 0x2e
+	.uleb128 0x2f
 	.uleb128 0x2e
 	.byte	0
 	.uleb128 0x3
@@ -4359,7 +4936,7 @@ check:
 	.uleb128 0x19
 	.byte	0
 	.byte	0
-	.uleb128 0x2f
+	.uleb128 0x30
 	.uleb128 0x2e
 	.byte	0
 	.uleb128 0x3f
@@ -4382,7 +4959,7 @@ check:
 	.uleb128 0x19
 	.byte	0
 	.byte	0
-	.uleb128 0x30
+	.uleb128 0x31
 	.uleb128 0x2e
 	.byte	0x1
 	.uleb128 0x3
@@ -4483,7 +5060,7 @@ check:
 	.long	.Ldebug_line0
 	.byte	0x3
 	.uleb128 0
-	.uleb128 0x2
+	.uleb128 0x3
 	.byte	0x5
 	.uleb128 0x1
 	.long	.LASF0
@@ -5507,86 +6084,86 @@ check:
 	.byte	0x5
 	.uleb128 0x155
 	.long	.LASF340
-	.file 16 "/usr/include/stdc-predef.h"
+	.file 17 "/usr/include/stdc-predef.h"
 	.byte	0x3
 	.uleb128 0x1f
-	.uleb128 0x10
+	.uleb128 0x11
 	.byte	0x7
 	.long	.Ldebug_macro2
 	.byte	0x4
-	.file 17 "VirtualMachine/vm/../../Bytecode/debug/debug.h"
+	.file 18 "VirtualMachine/vm/../../Bytecode/debug/debug.h"
 	.byte	0x3
 	.uleb128 0x1
-	.uleb128 0x11
+	.uleb128 0x12
 	.byte	0x5
 	.uleb128 0x2
 	.long	.LASF345
 	.byte	0x3
 	.uleb128 0x4
-	.uleb128 0x8
+	.uleb128 0x9
 	.byte	0x5
 	.uleb128 0x2
 	.long	.LASF346
-	.file 18 "VirtualMachine/vm/../../Bytecode/debug/../chunk/../../common/common.h"
-	.byte	0x3
-	.uleb128 0x4
-	.uleb128 0x12
-	.byte	0x5
-	.uleb128 0x2
-	.long	.LASF347
-	.file 19 "/usr/lib/gcc/x86_64-linux-gnu/9/include/stdbool.h"
+	.file 19 "VirtualMachine/vm/../../Bytecode/debug/../chunk/../../common/common.h"
 	.byte	0x3
 	.uleb128 0x4
 	.uleb128 0x13
+	.byte	0x5
+	.uleb128 0x2
+	.long	.LASF347
+	.file 20 "/usr/lib/gcc/x86_64-linux-gnu/9/include/stdbool.h"
+	.byte	0x3
+	.uleb128 0x4
+	.uleb128 0x14
 	.byte	0x7
 	.long	.Ldebug_macro3
 	.byte	0x4
 	.byte	0x3
 	.uleb128 0x5
-	.uleb128 0x3
+	.uleb128 0x4
 	.byte	0x7
 	.long	.Ldebug_macro4
 	.byte	0x4
-	.file 20 "/usr/lib/gcc/x86_64-linux-gnu/9/include/stdint.h"
+	.file 21 "/usr/lib/gcc/x86_64-linux-gnu/9/include/stdint.h"
 	.byte	0x3
 	.uleb128 0x6
-	.uleb128 0x14
-	.file 21 "/usr/include/stdint.h"
+	.uleb128 0x15
+	.file 22 "/usr/include/stdint.h"
 	.byte	0x3
 	.uleb128 0x9
-	.uleb128 0x15
+	.uleb128 0x16
 	.byte	0x7
 	.long	.Ldebug_macro5
-	.file 22 "/usr/include/x86_64-linux-gnu/bits/libc-header-start.h"
+	.file 23 "/usr/include/x86_64-linux-gnu/bits/libc-header-start.h"
 	.byte	0x3
 	.uleb128 0x1a
-	.uleb128 0x16
+	.uleb128 0x17
 	.byte	0x6
 	.uleb128 0x1f
 	.long	.LASF407
-	.file 23 "/usr/include/features.h"
+	.file 24 "/usr/include/features.h"
 	.byte	0x3
 	.uleb128 0x21
-	.uleb128 0x17
-	.byte	0x7
-	.long	.Ldebug_macro6
-	.file 24 "/usr/include/x86_64-linux-gnu/sys/cdefs.h"
-	.byte	0x3
-	.uleb128 0x1cd
 	.uleb128 0x18
 	.byte	0x7
+	.long	.Ldebug_macro6
+	.file 25 "/usr/include/x86_64-linux-gnu/sys/cdefs.h"
+	.byte	0x3
+	.uleb128 0x1cd
+	.uleb128 0x19
+	.byte	0x7
 	.long	.Ldebug_macro7
-	.file 25 "/usr/include/x86_64-linux-gnu/bits/wordsize.h"
+	.file 26 "/usr/include/x86_64-linux-gnu/bits/wordsize.h"
 	.byte	0x3
 	.uleb128 0x1c4
-	.uleb128 0x19
+	.uleb128 0x1a
 	.byte	0x7
 	.long	.Ldebug_macro8
 	.byte	0x4
-	.file 26 "/usr/include/x86_64-linux-gnu/bits/long-double.h"
+	.file 27 "/usr/include/x86_64-linux-gnu/bits/long-double.h"
 	.byte	0x3
 	.uleb128 0x1c5
-	.uleb128 0x1a
+	.uleb128 0x1b
 	.byte	0x5
 	.uleb128 0x15
 	.long	.LASF510
@@ -5594,14 +6171,14 @@ check:
 	.byte	0x7
 	.long	.Ldebug_macro9
 	.byte	0x4
-	.file 27 "/usr/include/x86_64-linux-gnu/gnu/stubs.h"
+	.file 28 "/usr/include/x86_64-linux-gnu/gnu/stubs.h"
 	.byte	0x3
 	.uleb128 0x1e5
-	.uleb128 0x1b
-	.file 28 "/usr/include/x86_64-linux-gnu/gnu/stubs-64.h"
+	.uleb128 0x1c
+	.file 29 "/usr/include/x86_64-linux-gnu/gnu/stubs-64.h"
 	.byte	0x3
 	.uleb128 0xa
-	.uleb128 0x1c
+	.uleb128 0x1d
 	.byte	0x7
 	.long	.Ldebug_macro10
 	.byte	0x4
@@ -5612,37 +6189,37 @@ check:
 	.byte	0x4
 	.byte	0x3
 	.uleb128 0x1b
-	.uleb128 0x4
+	.uleb128 0x5
 	.byte	0x5
 	.uleb128 0x18
 	.long	.LASF543
 	.byte	0x3
 	.uleb128 0x1b
-	.uleb128 0x19
+	.uleb128 0x1a
 	.byte	0x7
 	.long	.Ldebug_macro8
 	.byte	0x4
-	.file 29 "/usr/include/x86_64-linux-gnu/bits/timesize.h"
+	.file 30 "/usr/include/x86_64-linux-gnu/bits/timesize.h"
 	.byte	0x3
 	.uleb128 0x1c
-	.uleb128 0x1d
+	.uleb128 0x1e
 	.byte	0x5
 	.uleb128 0x18
 	.long	.LASF544
 	.byte	0x4
 	.byte	0x7
 	.long	.Ldebug_macro12
-	.file 30 "/usr/include/x86_64-linux-gnu/bits/typesizes.h"
+	.file 31 "/usr/include/x86_64-linux-gnu/bits/typesizes.h"
 	.byte	0x3
 	.uleb128 0x8d
-	.uleb128 0x1e
+	.uleb128 0x1f
 	.byte	0x7
 	.long	.Ldebug_macro13
 	.byte	0x4
-	.file 31 "/usr/include/x86_64-linux-gnu/bits/time64.h"
+	.file 32 "/usr/include/x86_64-linux-gnu/bits/time64.h"
 	.byte	0x3
 	.uleb128 0x8e
-	.uleb128 0x1f
+	.uleb128 0x20
 	.byte	0x7
 	.long	.Ldebug_macro14
 	.byte	0x4
@@ -5650,29 +6227,29 @@ check:
 	.uleb128 0xe1
 	.long	.LASF602
 	.byte	0x4
-	.file 32 "/usr/include/x86_64-linux-gnu/bits/wchar.h"
+	.file 33 "/usr/include/x86_64-linux-gnu/bits/wchar.h"
 	.byte	0x3
 	.uleb128 0x1c
-	.uleb128 0x20
+	.uleb128 0x21
 	.byte	0x7
 	.long	.Ldebug_macro15
 	.byte	0x4
 	.byte	0x3
 	.uleb128 0x1d
-	.uleb128 0x19
+	.uleb128 0x1a
 	.byte	0x7
 	.long	.Ldebug_macro8
 	.byte	0x4
 	.byte	0x3
 	.uleb128 0x22
-	.uleb128 0x5
+	.uleb128 0x6
 	.byte	0x5
 	.uleb128 0x14
 	.long	.LASF606
 	.byte	0x4
 	.byte	0x3
 	.uleb128 0x25
-	.uleb128 0x6
+	.uleb128 0x7
 	.byte	0x5
 	.uleb128 0x14
 	.long	.LASF607
@@ -5689,24 +6266,24 @@ check:
 	.byte	0x4
 	.byte	0x3
 	.uleb128 0x5
-	.uleb128 0x7
+	.uleb128 0x8
 	.byte	0x5
 	.uleb128 0x2
 	.long	.LASF674
-	.file 33 "VirtualMachine/vm/../../Bytecode/debug/../chunk/../value/../../common/common.h"
+	.file 34 "VirtualMachine/vm/../../Bytecode/debug/../chunk/../value/../../common/common.h"
 	.byte	0x3
 	.uleb128 0x4
-	.uleb128 0x21
+	.uleb128 0x22
 	.byte	0x4
-	.file 34 "/usr/include/string.h"
+	.file 35 "/usr/include/string.h"
 	.byte	0x3
 	.uleb128 0x7
-	.uleb128 0x22
+	.uleb128 0x23
 	.byte	0x7
 	.long	.Ldebug_macro18
 	.byte	0x3
 	.uleb128 0x1a
-	.uleb128 0x16
+	.uleb128 0x17
 	.byte	0x7
 	.long	.Ldebug_macro19
 	.byte	0x4
@@ -5714,7 +6291,7 @@ check:
 	.long	.Ldebug_macro20
 	.byte	0x3
 	.uleb128 0x21
-	.uleb128 0x3
+	.uleb128 0x4
 	.byte	0x7
 	.long	.Ldebug_macro21
 	.byte	0x4
@@ -5724,17 +6301,17 @@ check:
 	.byte	0x4
 	.byte	0x4
 	.byte	0x4
-	.file 35 "VirtualMachine/vm/../../Bytecode/memory/memory.h"
+	.file 36 "VirtualMachine/vm/../../Bytecode/memory/memory.h"
 	.byte	0x3
 	.uleb128 0x2
-	.uleb128 0x23
+	.uleb128 0x24
 	.byte	0x5
 	.uleb128 0x2
 	.long	.LASF722
-	.file 36 "VirtualMachine/vm/../../Bytecode/memory/../../common/common.h"
+	.file 37 "VirtualMachine/vm/../../Bytecode/memory/../../common/common.h"
 	.byte	0x3
 	.uleb128 0x4
-	.uleb128 0x24
+	.uleb128 0x25
 	.byte	0x4
 	.byte	0x3
 	.uleb128 0x5
@@ -5742,15 +6319,15 @@ check:
 	.byte	0x5
 	.uleb128 0x2
 	.long	.LASF723
-	.file 37 "VirtualMachine/vm/../../Bytecode/memory/../../Language/object/../../common/common.h"
+	.file 38 "VirtualMachine/vm/../../Bytecode/memory/../../Language/object/../../common/common.h"
 	.byte	0x3
 	.uleb128 0x4
-	.uleb128 0x25
+	.uleb128 0x26
 	.byte	0x4
-	.file 38 "VirtualMachine/vm/../../Bytecode/memory/../../Language/object/../../Bytecode/value/value.h"
+	.file 39 "VirtualMachine/vm/../../Bytecode/memory/../../Language/object/../../Bytecode/value/value.h"
 	.byte	0x3
 	.uleb128 0x5
-	.uleb128 0x26
+	.uleb128 0x27
 	.byte	0x4
 	.byte	0x7
 	.long	.Ldebug_macro23
@@ -5758,39 +6335,38 @@ check:
 	.byte	0x7
 	.long	.Ldebug_macro24
 	.byte	0x4
-	.file 39 "VirtualMachine/vm/../../Bytecode/value/value.h"
+	.file 40 "VirtualMachine/vm/../../Bytecode/value/value.h"
 	.byte	0x3
 	.uleb128 0x3
-	.uleb128 0x27
-	.byte	0x4
-	.file 40 "VirtualMachine/vm/../../common/common.h"
-	.byte	0x3
-	.uleb128 0x4
 	.uleb128 0x28
 	.byte	0x4
-	.file 41 "VirtualMachine/vm/../../Compilation/compiler/compiler.h"
+	.file 41 "VirtualMachine/vm/../../common/common.h"
+	.byte	0x3
+	.uleb128 0x4
+	.uleb128 0x29
+	.byte	0x4
+	.file 42 "VirtualMachine/vm/../../Compilation/compiler/compiler.h"
 	.byte	0x3
 	.uleb128 0x5
-	.uleb128 0x29
+	.uleb128 0x2a
 	.byte	0x5
 	.uleb128 0x2
 	.long	.LASF733
-	.file 42 "VirtualMachine/vm/../../Compilation/compiler/../../Language/object/object.h"
+	.file 43 "VirtualMachine/vm/../../Compilation/compiler/../../Language/object/object.h"
 	.byte	0x3
 	.uleb128 0x4
-	.uleb128 0x2a
+	.uleb128 0x2b
 	.byte	0x4
-	.file 43 "VirtualMachine/vm/../../Compilation/compiler/../../Tokenization/scanner/scanner.h"
 	.byte	0x3
 	.uleb128 0x5
-	.uleb128 0x2b
+	.uleb128 0x2
 	.byte	0x5
 	.uleb128 0x2
 	.long	.LASF734
 	.byte	0x4
 	.byte	0x3
 	.uleb128 0x6
-	.uleb128 0xa
+	.uleb128 0xb
 	.byte	0x5
 	.uleb128 0x2
 	.long	.LASF735
@@ -5806,7 +6382,7 @@ check:
 	.byte	0x4
 	.byte	0x3
 	.uleb128 0x6
-	.uleb128 0x9
+	.uleb128 0xa
 	.byte	0x5
 	.uleb128 0x2
 	.long	.LASF736
@@ -5822,7 +6398,7 @@ check:
 	.byte	0x4
 	.byte	0x3
 	.uleb128 0x7
-	.uleb128 0x3
+	.uleb128 0x4
 	.byte	0x4
 	.byte	0x4
 	.byte	0x5
@@ -5848,7 +6424,7 @@ check:
 	.long	.Ldebug_macro25
 	.byte	0x3
 	.uleb128 0x1b
-	.uleb128 0x16
+	.uleb128 0x17
 	.byte	0x7
 	.long	.Ldebug_macro19
 	.byte	0x4
@@ -5879,7 +6455,7 @@ check:
 	.long	.LASF807
 	.byte	0x3
 	.uleb128 0x18
-	.uleb128 0x1a
+	.uleb128 0x1b
 	.byte	0x5
 	.uleb128 0x15
 	.long	.LASF510
@@ -5955,18 +6531,18 @@ check:
 	.byte	0x4
 	.byte	0x3
 	.uleb128 0xa
-	.uleb128 0xb
+	.uleb128 0xc
 	.byte	0x7
 	.long	.Ldebug_macro37
 	.byte	0x4
 	.byte	0x3
 	.uleb128 0xb
-	.uleb128 0xf
+	.uleb128 0x10
 	.byte	0x7
 	.long	.Ldebug_macro38
 	.byte	0x3
 	.uleb128 0x1b
-	.uleb128 0x16
+	.uleb128 0x17
 	.byte	0x7
 	.long	.Ldebug_macro19
 	.byte	0x4
@@ -5974,7 +6550,7 @@ check:
 	.long	.Ldebug_macro39
 	.byte	0x3
 	.uleb128 0x21
-	.uleb128 0x3
+	.uleb128 0x4
 	.byte	0x7
 	.long	.Ldebug_macro21
 	.byte	0x4
@@ -6015,14 +6591,14 @@ check:
 	.byte	0x4
 	.byte	0x3
 	.uleb128 0x2a
-	.uleb128 0xe
+	.uleb128 0xf
 	.byte	0x5
 	.uleb128 0x2
 	.long	.LASF931
 	.byte	0x4
 	.byte	0x3
 	.uleb128 0x2b
-	.uleb128 0xd
+	.uleb128 0xe
 	.byte	0x7
 	.long	.Ldebug_macro40
 	.byte	0x4
@@ -7228,7 +7804,7 @@ check:
 	.uleb128 0x196
 	.long	.LASF404
 	.byte	0
-	.section	.debug_macro,"G",@progbits,wm4.value.h.93.bfaea07e85ae46c62b090a885a200a26,comdat
+	.section	.debug_macro,"G",@progbits,wm4.value.h.93.ea04d39224bdd560e06214733f3719e5,comdat
 .Ldebug_macro22:
 	.value	0x4
 	.byte	0
@@ -8265,12 +8841,14 @@ check:
 	.section	.debug_line,"",@progbits
 .Ldebug_line0:
 	.section	.debug_str,"MS",@progbits,1
+.LASF1079:
+	.string	"TK_QUESTION"
 .LASF615:
 	.string	"INT32_MAX (2147483647)"
 .LASF940:
 	.string	"_IOFBF 0"
-.LASF713:
-	.string	"UINT_VAL(value) ((Value){VAL_UINT, {.uIn = value}})"
+.LASF722:
+	.string	"memory_h "
 .LASF679:
 	.string	"IS_NIL(value) ((value).type == VAL_NIL)"
 .LASF898:
@@ -8279,56 +8857,58 @@ check:
 	.string	"__STD_TYPE typedef"
 .LASF742:
 	.string	"__DECL_SIMD_cosl "
-.LASF534:
-	.string	"__GLIBC_USE_IEC_60559_BFP_EXT 0"
+.LASF958:
+	.string	"READ_CONSTANT() (vm.chunk->constants.values[READ_BYTE()])"
 .LASF988:
 	.string	"int8_t"
 .LASF225:
 	.string	"__FLT128_MIN_10_EXP__ (-4931)"
 .LASF283:
 	.string	"__DEC128_EPSILON__ 1E-33DL"
-.LASF1072:
+.LASF1200:
 	.string	"chunk"
 .LASF802:
 	.string	"__HAVE_DISTINCT_FLOAT128 1"
-.LASF24:
-	.string	"__SIZEOF_FLOAT__ 4"
 .LASF51:
 	.string	"__UINT32_TYPE__ unsigned int"
-.LASF1045:
+.LASF1042:
 	.string	"OP_LESS"
 .LASF108:
 	.string	"__UINT32_MAX__ 0xffffffffU"
 .LASF974:
 	.string	"size_t"
-.LASF1007:
-	.string	"VAL_INT"
-.LASF674:
-	.string	"value_h "
+.LASF685:
+	.string	"IS_U16(value) ((value).type == VAL_U16)"
+.LASF60:
+	.string	"__UINT_LEAST64_TYPE__ long unsigned int"
 .LASF228:
 	.string	"__FLT128_DECIMAL_DIG__ 36"
-.LASF874:
-	.string	"__MATHCALL"
-.LASF815:
-	.string	"__HAVE_DISTINCT_FLOAT64 0"
+.LASF1167:
+	.string	"TK_IF"
 .LASF220:
 	.string	"__FLT64_HAS_INFINITY__ 1"
+.LASF1192:
+	.string	"start"
 .LASF943:
 	.string	"BUFSIZ 8192"
-.LASF949:
-	.string	"L_tmpnam 20"
+.LASF689:
+	.string	"IS_U64(value) ((value).type == VAL_U64)"
+.LASF1100:
+	.string	"TK_TILDE"
 .LASF822:
 	.string	"__f64(x) x ##f64"
 .LASF93:
 	.string	"__SIZE_WIDTH__ 64"
+.LASF773:
+	.string	"__DECL_SIMD_logf16 "
 .LASF506:
 	.string	"_Static_assert(expr,diagnostic) extern int (*__Static_assert_function (void)) [!!sizeof (struct { int __error_if_negative: (expr) ? 2 : -1; })]"
 .LASF282:
 	.string	"__DEC128_MAX__ 9.999999999999999999999999999999999E6144DL"
 .LASF19:
 	.string	"__LP64__ 1"
-.LASF528:
-	.string	"__stub_sigreturn "
+.LASF270:
+	.string	"__DEC32_SUBNORMAL_MIN__ 0.000001E-95DF"
 .LASF423:
 	.string	"__USE_XOPEN2K8XSI"
 .LASF945:
@@ -8339,12 +8919,12 @@ check:
 	.string	"__always_inline __inline __attribute__ ((__always_inline__))"
 .LASF12:
 	.string	"__ATOMIC_CONSUME 1"
-.LASF1121:
+.LASF1250:
 	.string	"_IO_codecvt"
 .LASF434:
 	.string	"__GLIBC_USE_DEPRECATED_SCANF"
-.LASF471:
-	.string	"__flexarr []"
+.LASF1191:
+	.string	"TokenType"
 .LASF185:
 	.string	"__DECIMAL_DIG__ 21"
 .LASF591:
@@ -8353,32 +8933,32 @@ check:
 	.string	"INT16_C(c) c"
 .LASF990:
 	.string	"int32_t"
-.LASF722:
-	.string	"memory_h "
-.LASF445:
-	.string	"__GNU_LIBRARY__"
+.LASF1084:
+	.string	"TK_SEMICOLON"
+.LASF22:
+	.string	"__SIZEOF_LONG_LONG__ 8"
 .LASF139:
 	.string	"__UINT_FAST16_MAX__ 0xffffffffffffffffUL"
-.LASF170:
-	.string	"__DBL_MAX_10_EXP__ 308"
-.LASF790:
-	.string	"__DECL_SIMD_pow "
+.LASF1179:
+	.string	"TK_FIELD"
 .LASF792:
 	.string	"__DECL_SIMD_powl "
-.LASF1030:
+.LASF1027:
 	.string	"values"
-.LASF1147:
+.LASF1278:
 	.string	"push"
 .LASF248:
 	.string	"__FLT32X_HAS_INFINITY__ 1"
-.LASF1101:
+.LASF1230:
 	.string	"_IO_save_end"
 .LASF136:
 	.string	"__INT_FAST64_MAX__ 0x7fffffffffffffffL"
-.LASF1135:
+.LASF1264:
 	.string	"runtimeError"
 .LASF681:
 	.string	"IS_NUMBER(value) ((value).type != VAL_NIL && (value).type != VAL_BOOL);"
+.LASF1007:
+	.string	"VAL_I16"
 .LASF32:
 	.string	"__ORDER_PDP_ENDIAN__ 3412"
 .LASF273:
@@ -8389,88 +8969,90 @@ check:
 	.string	"__FLT_HAS_DENORM__ 1"
 .LASF989:
 	.string	"int16_t"
+.LASF1085:
+	.string	"TK_COLON"
 .LASF200:
 	.string	"__FLT32_DECIMAL_DIG__ 9"
-.LASF831:
-	.string	"HUGE_VALL (__builtin_huge_vall ())"
-.LASF404:
-	.string	"offsetof(TYPE,MEMBER) __builtin_offsetof (TYPE, MEMBER)"
+.LASF1104:
+	.string	"TK_COLONCOLON"
+.LASF887:
+	.string	"__MATH_TG_F32(FUNC,ARGS) _Float32: FUNC ## f ARGS,"
 .LASF36:
 	.string	"__SIZE_TYPE__ long unsigned int"
-.LASF1051:
+.LASF609:
+	.string	"INT8_MIN (-128)"
+.LASF1048:
 	.string	"OP_EXPONENTIATE"
-.LASF1002:
-	.string	"VAL_UNDEFINED"
 .LASF123:
 	.string	"__UINT8_C(c) c"
 .LASF795:
 	.string	"__DECL_SIMD_powf64 "
 .LASF46:
 	.string	"__INT16_TYPE__ short int"
-.LASF1131:
+.LASF1260:
 	.string	"constant"
-.LASF1082:
+.LASF1210:
 	.string	"InterpretResult"
 .LASF910:
 	.string	"isunordered(x,y) __builtin_isunordered(x, y)"
 .LASF731:
 	.string	"GROW_ARRAY(type,pointer,oldCount,newCount) (type*)reallocate(pointer, sizeof(type) * (oldCount), sizeof(type) * (newCount))"
+.LASF1011:
+	.string	"VAL_I64"
 .LASF965:
 	.string	"READ_SHORT"
-.LASF346:
-	.string	"chunk_h "
 .LASF630:
 	.string	"UINT_LEAST16_MAX (65535)"
-.LASF696:
-	.string	"AS_UCHAR(value) ((value).as.uCh)"
-.LASF1094:
+.LASF699:
+	.string	"AS_I32(value) ((value).as.i32)"
+.LASF1223:
 	.string	"_IO_write_base"
 .LASF483:
 	.string	"__attribute_noinline__ __attribute__ ((__noinline__))"
 .LASF290:
 	.string	"__GCC_HAVE_SYNC_COMPARE_AND_SWAP_1 1"
-.LASF2:
-	.string	"__STDC_HOSTED__ 1"
+.LASF1089:
+	.string	"TK_MINUS"
 .LASF602:
 	.string	"__STD_TYPE"
+.LASF781:
+	.string	"__DECL_SIMD_expf "
 .LASF315:
 	.string	"__x86_64 1"
 .LASF640:
 	.string	"INT_FAST64_MAX (__INT64_C(9223372036854775807))"
+.LASF766:
+	.string	"__DECL_SIMD_sincosf128 "
 .LASF459:
 	.string	"__P(args) args"
-.LASF685:
-	.string	"IS_UINT(value) ((value).type == VAL_UINT)"
-.LASF1110:
+.LASF1083:
+	.string	"TK_DOTDOTDOT"
+.LASF1239:
 	.string	"_lock"
-.LASF367:
-	.string	"__SIZE_T__ "
+.LASF1002:
+	.string	"VAL_UNDEFINED"
 .LASF202:
 	.string	"__FLT32_MIN__ 1.17549435082228750796873653722224568e-38F32"
-.LASF1089:
-	.string	"_IO_FILE"
-.LASF199:
-	.string	"__FLT32_MAX_10_EXP__ 38"
 .LASF50:
 	.string	"__UINT16_TYPE__ short unsigned int"
 .LASF105:
 	.string	"__INT64_MAX__ 0x7fffffffffffffffL"
 .LASF572:
 	.string	"__OFF64_T_TYPE __SQUAD_TYPE"
-.LASF787:
-	.string	"__DECL_SIMD_expf32x "
+.LASF711:
+	.string	"U8_VAL(value) ((Value){VAL_U8, {.u8 = value}})"
 .LASF400:
 	.string	"__need_wchar_t"
 .LASF196:
 	.string	"__FLT32_MIN_EXP__ (-125)"
 .LASF179:
 	.string	"__LDBL_MANT_DIG__ 64"
-.LASF703:
-	.string	"AS_ULONGLONG(value) ((value).as.uLnglng)"
-.LASF824:
-	.string	"__f64x(x) x ##f64x"
+.LASF447:
+	.string	"__GLIBC__ 2"
 .LASF996:
 	.string	"type"
+.LASF682:
+	.string	"IS_I8(value) ((value).type == VAL_I8)"
 .LASF644:
 	.string	"UINT_FAST64_MAX (__UINT64_C(18446744073709551615))"
 .LASF361:
@@ -8481,28 +9063,30 @@ check:
 	.string	"__MATHCALL_NARROW_ARGS_2 (_Marg_ __x, _Marg_ __y)"
 .LASF11:
 	.string	"__ATOMIC_ACQ_REL 4"
-.LASF1099:
+.LASF1228:
 	.string	"_IO_save_base"
 .LASF665:
 	.string	"UINT16_C(c) c"
 .LASF211:
 	.string	"__FLT64_MIN_10_EXP__ (-307)"
-.LASF601:
-	.string	"__TIME64_T_TYPE __TIME_T_TYPE"
+.LASF639:
+	.string	"INT_FAST32_MAX (9223372036854775807L)"
 .LASF382:
 	.string	"__size_t "
-.LASF609:
-	.string	"INT8_MIN (-128)"
-.LASF137:
-	.string	"__INT_FAST64_WIDTH__ 64"
+.LASF7:
+	.string	"__ATOMIC_RELAXED 0"
+.LASF215:
+	.string	"__FLT64_MAX__ 1.79769313486231570814527423731704357e+308F64"
 .LASF1:
 	.string	"__STDC_VERSION__ 199901L"
 .LASF556:
 	.string	"__ULONG32_TYPE unsigned int"
-.LASF717:
-	.string	"LONGLONG_VAL(value) ((Value){VAL_LONGLONG, {.lnglng = value}})"
+.LASF725:
+	.string	"IS_STRING(value) isObjType(value, OBJ_STRING)"
 .LASF449:
 	.string	"__GLIBC_PREREQ(maj,min) ((__GLIBC__ << 16) + __GLIBC_MINOR__ >= ((maj) << 16) + (min))"
+.LASF265:
+	.string	"__DEC32_MIN_EXP__ (-94)"
 .LASF473:
 	.string	"__REDIRECT(name,proto,alias) name proto __asm__ (__ASMNAME (#alias))"
 .LASF371:
@@ -8519,14 +9103,16 @@ check:
 	.string	"UINT16_MAX (65535)"
 .LASF281:
 	.string	"__DEC128_MIN__ 1E-6143DL"
-.LASF639:
-	.string	"INT_FAST32_MAX (9223372036854775807L)"
+.LASF288:
+	.string	"__NO_INLINE__ 1"
 .LASF778:
 	.string	"__DECL_SIMD_logf64x "
-.LASF1103:
+.LASF1232:
 	.string	"_chain"
 .LASF1000:
 	.string	"chars"
+.LASF935:
+	.string	"_IO_EOF_SEEN 0x0010"
 .LASF333:
 	.string	"__CET__ 3"
 .LASF235:
@@ -8537,66 +9123,82 @@ check:
 	.string	"__USE_FILE_OFFSET64"
 .LASF210:
 	.string	"__FLT64_MIN_EXP__ (-1021)"
-.LASF1107:
+.LASF1236:
 	.string	"_cur_column"
-.LASF1039:
+.LASF1036:
 	.string	"OP_SET_GLOBAL"
 .LASF879:
 	.string	"__MATHCALL_NARROW_REDIR(func,redir,nargs) extern _Mret_ __REDIRECT_NTH (func, __MATHCALL_NARROW_ARGS_ ## nargs, redir)"
+.LASF1086:
+	.string	"TK_LTTILDE"
+.LASF1078:
+	.string	"TK_BANGBANG"
 .LASF413:
 	.string	"__USE_POSIX"
-.LASF863:
-	.string	"__MATH_DECLARING_FLOATN 1"
-.LASF799:
-	.string	"__DECL_SIMD_powf128x "
+.LASF700:
+	.string	"AS_U32(value) ((value).as.u32)"
+.LASF476:
+	.string	"__ASMNAME(cname) __ASMNAME2 (__USER_LABEL_PREFIX__, cname)"
+.LASF1153:
+	.string	"TK_LT"
 .LASF269:
 	.string	"__DEC32_EPSILON__ 1E-6DF"
 .LASF219:
 	.string	"__FLT64_HAS_DENORM__ 1"
 .LASF401:
 	.string	"NULL"
-.LASF925:
-	.string	"_STDIO_H 1"
+.LASF1134:
+	.string	"TK_SLASHEQ"
 .LASF600:
 	.string	"_BITS_TIME64_H 1"
 .LASF255:
 	.string	"__FLT64X_MAX_10_EXP__ 4932"
+.LASF1019:
+	.string	"f128"
+.LASF1075:
+	.string	"TK_RBRACELPAREN"
+.LASF705:
+	.string	"AS_F128(value) ((value).as.f128)"
+.LASF1097:
+	.string	"TK_AMP"
 .LASF656:
 	.string	"WCHAR_MIN __WCHAR_MIN"
 .LASF523:
 	.string	"__stub_fchflags "
-.LASF1128:
+.LASF1257:
 	.string	"result"
-.LASF353:
-	.string	"_STDDEF_H "
 .LASF40:
 	.string	"__INTMAX_TYPE__ long int"
 .LASF890:
 	.string	"FP_NAN 0"
-.LASF1056:
+.LASF1053:
 	.string	"OP_RETURN"
 .LASF813:
 	.string	"__HAVE_DISTINCT_FLOAT16 __HAVE_FLOAT16"
+.LASF1171:
+	.string	"TK_PUTS"
 .LASF187:
 	.string	"__LDBL_MAX__ 1.18973149535723176502126385303097021e+4932L"
-.LASF436:
-	.string	"__GNUC_PREREQ(maj,min) ((__GNUC__ << 16) + __GNUC_MINOR__ >= ((maj) << 16) + (min))"
-.LASF417:
-	.string	"__USE_XOPEN"
+.LASF268:
+	.string	"__DEC32_MAX__ 9.999999E96DF"
+.LASF388:
+	.string	"_T_WCHAR "
 .LASF138:
 	.string	"__UINT_FAST8_MAX__ 0xff"
 .LASF422:
 	.string	"__USE_XOPEN2K8"
-.LASF1034:
+.LASF1031:
 	.string	"OP_NIL"
 .LASF491:
 	.string	"__always_inline"
 .LASF369:
 	.string	"_SYS_SIZE_T_H "
-.LASF1077:
+.LASF1117:
+	.string	"TK_COLONULEQ"
+.LASF1205:
 	.string	"strings"
-.LASF843:
-	.string	"__MATHDECL(type,function,suffix,args) __MATHDECL_1(type, function,suffix, args); __MATHDECL_1(type, __CONCAT(__,function),suffix, args)"
+.LASF232:
+	.string	"__FLT128_DENORM_MIN__ 6.47517511943802511092443895822764655e-4966F128"
 .LASF57:
 	.string	"__UINT_LEAST8_TYPE__ unsigned char"
 .LASF432:
@@ -8605,28 +9207,32 @@ check:
 	.string	"INT32_MIN (-2147483647-1)"
 .LASF319:
 	.string	"__ATOMIC_HLE_ACQUIRE 65536"
-.LASF447:
-	.string	"__GLIBC__ 2"
-.LASF924:
-	.string	"__va_list__ "
-.LASF816:
-	.string	"__HAVE_DISTINCT_FLOAT32X 0"
+.LASF1143:
+	.string	"TK_EQI16"
+.LASF436:
+	.string	"__GNUC_PREREQ(maj,min) ((__GNUC__ << 16) + __GNUC_MINOR__ >= ((maj) << 16) + (min))"
+.LASF709:
+	.string	"BOOL_VAL(value) ((Value){VAL_BOOL, {.boolean = value}})"
 .LASF969:
 	.string	"long int"
-.LASF541:
-	.string	"__GLIBC_USE_IEC_60559_TYPES_EXT"
+.LASF544:
+	.string	"__TIMESIZE __WORDSIZE"
 .LASF242:
 	.string	"__FLT32X_DECIMAL_DIG__ 17"
+.LASF836:
+	.string	"__FP_LOGBNAN_IS_MIN 1"
 .LASF347:
 	.string	"common_h "
 .LASF249:
 	.string	"__FLT32X_HAS_QUIET_NAN__ 1"
 .LASF437:
 	.string	"__glibc_clang_prereq(maj,min) 0"
-.LASF589:
-	.string	"__CLOCKID_T_TYPE __S32_TYPE"
+.LASF112:
+	.string	"__INT_LEAST8_WIDTH__ 8"
 .LASF873:
 	.string	"__MATHDECL"
+.LASF1107:
+	.string	"TK_COLONCEQ"
 .LASF279:
 	.string	"__DEC128_MIN_EXP__ (-6142)"
 .LASF902:
@@ -8635,29 +9241,29 @@ check:
 	.string	"READ_BYTE() (*vm.ip++)"
 .LASF855:
 	.string	"_Mdouble_ float"
-.LASF433:
-	.string	"__GLIBC_USE_DEPRECATED_GETS"
+.LASF366:
+	.string	"__size_t__ "
 .LASF224:
 	.string	"__FLT128_MIN_EXP__ (-16381)"
 .LASF213:
 	.string	"__FLT64_MAX_10_EXP__ 308"
 .LASF68:
 	.string	"__UINT_FAST64_TYPE__ long unsigned int"
-.LASF337:
-	.string	"__unix 1"
+.LASF839:
+	.string	"__SIMD_DECL(function) __CONCAT (__DECL_SIMD_, function)"
 .LASF53:
 	.string	"__INT_LEAST8_TYPE__ signed char"
-.LASF35:
-	.string	"__SIZEOF_POINTER__ 8"
+.LASF1135:
+	.string	"TK_MODEQ"
 .LASF294:
 	.string	"__GCC_ATOMIC_BOOL_LOCK_FREE 2"
-.LASF1150:
+.LASF1281:
 	.string	"resetStack"
 .LASF857:
 	.string	"__MATH_DECLARING_DOUBLE 0"
 .LASF261:
 	.string	"__FLT64X_HAS_DENORM__ 1"
-.LASF1120:
+.LASF1249:
 	.string	"_IO_marker"
 .LASF852:
 	.string	"__MATH_PRECNAME"
@@ -8665,8 +9271,8 @@ check:
 	.string	"__SUSECONDS_T_TYPE __SYSCALL_SLONG_TYPE"
 .LASF198:
 	.string	"__FLT32_MAX_EXP__ 128"
-.LASF1043:
-	.string	"OP_EQUAL"
+.LASF1165:
+	.string	"TK_DEF"
 .LASF953:
 	.string	"FOPEN_MAX 16"
 .LASF881:
@@ -8677,13 +9283,13 @@ check:
 	.string	"INTPTR_MAX (9223372036854775807L)"
 .LASF972:
 	.string	"short unsigned int"
+.LASF1175:
+	.string	"TK_THIS"
 .LASF579:
 	.string	"__FSBLKCNT64_T_TYPE __UQUAD_TYPE"
-.LASF701:
-	.string	"AS_FLOAT(value) ((value).as.flt)"
 .LASF362:
 	.string	"___int_ptrdiff_t_h "
-.LASF1080:
+.LASF1208:
 	.string	"INTERPRET_COMPILE_ERROR"
 .LASF378:
 	.string	"_SIZE_T_DECLARED "
@@ -8691,22 +9297,28 @@ check:
 	.string	"__CONCAT(x,y) x ## y"
 .LASF955:
 	.string	"stdout stdout"
+.LASF1080:
+	.string	"TK_COMMA"
 .LASF141:
 	.string	"__UINT_FAST64_MAX__ 0xffffffffffffffffUL"
 .LASF231:
 	.string	"__FLT128_EPSILON__ 1.92592994438723585305597794258492732e-34F128"
-.LASF1074:
+.LASF1202:
 	.string	"stackTop"
-.LASF155:
-	.string	"__FLT_MAX_EXP__ 128"
+.LASF1087:
+	.string	"TK_TILDEGT"
+.LASF454:
+	.string	"__THROW __attribute__ ((__nothrow__ __LEAF))"
 .LASF342:
 	.string	"__STDC_IEC_559__ 1"
 .LASF21:
 	.string	"__SIZEOF_LONG__ 8"
-.LASF480:
-	.string	"__attribute_pure__ __attribute__ ((__pure__))"
+.LASF1151:
+	.string	"TK_EQF128"
 .LASF653:
 	.string	"SIG_ATOMIC_MIN (-2147483647-1)"
+.LASF513:
+	.string	"__LDBL_REDIR1_NTH(name,proto,alias) name proto __THROW"
 .LASF673:
 	.string	"UINT8_COUNT (UINT8_MAX + 1)"
 .LASF25:
@@ -8723,20 +9335,22 @@ check:
 	.string	"__GLIBC_INTERNAL_STARTING_HEADER_IMPLEMENTATION "
 .LASF341:
 	.string	"_STDC_PREDEF_H 1"
-.LASF1063:
-	.string	"lineCapacity"
+.LASF1094:
+	.string	"TK_AMPAMP"
+.LASF199:
+	.string	"__FLT32_MAX_10_EXP__ 38"
 .LASF16:
 	.string	"__PIE__ 2"
 .LASF218:
 	.string	"__FLT64_DENORM_MIN__ 4.94065645841246544176568792868221372e-324F64"
 .LASF275:
 	.string	"__DEC64_MAX__ 9.999999999999999E384DD"
-.LASF474:
-	.string	"__REDIRECT_NTH(name,proto,alias) name proto __asm__ (__ASMNAME (#alias)) __THROW"
-.LASF532:
-	.string	"__GLIBC_USE_LIB_EXT2 0"
-.LASF566:
-	.string	"__INO_T_TYPE __SYSCALL_ULONG_TYPE"
+.LASF1163:
+	.string	"TK_ENUM"
+.LASF451:
+	.string	"__PMT"
+.LASF1030:
+	.string	"OP_CONSTANT_LONG"
 .LASF154:
 	.string	"__FLT_MIN_10_EXP__ (-37)"
 .LASF889:
@@ -8749,26 +9363,34 @@ check:
 	.string	"__FLT_DECIMAL_DIG__ 9"
 .LASF680:
 	.string	"IS_BOOL(value) ((value).type == VAL_BOOL)"
-.LASF718:
-	.string	"ULONGLONG_VAL(value) ((Value){VAL_ULONGLONG, {.uLnglng = value}})"
-.LASF766:
-	.string	"__DECL_SIMD_sincosf128 "
+.LASF455:
+	.string	"__THROWNL __attribute__ ((__nothrow__))"
+.LASF1124:
+	.string	"TK_USDFEQ"
 .LASF976:
 	.string	"signed char"
+.LASF552:
+	.string	"__UQUAD_TYPE unsigned long int"
+.LASF1065:
+	.string	"TK_LEFT_PAREN"
 .LASF992:
 	.string	"uint8_t"
+.LASF831:
+	.string	"HUGE_VALL (__builtin_huge_vall ())"
 .LASF577:
 	.string	"__BLKCNT64_T_TYPE __SQUAD_TYPE"
-.LASF546:
-	.string	"__U16_TYPE unsigned short int"
 .LASF204:
 	.string	"__FLT32_DENORM_MIN__ 1.40129846432481707092372958328991613e-45F32"
-.LASF463:
-	.string	"__ptr_t void *"
+.LASF1218:
+	.string	"_IO_FILE"
 .LASF287:
 	.string	"__GNUC_STDC_INLINE__ 1"
-.LASF1122:
-	.string	"_IO_wide_data"
+.LASF824:
+	.string	"__f64x(x) x ##f64x"
+.LASF1145:
+	.string	"TK_EQI32"
+.LASF164:
+	.string	"__FLT_HAS_QUIET_NAN__ 1"
 .LASF1018:
 	.string	"boolean"
 .LASF561:
@@ -8779,40 +9401,42 @@ check:
 	.string	"__PTRDIFF_WIDTH__ 64"
 .LASF124:
 	.string	"__UINT_LEAST16_MAX__ 0xffff"
-.LASF880:
-	.string	"__MATHCALL_NARROW(func,redir,nargs) __MATHCALL_NARROW_NORMAL (func, nargs)"
 .LASF452:
 	.string	"__LEAF , __leaf__"
-.LASF926:
-	.string	"__need___va_list "
-.LASF708:
-	.string	"NIL_VAL ((Value){VAL_NIL, {.dbl = 0}})"
+.LASF207:
+	.string	"__FLT32_HAS_QUIET_NAN__ 1"
+.LASF509:
+	.string	"__SYSCALL_WORDSIZE 64"
 .LASF539:
 	.string	"__GLIBC_USE_IEC_60559_FUNCS_EXT_C2X"
 .LASF246:
 	.string	"__FLT32X_DENORM_MIN__ 4.94065645841246544176568792868221372e-324F32x"
-.LASF1059:
+.LASF1056:
 	.string	"LineStart"
 .LASF899:
 	.string	"isnan(x) __builtin_isnan (x)"
 .LASF133:
 	.string	"__INT_FAST16_WIDTH__ 64"
+.LASF537:
+	.string	"__GLIBC_USE_IEC_60559_FUNCS_EXT"
+.LASF463:
+	.string	"__ptr_t void *"
 .LASF377:
 	.string	"_BSD_SIZE_T_DEFINED_ "
-.LASF1081:
+.LASF1209:
 	.string	"INTERPRET_RUNTIME_ERROR"
 .LASF379:
 	.string	"___int_size_t_h "
-.LASF818:
-	.string	"__HAVE_DISTINCT_FLOAT128X __HAVE_FLOAT128X"
-.LASF1139:
+.LASF1268:
 	.string	"initVM"
 .LASF203:
 	.string	"__FLT32_EPSILON__ 1.19209289550781250000000000000000000e-7F32"
-.LASF1114:
+.LASF1243:
 	.string	"_freeres_list"
 .LASF460:
 	.string	"__PMT(args) args"
+.LASF340:
+	.string	"__DECIMAL_BID_FORMAT__ 1"
 .LASF280:
 	.string	"__DEC128_MAX_EXP__ 6145"
 .LASF631:
@@ -8821,27 +9445,31 @@ check:
 	.string	"__DECL_SIMD_exp "
 .LASF145:
 	.string	"__GCC_IEC_559 2"
+.LASF674:
+	.string	"value_h "
 .LASF252:
 	.string	"__FLT64X_MIN_EXP__ (-16381)"
 .LASF8:
 	.string	"__ATOMIC_SEQ_CST 5"
-.LASF1008:
-	.string	"VAL_UINT"
+.LASF690:
+	.string	"IS_F32(value) ((value).type == VAL_F32)"
 .LASF543:
 	.string	"_BITS_TYPES_H 1"
-.LASF181:
-	.string	"__LDBL_MIN_EXP__ (-16381)"
 .LASF735:
 	.string	"vm_h "
-.LASF775:
-	.string	"__DECL_SIMD_logf64 "
-.LASF851:
-	.string	"_Mdouble_"
+.LASF683:
+	.string	"IS_U8(value) ((value).type == VAL_U8)"
+.LASF1005:
+	.string	"VAL_I8"
+.LASF1168:
+	.string	"TK_IN"
 .LASF107:
 	.string	"__UINT16_MAX__ 0xffff"
+.LASF739:
+	.string	"_BITS_LIBM_SIMD_DECL_STUBS_H 1"
 .LASF127:
 	.string	"__UINT32_C(c) c ## U"
-.LASF1042:
+.LASF1039:
 	.string	"OP_GET_LOCAL"
 .LASF830:
 	.string	"HUGE_VALF (__builtin_huge_valf ())"
@@ -8855,40 +9483,34 @@ check:
 	.string	"INT16_MIN (-32767-1)"
 .LASF833:
 	.string	"NAN (__builtin_nanf (\"\"))"
-.LASF23:
-	.string	"__SIZEOF_SHORT__ 2"
-.LASF944:
-	.string	"EOF (-1)"
-.LASF695:
-	.string	"AS_CHAR(value) ((value).as.ch)"
-.LASF1083:
+.LASF346:
+	.string	"chunk_h "
+.LASF1212:
 	.string	"__gnuc_va_list"
-.LASF1023:
+.LASF1020:
 	.string	"_Bool"
 .LASF120:
 	.string	"__INT64_C(c) c ## L"
-.LASF499:
-	.string	"__restrict_arr __restrict"
+.LASF493:
+	.string	"__attribute_artificial__ __attribute__ ((__artificial__))"
 .LASF15:
 	.string	"__pie__ 2"
 .LASF289:
 	.string	"__STRICT_ANSI__ 1"
 .LASF375:
 	.string	"_SIZE_T_DEFINED_ "
-.LASF1068:
+.LASF1196:
 	.string	"value"
-.LASF468:
-	.string	"__warndecl(name,msg) extern void name (void) __attribute__((__warning__ (msg)))"
+.LASF97:
+	.string	"__UINTMAX_C(c) c ## UL"
 .LASF587:
 	.string	"__DADDR_T_TYPE __S32_TYPE"
 .LASF230:
 	.string	"__FLT128_MIN__ 3.36210314311209350626267781732175260e-4932F128"
-.LASF715:
-	.string	"ULONG_VAL(value) ((Value){VAL_ULONG, {.uLng = value}})"
-.LASF1020:
-	.string	"lnglng"
-.LASF443:
-	.string	"__GLIBC_USE_DEPRECATED_GETS 1"
+.LASF140:
+	.string	"__UINT_FAST32_MAX__ 0xffffffffffffffffUL"
+.LASF307:
+	.string	"__PRAGMA_REDEFINE_EXTNAME 1"
 .LASF626:
 	.string	"INT_LEAST16_MAX (32767)"
 .LASF866:
@@ -8905,39 +9527,49 @@ check:
 	.string	"__CFLOAT128 _Complex _Float128"
 .LASF64:
 	.string	"__INT_FAST64_TYPE__ long int"
-.LASF875:
-	.string	"__MATHCALL_NARROW_ARGS_1 (_Marg_ __x)"
-.LASF1006:
-	.string	"VAL_UCHAR"
-.LASF1148:
+.LASF701:
+	.string	"AS_I64(value) ((value).as.i64)"
+.LASF713:
+	.string	"U16_VAL(value) ((Value){VAL_U16, {.u16 = value}})"
+.LASF534:
+	.string	"__GLIBC_USE_IEC_60559_BFP_EXT 0"
+.LASF466:
+	.string	"__bos(ptr) __builtin_object_size (ptr, __USE_FORTIFY_LEVEL > 1)"
+.LASF1279:
 	.string	"interpret"
+.LASF698:
+	.string	"AS_U16(value) ((value).as.u16)"
 .LASF842:
 	.string	"__MATHCALL(function,suffix,args) __MATHDECL (_Mdouble_,function,suffix, args)"
-.LASF676:
-	.string	"__need_size_t "
+.LASF1157:
+	.string	"TK_EQEQ"
 .LASF897:
 	.string	"isfinite(x) __builtin_isfinite (x)"
-.LASF1012:
-	.string	"VAL_LONGLONG"
 .LASF896:
 	.string	"signbit(x) __builtin_signbit (x)"
 .LASF549:
 	.string	"__SLONGWORD_TYPE long int"
-.LASF515:
-	.string	"__LDBL_REDIR_DECL(name) "
+.LASF892:
+	.string	"FP_ZERO 2"
+.LASF431:
+	.string	"__KERNEL_STRICT_NAMES"
 .LASF29:
 	.string	"__BIGGEST_ALIGNMENT__ 16"
-.LASF496:
-	.string	"__fortify_function __extern_always_inline __attribute_artificial__"
-.LASF316:
-	.string	"__x86_64__ 1"
-.LASF1146:
+.LASF863:
+	.string	"__MATH_DECLARING_FLOATN 1"
+.LASF1025:
+	.string	"capacity"
+.LASF337:
+	.string	"__unix 1"
+.LASF1277:
 	.string	"_IO_lock_t"
 .LASF670:
 	.string	"_GCC_WRAP_STDINT_H "
+.LASF926:
+	.string	"__need___va_list "
 .LASF980:
 	.string	"__uint16_t"
-.LASF1054:
+.LASF1051:
 	.string	"OP_PUTS"
 .LASF872:
 	.string	"__MATHDECL_1"
@@ -8945,28 +9577,30 @@ check:
 	.string	"__DECL_SIMD_sinf "
 .LASF420:
 	.string	"__USE_XOPEN2K"
-.LASF525:
-	.string	"__stub_lchmod "
+.LASF601:
+	.string	"__TIME64_T_TYPE __TIME_T_TYPE"
+.LASF714:
+	.string	"I32_VAL(value) ((Value){VAL_I32, {.i32 = value}})"
+.LASF421:
+	.string	"__USE_XOPEN2KXSI"
 .LASF106:
 	.string	"__UINT8_MAX__ 0xff"
 .LASF160:
 	.string	"__FLT_EPSILON__ 1.19209289550781250000000000000000000e-7F"
-.LASF891:
-	.string	"FP_INFINITE 1"
-.LASF253:
-	.string	"__FLT64X_MIN_10_EXP__ (-4931)"
+.LASF702:
+	.string	"AS_U64(value) ((value).as.u64)"
+.LASF874:
+	.string	"__MATHCALL"
 .LASF494:
 	.string	"__extern_inline extern __inline __attribute__ ((__gnu_inline__))"
-.LASF537:
-	.string	"__GLIBC_USE_IEC_60559_FUNCS_EXT"
+.LASF1255:
+	.string	"distance"
+.LASF719:
+	.string	"F64_VAL(value) ((Value){VAL_F64, {.f64 = value}})"
 .LASF176:
 	.string	"__DBL_HAS_DENORM__ 1"
-.LASF1127:
+.LASF1256:
 	.string	"source"
-.LASF366:
-	.string	"__size_t__ "
-.LASF705:
-	.string	"AS_DOUBLELONG(value) ((value).as.dbllng)"
 .LASF331:
 	.string	"__SEG_FS 1"
 .LASF693:
@@ -8975,24 +9609,28 @@ check:
 	.string	"INT_FAST8_MAX (127)"
 .LASF625:
 	.string	"INT_LEAST8_MAX (127)"
-.LASF1016:
-	.string	"VAL_OBJ"
+.LASF744:
+	.string	"__DECL_SIMD_cosf32 "
 .LASF73:
 	.string	"__GXX_ABI_VERSION 1013"
-.LASF671:
-	.string	"DEBUG_PRINT_CODE "
+.LASF554:
+	.string	"__UWORD_TYPE unsigned long int"
 .LASF745:
 	.string	"__DECL_SIMD_cosf64 "
 .LASF156:
 	.string	"__FLT_MAX_10_EXP__ 38"
-.LASF1091:
+.LASF843:
+	.string	"__MATHDECL(type,function,suffix,args) __MATHDECL_1(type, function,suffix, args); __MATHDECL_1(type, __CONCAT(__,function),suffix, args)"
+.LASF1220:
 	.string	"_IO_read_ptr"
 .LASF226:
 	.string	"__FLT128_MAX_EXP__ 16384"
-.LASF691:
-	.string	"IS_DOUBLE(value) ((value).type == VAL_DOUBLE)"
+.LASF1147:
+	.string	"TK_EQI64"
 .LASF666:
 	.string	"UINT32_C(c) c ## U"
+.LASF1092:
+	.string	"TK_MOD"
 .LASF645:
 	.string	"INTPTR_MIN (-9223372036854775807L-1)"
 .LASF415:
@@ -9001,7 +9639,7 @@ check:
 	.string	"INT64_MAX (__INT64_C(9223372036854775807))"
 .LASF344:
 	.string	"__STDC_ISO_10646__ 201706L"
-.LASF1085:
+.LASF1214:
 	.string	"fp_offset"
 .LASF826:
 	.string	"__CFLOAT64 _Complex _Float64"
@@ -9009,28 +9647,28 @@ check:
 	.string	"__has_include_next(STR) __has_include_next__(STR)"
 .LASF956:
 	.string	"stderr stderr"
-.LASF1140:
+.LASF1271:
 	.string	"isObjType"
 .LASF767:
 	.string	"__DECL_SIMD_sincosf32x "
 .LASF736:
 	.string	"table_h "
-.LASF1134:
+.LASF1263:
 	.string	"isFalsey"
 .LASF934:
 	.string	"__putc_unlocked_body(_ch,_fp) (__glibc_unlikely ((_fp)->_IO_write_ptr >= (_fp)->_IO_write_end) ? __overflow (_fp, (unsigned char) (_ch)) : (unsigned char) (*(_fp)->_IO_write_ptr++ = (_ch)))"
-.LASF635:
-	.string	"INT_FAST32_MIN (-9223372036854775807L-1)"
+.LASF1170:
+	.string	"TK_NIL"
+.LASF1173:
+	.string	"TK_SUPER"
 .LASF448:
 	.string	"__GLIBC_MINOR__ 31"
-.LASF1123:
-	.string	"stdin"
-.LASF850:
-	.string	"__MATH_DECLARING_FLOATN 0"
+.LASF1182:
+	.string	"TK_IDENTIFIER"
+.LASF1194:
+	.string	"current"
 .LASF648:
 	.string	"INTMAX_MIN (-__INT64_C(9223372036854775807)-1)"
-.LASF299:
-	.string	"__GCC_ATOMIC_SHORT_LOCK_FREE 2"
 .LASF419:
 	.string	"__USE_UNIX98"
 .LASF61:
@@ -9041,40 +9679,54 @@ check:
 	.string	"__attribute_warn_unused_result__ __attribute__ ((__warn_unused_result__))"
 .LASF435:
 	.string	"__KERNEL_STRICT_NAMES "
-.LASF784:
-	.string	"__DECL_SIMD_expf32 "
+.LASF931:
+	.string	"__FILE_defined 1"
+.LASF1185:
+	.string	"TK_STATIC_FIELD"
+.LASF1109:
+	.string	"TK_COLONUCEQ"
 .LASF893:
 	.string	"FP_SUBNORMAL 3"
 .LASF968:
 	.string	"BINARY_OPF"
-.LASF967:
-	.string	"BINARY_OP"
+.LASF749:
+	.string	"__DECL_SIMD_cosf128x "
 .LASF565:
 	.string	"__GID_T_TYPE __U32_TYPE"
-.LASF939:
-	.string	"_IO_USER_LOCK 0x8000"
+.LASF720:
+	.string	"F128_VAL(value) ((Value){VAL_F128, {.f128 = value}})"
+.LASF299:
+	.string	"__GCC_ATOMIC_SHORT_LOCK_FREE 2"
 .LASF14:
 	.string	"__PIC__ 2"
+.LASF396:
+	.string	"__INT_WCHAR_T_H "
 .LASF550:
 	.string	"__ULONGWORD_TYPE unsigned long int"
+.LASF607:
+	.string	"_BITS_STDINT_UINTN_H 1"
 .LASF303:
 	.string	"__GCC_ATOMIC_TEST_AND_SET_TRUEVAL 1"
-.LASF1102:
+.LASF1231:
 	.string	"_markers"
 .LASF594:
 	.string	"__CPU_MASK_TYPE __SYSCALL_ULONG_TYPE"
-.LASF958:
-	.string	"READ_CONSTANT() (vm.chunk->constants.values[READ_BYTE()])"
+.LASF1071:
+	.string	"TK_LTLBRACE"
 .LASF339:
 	.string	"__ELF__ 1"
 .LASF922:
 	.string	"_VA_LIST_DEFINED "
-.LASF498:
-	.string	"__va_arg_pack_len() __builtin_va_arg_pack_len ()"
-.LASF1052:
+.LASF1106:
+	.string	"TK_USDEQ"
+.LASF80:
+	.string	"__WCHAR_MIN__ (-__WCHAR_MAX__ - 1)"
+.LASF1049:
 	.string	"OP_NOT"
-.LASF207:
-	.string	"__FLT32_HAS_QUIET_NAN__ 1"
+.LASF96:
+	.string	"__UINTMAX_MAX__ 0xffffffffffffffffUL"
+.LASF676:
+	.string	"__need_size_t "
 .LASF951:
 	.string	"FILENAME_MAX 4096"
 .LASF633:
@@ -9085,11 +9737,11 @@ check:
 	.string	"_Mdouble_ _Float32"
 .LASF527:
 	.string	"__stub_setlogin "
-.LASF268:
-	.string	"__DEC32_MAX__ 9.999999E96DF"
+.LASF1276:
+	.string	"__va_list_tag"
 .LASF596:
 	.string	"__INO_T_MATCHES_INO64_T 1"
-.LASF1078:
+.LASF1206:
 	.string	"objects"
 .LASF734:
 	.string	"scanner_h "
@@ -9101,46 +9753,52 @@ check:
 	.string	"__GNUC_VA_LIST "
 .LASF110:
 	.string	"__INT_LEAST8_MAX__ 0x7f"
-.LASF1046:
+.LASF841:
+	.string	"__MATHDECL_VEC(type,function,suffix,args) __SIMD_DECL (__MATH_PRECNAME (function, suffix)) __MATHDECL(type, function,suffix, args)"
+.LASF1043:
 	.string	"OP_ADD"
 .LASF349:
 	.string	"bool _Bool"
-.LASF721:
-	.string	"OBJ_VAL(object) ((Value){VAL_OBJ, {.obj = (Obj*)object}})"
+.LASF1088:
+	.string	"TK_PLUS"
 .LASF729:
 	.string	"FREE(type,pointer) reallocate(pointer, sizeof(type), 0)"
-.LASF977:
-	.string	"__uint8_t"
+.LASF155:
+	.string	"__FLT_MAX_EXP__ 128"
 .LASF100:
 	.string	"__SIG_ATOMIC_MIN__ (-__SIG_ATOMIC_MAX__ - 1)"
 .LASF122:
 	.string	"__UINT_LEAST8_MAX__ 0xff"
-.LASF301:
-	.string	"__GCC_ATOMIC_LONG_LOCK_FREE 2"
+.LASF391:
+	.string	"_BSD_WCHAR_T_ "
 .LASF597:
 	.string	"__RLIM_T_MATCHES_RLIM64_T 1"
 .LASF262:
 	.string	"__FLT64X_HAS_INFINITY__ 1"
 .LASF948:
 	.string	"_BITS_STDIO_LIM_H 1"
-.LASF307:
-	.string	"__PRAGMA_REDEFINE_EXTNAME 1"
 .LASF642:
 	.string	"UINT_FAST16_MAX (18446744073709551615UL)"
 .LASF172:
 	.string	"__DBL_MAX__ ((double)1.79769313486231570814527423731704357e+308L)"
-.LASF743:
-	.string	"__DECL_SIMD_cosf16 "
-.LASF535:
-	.string	"__GLIBC_USE_IEC_60559_BFP_EXT_C2X"
-.LASF714:
-	.string	"LONG_VAL(value) ((Value){VAL_LONG, {.lng = value}})"
+.LASF708:
+	.string	"NIL_VAL ((Value){VAL_NIL, {.f64 = 0}})"
+.LASF1111:
+	.string	"TK_COLONIEQ"
+.LASF775:
+	.string	"__DECL_SIMD_logf64 "
+.LASF1037:
+	.string	"OP_GET_GLOBAL"
 .LASF508:
 	.string	"__WORDSIZE_TIME64_COMPAT32 1"
 .LASF847:
 	.string	"_Mdouble_ double"
 .LASF928:
 	.string	"____mbstate_t_defined 1"
+.LASF687:
+	.string	"IS_U32(value) ((value).type == VAL_U32)"
+.LASF474:
+	.string	"__REDIRECT_NTH(name,proto,alias) name proto __asm__ (__ASMNAME (#alias)) __THROW"
 .LASF115:
 	.string	"__INT_LEAST16_WIDTH__ 16"
 .LASF870:
@@ -9165,62 +9823,72 @@ check:
 	.string	"NULL ((void *)0)"
 .LASF862:
 	.string	"__MATH_PRECNAME(name,r) name ##f32 ##r"
-.LASF1047:
-	.string	"OP_SUBTRACT"
-.LASF403:
-	.string	"__need_NULL"
+.LASF1129:
+	.string	"TK_COLONSEQ"
+.LASF1240:
+	.string	"_offset"
 .LASF785:
 	.string	"__DECL_SIMD_expf64 "
 .LASF334:
 	.string	"__gnu_linux__ 1"
-.LASF682:
-	.string	"IS_CHAR(value) ((value).type == VAL_CHAR)"
 .LASF286:
 	.string	"__USER_LABEL_PREFIX__ "
 .LASF871:
 	.string	"__MATH_PRECNAME(name,r) name ##f64x ##r"
+.LASF733:
+	.string	"compiler_h "
 .LASF56:
 	.string	"__INT_LEAST64_TYPE__ long int"
 .LASF860:
 	.string	"__MATH_DECLARE_LDOUBLE 1"
-.LASF664:
-	.string	"UINT8_C(c) c"
+.LASF1164:
+	.string	"TK_FALSE"
+.LASF542:
+	.string	"__GLIBC_USE_IEC_60559_TYPES_EXT 0"
 .LASF555:
 	.string	"__SLONG32_TYPE int"
 .LASF808:
 	.string	"__HAVE_FLOAT16 0"
-.LASF1132:
+.LASF671:
+	.string	"DEBUG_PRINT_CODE "
+.LASF1261:
 	.string	"index"
+.LASF562:
+	.string	"__SYSCALL_ULONG_TYPE __ULONGWORD_TYPE"
 .LASF304:
 	.string	"__GCC_ATOMIC_POINTER_LOCK_FREE 2"
-.LASF1149:
+.LASF1280:
 	.string	"concatenate"
 .LASF814:
 	.string	"__HAVE_DISTINCT_FLOAT32 0"
-.LASF1038:
+.LASF1035:
 	.string	"OP_DEFINE_GLOBAL"
 .LASF9:
 	.string	"__ATOMIC_ACQUIRE 2"
 .LASF407:
 	.string	"__GLIBC_INTERNAL_STARTING_HEADER_IMPLEMENTATION"
+.LASF1141:
+	.string	"TK_EQI8"
 .LASF409:
 	.string	"__USE_ISOC11"
-.LASF509:
-	.string	"__SYSCALL_WORDSIZE 64"
+.LASF1133:
+	.string	"TK_STAREQ"
+.LASF485:
+	.string	"__attribute_deprecated_msg__(msg) __attribute__ ((__deprecated__ (msg)))"
 .LASF240:
 	.string	"__FLT32X_MAX_EXP__ 1024"
 .LASF71:
 	.string	"__has_include(STR) __has_include__(STR)"
-.LASF1049:
+.LASF1046:
 	.string	"OP_DIVIDE"
 .LASF888:
 	.string	"__MATH_TG_F64X(FUNC,ARGS) _Float64x: FUNC ## l ARGS,"
 .LASF678:
 	.string	"IS_UNDEFINED(value) ((value).type == VAL_UNDEFINED)"
-.LASF704:
-	.string	"AS_DOUBLE(value) ((value).as.dbl)"
 .LASF834:
 	.string	"__GLIBC_FLT_EVAL_METHOD __FLT_EVAL_METHOD__"
+.LASF961:
+	.string	"BINARY_OP(valueType,op) do{ if(!IS_F64(check(0)) || !IS_F64(check(1))){ runtimeError(\"Operands must be numbers.\"); return INTERPRET_RUNTIME_ERROR; } double b = AS_F64(pop()); double a = AS_F64(pop()); push(valueType(a op b)); } while(false)"
 .LASF121:
 	.string	"__INT_LEAST64_WIDTH__ 64"
 .LASF163:
@@ -9235,11 +9903,13 @@ check:
 	.string	"__INT8_MAX__ 0x7f"
 .LASF578:
 	.string	"__FSBLKCNT_T_TYPE __SYSCALL_ULONG_TYPE"
-.LASF306:
-	.string	"__GCC_HAVE_DWARF2_CFI_ASM 1"
+.LASF1116:
+	.string	"TK_USDLEQ"
 .LASF868:
 	.string	"_Mdouble_ _Float32x"
-.LASF1064:
+.LASF525:
+	.string	"__stub_lchmod "
+.LASF1061:
 	.string	"lines"
 .LASF617:
 	.string	"UINT8_MAX (255)"
@@ -9247,22 +9917,24 @@ check:
 	.string	"SIG_ATOMIC_MAX (2147483647)"
 .LASF453:
 	.string	"__LEAF_ATTR __attribute__ ((__leaf__))"
-.LASF1032:
+.LASF1029:
 	.string	"OP_CONSTANT"
 .LASF146:
 	.string	"__GCC_IEC_559_COMPLEX 2"
-.LASF749:
-	.string	"__DECL_SIMD_cosf128x "
-.LASF1136:
+.LASF1155:
+	.string	"TK_LTEQ"
+.LASF1265:
 	.string	"format"
 .LASF3:
 	.string	"__GNUC__ 9"
-.LASF1133:
+.LASF1121:
+	.string	"TK_COLONULLEQ"
+.LASF1262:
 	.string	"check"
 .LASF982:
 	.string	"__uint32_t"
-.LASF441:
-	.string	"__USE_ISOC95 1"
+.LASF253:
+	.string	"__FLT64X_MIN_10_EXP__ (-4931)"
 .LASF77:
 	.string	"__LONG_MAX__ 0x7fffffffffffffffL"
 .LASF519:
@@ -9277,50 +9949,50 @@ check:
 	.string	"__FLT_EVAL_METHOD_TS_18661_3__ 0"
 .LASF85:
 	.string	"__SCHAR_WIDTH__ 8"
+.LASF1096:
+	.string	"TK_CARETCARET"
 .LASF964:
 	.string	"READ_CONSTANT"
 .LASF746:
 	.string	"__DECL_SIMD_cosf128 "
 .LASF472:
 	.string	"__glibc_c99_flexarr_available 1"
-.LASF1093:
+.LASF1222:
 	.string	"_IO_read_base"
 .LASF878:
 	.string	"__MATHCALL_NARROW_NORMAL(func,nargs) extern _Mret_ func __MATHCALL_NARROW_ARGS_ ## nargs __THROW"
-.LASF712:
-	.string	"INT_VAL(value) ((Value){VAL_INT, {.in = value}})"
+.LASF1162:
+	.string	"TK_ELSIF"
+.LASF499:
+	.string	"__restrict_arr __restrict"
 .LASF323:
 	.string	"__k8__ 1"
 .LASF18:
 	.string	"_LP64 1"
-.LASF1058:
+.LASF1055:
 	.string	"line"
 .LASF131:
 	.string	"__INT_FAST8_WIDTH__ 8"
-.LASF260:
-	.string	"__FLT64X_DENORM_MIN__ 3.64519953188247460252840593361941982e-4951F64x"
 .LASF464:
 	.string	"__BEGIN_DECLS "
 .LASF44:
 	.string	"__SIG_ATOMIC_TYPE__ int"
-.LASF454:
-	.string	"__THROW __attribute__ ((__nothrow__ __LEAF))"
+.LASF1190:
+	.string	"TK_ENDEXPRESSION"
 .LASF677:
 	.string	"__need_NULL "
 .LASF408:
 	.string	"_FEATURES_H 1"
 .LASF783:
 	.string	"__DECL_SIMD_expf16 "
-.LASF1118:
+.LASF1247:
 	.string	"_unused2"
 .LASF194:
 	.string	"__FLT32_MANT_DIG__ 24"
-.LASF844:
-	.string	"__MATHCALLX(function,suffix,args,attrib) __MATHDECLX (_Mdouble_,function,suffix, args, attrib)"
-.LASF887:
-	.string	"__MATH_TG_F32(FUNC,ARGS) _Float32: FUNC ## f ARGS,"
-.LASF511:
-	.string	"__LDBL_REDIR1(name,proto,alias) name proto"
+.LASF696:
+	.string	"AS_U8(value) ((value).as.u8)"
+.LASF404:
+	.string	"offsetof(TYPE,MEMBER) __builtin_offsetof (TYPE, MEMBER)"
 .LASF605:
 	.string	"__WCHAR_MIN __WCHAR_MIN__"
 .LASF798:
@@ -9329,64 +10001,82 @@ check:
 	.string	"MATH_ERRNO 1"
 .LASF482:
 	.string	"__attribute_used__ __attribute__ ((__used__))"
-.LASF1108:
+.LASF925:
+	.string	"_STDIO_H 1"
+.LASF1160:
+	.string	"TK_CLASS"
+.LASF1237:
 	.string	"_vtable_offset"
 .LASF296:
 	.string	"__GCC_ATOMIC_CHAR16_T_LOCK_FREE 2"
+.LASF891:
+	.string	"FP_INFINITE 1"
 .LASF169:
 	.string	"__DBL_MAX_EXP__ 1024"
 .LASF560:
 	.string	"_BITS_TYPESIZES_H 1"
 .LASF10:
 	.string	"__ATOMIC_RELEASE 3"
+.LASF446:
+	.string	"__GNU_LIBRARY__ 6"
+.LASF1252:
+	.string	"stdin"
 .LASF247:
 	.string	"__FLT32X_HAS_DENORM__ 1"
 .LASF151:
 	.string	"__FLT_MANT_DIG__ 24"
 .LASF911:
 	.string	"_STDARG_H "
-.LASF1019:
-	.string	"uLng"
-.LASF684:
-	.string	"IS_INT(value) ((value).type == VAL_INT)"
-.LASF1015:
-	.string	"VAL_DOUBLELONG"
+.LASF1189:
+	.string	"TK_NEWLINE"
+.LASF1186:
+	.string	"TK_STRING"
+.LASF1008:
+	.string	"VAL_U16"
 .LASF94:
 	.string	"__INTMAX_MAX__ 0x7fffffffffffffffL"
+.LASF840:
+	.string	"__MATHCALL_VEC(function,suffix,args) __SIMD_DECL (__MATH_PRECNAME (function, suffix)) __MATHCALL (function, suffix, args)"
 .LASF771:
 	.string	"__DECL_SIMD_logf "
 .LASF216:
 	.string	"__FLT64_MIN__ 2.22507385850720138309023271733240406e-308F64"
+.LASF17:
+	.string	"__FINITE_MATH_ONLY__ 0"
 .LASF357:
 	.string	"_T_PTRDIFF_ "
-.LASF1106:
+.LASF1235:
 	.string	"_old_offset"
-.LASF96:
-	.string	"__UINTMAX_MAX__ 0xffffffffffffffffUL"
+.LASF1098:
+	.string	"TK_PIPE"
+.LASF1069:
+	.string	"TK_LEFT_BRACK"
 .LASF917:
 	.string	"va_arg(v,l) __builtin_va_arg(v,l)"
-.LASF1137:
+.LASF1266:
 	.string	"args"
 .LASF239:
 	.string	"__FLT32X_MIN_10_EXP__ (-307)"
+.LASF703:
+	.string	"AS_F32(value) ((value).as.f32)"
+.LASF695:
+	.string	"AS_I8(value) ((value).as.i8)"
 .LASF326:
 	.string	"__SSE__ 1"
-.LASF706:
-	.string	"AS_OBJ(value) ((value).as.obj)"
+.LASF732:
+	.string	"FREE_ARRAY(type,pointer,oldCount) reallocate(pointer, sizeof(type) * (oldCount), 0)"
 .LASF98:
 	.string	"__INTMAX_WIDTH__ 64"
-.LASF692:
-	.string	"IS_DOUBLELONG(value) ((value).type == VAL_DOUBLELONG)"
 .LASF186:
 	.string	"__LDBL_DECIMAL_DIG__ 21"
+.LASF305:
+	.string	"__HAVE_SPECULATION_SAFE_VALUE 1"
 .LASF293:
 	.string	"__GCC_HAVE_SYNC_COMPARE_AND_SWAP_8 1"
 .LASF595:
 	.string	"__OFF_T_MATCHES_OFF64_T 1"
 .LASF233:
 	.string	"__FLT128_HAS_DENORM__ 1"
-.LASF690:
-	.string	"IS_ULONGLONG(value) ((value).type == VAL_ULONGLONG)"
 .LASF387:
 	.string	"_T_WCHAR_ "
 .LASF707:
@@ -9395,21 +10085,25 @@ check:
 	.string	"__INT_LEAST32_MAX__ 0x7fffffff"
 .LASF752:
 	.string	"__DECL_SIMD_sinl "
-.LASF513:
-	.string	"__LDBL_REDIR1_NTH(name,proto,alias) name proto __THROW"
-.LASF1062:
+.LASF1178:
+	.string	"TK_WHILE"
+.LASF1059:
 	.string	"lineCount"
-.LASF1053:
+.LASF1050:
 	.string	"OP_NEGATE"
+.LASF301:
+	.string	"__GCC_ATOMIC_LONG_LOCK_FREE 2"
+.LASF1184:
+	.string	"TK_LINE"
 .LASF383:
 	.string	"__need_size_t"
 .LASF373:
 	.string	"_SIZE_T_ "
 .LASF150:
 	.string	"__FLT_RADIX__ 2"
-.LASF440:
-	.string	"__USE_ISOC99 1"
-.LASF1088:
+.LASF1159:
+	.string	"TK_CASE"
+.LASF1217:
 	.string	"va_list"
 .LASF43:
 	.string	"__CHAR32_TYPE__ unsigned int"
@@ -9417,14 +10111,18 @@ check:
 	.string	"__wchar_t__ "
 .LASF193:
 	.string	"__LDBL_HAS_QUIET_NAN__ 1"
-.LASF1033:
-	.string	"OP_CONSTANT_LONG"
+.LASF403:
+	.string	"__need_NULL"
 .LASF190:
 	.string	"__LDBL_DENORM_MIN__ 3.64519953188247460252840593361941982e-4951L"
 .LASF314:
 	.string	"__amd64__ 1"
 .LASF89:
 	.string	"__LONG_LONG_WIDTH__ 64"
+.LASF924:
+	.string	"__va_list__ "
+.LASF1081:
+	.string	"TK_DOT"
 .LASF356:
 	.string	"_PTRDIFF_T "
 .LASF405:
@@ -9435,11 +10133,11 @@ check:
 	.string	"__HAVE_FLOAT128_UNLIKE_LDBL (__HAVE_DISTINCT_FLOAT128 && __LDBL_MANT_DIG__ != 113)"
 .LASF132:
 	.string	"__INT_FAST16_MAX__ 0x7fffffffffffffffL"
-.LASF960:
-	.string	"READ_STRING() AS_STRING(READ_CONSTANT())"
+.LASF939:
+	.string	"_IO_USER_LOCK 0x8000"
 .LASF302:
 	.string	"__GCC_ATOMIC_LLONG_LOCK_FREE 2"
-.LASF1141:
+.LASF1272:
 	.string	"GNU C99 9.3.0 -mtune=generic -march=x86-64 -g -ggdb3 -O0 -std=c99 -fasynchronous-unwind-tables -fstack-protector-strong -fstack-clash-protection -fcf-protection"
 .LASF756:
 	.string	"__DECL_SIMD_sinf128 "
@@ -9449,15 +10147,15 @@ check:
 	.string	"__attribute_copy__"
 .LASF212:
 	.string	"__FLT64_MAX_EXP__ 1024"
-.LASF1005:
-	.string	"VAL_CHAR"
+.LASF316:
+	.string	"__x86_64__ 1"
 .LASF389:
 	.string	"__WCHAR_T "
-.LASF1025:
+.LASF1022:
 	.string	"double"
 .LASF134:
 	.string	"__INT_FAST32_MAX__ 0x7fffffffffffffffL"
-.LASF1073:
+.LASF1201:
 	.string	"stack"
 .LASF457:
 	.string	"__NTHNL(fct) __attribute__ ((__nothrow__)) fct"
@@ -9465,7 +10163,7 @@ check:
 	.string	"__DECL_SIMD_sincosf128x "
 .LASF41:
 	.string	"__UINTMAX_TYPE__ long unsigned int"
-.LASF1096:
+.LASF1225:
 	.string	"_IO_write_end"
 .LASF1017:
 	.string	"ValueType"
@@ -9479,38 +10177,40 @@ check:
 	.string	"__INT_FAST8_MAX__ 0x7f"
 .LASF503:
 	.string	"__attribute_nonstring__ __attribute__ ((__nonstring__))"
-.LASF80:
-	.string	"__WCHAR_MIN__ (-__WCHAR_MAX__ - 1)"
-.LASF451:
-	.string	"__PMT"
-.LASF1138:
-	.string	"freeVM"
+.LASF1172:
+	.string	"TK_STRUCT"
+.LASF1010:
+	.string	"VAL_U32"
+.LASF880:
+	.string	"__MATHCALL_NARROW(func,redir,nargs) __MATHCALL_NARROW_NORMAL (func, nargs)"
 .LASF797:
 	.string	"__DECL_SIMD_powf32x "
 .LASF923:
 	.string	"_VA_LIST_T_H "
-.LASF1144:
+.LASF1275:
 	.string	"__builtin_va_list"
-.LASF1031:
-	.string	"ValueArray"
 .LASF308:
 	.string	"__SSP_STRONG__ 3"
 .LASF849:
 	.string	"__MATH_DECLARING_DOUBLE 1"
-.LASF47:
-	.string	"__INT32_TYPE__ int"
-.LASF865:
-	.string	"__MATH_PRECNAME(name,r) name ##f64 ##r"
+.LASF1118:
+	.string	"TK_USDULEQ"
+.LASF1067:
+	.string	"TK_LEFT_BRACE"
 .LASF805:
 	.string	"__f128(x) x ##f128"
-.LASF1084:
+.LASF1213:
 	.string	"gp_offset"
+.LASF547:
+	.string	"__S32_TYPE int"
+.LASF715:
+	.string	"U32_VAL(value) ((Value){VAL_U32, {.u32 = value}})"
 .LASF827:
 	.string	"__CFLOAT32X _Complex _Float32x"
-.LASF582:
-	.string	"__ID_T_TYPE __U32_TYPE"
-.LASF1126:
-	.string	"distance"
+.LASF1113:
+	.string	"TK_COLONUIEQ"
+.LASF1101:
+	.string	"TK_GTGTGT"
 .LASF551:
 	.string	"__SQUAD_TYPE long int"
 .LASF727:
@@ -9519,40 +10219,48 @@ check:
 	.string	"__BYTE_ORDER__ __ORDER_LITTLE_ENDIAN__"
 .LASF117:
 	.string	"__INT32_C(c) c"
+.LASF566:
+	.string	"__INO_T_TYPE __SYSCALL_ULONG_TYPE"
 .LASF38:
 	.string	"__WCHAR_TYPE__ int"
-.LASF421:
-	.string	"__USE_XOPEN2KXSI"
+.LASF787:
+	.string	"__DECL_SIMD_expf32x "
 .LASF70:
 	.string	"__UINTPTR_TYPE__ long unsigned int"
 .LASF430:
 	.string	"__USE_FORTIFY_LEVEL"
 .LASF355:
 	.string	"_ANSI_STDDEF_H "
-.LASF732:
-	.string	"FREE_ARRAY(type,pointer,oldCount) reallocate(pointer, sizeof(type) * (oldCount), 0)"
-.LASF1029:
+.LASF944:
+	.string	"EOF (-1)"
+.LASF1026:
 	.string	"count"
 .LASF39:
 	.string	"__WINT_TYPE__ unsigned int"
-.LASF1095:
-	.string	"_IO_write_ptr"
+.LASF260:
+	.string	"__FLT64X_DENORM_MIN__ 3.64519953188247460252840593361941982e-4951F64x"
 .LASF322:
 	.string	"__k8 1"
 .LASF938:
 	.string	"__ferror_unlocked_body(_fp) (((_fp)->_flags & _IO_ERR_SEEN) != 0)"
 .LASF518:
 	.string	"__glibc_macro_warning1(message) _Pragma (#message)"
-.LASF909:
-	.string	"islessgreater(x,y) __builtin_islessgreater(x, y)"
-.LASF1097:
+.LASF1177:
+	.string	"TK_WHEN"
+.LASF1226:
 	.string	"_IO_buf_base"
 .LASF801:
 	.string	"__HAVE_FLOAT128 1"
-.LASF1011:
-	.string	"VAL_FLOAT"
-.LASF22:
-	.string	"__SIZEOF_LONG_LONG__ 8"
+.LASF998:
+	.string	"ObjString"
+.LASF907:
+	.string	"isless(x,y) __builtin_isless(x, y)"
+.LASF784:
+	.string	"__DECL_SIMD_expf32 "
+.LASF1193:
+	.string	"Token"
+.LASF960:
+	.string	"READ_STRING() AS_STRING(READ_CONSTANT())"
 .LASF59:
 	.string	"__UINT_LEAST32_TYPE__ unsigned int"
 .LASF973:
@@ -9563,7 +10271,7 @@ check:
 	.string	"__INT_FAST32_TYPE__ long int"
 .LASF929:
 	.string	"_____fpos64_t_defined 1"
-.LASF1050:
+.LASF1047:
 	.string	"OP_MODULATE"
 .LASF153:
 	.string	"__FLT_MIN_EXP__ (-125)"
@@ -9571,8 +10279,12 @@ check:
 	.string	"__FLT64_HAS_QUIET_NAN__ 1"
 .LASF502:
 	.string	"__glibc_has_attribute(attr) __has_attribute (attr)"
+.LASF1144:
+	.string	"TK_EQU16"
 .LASF869:
 	.string	"__MATH_PRECNAME(name,r) name ##f32x ##r"
+.LASF927:
+	.string	"_____fpos_t_defined 1"
 .LASF427:
 	.string	"__USE_MISC"
 .LASF243:
@@ -9583,7 +10295,7 @@ check:
 	.string	"__FLT_DIG__ 6"
 .LASF348:
 	.string	"_STDBOOL_H "
-.LASF1048:
+.LASF1045:
 	.string	"OP_MULTIPLY"
 .LASF398:
 	.string	"_WCHAR_T_DECLARED "
@@ -9593,17 +10305,17 @@ check:
 	.string	"__FLT_EVAL_METHOD__ 0"
 .LASF779:
 	.string	"__DECL_SIMD_logf128x "
-.LASF588:
-	.string	"__KEY_T_TYPE __S32_TYPE"
+.LASF1176:
+	.string	"TK_TRUE"
 .LASF158:
 	.string	"__FLT_MAX__ 3.40282346638528859811704183484516925e+38F"
 .LASF74:
 	.string	"__SCHAR_MAX__ 0x7f"
-.LASF1044:
+.LASF1041:
 	.string	"OP_GREATER"
-.LASF1076:
+.LASF1204:
 	.string	"globalValues"
-.LASF1116:
+.LASF1245:
 	.string	"__pad5"
 .LASF548:
 	.string	"__U32_TYPE unsigned int"
@@ -9621,16 +10333,14 @@ check:
 	.string	"__FLT128_MAX_10_EXP__ 4932"
 .LASF859:
 	.string	"__MATH_PRECNAME(name,r) name ##l ##r"
-.LASF84:
-	.string	"__SIZE_MAX__ 0xffffffffffffffffUL"
-.LASF719:
-	.string	"DOUBLE_VAL(value) ((Value){VAL_DOUBLE, {.dbl = value}})"
+.LASF1195:
+	.string	"Scanner"
+.LASF761:
+	.string	"__DECL_SIMD_sincosf "
 .LASF858:
 	.string	"_Mdouble_ long double"
-.LASF97:
-	.string	"__UINTMAX_C(c) c ## UL"
-.LASF501:
-	.string	"__glibc_likely(cond) __builtin_expect ((cond), 1)"
+.LASF468:
+	.string	"__warndecl(name,msg) extern void name (void) __attribute__((__warning__ (msg)))"
 .LASF524:
 	.string	"__stub_gtty "
 .LASF385:
@@ -9645,83 +10355,97 @@ check:
 	.string	"INT_LEAST8_MIN (-128)"
 .LASF34:
 	.string	"__FLOAT_WORD_ORDER__ __ORDER_LITTLE_ENDIAN__"
-.LASF397:
-	.string	"_GCC_WCHAR_T "
-.LASF562:
-	.string	"__SYSCALL_ULONG_TYPE __ULONGWORD_TYPE"
+.LASF49:
+	.string	"__UINT8_TYPE__ unsigned char"
+.LASF541:
+	.string	"__GLIBC_USE_IEC_60559_TYPES_EXT"
+.LASF1119:
+	.string	"TK_COLONLLEQ"
 .LASF490:
 	.string	"__wur "
-.LASF1086:
+.LASF467:
+	.string	"__bos0(ptr) __builtin_object_size (ptr, 0)"
+.LASF1215:
 	.string	"overflow_arg_area"
 .LASF791:
 	.string	"__DECL_SIMD_powf "
-.LASF351:
-	.string	"false 0"
+.LASF1108:
+	.string	"TK_USDCEQ"
+.LASF716:
+	.string	"I64_VAL(value) ((Value){VAL_I64, {.i64 = value}})"
 .LASF86:
 	.string	"__SHRT_WIDTH__ 16"
-.LASF737:
-	.string	"STACK_MAX 256"
+.LASF1066:
+	.string	"TK_RIGHT_PAREN"
 .LASF278:
 	.string	"__DEC128_MANT_DIG__ 34"
-.LASF1090:
+.LASF1219:
 	.string	"_flags"
-.LASF1040:
-	.string	"OP_GET_GLOBAL"
+.LASF1014:
+	.string	"VAL_F64"
 .LASF350:
 	.string	"true 1"
 .LASF364:
 	.string	"_PTRDIFF_T_DECLARED "
-.LASF1057:
+.LASF1054:
 	.string	"offset"
 .LASF324:
 	.string	"__code_model_small__ 1"
-.LASF446:
-	.string	"__GNU_LIBRARY__ 6"
+.LASF1149:
+	.string	"TK_EQF32"
+.LASF1158:
+	.string	"TK_BANGEQ"
 .LASF564:
 	.string	"__UID_T_TYPE __U32_TYPE"
 .LASF238:
 	.string	"__FLT32X_MIN_EXP__ (-1021)"
 .LASF793:
 	.string	"__DECL_SIMD_powf16 "
-.LASF164:
-	.string	"__FLT_HAS_QUIET_NAN__ 1"
 .LASF295:
 	.string	"__GCC_ATOMIC_CHAR_LOCK_FREE 2"
-.LASF689:
-	.string	"IS_LONGLONG(value) ((value).type == VAL_LONGLONG)"
-.LASF1117:
+.LASF753:
+	.string	"__DECL_SIMD_sinf16 "
+.LASF170:
+	.string	"__DBL_MAX_10_EXP__ 308"
+.LASF724:
+	.string	"OBJ_TYPE(value) (AS_OBJ(value)->type)"
+.LASF1246:
 	.string	"_mode"
 .LASF571:
 	.string	"__OFF_T_TYPE __SYSCALL_SLONG_TYPE"
-.LASF455:
-	.string	"__THROWNL __attribute__ ((__nothrow__))"
+.LASF1028:
+	.string	"ValueArray"
 .LASF512:
 	.string	"__LDBL_REDIR(name,proto) name proto"
 .LASF104:
 	.string	"__INT32_MAX__ 0x7fffffff"
-.LASF788:
-	.string	"__DECL_SIMD_expf64x "
+.LASF511:
+	.string	"__LDBL_REDIR1(name,proto,alias) name proto"
 .LASF462:
 	.string	"__STRING(x) #x"
-.LASF533:
-	.string	"__GLIBC_USE_IEC_60559_BFP_EXT"
+.LASF1009:
+	.string	"VAL_I32"
 .LASF971:
 	.string	"unsigned char"
 .LASF505:
 	.string	"__attribute_copy__(arg) __attribute__ ((__copy__ (arg)))"
-.LASF1010:
-	.string	"VAL_ULONG"
-.LASF1112:
+.LASF818:
+	.string	"__HAVE_DISTINCT_FLOAT128X __HAVE_FLOAT128X"
+.LASF443:
+	.string	"__GLIBC_USE_DEPRECATED_GETS 1"
+.LASF1241:
 	.string	"_codecvt"
 .LASF45:
 	.string	"__INT8_TYPE__ signed char"
-.LASF129:
-	.string	"__UINT64_C(c) c ## UL"
+.LASF918:
+	.string	"va_copy(d,s) __builtin_va_copy(d,s)"
 .LASF768:
 	.string	"__DECL_SIMD_sincosf64x "
 .LASF197:
 	.string	"__FLT32_MIN_10_EXP__ (-37)"
-.LASF1069:
+.LASF885:
+	.string	"__MATHCALL_NARROW_REDIR"
+.LASF1197:
 	.string	"Entry"
 .LASF386:
 	.string	"_WCHAR_T "
@@ -9729,24 +10453,30 @@ check:
 	.string	"__DECL_SIMD_sinf32x "
 .LASF812:
 	.string	"__HAVE_FLOAT128X 0"
-.LASF885:
-	.string	"__MATHCALL_NARROW_REDIR"
+.LASF1012:
+	.string	"VAL_U64"
 .LASF161:
 	.string	"__FLT_DENORM_MIN__ 1.40129846432481707092372958328991613e-45F"
 .LASF264:
 	.string	"__DEC32_MANT_DIG__ 7"
-.LASF927:
-	.string	"_____fpos_t_defined 1"
+.LASF1146:
+	.string	"TK_EQU32"
+.LASF635:
+	.string	"INT_FAST32_MIN (-9223372036854775807L-1)"
+.LASF691:
+	.string	"IS_F64(value) ((value).type == VAL_F64)"
 .LASF363:
 	.string	"_GCC_PTRDIFF_T "
 .LASF526:
 	.string	"__stub_revoke "
-.LASF1143:
+.LASF515:
+	.string	"__LDBL_REDIR_DECL(name) "
+.LASF1274:
 	.string	"/mnt/d/coding portfolio/fortissimolanguage"
 .LASF782:
 	.string	"__DECL_SIMD_expl "
-.LASF456:
-	.string	"__NTH(fct) __attribute__ ((__nothrow__ __LEAF)) fct"
+.LASF1006:
+	.string	"VAL_U8"
 .LASF517:
 	.string	"__REDIRECT_NTH_LDBL(name,proto,alias) __REDIRECT_NTH (name, proto, alias)"
 .LASF368:
@@ -9755,8 +10485,8 @@ check:
 	.string	"_WCHAR_T_H "
 .LASF941:
 	.string	"_IOLBF 1"
-.LASF744:
-	.string	"__DECL_SIMD_cosf32 "
+.LASF865:
+	.string	"__MATH_PRECNAME(name,r) name ##f64 ##r"
 .LASF776:
 	.string	"__DECL_SIMD_logf128 "
 .LASF796:
@@ -9771,18 +10501,20 @@ check:
 	.string	"INT_LEAST32_MIN (-2147483647-1)"
 .LASF78:
 	.string	"__LONG_LONG_MAX__ 0x7fffffffffffffffLL"
-.LASF716:
-	.string	"FLOAT_VAL(value) ((Value){VAL_FLOAT, {.flt = value}})"
-.LASF1079:
+.LASF471:
+	.string	"__flexarr []"
+.LASF1207:
 	.string	"INTERPRET_OK"
-.LASF1026:
+.LASF1023:
 	.string	"long double"
 .LASF930:
 	.string	"____FILE_defined 1"
-.LASF476:
-	.string	"__ASMNAME(cname) __ASMNAME2 (__USER_LABEL_PREFIX__, cname)"
+.LASF1013:
+	.string	"VAL_F32"
 .LASF573:
 	.string	"__PID_T_TYPE __S32_TYPE"
+.LASF1103:
+	.string	"TK_LTLT"
 .LASF263:
 	.string	"__FLT64X_HAS_QUIET_NAN__ 1"
 .LASF223:
@@ -9791,19 +10523,21 @@ check:
 	.string	"__INT8_C(c) c"
 .LASF201:
 	.string	"__FLT32_MAX__ 3.40282346638528859811704183484516925e+38F32"
-.LASF354:
-	.string	"_STDDEF_H_ "
+.LASF1105:
+	.string	"TK_COLONEQ"
 .LASF167:
 	.string	"__DBL_MIN_EXP__ (-1021)"
 .LASF372:
 	.string	"__SIZE_T "
-.LASF1119:
+.LASF799:
+	.string	"__DECL_SIMD_powf128x "
+.LASF1248:
 	.string	"FILE"
-.LASF544:
-	.string	"__TIMESIZE __WORDSIZE"
+.LASF47:
+	.string	"__INT32_TYPE__ int"
 .LASF770:
 	.string	"__DECL_SIMD_log "
-.LASF1061:
+.LASF1058:
 	.string	"constants"
 .LASF592:
 	.string	"__FSID_T_TYPE struct { int __val[2]; }"
@@ -9815,47 +10549,47 @@ check:
 	.string	"__USE_ISOC99"
 .LASF581:
 	.string	"__FSFILCNT64_T_TYPE __UQUAD_TYPE"
-.LASF709:
-	.string	"BOOL_VAL(value) ((Value){VAL_BOOL, {.boolean = value}})"
-.LASF697:
-	.string	"AS_INT(value) ((value).as.in)"
+.LASF1073:
+	.string	"TK_LTLPAREN"
+.LASF949:
+	.string	"L_tmpnam 20"
 .LASF418:
 	.string	"__USE_XOPEN_EXTENDED"
-.LASF1111:
-	.string	"_offset"
 .LASF804:
 	.string	"__HAVE_FLOAT64X_LONG_DOUBLE 1"
 .LASF191:
 	.string	"__LDBL_HAS_DENORM__ 1"
-.LASF305:
-	.string	"__HAVE_SPECULATION_SAFE_VALUE 1"
 .LASF292:
 	.string	"__GCC_HAVE_SYNC_COMPARE_AND_SWAP_4 1"
 .LASF244:
 	.string	"__FLT32X_MIN__ 2.22507385850720138309023271733240406e-308F32x"
+.LASF962:
+	.string	"BINARY_OPF(valueType,op) do{ if(!IS_F64(check(0)) || !IS_F64(check(1))){ runtimeError(\"Operands must be numbers.\"); return INTERPRET_RUNTIME_ERROR; } double b = AS_F64(pop()); double a = AS_F64(pop()); push(valueType(op(a,b))); } while(false)"
 .LASF6:
 	.string	"__VERSION__ \"9.3.0\""
-.LASF773:
-	.string	"__DECL_SIMD_logf16 "
+.LASF397:
+	.string	"_GCC_WCHAR_T "
+.LASF1181:
+	.string	"TK_NUMBER"
 .LASF632:
 	.string	"UINT_LEAST64_MAX (__UINT64_C(18446744073709551615))"
 .LASF726:
 	.string	"AS_STRING(value) ((ObjString*)AS_OBJ(value))"
 .LASF975:
 	.string	"__int8_t"
-.LASF837:
-	.string	"FP_ILOGB0 (-2147483647 - 1)"
 .LASF608:
 	.string	"__intptr_t_defined "
 .LASF599:
 	.string	"__FD_SETSIZE 1024"
 .LASF48:
 	.string	"__INT64_TYPE__ long int"
+.LASF1095:
+	.string	"TK_PIPEPIPE"
 .LASF570:
 	.string	"__FSWORD_T_TYPE __SYSCALL_SLONG_TYPE"
 .LASF30:
 	.string	"__ORDER_LITTLE_ENDIAN__ 1234"
-.LASF1105:
+.LASF1234:
 	.string	"_flags2"
 .LASF919:
 	.string	"__va_copy(d,s) __builtin_va_copy(d,s)"
@@ -9865,15 +10599,17 @@ check:
 	.string	"__DEC64_MANT_DIG__ 16"
 .LASF250:
 	.string	"__FLT64X_MANT_DIG__ 64"
-.LASF607:
-	.string	"_BITS_STDINT_UINTN_H 1"
-.LASF1014:
-	.string	"VAL_DOUBLE"
+.LASF456:
+	.string	"__NTH(fct) __attribute__ ((__nothrow__ __LEAF)) fct"
+.LASF712:
+	.string	"I16_VAL(value) ((Value){VAL_I16, {.i16 = value}})"
+.LASF1131:
+	.string	"TK_PLUSEQ"
 .LASF817:
 	.string	"__HAVE_DISTINCT_FLOAT64X 0"
 .LASF75:
 	.string	"__SHRT_MAX__ 0x7fff"
-.LASF1087:
+.LASF1216:
 	.string	"reg_save_area"
 .LASF412:
 	.string	"__USE_ISOCXX11"
@@ -9885,8 +10621,8 @@ check:
 	.string	"length"
 .LASF993:
 	.string	"uint16_t"
-.LASF765:
-	.string	"__DECL_SIMD_sincosf64 "
+.LASF1188:
+	.string	"TK_EOF"
 .LASF558:
 	.string	"__U64_TYPE unsigned long int"
 .LASF359:
@@ -9901,39 +10637,45 @@ check:
 	.string	"isinf(x) __builtin_isinf_sign (x)"
 .LASF970:
 	.string	"long unsigned int"
-.LASF810:
-	.string	"__HAVE_FLOAT64 1"
-.LASF1129:
+.LASF1183:
+	.string	"TK_INTERPOLATION"
+.LASF1258:
 	.string	"instruction"
-.LASF1036:
+.LASF1150:
+	.string	"TK_EQF64"
+.LASF1033:
 	.string	"OP_FALSE"
 .LASF58:
 	.string	"__UINT_LEAST16_TYPE__ short unsigned int"
 .LASF42:
 	.string	"__CHAR16_TYPE__ short unsigned int"
+.LASF723:
+	.string	"object_h "
+.LASF967:
+	.string	"BINARY_OP"
 .LASF237:
 	.string	"__FLT32X_DIG__ 15"
-.LASF688:
-	.string	"IS_FLOAT(value) ((value).type == VAL_FLOAT)"
-.LASF485:
-	.string	"__attribute_deprecated_msg__(msg) __attribute__ ((__deprecated__ (msg)))"
+.LASF433:
+	.string	"__GLIBC_USE_DEPRECATED_GETS"
 .LASF416:
 	.string	"__USE_POSIX199506"
-.LASF683:
-	.string	"IS_UCHAR(value) ((value).type == VAL_UCHAR)"
 .LASF662:
 	.string	"INT32_C(c) c"
+.LASF815:
+	.string	"__HAVE_DISTINCT_FLOAT64 0"
 .LASF759:
 	.string	"__DECL_SIMD_sinf128x "
 .LASF142:
 	.string	"__INTPTR_MAX__ 0x7fffffffffffffffL"
-.LASF17:
-	.string	"__FINITE_MATH_ONLY__ 0"
+.LASF1110:
+	.string	"TK_USDUCEQ"
 .LASF838:
 	.string	"FP_ILOGBNAN (-2147483647 - 1)"
 .LASF667:
 	.string	"UINT64_C(c) c ## UL"
-.LASF1115:
+.LASF875:
+	.string	"__MATHCALL_NARROW_ARGS_1 (_Marg_ __x)"
+.LASF1244:
 	.string	"_freeres_buf"
 .LASF317:
 	.string	"__SIZEOF_FLOAT80__ 16"
@@ -9941,14 +10683,14 @@ check:
 	.string	"SEEK_END 2"
 .LASF328:
 	.string	"__FXSR__ 1"
-.LASF507:
-	.string	"__WORDSIZE 64"
+.LASF23:
+	.string	"__SIZEOF_SHORT__ 2"
+.LASF1161:
+	.string	"TK_ELSE"
 .LASF845:
 	.string	"__MATHDECLX(type,function,suffix,args,attrib) __MATHDECL_1(type, function,suffix, args) __attribute__ (attrib); __MATHDECL_1(type, __CONCAT(__,function),suffix, args) __attribute__ (attrib)"
-.LASF702:
-	.string	"AS_LONGLONG(value) ((value).as.lnglng)"
-.LASF1013:
-	.string	"VAL_ULONGLONG"
+.LASF1138:
+	.string	"TK_CARETEQ"
 .LASF912:
 	.string	"_ANSI_STDARG_H_ "
 .LASF510:
@@ -9957,74 +10699,90 @@ check:
 	.string	"__SIZEOF_INT128__ 16"
 .LASF966:
 	.string	"READ_STRING"
-.LASF13:
-	.string	"__pic__ 2"
+.LASF1148:
+	.string	"TK_EQU64"
 .LASF530:
 	.string	"__stub_stty "
-.LASF1035:
+.LASF1032:
 	.string	"OP_TRUE"
+.LASF641:
+	.string	"UINT_FAST8_MAX (255)"
 .LASF569:
 	.string	"__NLINK_T_TYPE __SYSCALL_ULONG_TYPE"
-.LASF270:
-	.string	"__DEC32_SUBNORMAL_MIN__ 0.000001E-95DF"
 .LASF469:
 	.string	"__warnattr(msg) __attribute__((__warning__ (msg)))"
-.LASF724:
-	.string	"OBJ_TYPE(value) (AS_OBJ(value)->type)"
+.LASF1174:
+	.string	"TK_RETURN"
 .LASF119:
 	.string	"__INT_LEAST64_MAX__ 0x7fffffffffffffffL"
+.LASF557:
+	.string	"__S64_TYPE long int"
 .LASF374:
 	.string	"_BSD_SIZE_T_ "
-.LASF467:
-	.string	"__bos0(ptr) __builtin_object_size (ptr, 0)"
+.LASF977:
+	.string	"__uint8_t"
 .LASF915:
 	.string	"va_start(v,l) __builtin_va_start(v,l)"
+.LASF417:
+	.string	"__USE_XOPEN"
 .LASF390:
 	.string	"_WCHAR_T_ "
 .LASF748:
 	.string	"__DECL_SIMD_cosf64x "
-.LASF325:
-	.string	"__MMX__ 1"
-.LASF1037:
+.LASF496:
+	.string	"__fortify_function __extern_always_inline __attribute_artificial__"
+.LASF1034:
 	.string	"OP_POP"
-.LASF388:
-	.string	"_T_WCHAR "
-.LASF547:
-	.string	"__S32_TYPE int"
-.LASF739:
-	.string	"_BITS_LIBM_SIMD_DECL_STUBS_H 1"
+.LASF810:
+	.string	"__HAVE_FLOAT64 1"
+.LASF1224:
+	.string	"_IO_write_ptr"
+.LASF1082:
+	.string	"TK_DOTDOT"
 .LASF619:
 	.string	"UINT32_MAX (4294967295U)"
-.LASF761:
-	.string	"__DECL_SIMD_sincosf "
+.LASF501:
+	.string	"__glibc_likely(cond) __builtin_expect ((cond), 1)"
+.LASF84:
+	.string	"__SIZE_MAX__ 0xffffffffffffffffUL"
 .LASF978:
 	.string	"__int16_t"
-.LASF1100:
+.LASF697:
+	.string	"AS_I16(value) ((value).as.i16)"
+.LASF1229:
 	.string	"_IO_backup_base"
-.LASF1109:
+.LASF1238:
 	.string	"_shortbuf"
-.LASF396:
-	.string	"__INT_WCHAR_T_H "
+.LASF1125:
+	.string	"TK_COLONDEQ"
+.LASF129:
+	.string	"__UINT64_C(c) c ## UL"
+.LASF574:
+	.string	"__RLIM_T_TYPE __SYSCALL_ULONG_TYPE"
 .LASF657:
 	.string	"WCHAR_MAX __WCHAR_MAX"
+.LASF532:
+	.string	"__GLIBC_USE_LIB_EXT2 0"
 .LASF675:
 	.string	"_STRING_H 1"
-.LASF781:
-	.string	"__DECL_SIMD_expf "
+.LASF480:
+	.string	"__attribute_pure__ __attribute__ ((__pure__))"
 .LASF603:
 	.string	"_BITS_WCHAR_H 1"
-.LASF763:
-	.string	"__DECL_SIMD_sincosf16 "
-.LASF699:
-	.string	"AS_LONG(value) ((value).as.lng)"
+.LASF1122:
+	.string	"TK_USDULLEQ"
+.LASF743:
+	.string	"__DECL_SIMD_cosf16 "
 .LASF832:
 	.string	"INFINITY (__builtin_inff ())"
 .LASF663:
 	.string	"INT64_C(c) c ## L"
-.LASF60:
-	.string	"__UINT_LEAST64_TYPE__ long unsigned int"
-.LASF391:
-	.string	"_BSD_WCHAR_T_ "
+.LASF688:
+	.string	"IS_I64(value) ((value).type == VAL_I64)"
+.LASF1123:
+	.string	"TK_COLONFEQ"
+.LASF790:
+	.string	"__DECL_SIMD_pow "
 .LASF173:
 	.string	"__DBL_MIN__ ((double)2.22507385850720138309023271733240406e-308L)"
 .LASF800:
@@ -10033,10 +10791,12 @@ check:
 	.string	"__FLT64X_MIN__ 3.36210314311209350626267781732175260e-4932F64x"
 .LASF669:
 	.string	"UINTMAX_C(c) c ## UL"
-.LASF529:
-	.string	"__stub_sstk "
-.LASF836:
-	.string	"__FP_LOGBNAN_IS_MIN 1"
+.LASF440:
+	.string	"__USE_ISOC99 1"
+.LASF538:
+	.string	"__GLIBC_USE_IEC_60559_FUNCS_EXT 0"
+.LASF765:
+	.string	"__DECL_SIMD_sincosf64 "
 .LASF79:
 	.string	"__WCHAR_MAX__ 0x7fffffff"
 .LASF986:
@@ -10045,14 +10805,16 @@ check:
 	.string	"__INT_LEAST32_TYPE__ int"
 .LASF259:
 	.string	"__FLT64X_EPSILON__ 1.08420217248550443400745280086994171e-19F64x"
-.LASF918:
-	.string	"va_copy(d,s) __builtin_va_copy(d,s)"
 .LASF4:
 	.string	"__GNUC_MINOR__ 3"
-.LASF1060:
+.LASF1057:
 	.string	"code"
+.LASF1152:
+	.string	"TK_EQS"
 .LASF182:
 	.string	"__LDBL_MIN_10_EXP__ (-4931)"
+.LASF704:
+	.string	"AS_F64(value) ((value).as.f64)"
 .LASF300:
 	.string	"__GCC_ATOMIC_INT_LOCK_FREE 2"
 .LASF803:
@@ -10071,17 +10833,21 @@ check:
 	.string	"__TIMER_T_TYPE void *"
 .LASF178:
 	.string	"__DBL_HAS_QUIET_NAN__ 1"
-.LASF733:
-	.string	"compiler_h "
+.LASF137:
+	.string	"__INT_FAST64_WIDTH__ 64"
 .LASF750:
 	.string	"__DECL_SIMD_sin "
 .LASF894:
 	.string	"FP_NORMAL 4"
+.LASF598:
+	.string	"__STATFS_MATCHES_STATFS64 1"
+.LASF1169:
+	.string	"TK_LET"
 .LASF327:
 	.string	"__SSE2__ 1"
-.LASF232:
-	.string	"__FLT128_DENORM_MIN__ 6.47517511943802511092443895822764655e-4966F128"
-.LASF1098:
+.LASF1142:
+	.string	"TK_EQU8"
+.LASF1227:
 	.string	"_IO_buf_end"
 .LASF829:
 	.string	"HUGE_VAL (__builtin_huge_val ())"
@@ -10099,7 +10865,7 @@ check:
 	.string	"__DEC128_SUBNORMAL_MIN__ 0.000000000000000000000000000000001E-6143DL"
 .LASF166:
 	.string	"__DBL_DIG__ 15"
-.LASF1075:
+.LASF1203:
 	.string	"globalNames"
 .LASF604:
 	.string	"__WCHAR_MAX __WCHAR_MAX__"
@@ -10107,14 +10873,18 @@ check:
 	.string	"__f32(x) x ##f32"
 .LASF487:
 	.string	"__attribute_format_strfmon__(a,b) __attribute__ ((__format__ (__strfmon__, a, b)))"
-.LASF892:
-	.string	"FP_ZERO 2"
+.LASF1072:
+	.string	"TK_RBRACEGT"
+.LASF1126:
+	.string	"TK_USDDEQ"
+.LASF851:
+	.string	"_Mdouble_"
 .LASF27:
 	.string	"__SIZEOF_SIZE_T__ 8"
 .LASF825:
 	.string	"__CFLOAT32 _Complex _Float32"
-.LASF641:
-	.string	"UINT_FAST8_MAX (255)"
+.LASF535:
+	.string	"__GLIBC_USE_IEC_60559_BFP_EXT_C2X"
 .LASF217:
 	.string	"__FLT64_EPSILON__ 2.22044604925031308084726333618164062e-16F64"
 .LASF575:
@@ -10127,8 +10897,10 @@ check:
 	.string	"__DECL_SIMD_cosf "
 .LASF764:
 	.string	"__DECL_SIMD_sincosf32 "
-.LASF340:
-	.string	"__DECIMAL_BID_FORMAT__ 1"
+.LASF1044:
+	.string	"OP_SUBTRACT"
+.LASF1112:
+	.string	"TK_USDIEQ"
 .LASF952:
 	.string	"FOPEN_MAX"
 .LASF655:
@@ -10141,48 +10913,66 @@ check:
 	.string	"__UINT_FAST8_TYPE__ unsigned char"
 .LASF754:
 	.string	"__DECL_SIMD_sinf32 "
-.LASF1067:
+.LASF1064:
 	.string	"ObjType"
 .LASF109:
 	.string	"__UINT64_MAX__ 0xffffffffffffffffUL"
-.LASF1125:
+.LASF1187:
+	.string	"TK_ERROR"
+.LASF1254:
 	.string	"stderr"
 .LASF329:
 	.string	"__SSE_MATH__ 1"
 .LASF979:
 	.string	"short int"
-.LASF450:
-	.string	"_SYS_CDEFS_H 1"
+.LASF353:
+	.string	"_STDDEF_H "
 .LASF903:
 	.string	"math_errhandling (MATH_ERRNO | MATH_ERREXCEPT)"
 .LASF853:
 	.string	"__MATH_DECLARING_DOUBLE"
-.LASF574:
-	.string	"__RLIM_T_TYPE __SYSCALL_ULONG_TYPE"
+.LASF83:
+	.string	"__PTRDIFF_MAX__ 0x7fffffffffffffffL"
 .LASF125:
 	.string	"__UINT16_C(c) c"
+.LASF788:
+	.string	"__DECL_SIMD_expf64x "
+.LASF1128:
+	.string	"TK_USDLDEQ"
 .LASF995:
 	.string	"uint64_t"
-.LASF438:
-	.string	"__GLIBC_USE(F) __GLIBC_USE_ ## F"
-.LASF747:
-	.string	"__DECL_SIMD_cosf32x "
-.LASF288:
-	.string	"__NO_INLINE__ 1"
-.LASF931:
-	.string	"__FILE_defined 1"
+.LASF507:
+	.string	"__WORDSIZE 64"
+.LASF1016:
+	.string	"VAL_OBJ"
+.LASF498:
+	.string	"__va_arg_pack_len() __builtin_va_arg_pack_len ()"
+.LASF1090:
+	.string	"TK_STAR"
+.LASF1130:
+	.string	"TK_USDSEQ"
 .LASF660:
 	.string	"INT8_C(c) c"
 .LASF613:
 	.string	"INT8_MAX (127)"
 .LASF254:
 	.string	"__FLT64X_MAX_EXP__ 16384"
-.LASF7:
-	.string	"__ATOMIC_RELAXED 0"
-.LASF477:
-	.string	"__ASMNAME2(prefix,cname) __STRING (prefix) cname"
+.LASF593:
+	.string	"__SSIZE_T_TYPE __SWORD_TYPE"
+.LASF1136:
+	.string	"TK_AMPEQ"
+.LASF1077:
+	.string	"TK_BANG"
+.LASF1139:
+	.string	"TK_TILDEEQ"
+.LASF1211:
+	.string	"scanner"
+.LASF816:
+	.string	"__HAVE_DISTINCT_FLOAT32X 0"
 .LASF177:
 	.string	"__DBL_HAS_INFINITY__ 1"
+.LASF533:
+	.string	"__GLIBC_USE_IEC_60559_BFP_EXT"
 .LASF99:
 	.string	"__SIG_ATOMIC_MAX__ 0x7fffffff"
 .LASF208:
@@ -10193,14 +10983,10 @@ check:
 	.string	"__GNUC_PATCHLEVEL__ 0"
 .LASF62:
 	.string	"__INT_FAST16_TYPE__ long int"
-.LASF720:
-	.string	"DOUBLELONG_VAL(value) ((Value){VAL_DOUBLELONG, {.dbllng = value}})"
-.LASF700:
-	.string	"AS_ULONG(value) ((value).as.uLng)"
-.LASF552:
-	.string	"__UQUAD_TYPE unsigned long int"
-.LASF554:
-	.string	"__UWORD_TYPE unsigned long int"
+.LASF582:
+	.string	"__ID_T_TYPE __U32_TYPE"
+.LASF24:
+	.string	"__SIZEOF_FLOAT__ 4"
 .LASF274:
 	.string	"__DEC64_MIN__ 1E-383DD"
 .LASF365:
@@ -10209,12 +10995,20 @@ check:
 	.string	"__DBL_DECIMAL_DIG__ 17"
 .LASF905:
 	.string	"isgreater(x,y) __builtin_isgreater(x, y)"
+.LASF528:
+	.string	"__stub_sigreturn "
 .LASF360:
 	.string	"_PTRDIFF_T_ "
-.LASF841:
-	.string	"__MATHDECL_VEC(type,function,suffix,args) __SIMD_DECL (__MATH_PRECNAME (function, suffix)) __MATHDECL(type, function,suffix, args)"
+.LASF589:
+	.string	"__CLOCKID_T_TYPE __S32_TYPE"
 .LASF475:
 	.string	"__REDIRECT_NTHNL(name,proto,alias) name proto __asm__ (__ASMNAME (#alias)) __THROWNL"
+.LASF717:
+	.string	"U64_VAL(value) ((Value){VAL_U64, {.u64 = value}})"
+.LASF450:
+	.string	"_SYS_CDEFS_H 1"
+.LASF1093:
+	.string	"TK_STARSTAR"
 .LASF393:
 	.string	"_WCHAR_T_DEFINED "
 .LASF103:
@@ -10231,12 +11025,14 @@ check:
 	.string	"VAL_NIL"
 .LASF87:
 	.string	"__INT_WIDTH__ 32"
+.LASF367:
+	.string	"__SIZE_T__ "
 .LASF484:
 	.string	"__attribute_deprecated__ __attribute__ ((__deprecated__))"
 .LASF222:
 	.string	"__FLT128_MANT_DIG__ 113"
-.LASF1145:
-	.string	"__va_list_tag"
+.LASF1180:
+	.string	"TK_NAME"
 .LASF650:
 	.string	"UINTMAX_MAX (__UINT64_C(18446744073709551615))"
 .LASF738:
@@ -10247,32 +11043,40 @@ check:
 	.string	"__SIG_ATOMIC_WIDTH__ 32"
 .LASF936:
 	.string	"__feof_unlocked_body(_fp) (((_fp)->_flags & _IO_EOF_SEEN) != 0)"
-.LASF723:
-	.string	"object_h "
-.LASF907:
-	.string	"isless(x,y) __builtin_isless(x, y)"
+.LASF1099:
+	.string	"TK_CARET"
+.LASF909:
+	.string	"islessgreater(x,y) __builtin_islessgreater(x, y)"
+.LASF1068:
+	.string	"TK_RIGHT_BRACE"
 .LASF755:
 	.string	"__DECL_SIMD_sinf64 "
+.LASF1269:
+	.string	"makeToken"
 .LASF823:
 	.string	"__f32x(x) x ##f32x"
-.LASF916:
-	.string	"va_end(v) __builtin_va_end(v)"
-.LASF921:
-	.string	"_VA_LIST "
+.LASF1132:
+	.string	"TK_MINUSEQ"
+.LASF1070:
+	.string	"TK_RIGHT_BRACK"
 .LASF267:
 	.string	"__DEC32_MIN__ 1E-95DF"
-.LASF711:
-	.string	"UCHAR_VAL(value) ((Value){VAL_UCHAR, {.uCh = value}})"
+.LASF351:
+	.string	"false 0"
+.LASF2:
+	.string	"__STDC_HOSTED__ 1"
 .LASF545:
 	.string	"__S16_TYPE short int"
 .LASF311:
 	.string	"__SIZEOF_WINT_T__ 4"
 .LASF659:
 	.string	"WINT_MAX (4294967295u)"
-.LASF1028:
-	.string	"capacity"
+.LASF706:
+	.string	"AS_OBJ(value) ((value).as.obj)"
 .LASF0:
 	.string	"__STDC__ 1"
+.LASF763:
+	.string	"__DECL_SIMD_sincosf16 "
 .LASF983:
 	.string	"__int64_t"
 .LASF620:
@@ -10281,14 +11085,18 @@ check:
 	.string	"__FP_LOGB0_IS_MIN 1"
 .LASF854:
 	.string	"__MATH_DECLARING_FLOATN"
+.LASF916:
+	.string	"va_end(v) __builtin_va_end(v)"
 .LASF144:
 	.string	"__UINTPTR_MAX__ 0xffffffffffffffffUL"
-.LASF493:
-	.string	"__attribute_artificial__ __attribute__ ((__artificial__))"
+.LASF441:
+	.string	"__USE_ISOC95 1"
 .LASF205:
 	.string	"__FLT32_HAS_DENORM__ 1"
-.LASF265:
-	.string	"__DEC32_MIN_EXP__ (-94)"
+.LASF664:
+	.string	"UINT8_C(c) c"
+.LASF1251:
+	.string	"_IO_wide_data"
 .LASF52:
 	.string	"__UINT64_TYPE__ long unsigned int"
 .LASF1004:
@@ -10305,6 +11113,8 @@ check:
 	.string	"__MATHCALL_NARROW_ARGS_3"
 .LASF26:
 	.string	"__SIZEOF_LONG_DOUBLE__ 16"
+.LASF1040:
+	.string	"OP_EQUAL"
 .LASF514:
 	.string	"__LDBL_REDIR_NTH(name,proto) name proto __THROW"
 .LASF583:
@@ -10313,31 +11123,33 @@ check:
 	.string	"__va_arg_pack() __builtin_va_arg_pack ()"
 .LASF37:
 	.string	"__PTRDIFF_TYPE__ long int"
-.LASF229:
-	.string	"__FLT128_MAX__ 1.18973149535723176508575932662800702e+4932F128"
-.LASF1092:
+.LASF325:
+	.string	"__MMX__ 1"
+.LASF1221:
 	.string	"_IO_read_end"
-.LASF935:
-	.string	"_IO_EOF_SEEN 0x0010"
-.LASF962:
-	.string	"BINARY_OPF(valueType,op) do{ if(!IS_DOUBLE(check(0)) || !IS_DOUBLE(check(1))){ runtimeError(\"Operands must be numbers.\"); return INTERPRET_RUNTIME_ERROR; } double b = AS_DOUBLE(pop()); double a = AS_DOUBLE(pop()); push(valueType(op(a,b))); } while(false)"
-.LASF687:
-	.string	"IS_ULONG(value) ((value).type == VAL_ULONG)"
-.LASF215:
-	.string	"__FLT64_MAX__ 1.79769313486231570814527423731704357e+308F64"
-.LASF998:
-	.string	"ObjString"
+.LASF1140:
+	.string	"TK_EQ"
+.LASF1137:
+	.string	"TK_PIPEEQ"
+.LASF684:
+	.string	"IS_I16(value) ((value).type == VAL_I16)"
+.LASF1156:
+	.string	"TK_GTEQ"
 .LASF380:
 	.string	"_GCC_SIZE_T "
-.LASF1009:
-	.string	"VAL_LONG"
+.LASF844:
+	.string	"__MATHCALLX(function,suffix,args,attrib) __MATHDECLX (_Mdouble_,function,suffix, args, attrib)"
 .LASF91:
 	.string	"__WINT_WIDTH__ 32"
-.LASF1071:
+.LASF721:
+	.string	"OBJ_VAL(object) ((Value){VAL_OBJ, {.obj = (Obj*)object}})"
+.LASF1199:
 	.string	"Table"
-.LASF1142:
+.LASF710:
+	.string	"I8_VAL(value) ((Value){VAL_I8, {.i8 = value}})"
+.LASF1273:
 	.string	"VirtualMachine/vm/vm.c"
-.LASF1027:
+.LASF1024:
 	.string	"Value"
 .LASF20:
 	.string	"__SIZEOF_INT__ 4"
@@ -10349,9 +11161,11 @@ check:
 	.string	"INT_LEAST32_MAX (2147483647)"
 .LASF846:
 	.string	"__MATHDECL_1(type,function,suffix,args) extern type __MATH_PRECNAME(function,suffix) args __THROW"
-.LASF593:
-	.string	"__SSIZE_T_TYPE __SWORD_TYPE"
-.LASF1041:
+.LASF588:
+	.string	"__KEY_T_TYPE __S32_TYPE"
+.LASF35:
+	.string	"__SIZEOF_POINTER__ 8"
+.LASF1038:
 	.string	"OP_SET_LOCAL"
 .LASF439:
 	.string	"__GLIBC_USE_ISOC2X 0"
@@ -10363,42 +11177,46 @@ check:
 	.string	"__MATHCALL_NARROW_ARGS_3 (_Marg_ __x, _Marg_ __y, _Marg_ __z)"
 .LASF760:
 	.string	"__DECL_SIMD_sincos "
-.LASF83:
-	.string	"__PTRDIFF_MAX__ 0x7fffffffffffffffL"
+.LASF1166:
+	.string	"TK_FOR"
 .LASF428:
 	.string	"__USE_ATFILE"
 .LASF321:
 	.string	"__GCC_ASM_FLAG_OUTPUTS__ 1"
-.LASF1104:
+.LASF1233:
 	.string	"_fileno"
-.LASF466:
-	.string	"__bos(ptr) __builtin_object_size (ptr, __USE_FORTIFY_LEVEL > 1)"
 .LASF313:
 	.string	"__amd64 1"
+.LASF1074:
+	.string	"TK_RPARENLBRACE"
 .LASF188:
 	.string	"__LDBL_MIN__ 3.36210314311209350626267781732175260e-4932L"
 .LASF338:
 	.string	"__unix__ 1"
 .LASF458:
 	.string	"__glibc_clang_has_extension(ext) 0"
-.LASF725:
-	.string	"IS_STRING(value) isObjType(value, OBJ_STRING)"
+.LASF850:
+	.string	"__MATH_DECLARING_FLOATN 0"
+.LASF477:
+	.string	"__ASMNAME2(prefix,cname) __STRING (prefix) cname"
 .LASF520:
 	.string	"__HAVE_GENERIC_SELECTION 1"
 .LASF614:
 	.string	"INT16_MAX (32767)"
+.LASF306:
+	.string	"__GCC_HAVE_DWARF2_CFI_ASM 1"
 .LASF658:
 	.string	"WINT_MIN (0u)"
-.LASF1113:
+.LASF1242:
 	.string	"_wide_data"
 .LASF180:
 	.string	"__LDBL_DIG__ 18"
-.LASF839:
-	.string	"__SIMD_DECL(function) __CONCAT (__DECL_SIMD_, function)"
+.LASF438:
+	.string	"__GLIBC_USE(F) __GLIBC_USE_ ## F"
 .LASF567:
 	.string	"__INO64_T_TYPE __UQUAD_TYPE"
-.LASF753:
-	.string	"__DECL_SIMD_sinf16 "
+.LASF1270:
+	.string	"token"
 .LASF82:
 	.string	"__WINT_MIN__ 0U"
 .LASF568:
@@ -10409,12 +11227,14 @@ check:
 	.string	"__DEC64_EPSILON__ 1E-15DD"
 .LASF159:
 	.string	"__FLT_MIN__ 1.17549435082228750796873653722224568e-38F"
-.LASF112:
-	.string	"__INT_LEAST8_WIDTH__ 8"
+.LASF1015:
+	.string	"VAL_F128"
+.LASF1076:
+	.string	"TK_RPARENGT"
 .LASF937:
 	.string	"_IO_ERR_SEEN 0x0020"
-.LASF840:
-	.string	"__MATHCALL_VEC(function,suffix,args) __SIMD_DECL (__MATH_PRECNAME (function, suffix)) __MATHCALL (function, suffix, args)"
+.LASF1114:
+	.string	"TK_USDUIEQ"
 .LASF54:
 	.string	"__INT_LEAST16_TYPE__ short int"
 .LASF864:
@@ -10427,25 +11247,25 @@ check:
 	.string	"__NO_MATH_INLINES 1"
 .LASF606:
 	.string	"_BITS_STDINT_INTN_H 1"
-.LASF1024:
+.LASF1021:
 	.string	"float"
-.LASF1124:
+.LASF1253:
 	.string	"stdout"
 .LASF206:
 	.string	"__FLT32_HAS_INFINITY__ 1"
 .LASF638:
 	.string	"INT_FAST16_MAX (9223372036854775807L)"
-.LASF538:
-	.string	"__GLIBC_USE_IEC_60559_FUNCS_EXT 0"
+.LASF229:
+	.string	"__FLT128_MAX__ 1.18973149535723176508575932662800702e+4932F128"
 .LASF336:
 	.string	"__linux__ 1"
 .LASF442:
 	.string	"__USE_FORTIFY_LEVEL 0"
-.LASF557:
-	.string	"__S64_TYPE long int"
-.LASF542:
-	.string	"__GLIBC_USE_IEC_60559_TYPES_EXT 0"
-.LASF1130:
+.LASF181:
+	.string	"__LDBL_MIN_EXP__ (-16381)"
+.LASF445:
+	.string	"__GNU_LIBRARY__"
+.LASF1259:
 	.string	"slot"
 .LASF352:
 	.string	"__bool_true_false_are_defined 1"
@@ -10457,47 +11277,63 @@ check:
 	.string	"__DBL_EPSILON__ ((double)2.22044604925031308084726333618164062e-16L)"
 .LASF913:
 	.string	"__need___va_list"
-.LASF1070:
+.LASF921:
+	.string	"_VA_LIST "
+.LASF1198:
 	.string	"entries"
 .LASF318:
 	.string	"__SIZEOF_FLOAT128__ 16"
-.LASF1066:
+.LASF1063:
 	.string	"OBJ_STRING"
 .LASF126:
 	.string	"__UINT_LEAST32_MAX__ 0xffffffffU"
-.LASF1021:
-	.string	"uLnglng"
 .LASF774:
 	.string	"__DECL_SIMD_logf32 "
+.LASF529:
+	.string	"__stub_sstk "
+.LASF686:
+	.string	"IS_I32(value) ((value).type == VAL_I32)"
+.LASF747:
+	.string	"__DECL_SIMD_cosf32x "
 .LASF932:
 	.string	"__struct_FILE_defined 1"
 .LASF848:
 	.string	"__MATH_PRECNAME(name,r) __CONCAT(name,r)"
+.LASF737:
+	.string	"STACK_MAX 256"
 .LASF981:
 	.string	"__int32_t"
+.LASF692:
+	.string	"IS_F128(value) ((value).type == VAL_F128)"
 .LASF991:
 	.string	"int64_t"
+.LASF13:
+	.string	"__pic__ 2"
+.LASF1154:
+	.string	"TK_GT"
 .LASF828:
 	.string	"__CFLOAT64X _Complex _Float64x"
 .LASF370:
 	.string	"_T_SIZE_ "
-.LASF128:
-	.string	"__UINT_LEAST64_MAX__ 0xffffffffffffffffUL"
-.LASF698:
-	.string	"AS_UINT(value) ((value).as.uIn)"
-.LASF431:
-	.string	"__KERNEL_STRICT_NAMES"
-.LASF49:
-	.string	"__UINT8_TYPE__ unsigned char"
+.LASF1102:
+	.string	"TK_GTGT"
+.LASF354:
+	.string	"_STDDEF_H_ "
+.LASF1267:
+	.string	"freeVM"
 .LASF236:
 	.string	"__FLT32X_MANT_DIG__ 53"
+.LASF1060:
+	.string	"lineCapacity"
 .LASF90:
 	.string	"__WCHAR_WIDTH__ 32"
+.LASF1091:
+	.string	"TK_SLASH"
 .LASF425:
 	.string	"__USE_LARGEFILE64"
 .LASF933:
 	.string	"__getc_unlocked_body(_fp) (__glibc_unlikely ((_fp)->_IO_read_ptr >= (_fp)->_IO_read_end) ? __uflow (_fp) : *(unsigned char *) (_fp)->_IO_read_ptr++)"
-.LASF1065:
+.LASF1062:
 	.string	"Chunk"
 .LASF114:
 	.string	"__INT16_C(c) c"
@@ -10509,13 +11345,15 @@ check:
 	.string	"__FLT64X_DIG__ 18"
 .LASF1001:
 	.string	"hash"
+.LASF1115:
+	.string	"TK_COLONLEQ"
+.LASF546:
+	.string	"__U16_TYPE unsigned short int"
 .LASF272:
 	.string	"__DEC64_MIN_EXP__ (-382)"
-.LASF686:
-	.string	"IS_LONG(value) ((value).type == VAL_LONG)"
 .LASF730:
 	.string	"GROW_CAPACITY(capacity) ((capacity) < 8 ? 8 : (capacity) * 2)"
-.LASF1055:
+.LASF1052:
 	.string	"OP_JUMP_IF_FALSE"
 .LASF143:
 	.string	"__INTPTR_WIDTH__ 64"
@@ -10523,14 +11361,14 @@ check:
 	.string	"__linux 1"
 .LASF997:
 	.string	"next"
+.LASF837:
+	.string	"FP_ILOGB0 (-2147483647 - 1)"
 .LASF963:
 	.string	"READ_BYTE"
 .LASF135:
 	.string	"__INT_FAST32_WIDTH__ 64"
 .LASF867:
 	.string	"__MATH_PRECNAME(name,r) name ##f128 ##r"
-.LASF710:
-	.string	"CHAR_VAL(value) ((Value){VAL_CHAR, {.ch = value}})"
 .LASF175:
 	.string	"__DBL_DENORM_MIN__ ((double)4.94065645841246544176568792868221372e-324L)"
 .LASF856:
@@ -10539,18 +11377,18 @@ check:
 	.string	"__FLT64X_DECIMAL_DIG__ 21"
 .LASF531:
 	.string	"__GLIBC_USE_LIB_EXT2"
-.LASF961:
-	.string	"BINARY_OP(valueType,op) do{ if(!IS_DOUBLE(check(0)) || !IS_DOUBLE(check(1))){ runtimeError(\"Operands must be numbers.\"); return INTERPRET_RUNTIME_ERROR; } double b = AS_DOUBLE(pop()); double a = AS_DOUBLE(pop()); push(valueType(a op b)); } while(false)"
-.LASF598:
-	.string	"__STATFS_MATCHES_STATFS64 1"
-.LASF1022:
-	.string	"dbllng"
+.LASF1127:
+	.string	"TK_COLONLDEQ"
+.LASF1120:
+	.string	"TK_USDLLEQ"
 .LASF652:
 	.string	"PTRDIFF_MAX (9223372036854775807L)"
 .LASF920:
 	.string	"_VA_LIST_ "
 .LASF794:
 	.string	"__DECL_SIMD_powf32 "
+.LASF718:
+	.string	"F32_VAL(value) ((Value){VAL_F32, {.f32 = value}})"
 .LASF165:
 	.string	"__DBL_MANT_DIG__ 53"
 .LASF668:
@@ -10561,8 +11399,8 @@ check:
 	.string	"__glibc_unlikely(cond) __builtin_expect ((cond), 0)"
 .LASF76:
 	.string	"__INT_MAX__ 0x7fffffff"
-.LASF140:
-	.string	"__UINT_FAST32_MAX__ 0xffffffffffffffffUL"
+.LASF128:
+	.string	"__UINT_LEAST64_MAX__ 0xffffffffffffffffUL"
 .LASF728:
 	.string	"ALLOCATE(type,count) (type*)reallocate(NULL, 0, sizeof(type) * (count))"
 .LASF950:

@@ -73,23 +73,23 @@ static InterpretResult run(){
 //For Doubles! Make versions for other number types.
 #define BINARY_OP(valueType, op) \
     do{ \
-        if(!IS_DOUBLE(check(0)) || !IS_DOUBLE(check(1))){ \
+        if(!IS_F64(check(0)) || !IS_F64(check(1))){ \
             runtimeError("Operands must be numbers."); \
             return INTERPRET_RUNTIME_ERROR; \
         } \
-        double b = AS_DOUBLE(pop()); \
-        double a = AS_DOUBLE(pop()); \
+        double b = AS_F64(pop()); \
+        double a = AS_F64(pop()); \
         push(valueType(a op b)); \
     } while(false)
 
 #define BINARY_OPF(valueType, op) \
     do{ \
-        if(!IS_DOUBLE(check(0)) || !IS_DOUBLE(check(1))){ \
+        if(!IS_F64(check(0)) || !IS_F64(check(1))){ \
             runtimeError("Operands must be numbers."); \
             return INTERPRET_RUNTIME_ERROR; \
         } \
-        double b = AS_DOUBLE(pop()); \
-        double a = AS_DOUBLE(pop()); \
+        double b = AS_F64(pop()); \
+        double a = AS_F64(pop()); \
         push(valueType(op(a,b))); \
     } while(false)
 
@@ -168,27 +168,27 @@ static InterpretResult run(){
             case OP_ADD:
                 if(IS_STRING(check(0)) && IS_STRING(check(1))){
                     concatenate();
-                } else if (IS_DOUBLE(check(0)) && IS_DOUBLE(check(1))){
-                    double b = AS_DOUBLE(pop()); \
-                    double a = AS_DOUBLE(pop()); \
-                    push(DOUBLE_VAL(a + b)); \
+                } else if (IS_F64(check(0)) && IS_F64(check(1))){
+                    double b = AS_F64(pop()); \
+                    double a = AS_F64(pop()); \
+                    push(F64_VAL(a + b)); \
                 } else {
                     runtimeError("Operands must be doubles or strings.");
                     return INTERPRET_RUNTIME_ERROR;
                 }
                 break;    
-            case OP_SUBTRACT:   BINARY_OP(DOUBLE_VAL, -); break;
-            case OP_MULTIPLY:   BINARY_OP(DOUBLE_VAL, *); break;
-            case OP_DIVIDE:     BINARY_OP(DOUBLE_VAL, /); break;
-            case OP_EXPONENTIATE: BINARY_OPF(DOUBLE_VAL, pow); break;
-            case OP_MODULATE:   BINARY_OPF(DOUBLE_VAL, fmod); break;
+            case OP_SUBTRACT:   BINARY_OP(F64_VAL, -); break;
+            case OP_MULTIPLY:   BINARY_OP(F64_VAL, *); break;
+            case OP_DIVIDE:     BINARY_OP(F64_VAL, /); break;
+            case OP_EXPONENTIATE: BINARY_OPF(F64_VAL, pow); break;
+            case OP_MODULATE:   BINARY_OPF(F64_VAL, fmod); break;
             case OP_NOT:        push(BOOL_VAL(isFalsey(pop()))); break;
             case OP_NEGATE:{
-                if(!IS_DOUBLE(check(0))){
+                if(!IS_F64(check(0))){
                     runtimeError("Operand must be a number.");
                     return INTERPRET_RUNTIME_ERROR;
                 }
-                push(DOUBLE_VAL(-AS_DOUBLE(pop()))); //will need to modify for different types.
+                push(F64_VAL(-AS_F64(pop()))); //will need to modify for different types.
                 }
                 break;
             case OP_PUTS:{

@@ -1542,17 +1542,17 @@ typedef enum {
     VAL_UNDEFINED,
     VAL_NIL,
     VAL_BOOL,
-    VAL_CHAR,
-    VAL_UCHAR,
-    VAL_INT,
-    VAL_UINT,
-    VAL_LONG,
-    VAL_ULONG,
-    VAL_FLOAT,
-    VAL_LONGLONG,
-    VAL_ULONGLONG,
-    VAL_DOUBLE,
-    VAL_DOUBLELONG,
+    VAL_I8,
+    VAL_U8,
+    VAL_I16,
+    VAL_U16,
+    VAL_I32,
+    VAL_U32,
+    VAL_I64,
+    VAL_U64,
+    VAL_F32,
+    VAL_F64,
+    VAL_F128,
     VAL_OBJ
 } ValueType;
 
@@ -1564,17 +1564,17 @@ typedef struct {
        _Bool 
 # 77 "VirtualMachine/vm/../../Bytecode/debug/../chunk/../value/value.h"
             boolean;
-        int8_t ch;
-        uint8_t uCh;
-        int16_t in;
-        uint16_t uIn;
-        int32_t lng;
-        uint32_t uLng;
-        float flt;
-        int64_t lnglng;
-        uint64_t uLnglng;
-        double dbl;
-        double long dbllng;
+        int8_t i8;
+        uint8_t u8;
+        int16_t i16;
+        uint16_t u16;
+        int32_t i32;
+        uint32_t u32;
+        int64_t i64;
+        uint64_t u64;
+        float f32;
+        double f64;
+        double long f128;
         Obj* obj;
     } as;
 } Value;
@@ -1583,47 +1583,47 @@ typedef struct {
 #define IS_NIL(value) ((value).type == VAL_NIL)
 #define IS_BOOL(value) ((value).type == VAL_BOOL)
 #define IS_NUMBER(value) ((value).type != VAL_NIL && (value).type != VAL_BOOL);
-#define IS_CHAR(value) ((value).type == VAL_CHAR)
-#define IS_UCHAR(value) ((value).type == VAL_UCHAR)
-#define IS_INT(value) ((value).type == VAL_INT)
-#define IS_UINT(value) ((value).type == VAL_UINT)
-#define IS_LONG(value) ((value).type == VAL_LONG)
-#define IS_ULONG(value) ((value).type == VAL_ULONG)
-#define IS_FLOAT(value) ((value).type == VAL_FLOAT)
-#define IS_LONGLONG(value) ((value).type == VAL_LONGLONG)
-#define IS_ULONGLONG(value) ((value).type == VAL_ULONGLONG)
-#define IS_DOUBLE(value) ((value).type == VAL_DOUBLE)
-#define IS_DOUBLELONG(value) ((value).type == VAL_DOUBLELONG)
+#define IS_I8(value) ((value).type == VAL_I8)
+#define IS_U8(value) ((value).type == VAL_U8)
+#define IS_I16(value) ((value).type == VAL_I16)
+#define IS_U16(value) ((value).type == VAL_U16)
+#define IS_I32(value) ((value).type == VAL_I32)
+#define IS_U32(value) ((value).type == VAL_U32)
+#define IS_I64(value) ((value).type == VAL_I64)
+#define IS_U64(value) ((value).type == VAL_U64)
+#define IS_F32(value) ((value).type == VAL_F32)
+#define IS_F64(value) ((value).type == VAL_F64)
+#define IS_F128(value) ((value).type == VAL_F128)
 #define IS_OBJ(value) ((value).type == VAL_OBJ)
 
 #define AS_BOOL(value) ((value).as.boolean)
-#define AS_CHAR(value) ((value).as.ch)
-#define AS_UCHAR(value) ((value).as.uCh)
-#define AS_INT(value) ((value).as.in)
-#define AS_UINT(value) ((value).as.uIn)
-#define AS_LONG(value) ((value).as.lng)
-#define AS_ULONG(value) ((value).as.uLng)
-#define AS_FLOAT(value) ((value).as.flt)
-#define AS_LONGLONG(value) ((value).as.lnglng)
-#define AS_ULONGLONG(value) ((value).as.uLnglng)
-#define AS_DOUBLE(value) ((value).as.dbl)
-#define AS_DOUBLELONG(value) ((value).as.dbllng)
+#define AS_I8(value) ((value).as.i8)
+#define AS_U8(value) ((value).as.u8)
+#define AS_I16(value) ((value).as.i16)
+#define AS_U16(value) ((value).as.u16)
+#define AS_I32(value) ((value).as.i32)
+#define AS_U32(value) ((value).as.u32)
+#define AS_I64(value) ((value).as.i64)
+#define AS_U64(value) ((value).as.u64)
+#define AS_F32(value) ((value).as.f32)
+#define AS_F64(value) ((value).as.f64)
+#define AS_F128(value) ((value).as.f128)
 #define AS_OBJ(value) ((value).as.obj)
 
 #define UNDEFINED_VAL ((Value){VAL_UNDEFINED})
-#define NIL_VAL ((Value){VAL_NIL, {.dbl = 0}})
+#define NIL_VAL ((Value){VAL_NIL, {.f64 = 0}})
 #define BOOL_VAL(value) ((Value){VAL_BOOL, {.boolean = value}})
-#define CHAR_VAL(value) ((Value){VAL_CHAR, {.ch = value}})
-#define UCHAR_VAL(value) ((Value){VAL_UCHAR, {.uCh = value}})
-#define INT_VAL(value) ((Value){VAL_INT, {.in = value}})
-#define UINT_VAL(value) ((Value){VAL_UINT, {.uIn = value}})
-#define LONG_VAL(value) ((Value){VAL_LONG, {.lng = value}})
-#define ULONG_VAL(value) ((Value){VAL_ULONG, {.uLng = value}})
-#define FLOAT_VAL(value) ((Value){VAL_FLOAT, {.flt = value}})
-#define LONGLONG_VAL(value) ((Value){VAL_LONGLONG, {.lnglng = value}})
-#define ULONGLONG_VAL(value) ((Value){VAL_ULONGLONG, {.uLnglng = value}})
-#define DOUBLE_VAL(value) ((Value){VAL_DOUBLE, {.dbl = value}})
-#define DOUBLELONG_VAL(value) ((Value){VAL_DOUBLELONG, {.dbllng = value}})
+#define I8_VAL(value) ((Value){VAL_I8, {.i8 = value}})
+#define U8_VAL(value) ((Value){VAL_U8, {.u8 = value}})
+#define I16_VAL(value) ((Value){VAL_I16, {.i16 = value}})
+#define U16_VAL(value) ((Value){VAL_U16, {.u16 = value}})
+#define I32_VAL(value) ((Value){VAL_I32, {.i32 = value}})
+#define U32_VAL(value) ((Value){VAL_U32, {.u32 = value}})
+#define I64_VAL(value) ((Value){VAL_I64, {.i64 = value}})
+#define U64_VAL(value) ((Value){VAL_U64, {.u64 = value}})
+#define F32_VAL(value) ((Value){VAL_F32, {.f32 = value}})
+#define F64_VAL(value) ((Value){VAL_F64, {.f64 = value}})
+#define F128_VAL(value) ((Value){VAL_F128, {.f128 = value}})
 #define OBJ_VAL(object) ((Value){VAL_OBJ, {.obj = (Obj*)object}})
 
 
@@ -1798,154 +1798,160 @@ void freeObjects();
 
 typedef enum {
 
-    TOKEN_LEFT_PAREN,
-    TOKEN_RIGHT_PAREN,
-    TOKEN_LEFT_BRACE,
-    TOKEN_RIGHT_BRACE,
-    TOKEN_LEFT_BRACK,
-    TOKEN_RIGHT_BRACK,
-    TOKEN_LTLBRACE,
-    TOKEN_RBRACEGT,
-    TOKEN_LTLPAREN,
-    TOKEN_RPARENLBRACE,
-    TOKEN_RBRACELPAREN,
-    TOKEN_RPARENGT,
+    TK_LEFT_PAREN,
+    TK_RIGHT_PAREN,
+    TK_LEFT_BRACE,
+    TK_RIGHT_BRACE,
+    TK_LEFT_BRACK,
+    TK_RIGHT_BRACK,
+    TK_LTLBRACE,
+    TK_RBRACEGT,
+    TK_LTLPAREN,
+    TK_RPARENLBRACE,
+    TK_RBRACELPAREN,
+    TK_RPARENGT,
 
 
-    TOKEN_BANG,
-    TOKEN_BANGBANG,
-    TOKEN_QUESTION,
-    TOKEN_COMMA,
-    TOKEN_DOT,
-    TOKEN_DOTDOT,
-    TOKEN_DOTDOTDOT,
-    TOKEN_SEMICOLON,
-    TOKEN_COLON,
+    TK_BANG,
+    TK_BANGBANG,
+    TK_QUESTION,
+    TK_COMMA,
+    TK_DOT,
+    TK_DOTDOT,
+    TK_DOTDOTDOT,
+    TK_SEMICOLON,
+    TK_COLON,
 
 
-    TOKEN_LTTILDE,
-    TOKEN_TILDEGT,
+    TK_LTTILDE,
+    TK_TILDEGT,
 
 
-    TOKEN_PLUS,
-    TOKEN_MINUS,
-    TOKEN_STAR,
-    TOKEN_SLASH,
-    TOKEN_MOD,
-    TOKEN_STARSTAR,
+    TK_PLUS,
+    TK_MINUS,
+    TK_STAR,
+    TK_SLASH,
+    TK_MOD,
+    TK_STARSTAR,
 
 
-    TOKEN_AMPAMP,
-    TOKEN_PIPEPIPE,
-    TOKEN_CARETCARET,
+    TK_AMPAMP,
+    TK_PIPEPIPE,
+    TK_CARETCARET,
 
 
-    TOKEN_AMP,
-    TOKEN_PIPE,
-    TOKEN_CARET,
-    TOKEN_TILDE,
-    TOKEN_GTGTGT,
-    TOKEN_GTGT,
-    TOKEN_LTLT,
+    TK_AMP,
+    TK_PIPE,
+    TK_CARET,
+    TK_TILDE,
+    TK_GTGTGT,
+    TK_GTGT,
+    TK_LTLT,
 
 
-    TOKEN_COLONCOLON,
-    TOKEN_USDEQ,
-    TOKEN_COLONCEQ,
-    TOKEN_USDCEQ,
-    TOKEN_COLONUCEQ,
-    TOKEN_USDUCEQ,
-    TOKEN_COLONIEQ,
-    TOKEN_USDIEQ,
-    TOKEN_COLONUIEQ,
-    TOKEN_USDUIEQ,
-    TOKEN_COLONLEQ,
-    TOKEN_USDLEQ,
-    TOKEN_COLONULEQ,
-    TOKEN_USDULEQ,
-    TOKEN_COLONLLEQ,
-    TOKEN_USDLLEQ,
-    TOKEN_COLONULLEQ,
-    TOKEN_USDULLEQ,
-    TOKEN_COLONFEQ,
-    TOKEN_USDFEQ,
-    TOKEN_COLONDEQ,
-    TOKEN_USDDEQ,
-    TOKEN_COLONLDEQ,
-    TOKEN_USDLDEQ,
-    TOKEN_COLONSEQ,
-    TOKEN_USDSEQ,
+    TK_COLONCOLON,
+    TK_COLONEQ,
 
 
-    TOKEN_PLUSEQ,
-    TOKEN_MINUSEQ,
-    TOKEN_STAREQ,
-    TOKEN_SLASHEQ,
-    TOKEN_MODEQ,
-    TOKEN_AMPEQ,
-    TOKEN_PIPEEQ,
-    TOKEN_CARETEQ,
-    TOKEN_TILDEEQ,
-    TOKEN_EQ,
-
-
-    TOKEN_CEQ,
-    TOKEN_UCEQ,
-    TOKEN_IEQ,
-    TOKEN_UIEQ,
-    TOKEN_LEQ,
-    TOKEN_ULEQ,
-    TOKEN_LLEQ,
-    TOKEN_ULLEQ,
-    TOKEN_FEQ,
-    TOKEN_DEQ,
-    TOKEN_LDEQ,
-    TOKEN_SEQ,
-
-
-    TOKEN_LT,
-    TOKEN_GT,
-    TOKEN_LTEQ,
-    TOKEN_GTEQ,
-    TOKEN_EQEQ,
-    TOKEN_BANGEQ,
-
-
-    TOKEN_CASE,
-    TOKEN_CLASS,
-    TOKEN_ELSE,
-    TOKEN_ELSIF,
-    TOKEN_FALSE,
-    TOKEN_DEF,
-    TOKEN_FOR,
-    TOKEN_IF,
-    TOKEN_IN,
-    TOKEN_LET,
-    TOKEN_NIL,
-    TOKEN_PUTS,
-    TOKEN_SUPER,
-    TOKEN_RETURN,
-    TOKEN_THIS,
-    TOKEN_TRUE,
-    TOKEN_WHEN,
-    TOKEN_WHILE,
+    TK_USDEQ,
+    TK_COLONCEQ,
+    TK_USDCEQ,
+    TK_COLONUCEQ,
+    TK_USDUCEQ,
+    TK_COLONIEQ,
+    TK_USDIEQ,
+    TK_COLONUIEQ,
+    TK_USDUIEQ,
+    TK_COLONLEQ,
+    TK_USDLEQ,
+    TK_COLONULEQ,
+    TK_USDULEQ,
+    TK_COLONLLEQ,
+    TK_USDLLEQ,
+    TK_COLONULLEQ,
+    TK_USDULLEQ,
+    TK_COLONFEQ,
+    TK_USDFEQ,
+    TK_COLONDEQ,
+    TK_USDDEQ,
+    TK_COLONLDEQ,
+    TK_USDLDEQ,
+    TK_COLONSEQ,
+    TK_USDSEQ,
 
 
 
-    TOKEN_FIELD,
-    TOKEN_NAME,
-    TOKEN_NUMBER,
-    TOKEN_IDENTIFIER,
-    TOKEN_INTERPOLATION,
-    TOKEN_LINE,
-    TOKEN_STATIC_FIELD,
-    TOKEN_STRING,
+    TK_PLUSEQ,
+    TK_MINUSEQ,
+    TK_STAREQ,
+    TK_SLASHEQ,
+    TK_MODEQ,
+    TK_AMPEQ,
+    TK_PIPEEQ,
+    TK_CARETEQ,
+    TK_TILDEEQ,
+    TK_EQ,
 
 
-    TOKEN_ERROR,
-    TOKEN_EOF,
-    TOKEN_NEWLINE,
-    TOKEN_ENDEXPRESSION
+    TK_EQI8,
+    TK_EQU8,
+    TK_EQI16,
+    TK_EQU16,
+    TK_EQI32,
+    TK_EQU32,
+    TK_EQI64,
+    TK_EQU64,
+    TK_EQF32,
+    TK_EQF64,
+    TK_EQF128,
+    TK_EQS,
+
+
+    TK_LT,
+    TK_GT,
+    TK_LTEQ,
+    TK_GTEQ,
+    TK_EQEQ,
+    TK_BANGEQ,
+
+
+    TK_CASE,
+    TK_CLASS,
+    TK_ELSE,
+    TK_ELSIF,
+    TK_ENUM,
+    TK_FALSE,
+    TK_DEF,
+    TK_FOR,
+    TK_IF,
+    TK_IN,
+    TK_LET,
+    TK_NIL,
+    TK_PUTS,
+    TK_STRUCT,
+    TK_SUPER,
+    TK_RETURN,
+    TK_THIS,
+    TK_TRUE,
+    TK_WHEN,
+    TK_WHILE,
+
+
+
+    TK_FIELD,
+    TK_NAME,
+    TK_NUMBER,
+    TK_IDENTIFIER,
+    TK_INTERPOLATION,
+    TK_LINE,
+    TK_STATIC_FIELD,
+    TK_STRING,
+
+
+    TK_ERROR,
+    TK_EOF,
+    TK_NEWLINE,
+    TK_ENDEXPRESSION
 } TokenType;
 
 typedef struct {
@@ -1955,23 +1961,31 @@ typedef struct {
     int16_t line;
 } Token;
 
+typedef struct {
+    const int8_t* start;
+    const int8_t* current;
+    int16_t line;
+} Scanner;
+
+Scanner scanner;
+
 void initScanner(const int8_t* source);
 
 static 
-# 167 "VirtualMachine/vm/../../Compilation/compiler/../../Tokenization/scanner/scanner.h" 3 4
+# 181 "VirtualMachine/vm/../../Compilation/compiler/../../Tokenization/scanner/scanner.h" 3 4
       _Bool 
-# 167 "VirtualMachine/vm/../../Compilation/compiler/../../Tokenization/scanner/scanner.h"
+# 181 "VirtualMachine/vm/../../Compilation/compiler/../../Tokenization/scanner/scanner.h"
            isAlpha(int8_t c);
 static 
-# 168 "VirtualMachine/vm/../../Compilation/compiler/../../Tokenization/scanner/scanner.h" 3 4
+# 182 "VirtualMachine/vm/../../Compilation/compiler/../../Tokenization/scanner/scanner.h" 3 4
       _Bool 
-# 168 "VirtualMachine/vm/../../Compilation/compiler/../../Tokenization/scanner/scanner.h"
+# 182 "VirtualMachine/vm/../../Compilation/compiler/../../Tokenization/scanner/scanner.h"
            isDigit(int8_t c);
 
 static 
-# 170 "VirtualMachine/vm/../../Compilation/compiler/../../Tokenization/scanner/scanner.h" 3 4
+# 184 "VirtualMachine/vm/../../Compilation/compiler/../../Tokenization/scanner/scanner.h" 3 4
       _Bool 
-# 170 "VirtualMachine/vm/../../Compilation/compiler/../../Tokenization/scanner/scanner.h"
+# 184 "VirtualMachine/vm/../../Compilation/compiler/../../Tokenization/scanner/scanner.h"
            isAtEnd();
 
 
@@ -1980,12 +1994,19 @@ static int8_t checkChar();
 static int8_t checkNextChar();
 static int8_t nextChar();
 static 
-# 177 "VirtualMachine/vm/../../Compilation/compiler/../../Tokenization/scanner/scanner.h" 3 4
+# 191 "VirtualMachine/vm/../../Compilation/compiler/../../Tokenization/scanner/scanner.h" 3 4
       _Bool 
-# 177 "VirtualMachine/vm/../../Compilation/compiler/../../Tokenization/scanner/scanner.h"
+# 191 "VirtualMachine/vm/../../Compilation/compiler/../../Tokenization/scanner/scanner.h"
            compareChar(int8_t c);
 
-static Token makeToken(TokenType type);
+static Token makeToken(TokenType type){
+    Token token;
+    token.type = type;
+    token.start = scanner.start;
+    token.length = (int16_t)(scanner.current - scanner.start);
+    token.line = scanner.line;
+    return token;
+}
 static Token makeTwoCharToken(int8_t c, TokenType one, TokenType two);
 
 static Token errorToken(const int8_t* message);
@@ -3956,9 +3977,9 @@ static InterpretResult run(){
 #define READ_SHORT() (vm.ip += 2, (uint16_t)((vm.ip[-2] << 8) | vm.ip[-1]))
 #define READ_STRING() AS_STRING(READ_CONSTANT())
 
-#define BINARY_OP(valueType,op) do{ if(!IS_DOUBLE(check(0)) || !IS_DOUBLE(check(1))){ runtimeError("Operands must be numbers."); return INTERPRET_RUNTIME_ERROR; } double b = AS_DOUBLE(pop()); double a = AS_DOUBLE(pop()); push(valueType(a op b)); } while(false)
+#define BINARY_OP(valueType,op) do{ if(!IS_F64(check(0)) || !IS_F64(check(1))){ runtimeError("Operands must be numbers."); return INTERPRET_RUNTIME_ERROR; } double b = AS_F64(pop()); double a = AS_F64(pop()); push(valueType(a op b)); } while(false)
 # 85 "VirtualMachine/vm/vm.c"
-#define BINARY_OPF(valueType,op) do{ if(!IS_DOUBLE(check(0)) || !IS_DOUBLE(check(1))){ runtimeError("Operands must be numbers."); return INTERPRET_RUNTIME_ERROR; } double b = AS_DOUBLE(pop()); double a = AS_DOUBLE(pop()); push(valueType(op(a,b))); } while(false)
+#define BINARY_OPF(valueType,op) do{ if(!IS_F64(check(0)) || !IS_F64(check(1))){ runtimeError("Operands must be numbers."); return INTERPRET_RUNTIME_ERROR; } double b = AS_F64(pop()); double a = AS_F64(pop()); push(valueType(op(a,b))); } while(false)
 # 104 "VirtualMachine/vm/vm.c"
     for(;;){
 
@@ -3980,7 +4001,7 @@ static InterpretResult run(){
                 push(constant);
                 break;
             }
-            case OP_NIL: push(((Value){VAL_NIL, {.dbl = 0}})); break;
+            case OP_NIL: push(((Value){VAL_NIL, {.f64 = 0}})); break;
             case OP_TRUE: push(((Value){VAL_BOOL, {.boolean = 
 # 125 "VirtualMachine/vm/vm.c" 3 4
                                     1
@@ -4030,12 +4051,12 @@ static InterpretResult run(){
                 push(((Value){VAL_BOOL, {.boolean = valuesEqual(a,b)}}));
                 break;
             }
-            case OP_LESS: do{ if(!((check(0)).type == VAL_DOUBLE) || !((check(1)).type == VAL_DOUBLE)){ runtimeError("Operands must be numbers."); return INTERPRET_RUNTIME_ERROR; } double b = ((pop()).as.dbl); double a = ((pop()).as.dbl); push(((Value){VAL_BOOL, {.boolean = a < b}})); } while(
+            case OP_LESS: do{ if(!((check(0)).type == VAL_F64) || !((check(1)).type == VAL_F64)){ runtimeError("Operands must be numbers."); return INTERPRET_RUNTIME_ERROR; } double b = ((pop()).as.f64); double a = ((pop()).as.f64); push(((Value){VAL_BOOL, {.boolean = a < b}})); } while(
 # 166 "VirtualMachine/vm/vm.c" 3 4
                                0
 # 166 "VirtualMachine/vm/vm.c"
                                ); break;
-            case OP_GREATER: do{ if(!((check(0)).type == VAL_DOUBLE) || !((check(1)).type == VAL_DOUBLE)){ runtimeError("Operands must be numbers."); return INTERPRET_RUNTIME_ERROR; } double b = ((pop()).as.dbl); double a = ((pop()).as.dbl); push(((Value){VAL_BOOL, {.boolean = a > b}})); } while(
+            case OP_GREATER: do{ if(!((check(0)).type == VAL_F64) || !((check(1)).type == VAL_F64)){ runtimeError("Operands must be numbers."); return INTERPRET_RUNTIME_ERROR; } double b = ((pop()).as.f64); double a = ((pop()).as.f64); push(((Value){VAL_BOOL, {.boolean = a > b}})); } while(
 # 167 "VirtualMachine/vm/vm.c" 3 4
                                0
 # 167 "VirtualMachine/vm/vm.c"
@@ -4043,47 +4064,47 @@ static InterpretResult run(){
             case OP_ADD:
                 if(isObjType(check(0), OBJ_STRING) && isObjType(check(1), OBJ_STRING)){
                     concatenate();
-                } else if (((check(0)).type == VAL_DOUBLE) && ((check(1)).type == VAL_DOUBLE)){
-                    double b = ((pop()).as.dbl);
-                    double a = ((pop()).as.dbl);
-                    push(((Value){VAL_DOUBLE, {.dbl = a + b}}));
+                } else if (((check(0)).type == VAL_F64) && ((check(1)).type == VAL_F64)){
+                    double b = ((pop()).as.f64);
+                    double a = ((pop()).as.f64);
+                    push(((Value){VAL_F64, {.f64 = a + b}}));
                 } else {
                     runtimeError("Operands must be doubles or strings.");
                     return INTERPRET_RUNTIME_ERROR;
                 }
                 break;
-            case OP_SUBTRACT: do{ if(!((check(0)).type == VAL_DOUBLE) || !((check(1)).type == VAL_DOUBLE)){ runtimeError("Operands must be numbers."); return INTERPRET_RUNTIME_ERROR; } double b = ((pop()).as.dbl); double a = ((pop()).as.dbl); push(((Value){VAL_DOUBLE, {.dbl = a - b}})); } while(
+            case OP_SUBTRACT: do{ if(!((check(0)).type == VAL_F64) || !((check(1)).type == VAL_F64)){ runtimeError("Operands must be numbers."); return INTERPRET_RUNTIME_ERROR; } double b = ((pop()).as.f64); double a = ((pop()).as.f64); push(((Value){VAL_F64, {.f64 = a - b}})); } while(
 # 180 "VirtualMachine/vm/vm.c" 3 4
                                0
 # 180 "VirtualMachine/vm/vm.c"
                                ); break;
-            case OP_MULTIPLY: do{ if(!((check(0)).type == VAL_DOUBLE) || !((check(1)).type == VAL_DOUBLE)){ runtimeError("Operands must be numbers."); return INTERPRET_RUNTIME_ERROR; } double b = ((pop()).as.dbl); double a = ((pop()).as.dbl); push(((Value){VAL_DOUBLE, {.dbl = a * b}})); } while(
+            case OP_MULTIPLY: do{ if(!((check(0)).type == VAL_F64) || !((check(1)).type == VAL_F64)){ runtimeError("Operands must be numbers."); return INTERPRET_RUNTIME_ERROR; } double b = ((pop()).as.f64); double a = ((pop()).as.f64); push(((Value){VAL_F64, {.f64 = a * b}})); } while(
 # 181 "VirtualMachine/vm/vm.c" 3 4
                                0
 # 181 "VirtualMachine/vm/vm.c"
                                ); break;
-            case OP_DIVIDE: do{ if(!((check(0)).type == VAL_DOUBLE) || !((check(1)).type == VAL_DOUBLE)){ runtimeError("Operands must be numbers."); return INTERPRET_RUNTIME_ERROR; } double b = ((pop()).as.dbl); double a = ((pop()).as.dbl); push(((Value){VAL_DOUBLE, {.dbl = a / b}})); } while(
+            case OP_DIVIDE: do{ if(!((check(0)).type == VAL_F64) || !((check(1)).type == VAL_F64)){ runtimeError("Operands must be numbers."); return INTERPRET_RUNTIME_ERROR; } double b = ((pop()).as.f64); double a = ((pop()).as.f64); push(((Value){VAL_F64, {.f64 = a / b}})); } while(
 # 182 "VirtualMachine/vm/vm.c" 3 4
                                0
 # 182 "VirtualMachine/vm/vm.c"
                                ); break;
-            case OP_EXPONENTIATE: do{ if(!((check(0)).type == VAL_DOUBLE) || !((check(1)).type == VAL_DOUBLE)){ runtimeError("Operands must be numbers."); return INTERPRET_RUNTIME_ERROR; } double b = ((pop()).as.dbl); double a = ((pop()).as.dbl); push(((Value){VAL_DOUBLE, {.dbl = pow(a,b)}})); } while(
+            case OP_EXPONENTIATE: do{ if(!((check(0)).type == VAL_F64) || !((check(1)).type == VAL_F64)){ runtimeError("Operands must be numbers."); return INTERPRET_RUNTIME_ERROR; } double b = ((pop()).as.f64); double a = ((pop()).as.f64); push(((Value){VAL_F64, {.f64 = pow(a,b)}})); } while(
 # 183 "VirtualMachine/vm/vm.c" 3 4
                                  0
 # 183 "VirtualMachine/vm/vm.c"
                                  ); break;
-            case OP_MODULATE: do{ if(!((check(0)).type == VAL_DOUBLE) || !((check(1)).type == VAL_DOUBLE)){ runtimeError("Operands must be numbers."); return INTERPRET_RUNTIME_ERROR; } double b = ((pop()).as.dbl); double a = ((pop()).as.dbl); push(((Value){VAL_DOUBLE, {.dbl = fmod(a,b)}})); } while(
+            case OP_MODULATE: do{ if(!((check(0)).type == VAL_F64) || !((check(1)).type == VAL_F64)){ runtimeError("Operands must be numbers."); return INTERPRET_RUNTIME_ERROR; } double b = ((pop()).as.f64); double a = ((pop()).as.f64); push(((Value){VAL_F64, {.f64 = fmod(a,b)}})); } while(
 # 184 "VirtualMachine/vm/vm.c" 3 4
                                0
 # 184 "VirtualMachine/vm/vm.c"
                                ); break;
             case OP_NOT: push(((Value){VAL_BOOL, {.boolean = isFalsey(pop())}})); break;
             case OP_NEGATE:{
-                if(!((check(0)).type == VAL_DOUBLE)){
+                if(!((check(0)).type == VAL_F64)){
                     runtimeError("Operand must be a number.");
                     return INTERPRET_RUNTIME_ERROR;
                 }
-                push(((Value){VAL_DOUBLE, {.dbl = -((pop()).as.dbl)}}));
+                push(((Value){VAL_F64, {.f64 = -((pop()).as.f64)}}));
                 }
                 break;
             case OP_PUTS:{

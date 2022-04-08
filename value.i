@@ -1532,17 +1532,17 @@ typedef enum {
     VAL_UNDEFINED,
     VAL_NIL,
     VAL_BOOL,
-    VAL_CHAR,
-    VAL_UCHAR,
-    VAL_INT,
-    VAL_UINT,
-    VAL_LONG,
-    VAL_ULONG,
-    VAL_FLOAT,
-    VAL_LONGLONG,
-    VAL_ULONGLONG,
-    VAL_DOUBLE,
-    VAL_DOUBLELONG,
+    VAL_I8,
+    VAL_U8,
+    VAL_I16,
+    VAL_U16,
+    VAL_I32,
+    VAL_U32,
+    VAL_I64,
+    VAL_U64,
+    VAL_F32,
+    VAL_F64,
+    VAL_F128,
     VAL_OBJ
 } ValueType;
 
@@ -1554,17 +1554,17 @@ typedef struct {
        _Bool 
 # 77 "Bytecode/value/value.h"
             boolean;
-        int8_t ch;
-        uint8_t uCh;
-        int16_t in;
-        uint16_t uIn;
-        int32_t lng;
-        uint32_t uLng;
-        float flt;
-        int64_t lnglng;
-        uint64_t uLnglng;
-        double dbl;
-        double long dbllng;
+        int8_t i8;
+        uint8_t u8;
+        int16_t i16;
+        uint16_t u16;
+        int32_t i32;
+        uint32_t u32;
+        int64_t i64;
+        uint64_t u64;
+        float f32;
+        double f64;
+        double long f128;
         Obj* obj;
     } as;
 } Value;
@@ -1573,47 +1573,47 @@ typedef struct {
 #define IS_NIL(value) ((value).type == VAL_NIL)
 #define IS_BOOL(value) ((value).type == VAL_BOOL)
 #define IS_NUMBER(value) ((value).type != VAL_NIL && (value).type != VAL_BOOL);
-#define IS_CHAR(value) ((value).type == VAL_CHAR)
-#define IS_UCHAR(value) ((value).type == VAL_UCHAR)
-#define IS_INT(value) ((value).type == VAL_INT)
-#define IS_UINT(value) ((value).type == VAL_UINT)
-#define IS_LONG(value) ((value).type == VAL_LONG)
-#define IS_ULONG(value) ((value).type == VAL_ULONG)
-#define IS_FLOAT(value) ((value).type == VAL_FLOAT)
-#define IS_LONGLONG(value) ((value).type == VAL_LONGLONG)
-#define IS_ULONGLONG(value) ((value).type == VAL_ULONGLONG)
-#define IS_DOUBLE(value) ((value).type == VAL_DOUBLE)
-#define IS_DOUBLELONG(value) ((value).type == VAL_DOUBLELONG)
+#define IS_I8(value) ((value).type == VAL_I8)
+#define IS_U8(value) ((value).type == VAL_U8)
+#define IS_I16(value) ((value).type == VAL_I16)
+#define IS_U16(value) ((value).type == VAL_U16)
+#define IS_I32(value) ((value).type == VAL_I32)
+#define IS_U32(value) ((value).type == VAL_U32)
+#define IS_I64(value) ((value).type == VAL_I64)
+#define IS_U64(value) ((value).type == VAL_U64)
+#define IS_F32(value) ((value).type == VAL_F32)
+#define IS_F64(value) ((value).type == VAL_F64)
+#define IS_F128(value) ((value).type == VAL_F128)
 #define IS_OBJ(value) ((value).type == VAL_OBJ)
 
 #define AS_BOOL(value) ((value).as.boolean)
-#define AS_CHAR(value) ((value).as.ch)
-#define AS_UCHAR(value) ((value).as.uCh)
-#define AS_INT(value) ((value).as.in)
-#define AS_UINT(value) ((value).as.uIn)
-#define AS_LONG(value) ((value).as.lng)
-#define AS_ULONG(value) ((value).as.uLng)
-#define AS_FLOAT(value) ((value).as.flt)
-#define AS_LONGLONG(value) ((value).as.lnglng)
-#define AS_ULONGLONG(value) ((value).as.uLnglng)
-#define AS_DOUBLE(value) ((value).as.dbl)
-#define AS_DOUBLELONG(value) ((value).as.dbllng)
+#define AS_I8(value) ((value).as.i8)
+#define AS_U8(value) ((value).as.u8)
+#define AS_I16(value) ((value).as.i16)
+#define AS_U16(value) ((value).as.u16)
+#define AS_I32(value) ((value).as.i32)
+#define AS_U32(value) ((value).as.u32)
+#define AS_I64(value) ((value).as.i64)
+#define AS_U64(value) ((value).as.u64)
+#define AS_F32(value) ((value).as.f32)
+#define AS_F64(value) ((value).as.f64)
+#define AS_F128(value) ((value).as.f128)
 #define AS_OBJ(value) ((value).as.obj)
 
 #define UNDEFINED_VAL ((Value){VAL_UNDEFINED})
-#define NIL_VAL ((Value){VAL_NIL, {.dbl = 0}})
+#define NIL_VAL ((Value){VAL_NIL, {.f64 = 0}})
 #define BOOL_VAL(value) ((Value){VAL_BOOL, {.boolean = value}})
-#define CHAR_VAL(value) ((Value){VAL_CHAR, {.ch = value}})
-#define UCHAR_VAL(value) ((Value){VAL_UCHAR, {.uCh = value}})
-#define INT_VAL(value) ((Value){VAL_INT, {.in = value}})
-#define UINT_VAL(value) ((Value){VAL_UINT, {.uIn = value}})
-#define LONG_VAL(value) ((Value){VAL_LONG, {.lng = value}})
-#define ULONG_VAL(value) ((Value){VAL_ULONG, {.uLng = value}})
-#define FLOAT_VAL(value) ((Value){VAL_FLOAT, {.flt = value}})
-#define LONGLONG_VAL(value) ((Value){VAL_LONGLONG, {.lnglng = value}})
-#define ULONGLONG_VAL(value) ((Value){VAL_ULONGLONG, {.uLnglng = value}})
-#define DOUBLE_VAL(value) ((Value){VAL_DOUBLE, {.dbl = value}})
-#define DOUBLELONG_VAL(value) ((Value){VAL_DOUBLELONG, {.dbllng = value}})
+#define I8_VAL(value) ((Value){VAL_I8, {.i8 = value}})
+#define U8_VAL(value) ((Value){VAL_U8, {.u8 = value}})
+#define I16_VAL(value) ((Value){VAL_I16, {.i16 = value}})
+#define U16_VAL(value) ((Value){VAL_U16, {.u16 = value}})
+#define I32_VAL(value) ((Value){VAL_I32, {.i32 = value}})
+#define U32_VAL(value) ((Value){VAL_U32, {.u32 = value}})
+#define I64_VAL(value) ((Value){VAL_I64, {.i64 = value}})
+#define U64_VAL(value) ((Value){VAL_U64, {.u64 = value}})
+#define F32_VAL(value) ((Value){VAL_F32, {.f32 = value}})
+#define F64_VAL(value) ((Value){VAL_F64, {.f64 = value}})
+#define F128_VAL(value) ((Value){VAL_F128, {.f128 = value}})
 #define OBJ_VAL(object) ((Value){VAL_OBJ, {.obj = (Obj*)object}})
 
 
@@ -2249,27 +2249,27 @@ _Bool
     switch(a.type){
         case VAL_NIL: return 
 # 12 "Bytecode/value/value.c" 3 4
-                                   1
+                              1
 # 12 "Bytecode/value/value.c"
-                                       ;
+                                  ;
         case VAL_BOOL: return ((a).as.boolean) == ((b).as.boolean);
         case VAL_OBJ: return ((a).as.obj) == ((b).as.obj);
-        case VAL_CHAR: return ((a).as.ch) == ((b).as.ch);
-        case VAL_UCHAR: return ((a).as.uCh) == ((b).as.uCh);
-        case VAL_INT: return ((a).as.in) == ((b).as.in);
-        case VAL_UINT: return ((a).as.uIn) == ((b).as.uIn);
-        case VAL_LONG: return ((a).as.lng) == ((b).as.lng);
-        case VAL_ULONG: return ((a).as.uLng) == ((b).as.uLng);
-        case VAL_FLOAT: return ((a).as.flt) == ((b).as.flt);
-        case VAL_LONGLONG: return ((a).as.lnglng) == ((b).as.lnglng);
-        case VAL_ULONGLONG: return ((a).as.uLnglng) == ((b).as.uLnglng);
-        case VAL_DOUBLE: return ((a).as.dbl) == ((b).as.dbl);
-        case VAL_DOUBLELONG: return ((a).as.dbllng) == ((b).as.dbllng);
+        case VAL_I8: return ((a).as.i8) == ((b).as.i8);
+        case VAL_U8: return ((a).as.u8) == ((b).as.u8);
+        case VAL_I16: return ((a).as.i16) == ((b).as.i16);
+        case VAL_U16: return ((a).as.u16) == ((b).as.u16);
+        case VAL_I32: return ((a).as.i32) == ((b).as.i32);
+        case VAL_U32: return ((a).as.u32) == ((b).as.u32);
+        case VAL_I64: return ((a).as.i64) == ((b).as.i64);
+        case VAL_U64: return ((a).as.u64) == ((b).as.u64);
+        case VAL_F32: return ((a).as.f32) == ((b).as.f32);
+        case VAL_F64: return ((a).as.f64) == ((b).as.f64);
+        case VAL_F128: return ((a).as.f128) == ((b).as.f128);
         default: return 
 # 26 "Bytecode/value/value.c" 3 4
-                                   0
+                              0
 # 26 "Bytecode/value/value.c"
-                                        ;
+                                   ;
     }
 }
 
@@ -2306,17 +2306,17 @@ void printValue(Value value){
             break;
         case VAL_NIL: printf("nil"); break;
         case VAL_OBJ: printObject(value); break;
-        case VAL_CHAR: printf("%c", ((value).as.ch)); break;
-        case VAL_UCHAR: printf("%u", ((value).as.uCh)); break;
-        case VAL_INT: printf("%d", ((value).as.in)); break;
-        case VAL_UINT: printf("%u", ((value).as.uIn)); break;
-        case VAL_LONG: printf("%u", ((value).as.lng)); break;
-        case VAL_ULONG: printf("%u", ((value).as.uLng)); break;
-        case VAL_LONGLONG: printf("%lu", ((value).as.lnglng)); break;
-        case VAL_ULONGLONG: printf("%lu", ((value).as.uLnglng)); break;
-        case VAL_FLOAT: printf("%f", ((value).as.flt)); break;
-        case VAL_DOUBLE: printf("%g", ((value).as.dbl)); break;
-        case VAL_DOUBLELONG: printf("%Lf", ((value).as.dbllng)); break;
+        case VAL_I8: printf("%c", ((value).as.i8)); break;
+        case VAL_U8: printf("%u", ((value).as.u8)); break;
+        case VAL_I16: printf("%d", ((value).as.i16)); break;
+        case VAL_U16: printf("%u", ((value).as.u16)); break;
+        case VAL_I32: printf("%u", ((value).as.i32)); break;
+        case VAL_U32: printf("%u", ((value).as.u32)); break;
+        case VAL_I64: printf("%lu", ((value).as.i64)); break;
+        case VAL_U64: printf("%lu", ((value).as.u64)); break;
+        case VAL_F32: printf("%f", ((value).as.f32)); break;
+        case VAL_F64: printf("%g", ((value).as.f64)); break;
+        case VAL_F128: printf("%Lf", ((value).as.f128)); break;
     }
 
 }

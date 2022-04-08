@@ -1346,154 +1346,160 @@ typedef __uintmax_t uintmax_t;
 # 6 "Tokenization/scanner/scanner.h"
 typedef enum {
 
-    TOKEN_LEFT_PAREN,
-    TOKEN_RIGHT_PAREN,
-    TOKEN_LEFT_BRACE,
-    TOKEN_RIGHT_BRACE,
-    TOKEN_LEFT_BRACK,
-    TOKEN_RIGHT_BRACK,
-    TOKEN_LTLBRACE,
-    TOKEN_RBRACEGT,
-    TOKEN_LTLPAREN,
-    TOKEN_RPARENLBRACE,
-    TOKEN_RBRACELPAREN,
-    TOKEN_RPARENGT,
+    TK_LEFT_PAREN,
+    TK_RIGHT_PAREN,
+    TK_LEFT_BRACE,
+    TK_RIGHT_BRACE,
+    TK_LEFT_BRACK,
+    TK_RIGHT_BRACK,
+    TK_LTLBRACE,
+    TK_RBRACEGT,
+    TK_LTLPAREN,
+    TK_RPARENLBRACE,
+    TK_RBRACELPAREN,
+    TK_RPARENGT,
 
 
-    TOKEN_BANG,
-    TOKEN_BANGBANG,
-    TOKEN_QUESTION,
-    TOKEN_COMMA,
-    TOKEN_DOT,
-    TOKEN_DOTDOT,
-    TOKEN_DOTDOTDOT,
-    TOKEN_SEMICOLON,
-    TOKEN_COLON,
+    TK_BANG,
+    TK_BANGBANG,
+    TK_QUESTION,
+    TK_COMMA,
+    TK_DOT,
+    TK_DOTDOT,
+    TK_DOTDOTDOT,
+    TK_SEMICOLON,
+    TK_COLON,
 
 
-    TOKEN_LTTILDE,
-    TOKEN_TILDEGT,
+    TK_LTTILDE,
+    TK_TILDEGT,
 
 
-    TOKEN_PLUS,
-    TOKEN_MINUS,
-    TOKEN_STAR,
-    TOKEN_SLASH,
-    TOKEN_MOD,
-    TOKEN_STARSTAR,
+    TK_PLUS,
+    TK_MINUS,
+    TK_STAR,
+    TK_SLASH,
+    TK_MOD,
+    TK_STARSTAR,
 
 
-    TOKEN_AMPAMP,
-    TOKEN_PIPEPIPE,
-    TOKEN_CARETCARET,
+    TK_AMPAMP,
+    TK_PIPEPIPE,
+    TK_CARETCARET,
 
 
-    TOKEN_AMP,
-    TOKEN_PIPE,
-    TOKEN_CARET,
-    TOKEN_TILDE,
-    TOKEN_GTGTGT,
-    TOKEN_GTGT,
-    TOKEN_LTLT,
+    TK_AMP,
+    TK_PIPE,
+    TK_CARET,
+    TK_TILDE,
+    TK_GTGTGT,
+    TK_GTGT,
+    TK_LTLT,
 
 
-    TOKEN_COLONCOLON,
-    TOKEN_USDEQ,
-    TOKEN_COLONCEQ,
-    TOKEN_USDCEQ,
-    TOKEN_COLONUCEQ,
-    TOKEN_USDUCEQ,
-    TOKEN_COLONIEQ,
-    TOKEN_USDIEQ,
-    TOKEN_COLONUIEQ,
-    TOKEN_USDUIEQ,
-    TOKEN_COLONLEQ,
-    TOKEN_USDLEQ,
-    TOKEN_COLONULEQ,
-    TOKEN_USDULEQ,
-    TOKEN_COLONLLEQ,
-    TOKEN_USDLLEQ,
-    TOKEN_COLONULLEQ,
-    TOKEN_USDULLEQ,
-    TOKEN_COLONFEQ,
-    TOKEN_USDFEQ,
-    TOKEN_COLONDEQ,
-    TOKEN_USDDEQ,
-    TOKEN_COLONLDEQ,
-    TOKEN_USDLDEQ,
-    TOKEN_COLONSEQ,
-    TOKEN_USDSEQ,
+    TK_COLONCOLON,
+    TK_COLONEQ,
 
 
-    TOKEN_PLUSEQ,
-    TOKEN_MINUSEQ,
-    TOKEN_STAREQ,
-    TOKEN_SLASHEQ,
-    TOKEN_MODEQ,
-    TOKEN_AMPEQ,
-    TOKEN_PIPEEQ,
-    TOKEN_CARETEQ,
-    TOKEN_TILDEEQ,
-    TOKEN_EQ,
-
-
-    TOKEN_CEQ,
-    TOKEN_UCEQ,
-    TOKEN_IEQ,
-    TOKEN_UIEQ,
-    TOKEN_LEQ,
-    TOKEN_ULEQ,
-    TOKEN_LLEQ,
-    TOKEN_ULLEQ,
-    TOKEN_FEQ,
-    TOKEN_DEQ,
-    TOKEN_LDEQ,
-    TOKEN_SEQ,
-
-
-    TOKEN_LT,
-    TOKEN_GT,
-    TOKEN_LTEQ,
-    TOKEN_GTEQ,
-    TOKEN_EQEQ,
-    TOKEN_BANGEQ,
-
-
-    TOKEN_CASE,
-    TOKEN_CLASS,
-    TOKEN_ELSE,
-    TOKEN_ELSIF,
-    TOKEN_FALSE,
-    TOKEN_DEF,
-    TOKEN_FOR,
-    TOKEN_IF,
-    TOKEN_IN,
-    TOKEN_LET,
-    TOKEN_NIL,
-    TOKEN_PUTS,
-    TOKEN_SUPER,
-    TOKEN_RETURN,
-    TOKEN_THIS,
-    TOKEN_TRUE,
-    TOKEN_WHEN,
-    TOKEN_WHILE,
+    TK_USDEQ,
+    TK_COLONCEQ,
+    TK_USDCEQ,
+    TK_COLONUCEQ,
+    TK_USDUCEQ,
+    TK_COLONIEQ,
+    TK_USDIEQ,
+    TK_COLONUIEQ,
+    TK_USDUIEQ,
+    TK_COLONLEQ,
+    TK_USDLEQ,
+    TK_COLONULEQ,
+    TK_USDULEQ,
+    TK_COLONLLEQ,
+    TK_USDLLEQ,
+    TK_COLONULLEQ,
+    TK_USDULLEQ,
+    TK_COLONFEQ,
+    TK_USDFEQ,
+    TK_COLONDEQ,
+    TK_USDDEQ,
+    TK_COLONLDEQ,
+    TK_USDLDEQ,
+    TK_COLONSEQ,
+    TK_USDSEQ,
 
 
 
-    TOKEN_FIELD,
-    TOKEN_NAME,
-    TOKEN_NUMBER,
-    TOKEN_IDENTIFIER,
-    TOKEN_INTERPOLATION,
-    TOKEN_LINE,
-    TOKEN_STATIC_FIELD,
-    TOKEN_STRING,
+    TK_PLUSEQ,
+    TK_MINUSEQ,
+    TK_STAREQ,
+    TK_SLASHEQ,
+    TK_MODEQ,
+    TK_AMPEQ,
+    TK_PIPEEQ,
+    TK_CARETEQ,
+    TK_TILDEEQ,
+    TK_EQ,
 
 
-    TOKEN_ERROR,
-    TOKEN_EOF,
-    TOKEN_NEWLINE,
-    TOKEN_ENDEXPRESSION
+    TK_EQI8,
+    TK_EQU8,
+    TK_EQI16,
+    TK_EQU16,
+    TK_EQI32,
+    TK_EQU32,
+    TK_EQI64,
+    TK_EQU64,
+    TK_EQF32,
+    TK_EQF64,
+    TK_EQF128,
+    TK_EQS,
+
+
+    TK_LT,
+    TK_GT,
+    TK_LTEQ,
+    TK_GTEQ,
+    TK_EQEQ,
+    TK_BANGEQ,
+
+
+    TK_CASE,
+    TK_CLASS,
+    TK_ELSE,
+    TK_ELSIF,
+    TK_ENUM,
+    TK_FALSE,
+    TK_DEF,
+    TK_FOR,
+    TK_IF,
+    TK_IN,
+    TK_LET,
+    TK_NIL,
+    TK_PUTS,
+    TK_STRUCT,
+    TK_SUPER,
+    TK_RETURN,
+    TK_THIS,
+    TK_TRUE,
+    TK_WHEN,
+    TK_WHILE,
+
+
+
+    TK_FIELD,
+    TK_NAME,
+    TK_NUMBER,
+    TK_IDENTIFIER,
+    TK_INTERPOLATION,
+    TK_LINE,
+    TK_STATIC_FIELD,
+    TK_STRING,
+
+
+    TK_ERROR,
+    TK_EOF,
+    TK_NEWLINE,
+    TK_ENDEXPRESSION
 } TokenType;
 
 typedef struct {
@@ -1503,23 +1509,31 @@ typedef struct {
     int16_t line;
 } Token;
 
+typedef struct {
+    const int8_t* start;
+    const int8_t* current;
+    int16_t line;
+} Scanner;
+
+Scanner scanner;
+
 void initScanner(const int8_t* source);
 
 static 
-# 167 "Tokenization/scanner/scanner.h" 3 4
+# 181 "Tokenization/scanner/scanner.h" 3 4
       _Bool 
-# 167 "Tokenization/scanner/scanner.h"
+# 181 "Tokenization/scanner/scanner.h"
            isAlpha(int8_t c);
 static 
-# 168 "Tokenization/scanner/scanner.h" 3 4
+# 182 "Tokenization/scanner/scanner.h" 3 4
       _Bool 
-# 168 "Tokenization/scanner/scanner.h"
+# 182 "Tokenization/scanner/scanner.h"
            isDigit(int8_t c);
 
 static 
-# 170 "Tokenization/scanner/scanner.h" 3 4
+# 184 "Tokenization/scanner/scanner.h" 3 4
       _Bool 
-# 170 "Tokenization/scanner/scanner.h"
+# 184 "Tokenization/scanner/scanner.h"
            isAtEnd();
 
 
@@ -1528,12 +1542,19 @@ static int8_t checkChar();
 static int8_t checkNextChar();
 static int8_t nextChar();
 static 
-# 177 "Tokenization/scanner/scanner.h" 3 4
+# 191 "Tokenization/scanner/scanner.h" 3 4
       _Bool 
-# 177 "Tokenization/scanner/scanner.h"
+# 191 "Tokenization/scanner/scanner.h"
            compareChar(int8_t c);
 
-static Token makeToken(TokenType type);
+static Token makeToken(TokenType type){
+    Token token;
+    token.type = type;
+    token.start = scanner.start;
+    token.length = (int16_t)(scanner.current - scanner.start);
+    token.line = scanner.line;
+    return token;
+}
 static Token makeTwoCharToken(int8_t c, TokenType one, TokenType two);
 
 static Token errorToken(const int8_t* message);
@@ -2246,16 +2267,9 @@ extern char *strerror (int __errnum) __attribute__ ((__nothrow__ , __leaf__));
 # 499 "/usr/include/string.h" 3 4
 
 # 6 "Tokenization/scanner/scanner.c" 2
+# 14 "Tokenization/scanner/scanner.c"
 
-
-
-# 8 "Tokenization/scanner/scanner.c"
-typedef struct {
-    const int8_t* start;
-    const int8_t* current;
-    int16_t line;
-} Scanner;
-
+# 14 "Tokenization/scanner/scanner.c"
 Scanner scanner;
 Token token;
 
@@ -2328,24 +2342,15 @@ static
               ;
 }
 
-static Token makeToken(TokenType type){
-    Token token;
-    token.type = type;
-    token.start = scanner.start;
-    token.length = (int)(scanner.current - scanner.start);
-    token.line = scanner.line;
-    return token;
-}
-
-
-
+static Token makeToken(TokenType type);
+# 74 "Tokenization/scanner/scanner.c"
 static Token makeTwoCharToken(int8_t c, TokenType one, TokenType two){
     return makeToken(compareChar(c) ? one : two);
 }
 
 static Token errorToken(const int8_t* message){
     Token token;
-    token.type = TOKEN_ERROR;
+    token.type = TK_ERROR;
     token.start = message;
     token.length = (int16_t)strlen(message);
     token.line = scanner.line;
@@ -2404,11 +2409,10 @@ static void skipWhitespace(){
             case '\t':
                 nextChar();
                 break;
-
-
-
-
-
+            case '\n':
+                scanner.line++;
+                nextChar();
+                break;
             case '#':
                 if(checkNextChar() =='|') skipBlockComment();
                 else skipLineComment();
@@ -2425,7 +2429,7 @@ static TokenType checkKeyword(int16_t start, int16_t length, const int8_t* rest,
     if(scanner.current - scanner.start == start + length && memcmp(scanner.start + start, rest, length) == 0){
         return type;
     }
-    return TOKEN_IDENTIFIER;
+    return TK_IDENTIFIER;
 }
 
 static TokenType identifierType(){
@@ -2433,96 +2437,82 @@ static TokenType identifierType(){
         case 'c':
             if(scanner.current - scanner.start > 1){
                 switch(scanner.start[1]){
-                    case 'a': return checkKeyword(2, 2, "se", TOKEN_CASE);
-                    case 'l': return checkKeyword(2, 3, "ass", TOKEN_CLASS);
-                    case '=': return checkKeyword(2, 0, "", TOKEN_CEQ);
+                    case 'a': return checkKeyword(2, 2, "se", TK_CASE);
+                    case 'l': return checkKeyword(2, 3, "ass", TK_CLASS);
                 }
             }
             break;
         case 'd':
             if(scanner.current - scanner.start > 1){
                 switch(scanner.start[1]){
-                    case 'e': return checkKeyword(2, 2, "ef", TOKEN_DEF);
-                    case '=': return checkKeyword(2, 0, "", TOKEN_DEQ);
+                    case 'e': return checkKeyword(2, 1, "f", TK_DEF);
                 }
             }
         case 'e':
             if(scanner.current - scanner.start > 1){
-                switch(scanner.start[3]){
-                    case 'e': return checkKeyword(4, 0, "", TOKEN_ELSE);
-                    case 'i': return checkKeyword(4, 1, "f", TOKEN_ELSIF);
+                switch(scanner.start[1]){
+                    case 'l': switch(scanner.start[2]) {
+                        case 's': switch(scanner.start[3]){
+                            case 'e': return checkKeyword(4, 0, "", TK_ELSE);
+                            case 'i': return checkKeyword(4, 1, "f", TK_ELSIF);
+                        }
+                    }
+                    case 'n': return checkKeyword(2, 2, "um", TK_ENUM);
                 }
             }
             break;
         case 'f':
             if(scanner.current - scanner.start > 1){
                 switch(scanner.start[1]){
-                    case 'a': return checkKeyword(2, 3, "lse", TOKEN_FALSE);
-                    case 'o': return checkKeyword(2, 1, "r", TOKEN_FOR);
-                    case '=': return checkKeyword(2, 0, "", TOKEN_FEQ);
+                    case 'a': return checkKeyword(2, 3, "lse", TK_FALSE);
+                    case 'o': return checkKeyword(2, 1, "r", TK_FOR);
                 }
             }
             break;
         case 'i':
             if(scanner.current - scanner.start > 1){
                 switch(scanner.start[1]){
-                    case 'f': return checkKeyword(2, 0, "", TOKEN_IF);
-                    case 'n': return checkKeyword(2, 1, "n", TOKEN_IN);
-                    case '=': return checkKeyword(2, 0, "", TOKEN_IEQ);
+                    case 'f': return checkKeyword(2, 0, "", TK_IF);
+                    case 'n': return checkKeyword(2, 1, "n", TK_IN);
                 }
             }
             break;
         case 'l':
             if(scanner.current - scanner.start > 1){
                 switch(scanner.start[1]){
-                    case 'd': return checkKeyword(2, 1, "=", TOKEN_LDEQ);
-                    case 'e': return checkKeyword(2, 1, "t", TOKEN_LET);
-                    case 'l': return checkKeyword(2, 1, "=", TOKEN_LLEQ);
-                    case '=': return checkKeyword(2, 0, "", TOKEN_LEQ);
+                    case 'e': return checkKeyword(2, 1, "t", TK_LET);
                 }
             }
             break;
-        case 'n': return checkKeyword(1, 2, "il", TOKEN_NIL);
-        case 'p': return checkKeyword(1, 3, "uts", TOKEN_PUTS);
-        case 'r': return checkKeyword(1, 5, "eturn", TOKEN_RETURN);
+        case 'n': return checkKeyword(1, 2, "il", TK_NIL);
+        case 'p': return checkKeyword(1, 3, "uts", TK_PUTS);
+        case 'r': return checkKeyword(1, 5, "eturn", TK_RETURN);
         case 's':
             if (scanner.current - scanner.start > 1){
                 switch(scanner.start[1]){
-                    case 'u': return checkKeyword(2, 4, "uper", TOKEN_SUPER);
-                    case '=': return checkKeyword(2, 0, "", TOKEN_SEQ);
+                    case 'u': return checkKeyword(2, 3, "per", TK_SUPER);
+                    case 't': return checkKeyword(2, 4, "ruct", TK_STRUCT);
                 }
             }
             break;
         case 't':
             if(scanner.current - scanner.start > 1){
                 switch(scanner.start[1]){
-                    case 'h': return checkKeyword(2, 2, "is", TOKEN_THIS);
-                    case 'r': return checkKeyword(2, 2, "ue", TOKEN_TRUE);
+                    case 'h': return checkKeyword(2, 2, "is", TK_THIS);
+                    case 'r': return checkKeyword(2, 2, "ue", TK_TRUE);
                 }
             }
             break;
-        case 'u':
-            if(scanner.current - scanner.start > 1){
-                switch(scanner.start[1]){
-                            case 'c': return checkKeyword(2, 1, "=", TOKEN_UCEQ);
-                            case 'i': return checkKeyword(2, 1, "=", TOKEN_UIEQ);
-                            case 'l':
-                                switch(scanner.start[2]){
-                                    case 'l': return checkKeyword(3, 1, "=", TOKEN_ULLEQ);
-                                    case '=': return checkKeyword(3, 0, "", TOKEN_ULEQ);
-                                }
-                        }
-            }
         case 'w':
             if(scanner.current - scanner.start > 1){
                 switch(scanner.start[2]){
-                    case 'e': return checkKeyword(3, 1, "n", TOKEN_WHEN);
-                    case 'i': return checkKeyword(3, 2, "le", TOKEN_WHILE);
+                    case 'e': return checkKeyword(3, 1, "n", TK_WHEN);
+                    case 'i': return checkKeyword(3, 2, "le", TK_WHILE);
                 }
             }
             break;
     }
-    return TOKEN_IDENTIFIER;
+    return TK_IDENTIFIER;
 }
 
 static Token identifier(){
@@ -2539,7 +2529,7 @@ static Token number(){
         while(isDigit(checkChar())) nextChar();
     }
 
-    return makeToken(TOKEN_NUMBER);
+    return makeToken(TK_NUMBER);
 }
 
 static Token string(){
@@ -2551,14 +2541,14 @@ static Token string(){
     if(isAtEnd()) return errorToken("Unterminated string.");
 
     nextChar();
-    return makeToken(TOKEN_STRING);
+    return makeToken(TK_STRING);
 }
 
 Token scanToken(){
     skipWhitespace();
     scanner.start = scanner.current;
 
-    if(isAtEnd()) return makeToken(TOKEN_EOF);
+    if(isAtEnd()) return makeToken(TK_EOF);
 
     uint8_t c = nextChar();
     if(isAlpha(c)) return identifier();
@@ -2566,59 +2556,60 @@ Token scanToken(){
 
     switch(c){
 
-        case '(': return makeToken(TOKEN_LEFT_PAREN);
+        case '(': return makeToken(TK_LEFT_PAREN);
         case ')':
-            if(compareChar('>')) return makeToken(TOKEN_RPARENGT);
-            return makeTwoCharToken('{', TOKEN_RPARENLBRACE, TOKEN_RIGHT_PAREN);
-        case '{': return makeToken(TOKEN_LEFT_BRACE);
+            if(compareChar('>')) return makeToken(TK_RPARENGT);
+            return makeTwoCharToken('{', TK_RPARENLBRACE, TK_RIGHT_PAREN);
+        case '{': return makeToken(TK_LEFT_BRACE);
         case '}':
-            if(compareChar('>')) return makeToken(TOKEN_RBRACEGT);
-            return makeTwoCharToken('(', TOKEN_RBRACELPAREN, TOKEN_RIGHT_BRACE);
-        case '[': return makeToken(TOKEN_LEFT_BRACK);
-        case ']': return makeToken(TOKEN_RIGHT_BRACK);
+            if(compareChar('>')) return makeToken(TK_RBRACEGT);
+            return makeTwoCharToken('(', TK_RBRACELPAREN, TK_RIGHT_BRACE);
+        case '[': return makeToken(TK_LEFT_BRACK);
+        case ']': return makeToken(TK_RIGHT_BRACK);
 
 
         case '!':
-            if(compareChar('!')) return makeToken(TOKEN_BANGBANG);
-            return makeTwoCharToken('=', TOKEN_BANGEQ, TOKEN_BANG);
-        case '?': return makeToken(TOKEN_QUESTION);
-        case ',': return makeToken(TOKEN_COMMA);
+            if(compareChar('!')) return makeToken(TK_BANGBANG);
+            return makeTwoCharToken('=', TK_BANGEQ, TK_BANG);
+        case '?': return makeToken(TK_QUESTION);
+        case ',': return makeToken(TK_COMMA);
         case '.':
             if(compareChar('.')){
-                return makeTwoCharToken('.', TOKEN_DOTDOTDOT, TOKEN_DOTDOT);
-            } else return makeToken(TOKEN_DOT);
-        case ';': return makeToken(TOKEN_SEMICOLON);
+                return makeTwoCharToken('.', TK_DOTDOTDOT, TK_DOTDOT);
+            } else return makeToken(TK_DOT);
+        case ';': return makeToken(TK_SEMICOLON);
 
 
-        case '=': return makeTwoCharToken('=', TOKEN_EQEQ, TOKEN_EQ);
+        case '=': return makeTwoCharToken('=', TK_EQEQ, TK_EQ);
         case '<':
-            if(compareChar('<')) return makeToken(TOKEN_LTLT);
-            if(compareChar('{')) return makeToken(TOKEN_LTLBRACE);
-            if(compareChar('(')) return makeToken(TOKEN_LTLPAREN);
-            return makeTwoCharToken('=', TOKEN_LTEQ, TOKEN_LT);
+            if(compareChar('<')) return makeToken(TK_LTLT);
+            if(compareChar('{')) return makeToken(TK_LTLBRACE);
+            if(compareChar('(')) return makeToken(TK_LTLPAREN);
+            return makeTwoCharToken('=', TK_LTEQ, TK_LT);
         case '>':
-            if(compareChar('>')) return makeTwoCharToken('>', TOKEN_GTGTGT, TOKEN_GTGT);
-            return makeTwoCharToken('=', TOKEN_GTEQ, TOKEN_GT);
+            if(compareChar('>')) return makeTwoCharToken('>', TK_GTGTGT, TK_GTGT);
+            return makeTwoCharToken('=', TK_GTEQ, TK_GT);
 
-        case '+': return makeTwoCharToken('=', TOKEN_PLUSEQ, TOKEN_PLUS);
-        case '-': return makeTwoCharToken('=', TOKEN_MINUSEQ, TOKEN_MINUS);
+
+        case '+': return makeTwoCharToken('=', TK_PLUSEQ, TK_PLUS);
+        case '-': return makeTwoCharToken('=', TK_MINUSEQ, TK_MINUS);
         case '*':
-            if(compareChar('*')) return makeToken(TOKEN_STARSTAR);
-            return makeTwoCharToken('=', TOKEN_STAREQ, TOKEN_STAR);
-        case '/': return makeTwoCharToken('=', TOKEN_SLASHEQ, TOKEN_SLASH);
-        case '%': return makeTwoCharToken('%', TOKEN_MODEQ, TOKEN_MOD);
+            if(compareChar('*')) return makeToken(TK_STARSTAR);
+            return makeTwoCharToken('=', TK_STAREQ, TK_STAR);
+        case '/': return makeTwoCharToken('=', TK_SLASHEQ, TK_SLASH);
+        case '%': return makeTwoCharToken('%', TK_MODEQ, TK_MOD);
 
 
         case '&':
-            if(compareChar('&')) return makeToken(TOKEN_AMPAMP);
-            return makeTwoCharToken('=', TOKEN_AMPEQ, TOKEN_AMP);
+            if(compareChar('&')) return makeToken(TK_AMPAMP);
+            return makeTwoCharToken('=', TK_AMPEQ, TK_AMP);
         case '^':
-            if(compareChar('^')) return makeToken(TOKEN_CARETCARET);
-            return makeTwoCharToken('=', TOKEN_CARETEQ, TOKEN_CARET);
+            if(compareChar('^')) return makeToken(TK_CARETCARET);
+            return makeTwoCharToken('=', TK_CARETEQ, TK_CARET);
         case '~':
-            if(compareChar('>')) return makeToken(TOKEN_TILDEGT);
-            return makeTwoCharToken('=', TOKEN_TILDEEQ, TOKEN_TILDE);
-# 360 "Tokenization/scanner/scanner.c"
+            if(compareChar('>')) return makeToken(TK_TILDEGT);
+            return makeTwoCharToken('=', TK_TILDEEQ, TK_TILDE);
+# 347 "Tokenization/scanner/scanner.c"
         case '"':
         case '`':
         case '\'':
@@ -2626,62 +2617,55 @@ Token scanToken(){
 
 
         case ':':
-            if(compareChar('c')){nextChar(); return makeToken(TOKEN_COLONCEQ);}
-            if(compareChar('d')){nextChar(); return makeToken(TOKEN_COLONDEQ);}
-            if(compareChar('f')){nextChar(); return makeToken(TOKEN_COLONFEQ);}
-            if(compareChar('i')){nextChar(); return makeToken(TOKEN_COLONIEQ);}
+            if(compareChar('c')){nextChar(); return makeToken(TK_COLONCEQ);}
+            if(compareChar('d')){nextChar(); return makeToken(TK_COLONDEQ);}
+            if(compareChar('f')){nextChar(); return makeToken(TK_COLONFEQ);}
+            if(compareChar('i')){nextChar(); return makeToken(TK_COLONIEQ);}
             if(compareChar('l')){
-                if(compareChar('d')){nextChar(); return makeToken(TOKEN_COLONLDEQ);}
-                if(compareChar('l')){nextChar(); return makeToken(TOKEN_COLONLLEQ);}
-                if(compareChar('=')) return makeToken(TOKEN_COLONLEQ);
+                if(compareChar('d')){nextChar(); return makeToken(TK_COLONLDEQ);}
+                if(compareChar('l')){nextChar(); return makeToken(TK_COLONLLEQ);}
+                if(compareChar('=')) return makeToken(TK_COLONLEQ);
             }
-            if(compareChar('s')){nextChar(); return makeToken(TOKEN_COLONSEQ);}
+            if(compareChar('s')){nextChar(); return makeToken(TK_COLONSEQ);}
             if(compareChar('u')){
-                if(compareChar('c')){nextChar(); return makeToken(TOKEN_COLONUCEQ);}
-                if(compareChar('i')){nextChar(); return makeToken(TOKEN_COLONUIEQ);}
+                if(compareChar('c')){nextChar(); return makeToken(TK_COLONUCEQ);}
+                if(compareChar('i')){nextChar(); return makeToken(TK_COLONUIEQ);}
                 if(compareChar('l')){
-                    if(compareChar('l')){nextChar(); return makeToken(TOKEN_COLONULLEQ);}
-                    if(compareChar('=')) return makeToken(TOKEN_COLONULEQ);
+                    if(compareChar('l')){nextChar(); return makeToken(TK_COLONULLEQ);}
+                    if(compareChar('=')) return makeToken(TK_COLONULEQ);
                 }
             }
-            if(compareChar(':')) return makeToken(TOKEN_COLONCOLON);
-            if(compareChar('\0')) return makeToken(TOKEN_COLON);
+            if(compareChar(':')) return makeToken(TK_COLONCOLON);
+            if(compareChar('\0')) return makeToken(TK_COLON);
 
         case '$':
             if(scanner.current - scanner.start > 1){
                 switch(scanner.start[1]){
-                    case 'c': return makeToken(TOKEN_USDCEQ);
-                    case 'd': return makeToken(TOKEN_USDDEQ);
-                    case 'f': return makeToken(TOKEN_USDFEQ);
-                    case 'i': return makeToken(TOKEN_USDIEQ);
+                    case 'c': return makeToken(TK_USDCEQ);
+                    case 'd': return makeToken(TK_USDDEQ);
+                    case 'f': return makeToken(TK_USDFEQ);
+                    case 'i': return makeToken(TK_USDIEQ);
                     case 'l': switch(scanner.start[2]){
-                        case 'd': return makeToken(TOKEN_USDLDEQ);
-                        case 'l': return makeToken(TOKEN_USDLLEQ);
-                        case '=': return makeToken(TOKEN_USDLEQ);
+                        case 'd': return makeToken(TK_USDLDEQ);
+                        case 'l': return makeToken(TK_USDLLEQ);
+                        case '=': return makeToken(TK_USDLEQ);
                     }
-                    case 's': return makeToken(TOKEN_USDSEQ);
+                    case 's': return makeToken(TK_USDSEQ);
                     case 'u': switch(scanner.start[2]){
-                        case 'c': return makeToken(TOKEN_USDUCEQ);
-                        case 'i': return makeToken(TOKEN_USDUIEQ);
+                        case 'c': return makeToken(TK_USDUCEQ);
+                        case 'i': return makeToken(TK_USDUIEQ);
                         case 'l': switch(scanner.start[3]){
-                            case 'l': switch(scanner.start[4]) case '=': return makeToken(TOKEN_USDULLEQ);
-                            case '=': return makeToken(TOKEN_USDULEQ);
+                            case 'l': switch(scanner.start[4]) case '=': return makeToken(TK_USDULLEQ);
+                            case '=': return makeToken(TK_USDULEQ);
                         }
                     }
-                    case '=': return makeToken(TOKEN_USDEQ);
+                    case '=': return makeToken(TK_USDEQ);
 
                 }
 
             }
             break;
-
-
-            case '\n':
-                while(checkChar() == '\n'){
-                    nextChar();
-                    scanner.line++;
-                }
-                return makeToken(TOKEN_NEWLINE);
+# 410 "Tokenization/scanner/scanner.c"
     }
     invalidToken(c);
     return errorToken("Unexpected character.");

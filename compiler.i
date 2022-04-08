@@ -1532,17 +1532,17 @@ typedef enum {
     VAL_UNDEFINED,
     VAL_NIL,
     VAL_BOOL,
-    VAL_CHAR,
-    VAL_UCHAR,
-    VAL_INT,
-    VAL_UINT,
-    VAL_LONG,
-    VAL_ULONG,
-    VAL_FLOAT,
-    VAL_LONGLONG,
-    VAL_ULONGLONG,
-    VAL_DOUBLE,
-    VAL_DOUBLELONG,
+    VAL_I8,
+    VAL_U8,
+    VAL_I16,
+    VAL_U16,
+    VAL_I32,
+    VAL_U32,
+    VAL_I64,
+    VAL_U64,
+    VAL_F32,
+    VAL_F64,
+    VAL_F128,
     VAL_OBJ
 } ValueType;
 
@@ -1554,17 +1554,17 @@ typedef struct {
        _Bool 
 # 77 "Compilation/compiler/../../Bytecode/value/value.h"
             boolean;
-        int8_t ch;
-        uint8_t uCh;
-        int16_t in;
-        uint16_t uIn;
-        int32_t lng;
-        uint32_t uLng;
-        float flt;
-        int64_t lnglng;
-        uint64_t uLnglng;
-        double dbl;
-        double long dbllng;
+        int8_t i8;
+        uint8_t u8;
+        int16_t i16;
+        uint16_t u16;
+        int32_t i32;
+        uint32_t u32;
+        int64_t i64;
+        uint64_t u64;
+        float f32;
+        double f64;
+        double long f128;
         Obj* obj;
     } as;
 } Value;
@@ -1573,47 +1573,47 @@ typedef struct {
 #define IS_NIL(value) ((value).type == VAL_NIL)
 #define IS_BOOL(value) ((value).type == VAL_BOOL)
 #define IS_NUMBER(value) ((value).type != VAL_NIL && (value).type != VAL_BOOL);
-#define IS_CHAR(value) ((value).type == VAL_CHAR)
-#define IS_UCHAR(value) ((value).type == VAL_UCHAR)
-#define IS_INT(value) ((value).type == VAL_INT)
-#define IS_UINT(value) ((value).type == VAL_UINT)
-#define IS_LONG(value) ((value).type == VAL_LONG)
-#define IS_ULONG(value) ((value).type == VAL_ULONG)
-#define IS_FLOAT(value) ((value).type == VAL_FLOAT)
-#define IS_LONGLONG(value) ((value).type == VAL_LONGLONG)
-#define IS_ULONGLONG(value) ((value).type == VAL_ULONGLONG)
-#define IS_DOUBLE(value) ((value).type == VAL_DOUBLE)
-#define IS_DOUBLELONG(value) ((value).type == VAL_DOUBLELONG)
+#define IS_I8(value) ((value).type == VAL_I8)
+#define IS_U8(value) ((value).type == VAL_U8)
+#define IS_I16(value) ((value).type == VAL_I16)
+#define IS_U16(value) ((value).type == VAL_U16)
+#define IS_I32(value) ((value).type == VAL_I32)
+#define IS_U32(value) ((value).type == VAL_U32)
+#define IS_I64(value) ((value).type == VAL_I64)
+#define IS_U64(value) ((value).type == VAL_U64)
+#define IS_F32(value) ((value).type == VAL_F32)
+#define IS_F64(value) ((value).type == VAL_F64)
+#define IS_F128(value) ((value).type == VAL_F128)
 #define IS_OBJ(value) ((value).type == VAL_OBJ)
 
 #define AS_BOOL(value) ((value).as.boolean)
-#define AS_CHAR(value) ((value).as.ch)
-#define AS_UCHAR(value) ((value).as.uCh)
-#define AS_INT(value) ((value).as.in)
-#define AS_UINT(value) ((value).as.uIn)
-#define AS_LONG(value) ((value).as.lng)
-#define AS_ULONG(value) ((value).as.uLng)
-#define AS_FLOAT(value) ((value).as.flt)
-#define AS_LONGLONG(value) ((value).as.lnglng)
-#define AS_ULONGLONG(value) ((value).as.uLnglng)
-#define AS_DOUBLE(value) ((value).as.dbl)
-#define AS_DOUBLELONG(value) ((value).as.dbllng)
+#define AS_I8(value) ((value).as.i8)
+#define AS_U8(value) ((value).as.u8)
+#define AS_I16(value) ((value).as.i16)
+#define AS_U16(value) ((value).as.u16)
+#define AS_I32(value) ((value).as.i32)
+#define AS_U32(value) ((value).as.u32)
+#define AS_I64(value) ((value).as.i64)
+#define AS_U64(value) ((value).as.u64)
+#define AS_F32(value) ((value).as.f32)
+#define AS_F64(value) ((value).as.f64)
+#define AS_F128(value) ((value).as.f128)
 #define AS_OBJ(value) ((value).as.obj)
 
 #define UNDEFINED_VAL ((Value){VAL_UNDEFINED})
-#define NIL_VAL ((Value){VAL_NIL, {.dbl = 0}})
+#define NIL_VAL ((Value){VAL_NIL, {.f64 = 0}})
 #define BOOL_VAL(value) ((Value){VAL_BOOL, {.boolean = value}})
-#define CHAR_VAL(value) ((Value){VAL_CHAR, {.ch = value}})
-#define UCHAR_VAL(value) ((Value){VAL_UCHAR, {.uCh = value}})
-#define INT_VAL(value) ((Value){VAL_INT, {.in = value}})
-#define UINT_VAL(value) ((Value){VAL_UINT, {.uIn = value}})
-#define LONG_VAL(value) ((Value){VAL_LONG, {.lng = value}})
-#define ULONG_VAL(value) ((Value){VAL_ULONG, {.uLng = value}})
-#define FLOAT_VAL(value) ((Value){VAL_FLOAT, {.flt = value}})
-#define LONGLONG_VAL(value) ((Value){VAL_LONGLONG, {.lnglng = value}})
-#define ULONGLONG_VAL(value) ((Value){VAL_ULONGLONG, {.uLnglng = value}})
-#define DOUBLE_VAL(value) ((Value){VAL_DOUBLE, {.dbl = value}})
-#define DOUBLELONG_VAL(value) ((Value){VAL_DOUBLELONG, {.dbllng = value}})
+#define I8_VAL(value) ((Value){VAL_I8, {.i8 = value}})
+#define U8_VAL(value) ((Value){VAL_U8, {.u8 = value}})
+#define I16_VAL(value) ((Value){VAL_I16, {.i16 = value}})
+#define U16_VAL(value) ((Value){VAL_U16, {.u16 = value}})
+#define I32_VAL(value) ((Value){VAL_I32, {.i32 = value}})
+#define U32_VAL(value) ((Value){VAL_U32, {.u32 = value}})
+#define I64_VAL(value) ((Value){VAL_I64, {.i64 = value}})
+#define U64_VAL(value) ((Value){VAL_U64, {.u64 = value}})
+#define F32_VAL(value) ((Value){VAL_F32, {.f32 = value}})
+#define F64_VAL(value) ((Value){VAL_F64, {.f64 = value}})
+#define F128_VAL(value) ((Value){VAL_F128, {.f128 = value}})
 #define OBJ_VAL(object) ((Value){VAL_OBJ, {.obj = (Obj*)object}})
 
 
@@ -1694,154 +1694,160 @@ static inline
 
 typedef enum {
 
-    TOKEN_LEFT_PAREN,
-    TOKEN_RIGHT_PAREN,
-    TOKEN_LEFT_BRACE,
-    TOKEN_RIGHT_BRACE,
-    TOKEN_LEFT_BRACK,
-    TOKEN_RIGHT_BRACK,
-    TOKEN_LTLBRACE,
-    TOKEN_RBRACEGT,
-    TOKEN_LTLPAREN,
-    TOKEN_RPARENLBRACE,
-    TOKEN_RBRACELPAREN,
-    TOKEN_RPARENGT,
+    TK_LEFT_PAREN,
+    TK_RIGHT_PAREN,
+    TK_LEFT_BRACE,
+    TK_RIGHT_BRACE,
+    TK_LEFT_BRACK,
+    TK_RIGHT_BRACK,
+    TK_LTLBRACE,
+    TK_RBRACEGT,
+    TK_LTLPAREN,
+    TK_RPARENLBRACE,
+    TK_RBRACELPAREN,
+    TK_RPARENGT,
 
 
-    TOKEN_BANG,
-    TOKEN_BANGBANG,
-    TOKEN_QUESTION,
-    TOKEN_COMMA,
-    TOKEN_DOT,
-    TOKEN_DOTDOT,
-    TOKEN_DOTDOTDOT,
-    TOKEN_SEMICOLON,
-    TOKEN_COLON,
+    TK_BANG,
+    TK_BANGBANG,
+    TK_QUESTION,
+    TK_COMMA,
+    TK_DOT,
+    TK_DOTDOT,
+    TK_DOTDOTDOT,
+    TK_SEMICOLON,
+    TK_COLON,
 
 
-    TOKEN_LTTILDE,
-    TOKEN_TILDEGT,
+    TK_LTTILDE,
+    TK_TILDEGT,
 
 
-    TOKEN_PLUS,
-    TOKEN_MINUS,
-    TOKEN_STAR,
-    TOKEN_SLASH,
-    TOKEN_MOD,
-    TOKEN_STARSTAR,
+    TK_PLUS,
+    TK_MINUS,
+    TK_STAR,
+    TK_SLASH,
+    TK_MOD,
+    TK_STARSTAR,
 
 
-    TOKEN_AMPAMP,
-    TOKEN_PIPEPIPE,
-    TOKEN_CARETCARET,
+    TK_AMPAMP,
+    TK_PIPEPIPE,
+    TK_CARETCARET,
 
 
-    TOKEN_AMP,
-    TOKEN_PIPE,
-    TOKEN_CARET,
-    TOKEN_TILDE,
-    TOKEN_GTGTGT,
-    TOKEN_GTGT,
-    TOKEN_LTLT,
+    TK_AMP,
+    TK_PIPE,
+    TK_CARET,
+    TK_TILDE,
+    TK_GTGTGT,
+    TK_GTGT,
+    TK_LTLT,
 
 
-    TOKEN_COLONCOLON,
-    TOKEN_USDEQ,
-    TOKEN_COLONCEQ,
-    TOKEN_USDCEQ,
-    TOKEN_COLONUCEQ,
-    TOKEN_USDUCEQ,
-    TOKEN_COLONIEQ,
-    TOKEN_USDIEQ,
-    TOKEN_COLONUIEQ,
-    TOKEN_USDUIEQ,
-    TOKEN_COLONLEQ,
-    TOKEN_USDLEQ,
-    TOKEN_COLONULEQ,
-    TOKEN_USDULEQ,
-    TOKEN_COLONLLEQ,
-    TOKEN_USDLLEQ,
-    TOKEN_COLONULLEQ,
-    TOKEN_USDULLEQ,
-    TOKEN_COLONFEQ,
-    TOKEN_USDFEQ,
-    TOKEN_COLONDEQ,
-    TOKEN_USDDEQ,
-    TOKEN_COLONLDEQ,
-    TOKEN_USDLDEQ,
-    TOKEN_COLONSEQ,
-    TOKEN_USDSEQ,
+    TK_COLONCOLON,
+    TK_COLONEQ,
 
 
-    TOKEN_PLUSEQ,
-    TOKEN_MINUSEQ,
-    TOKEN_STAREQ,
-    TOKEN_SLASHEQ,
-    TOKEN_MODEQ,
-    TOKEN_AMPEQ,
-    TOKEN_PIPEEQ,
-    TOKEN_CARETEQ,
-    TOKEN_TILDEEQ,
-    TOKEN_EQ,
-
-
-    TOKEN_CEQ,
-    TOKEN_UCEQ,
-    TOKEN_IEQ,
-    TOKEN_UIEQ,
-    TOKEN_LEQ,
-    TOKEN_ULEQ,
-    TOKEN_LLEQ,
-    TOKEN_ULLEQ,
-    TOKEN_FEQ,
-    TOKEN_DEQ,
-    TOKEN_LDEQ,
-    TOKEN_SEQ,
-
-
-    TOKEN_LT,
-    TOKEN_GT,
-    TOKEN_LTEQ,
-    TOKEN_GTEQ,
-    TOKEN_EQEQ,
-    TOKEN_BANGEQ,
-
-
-    TOKEN_CASE,
-    TOKEN_CLASS,
-    TOKEN_ELSE,
-    TOKEN_ELSIF,
-    TOKEN_FALSE,
-    TOKEN_DEF,
-    TOKEN_FOR,
-    TOKEN_IF,
-    TOKEN_IN,
-    TOKEN_LET,
-    TOKEN_NIL,
-    TOKEN_PUTS,
-    TOKEN_SUPER,
-    TOKEN_RETURN,
-    TOKEN_THIS,
-    TOKEN_TRUE,
-    TOKEN_WHEN,
-    TOKEN_WHILE,
+    TK_USDEQ,
+    TK_COLONCEQ,
+    TK_USDCEQ,
+    TK_COLONUCEQ,
+    TK_USDUCEQ,
+    TK_COLONIEQ,
+    TK_USDIEQ,
+    TK_COLONUIEQ,
+    TK_USDUIEQ,
+    TK_COLONLEQ,
+    TK_USDLEQ,
+    TK_COLONULEQ,
+    TK_USDULEQ,
+    TK_COLONLLEQ,
+    TK_USDLLEQ,
+    TK_COLONULLEQ,
+    TK_USDULLEQ,
+    TK_COLONFEQ,
+    TK_USDFEQ,
+    TK_COLONDEQ,
+    TK_USDDEQ,
+    TK_COLONLDEQ,
+    TK_USDLDEQ,
+    TK_COLONSEQ,
+    TK_USDSEQ,
 
 
 
-    TOKEN_FIELD,
-    TOKEN_NAME,
-    TOKEN_NUMBER,
-    TOKEN_IDENTIFIER,
-    TOKEN_INTERPOLATION,
-    TOKEN_LINE,
-    TOKEN_STATIC_FIELD,
-    TOKEN_STRING,
+    TK_PLUSEQ,
+    TK_MINUSEQ,
+    TK_STAREQ,
+    TK_SLASHEQ,
+    TK_MODEQ,
+    TK_AMPEQ,
+    TK_PIPEEQ,
+    TK_CARETEQ,
+    TK_TILDEEQ,
+    TK_EQ,
 
 
-    TOKEN_ERROR,
-    TOKEN_EOF,
-    TOKEN_NEWLINE,
-    TOKEN_ENDEXPRESSION
+    TK_EQI8,
+    TK_EQU8,
+    TK_EQI16,
+    TK_EQU16,
+    TK_EQI32,
+    TK_EQU32,
+    TK_EQI64,
+    TK_EQU64,
+    TK_EQF32,
+    TK_EQF64,
+    TK_EQF128,
+    TK_EQS,
+
+
+    TK_LT,
+    TK_GT,
+    TK_LTEQ,
+    TK_GTEQ,
+    TK_EQEQ,
+    TK_BANGEQ,
+
+
+    TK_CASE,
+    TK_CLASS,
+    TK_ELSE,
+    TK_ELSIF,
+    TK_ENUM,
+    TK_FALSE,
+    TK_DEF,
+    TK_FOR,
+    TK_IF,
+    TK_IN,
+    TK_LET,
+    TK_NIL,
+    TK_PUTS,
+    TK_STRUCT,
+    TK_SUPER,
+    TK_RETURN,
+    TK_THIS,
+    TK_TRUE,
+    TK_WHEN,
+    TK_WHILE,
+
+
+
+    TK_FIELD,
+    TK_NAME,
+    TK_NUMBER,
+    TK_IDENTIFIER,
+    TK_INTERPOLATION,
+    TK_LINE,
+    TK_STATIC_FIELD,
+    TK_STRING,
+
+
+    TK_ERROR,
+    TK_EOF,
+    TK_NEWLINE,
+    TK_ENDEXPRESSION
 } TokenType;
 
 typedef struct {
@@ -1851,23 +1857,31 @@ typedef struct {
     int16_t line;
 } Token;
 
+typedef struct {
+    const int8_t* start;
+    const int8_t* current;
+    int16_t line;
+} Scanner;
+
+Scanner scanner;
+
 void initScanner(const int8_t* source);
 
 static 
-# 167 "Compilation/compiler/../../Tokenization/scanner/scanner.h" 3 4
+# 181 "Compilation/compiler/../../Tokenization/scanner/scanner.h" 3 4
       _Bool 
-# 167 "Compilation/compiler/../../Tokenization/scanner/scanner.h"
+# 181 "Compilation/compiler/../../Tokenization/scanner/scanner.h"
            isAlpha(int8_t c);
 static 
-# 168 "Compilation/compiler/../../Tokenization/scanner/scanner.h" 3 4
+# 182 "Compilation/compiler/../../Tokenization/scanner/scanner.h" 3 4
       _Bool 
-# 168 "Compilation/compiler/../../Tokenization/scanner/scanner.h"
+# 182 "Compilation/compiler/../../Tokenization/scanner/scanner.h"
            isDigit(int8_t c);
 
 static 
-# 170 "Compilation/compiler/../../Tokenization/scanner/scanner.h" 3 4
+# 184 "Compilation/compiler/../../Tokenization/scanner/scanner.h" 3 4
       _Bool 
-# 170 "Compilation/compiler/../../Tokenization/scanner/scanner.h"
+# 184 "Compilation/compiler/../../Tokenization/scanner/scanner.h"
            isAtEnd();
 
 
@@ -1876,12 +1890,19 @@ static int8_t checkChar();
 static int8_t checkNextChar();
 static int8_t nextChar();
 static 
-# 177 "Compilation/compiler/../../Tokenization/scanner/scanner.h" 3 4
+# 191 "Compilation/compiler/../../Tokenization/scanner/scanner.h" 3 4
       _Bool 
-# 177 "Compilation/compiler/../../Tokenization/scanner/scanner.h"
+# 191 "Compilation/compiler/../../Tokenization/scanner/scanner.h"
            compareChar(int8_t c);
 
-static Token makeToken(TokenType type);
+static Token makeToken(TokenType type){
+    Token token;
+    token.type = type;
+    token.start = scanner.start;
+    token.length = (int16_t)(scanner.current - scanner.start);
+    token.line = scanner.line;
+    return token;
+}
 static Token makeTwoCharToken(int8_t c, TokenType one, TokenType two);
 
 static Token errorToken(const int8_t* message);
@@ -3070,13 +3091,13 @@ static void errorAt(Token* token, const char* message){
 # 69 "Compilation/compiler/compiler.c"
                  , "[Line %d] Error", token->line);
 
-    if(token->type == TOKEN_EOF){
+    if(token->type == TK_EOF){
         fprintf(
 # 72 "Compilation/compiler/compiler.c" 3 4
                stderr
 # 72 "Compilation/compiler/compiler.c"
                      , " at end.");
-    } else if (token->type == TOKEN_ERROR){
+    } else if (token->type == TK_ERROR){
     } else {
         fprintf(
 # 75 "Compilation/compiler/compiler.c" 3 4
@@ -3110,9 +3131,24 @@ static void advance(){
 
     for(;;){
         parser.current = scanToken();
-        if(parser.current.type != TOKEN_ERROR) break;
+        if(parser.current.type != TK_ERROR) break;
         errorAtCurrent(parser.current.start);
     }
+}
+
+static 
+# 100 "Compilation/compiler/compiler.c" 3 4
+      _Bool 
+# 100 "Compilation/compiler/compiler.c"
+           scout(TokenType type){
+    parser.previous = parser.current;
+
+    for(;;){
+        parser.current = scanToken();
+        if(parser.current.type != TK_ERROR) break;
+        errorAtCurrent(parser.current.start);
+    }
+    return parser.current.type == type;
 }
 
 static void consume(TokenType type, const char* message){
@@ -3125,28 +3161,54 @@ static void consume(TokenType type, const char* message){
 }
 
 static 
-# 109 "Compilation/compiler/compiler.c" 3 4
+# 120 "Compilation/compiler/compiler.c" 3 4
       _Bool 
-# 109 "Compilation/compiler/compiler.c"
+# 120 "Compilation/compiler/compiler.c"
            verify(TokenType type){
     return parser.current.type == type;
 }
 
 static 
-# 113 "Compilation/compiler/compiler.c" 3 4
+# 124 "Compilation/compiler/compiler.c" 3 4
       _Bool 
-# 113 "Compilation/compiler/compiler.c"
+# 124 "Compilation/compiler/compiler.c"
+           verifyPrevious(TokenType type){
+    return parser.previous.type == type;
+}
+
+static 
+# 128 "Compilation/compiler/compiler.c" 3 4
+      _Bool 
+# 128 "Compilation/compiler/compiler.c"
            match(TokenType type){
     if(!verify(type)) return 
-# 114 "Compilation/compiler/compiler.c" 3 4
+# 129 "Compilation/compiler/compiler.c" 3 4
                             0
-# 114 "Compilation/compiler/compiler.c"
+# 129 "Compilation/compiler/compiler.c"
                                  ;
     advance();
     return 
-# 116 "Compilation/compiler/compiler.c" 3 4
+# 131 "Compilation/compiler/compiler.c" 3 4
           1
-# 116 "Compilation/compiler/compiler.c"
+# 131 "Compilation/compiler/compiler.c"
+              ;
+}
+
+static 
+# 134 "Compilation/compiler/compiler.c" 3 4
+      _Bool 
+# 134 "Compilation/compiler/compiler.c"
+           matchPrevious(TokenType type){
+    if(!verifyPrevious(type)) return 
+# 135 "Compilation/compiler/compiler.c" 3 4
+                                    0
+# 135 "Compilation/compiler/compiler.c"
+                                         ;
+    advance();
+    return 
+# 137 "Compilation/compiler/compiler.c" 3 4
+          1
+# 137 "Compilation/compiler/compiler.c"
               ;
 }
 
@@ -3174,9 +3236,9 @@ static void emitReturn(){
 static uint8_t makeConstant(Value value){
     int constant = addConstant(currentChunk(), value);
     if(constant > 
-# 142 "Compilation/compiler/compiler.c" 3 4
+# 163 "Compilation/compiler/compiler.c" 3 4
                  (255)
-# 142 "Compilation/compiler/compiler.c"
+# 163 "Compilation/compiler/compiler.c"
                           ){
         error("Too many constants in one chunk.");
         return 0;
@@ -3193,9 +3255,9 @@ static void patchJump(int16_t offset){
     int16_t jump = currentChunk()->count - offset - 2;
 
     if(jump > 
-# 157 "Compilation/compiler/compiler.c" 3 4
+# 178 "Compilation/compiler/compiler.c" 3 4
              (65535)
-# 157 "Compilation/compiler/compiler.c"
+# 178 "Compilation/compiler/compiler.c"
                        ){
         error("Too much code to jump over.");
     }
@@ -3231,7 +3293,7 @@ static void endScope(){
     }
 }
 
-static void expression();
+static Token expression();
 static void statement();
 static void declaration();
 static ParseRule* getRule(TokenType type);
@@ -3241,81 +3303,80 @@ static void parsePrecedence(Precedence precedence);
 static int resolveLocal(Compiler* compiler, Token* name);
 
 static void binary(
-# 201 "Compilation/compiler/compiler.c" 3 4
+# 222 "Compilation/compiler/compiler.c" 3 4
                   _Bool 
-# 201 "Compilation/compiler/compiler.c"
+# 222 "Compilation/compiler/compiler.c"
                        canAssign){
     TokenType operatorType = parser.previous.type;
     ParseRule* rule = getRule(operatorType);
     parsePrecedence((Precedence)(rule->precedence + 1));
 
     switch (operatorType){
-        case TOKEN_EQEQ: emitByte(OP_EQUAL); break;
-        case TOKEN_BANGEQ: emitBytes(OP_EQUAL, OP_NOT); break;
-        case TOKEN_LT: emitByte(OP_LESS); break;
-        case TOKEN_GT: emitByte(OP_GREATER); break;
-        case TOKEN_LTEQ: emitBytes(OP_GREATER, OP_NOT); break;
-        case TOKEN_GTEQ: emitBytes(OP_LESS, OP_NOT); break;
-        case TOKEN_PLUS: emitByte(OP_ADD); break;
-        case TOKEN_MINUS: emitByte(OP_SUBTRACT); break;
-        case TOKEN_STAR: emitByte(OP_MULTIPLY); break;
-        case TOKEN_SLASH: emitByte(OP_DIVIDE); break;
-        case TOKEN_MOD: emitByte(OP_MODULATE); break;
-        case TOKEN_STARSTAR: emitByte(OP_EXPONENTIATE); break;
+        case TK_EQEQ: emitByte(OP_EQUAL); break;
+        case TK_BANGEQ: emitBytes(OP_EQUAL, OP_NOT); break;
+        case TK_LT: emitByte(OP_LESS); break;
+        case TK_GT: emitByte(OP_GREATER); break;
+        case TK_LTEQ: emitBytes(OP_GREATER, OP_NOT); break;
+        case TK_GTEQ: emitBytes(OP_LESS, OP_NOT); break;
+        case TK_PLUS: emitByte(OP_ADD); break;
+        case TK_MINUS: emitByte(OP_SUBTRACT); break;
+        case TK_STAR: emitByte(OP_MULTIPLY); break;
+        case TK_SLASH: emitByte(OP_DIVIDE); break;
+        case TK_MOD: emitByte(OP_MODULATE); break;
+        case TK_STARSTAR: emitByte(OP_EXPONENTIATE); break;
         default: break;
     }
 }
 
 static void literal(
-# 223 "Compilation/compiler/compiler.c" 3 4
+# 244 "Compilation/compiler/compiler.c" 3 4
                    _Bool 
-# 223 "Compilation/compiler/compiler.c"
+# 244 "Compilation/compiler/compiler.c"
                         canAssign){
     switch (parser.previous.type){
-        case TOKEN_BANG: emitByte(OP_NOT); break;
-        case TOKEN_FALSE: emitByte(OP_FALSE); break;
-        case TOKEN_NIL: emitByte(OP_NIL); break;
-        case TOKEN_TRUE: emitByte(OP_TRUE); break;
+        case TK_BANG: emitByte(OP_NOT); break;
+        case TK_FALSE: emitByte(OP_FALSE); break;
+        case TK_NIL: emitByte(OP_NIL); break;
+        case TK_TRUE: emitByte(OP_TRUE); break;
         default: return;
     }
 }
 
 static void grouping(
-# 233 "Compilation/compiler/compiler.c" 3 4
+# 254 "Compilation/compiler/compiler.c" 3 4
                     _Bool 
-# 233 "Compilation/compiler/compiler.c"
+# 254 "Compilation/compiler/compiler.c"
                          canAssign){
     expression();
-    consume(TOKEN_RIGHT_PAREN, "Expect ')' after expression.");
+    consume(TK_RIGHT_PAREN, "Expect ')' after expression.");
 }
 
 static void number(
-# 238 "Compilation/compiler/compiler.c" 3 4
+# 259 "Compilation/compiler/compiler.c" 3 4
                   _Bool 
-# 238 "Compilation/compiler/compiler.c"
+# 259 "Compilation/compiler/compiler.c"
                        canAssign){
     double value = strtod(parser.previous.start, 
-# 239 "Compilation/compiler/compiler.c" 3 4
+# 260 "Compilation/compiler/compiler.c" 3 4
                                                 ((void *)0)
-# 239 "Compilation/compiler/compiler.c"
+# 260 "Compilation/compiler/compiler.c"
                                                     );
-    emitConstant(((Value){VAL_DOUBLE, {.dbl = value}}));
+    emitConstant(((Value){VAL_F64, {.f64 = value}}));
 }
 
 static void string(
-# 243 "Compilation/compiler/compiler.c" 3 4
+# 264 "Compilation/compiler/compiler.c" 3 4
                   _Bool 
-# 243 "Compilation/compiler/compiler.c"
+# 264 "Compilation/compiler/compiler.c"
                        canAssign){
     emitConstant(((Value){VAL_OBJ, {.obj = (Obj*)copyString(parser.previous.start + 1, parser.previous.length - 2)}}));
 }
 
 static void namedVariable(Token name, 
-# 247 "Compilation/compiler/compiler.c" 3 4
+# 268 "Compilation/compiler/compiler.c" 3 4
                                      _Bool 
-# 247 "Compilation/compiler/compiler.c"
+# 268 "Compilation/compiler/compiler.c"
                                           canAssign){
-
     uint8_t getOp, setOp;
     int16_t arg = resolveLocal(current, &name);
     if(arg != -1){
@@ -3327,7 +3388,7 @@ static void namedVariable(Token name,
         getOp = OP_GET_GLOBAL;
     }
 
-    if(canAssign && match(TOKEN_COLONCOLON || TOKEN_EQ)){
+    if(canAssign && match(TK_COLONCOLON || TK_EQ)){
         expression();
         emitBytes(setOp, (uint8_t)arg);
     } else {
@@ -3336,17 +3397,17 @@ static void namedVariable(Token name,
 }
 
 static void variable(
-# 268 "Compilation/compiler/compiler.c" 3 4
+# 288 "Compilation/compiler/compiler.c" 3 4
                     _Bool 
-# 268 "Compilation/compiler/compiler.c"
+# 288 "Compilation/compiler/compiler.c"
                          canAssign){
     namedVariable(parser.previous, canAssign);
 }
 
 static void unary(
-# 272 "Compilation/compiler/compiler.c" 3 4
+# 292 "Compilation/compiler/compiler.c" 3 4
                  _Bool 
-# 272 "Compilation/compiler/compiler.c"
+# 292 "Compilation/compiler/compiler.c"
                       canAssign){
     TokenType operatorType = parser.previous.type;
 
@@ -3355,8 +3416,8 @@ static void unary(
 
 
     switch(operatorType){
-        case TOKEN_BANG: emitByte(OP_NOT); break;
-        case TOKEN_MINUS: emitByte(OP_NEGATE); break;
+        case TK_BANG: emitByte(OP_NOT); break;
+        case TK_MINUS: emitByte(OP_NEGATE); break;
         default: return;
     }
 }
@@ -3365,7 +3426,7 @@ static void conditional(){
 
     parsePrecedence(PREC_CONDITIONAL);
 
-    consume(TOKEN_COLON, "Expect ':' after then branch of conditional operator.");
+    consume(TK_COLON, "Expect ':' after then branch of conditional operator.");
 
 
     parsePrecedence(PREC_ASSIGNMENT);
@@ -3373,481 +3434,481 @@ static void conditional(){
 
 ParseRule rules[] = {
 
-    [TOKEN_LEFT_PAREN] = {grouping, 
-# 298 "Compilation/compiler/compiler.c" 3 4
-                                    ((void *)0)
-# 298 "Compilation/compiler/compiler.c"
-                                        , PREC_NONE},
-    [TOKEN_RIGHT_PAREN] = {
-# 299 "Compilation/compiler/compiler.c" 3 4
-                          ((void *)0)
-# 299 "Compilation/compiler/compiler.c"
-                              , 
-# 299 "Compilation/compiler/compiler.c" 3 4
-                                   ((void *)0)
-# 299 "Compilation/compiler/compiler.c"
-                                       , PREC_NONE},
-    [TOKEN_LEFT_BRACE] = {
-# 300 "Compilation/compiler/compiler.c" 3 4
-                          ((void *)0)
-# 300 "Compilation/compiler/compiler.c"
-                              , 
-# 300 "Compilation/compiler/compiler.c" 3 4
-                                   ((void *)0)
-# 300 "Compilation/compiler/compiler.c"
-                                       , PREC_NONE},
-    [TOKEN_RIGHT_BRACE] = {
-# 301 "Compilation/compiler/compiler.c" 3 4
-                          ((void *)0)
-# 301 "Compilation/compiler/compiler.c"
-                              , 
-# 301 "Compilation/compiler/compiler.c" 3 4
-                                   ((void *)0)
-# 301 "Compilation/compiler/compiler.c"
-                                       , PREC_NONE},
-    [TOKEN_LEFT_BRACK] = {
-# 302 "Compilation/compiler/compiler.c" 3 4
-                          ((void *)0)
-# 302 "Compilation/compiler/compiler.c"
-                              , 
-# 302 "Compilation/compiler/compiler.c" 3 4
-                                   ((void *)0)
-# 302 "Compilation/compiler/compiler.c"
-                                       , PREC_NONE},
-    [TOKEN_RIGHT_BRACK] = {
-# 303 "Compilation/compiler/compiler.c" 3 4
-                          ((void *)0)
-# 303 "Compilation/compiler/compiler.c"
-                              , 
-# 303 "Compilation/compiler/compiler.c" 3 4
-                                   ((void *)0)
-# 303 "Compilation/compiler/compiler.c"
-                                       , PREC_NONE},
-
-
-    [TOKEN_BANG] = {unary, 
-# 306 "Compilation/compiler/compiler.c" 3 4
-                                   ((void *)0)
-# 306 "Compilation/compiler/compiler.c"
-                                       , PREC_NONE},
-    [TOKEN_BANGBANG] = {
-# 307 "Compilation/compiler/compiler.c" 3 4
-                          ((void *)0)
-# 307 "Compilation/compiler/compiler.c"
-                              , 
-# 307 "Compilation/compiler/compiler.c" 3 4
-                                   ((void *)0)
-# 307 "Compilation/compiler/compiler.c"
-                                       , PREC_NONE},
-    [TOKEN_QUESTION] = {
-# 308 "Compilation/compiler/compiler.c" 3 4
-                          ((void *)0)
-# 308 "Compilation/compiler/compiler.c"
-                              , 
-# 308 "Compilation/compiler/compiler.c" 3 4
-                                   ((void *)0)
-# 308 "Compilation/compiler/compiler.c"
-                                       , PREC_NONE},
-    [TOKEN_COMMA] = {
-# 309 "Compilation/compiler/compiler.c" 3 4
-                          ((void *)0)
-# 309 "Compilation/compiler/compiler.c"
-                              , 
-# 309 "Compilation/compiler/compiler.c" 3 4
-                                   ((void *)0)
-# 309 "Compilation/compiler/compiler.c"
-                                       , PREC_NONE},
-    [TOKEN_DOT] = {
-# 310 "Compilation/compiler/compiler.c" 3 4
-                          ((void *)0)
-# 310 "Compilation/compiler/compiler.c"
-                              , 
-# 310 "Compilation/compiler/compiler.c" 3 4
-                                   ((void *)0)
-# 310 "Compilation/compiler/compiler.c"
-                                       , PREC_NONE},
-    [TOKEN_DOTDOT] = {
-# 311 "Compilation/compiler/compiler.c" 3 4
-                          ((void *)0)
-# 311 "Compilation/compiler/compiler.c"
-                              , 
-# 311 "Compilation/compiler/compiler.c" 3 4
-                                   ((void *)0)
-# 311 "Compilation/compiler/compiler.c"
-                                       , PREC_NONE},
-    [TOKEN_DOTDOTDOT] = {
-# 312 "Compilation/compiler/compiler.c" 3 4
-                          ((void *)0)
-# 312 "Compilation/compiler/compiler.c"
-                              , 
-# 312 "Compilation/compiler/compiler.c" 3 4
-                                   ((void *)0)
-# 312 "Compilation/compiler/compiler.c"
-                                       , PREC_NONE},
-    [TOKEN_SEMICOLON] = {
-# 313 "Compilation/compiler/compiler.c" 3 4
-                          ((void *)0)
-# 313 "Compilation/compiler/compiler.c"
-                              , 
-# 313 "Compilation/compiler/compiler.c" 3 4
-                                   ((void *)0)
-# 313 "Compilation/compiler/compiler.c"
-                                       , PREC_NONE},
-    [TOKEN_COLON] = {
-# 314 "Compilation/compiler/compiler.c" 3 4
-                          ((void *)0)
-# 314 "Compilation/compiler/compiler.c"
-                              , 
-# 314 "Compilation/compiler/compiler.c" 3 4
-                                   ((void *)0)
-# 314 "Compilation/compiler/compiler.c"
-                                       , PREC_NONE},
-
-
-    [TOKEN_CASE] = {
-# 317 "Compilation/compiler/compiler.c" 3 4
-                          ((void *)0)
-# 317 "Compilation/compiler/compiler.c"
-                              , 
-# 317 "Compilation/compiler/compiler.c" 3 4
-                                   ((void *)0)
-# 317 "Compilation/compiler/compiler.c"
-                                       , PREC_NONE},
-    [TOKEN_CLASS] = {
+    [TK_LEFT_PAREN] = {grouping, 
 # 318 "Compilation/compiler/compiler.c" 3 4
-                          ((void *)0)
+                                 ((void *)0)
 # 318 "Compilation/compiler/compiler.c"
-                              , 
-# 318 "Compilation/compiler/compiler.c" 3 4
-                                   ((void *)0)
-# 318 "Compilation/compiler/compiler.c"
-                                       , PREC_NONE},
-    [TOKEN_DEF] = {
+                                     , PREC_NONE},
+    [TK_RIGHT_PAREN] = {
 # 319 "Compilation/compiler/compiler.c" 3 4
-                          ((void *)0)
+                       ((void *)0)
 # 319 "Compilation/compiler/compiler.c"
-                              , 
+                           , 
 # 319 "Compilation/compiler/compiler.c" 3 4
-                                   ((void *)0)
+                                ((void *)0)
 # 319 "Compilation/compiler/compiler.c"
-                                       , PREC_NONE},
-    [TOKEN_ELSE] = {
+                                    , PREC_NONE},
+    [TK_LEFT_BRACE] = {
 # 320 "Compilation/compiler/compiler.c" 3 4
-                          ((void *)0)
+                       ((void *)0)
 # 320 "Compilation/compiler/compiler.c"
-                              , 
+                           , 
 # 320 "Compilation/compiler/compiler.c" 3 4
-                                   ((void *)0)
+                                ((void *)0)
 # 320 "Compilation/compiler/compiler.c"
-                                       , PREC_NONE},
-    [TOKEN_ELSIF] = {
+                                    , PREC_NONE},
+    [TK_RIGHT_BRACE] = {
 # 321 "Compilation/compiler/compiler.c" 3 4
-                          ((void *)0)
+                       ((void *)0)
 # 321 "Compilation/compiler/compiler.c"
-                              , 
+                           , 
 # 321 "Compilation/compiler/compiler.c" 3 4
-                                   ((void *)0)
+                                ((void *)0)
 # 321 "Compilation/compiler/compiler.c"
-                                       , PREC_NONE},
-    [TOKEN_FALSE] = {literal, 
+                                    , PREC_NONE},
+    [TK_LEFT_BRACK] = {
 # 322 "Compilation/compiler/compiler.c" 3 4
-                                   ((void *)0)
+                       ((void *)0)
 # 322 "Compilation/compiler/compiler.c"
-                                       , PREC_NONE},
-    [TOKEN_FOR] = {
+                           , 
+# 322 "Compilation/compiler/compiler.c" 3 4
+                                ((void *)0)
+# 322 "Compilation/compiler/compiler.c"
+                                    , PREC_NONE},
+    [TK_RIGHT_BRACK] = {
 # 323 "Compilation/compiler/compiler.c" 3 4
-                          ((void *)0)
+                       ((void *)0)
 # 323 "Compilation/compiler/compiler.c"
-                              , 
+                           , 
 # 323 "Compilation/compiler/compiler.c" 3 4
-                                   ((void *)0)
+                                ((void *)0)
 # 323 "Compilation/compiler/compiler.c"
-                                       , PREC_NONE},
-    [TOKEN_IF] = {
-# 324 "Compilation/compiler/compiler.c" 3 4
-                          ((void *)0)
-# 324 "Compilation/compiler/compiler.c"
-                              , 
-# 324 "Compilation/compiler/compiler.c" 3 4
-                                   ((void *)0)
-# 324 "Compilation/compiler/compiler.c"
-                                       , PREC_NONE},
-    [TOKEN_IN] = {
-# 325 "Compilation/compiler/compiler.c" 3 4
-                          ((void *)0)
-# 325 "Compilation/compiler/compiler.c"
-                              , 
-# 325 "Compilation/compiler/compiler.c" 3 4
-                                   ((void *)0)
-# 325 "Compilation/compiler/compiler.c"
-                                       , PREC_NONE},
-    [TOKEN_LET] = {
+                                    , PREC_NONE},
+
+
+    [TK_BANG] = {unary, 
 # 326 "Compilation/compiler/compiler.c" 3 4
-                          ((void *)0)
+                                ((void *)0)
 # 326 "Compilation/compiler/compiler.c"
-                              , 
-# 326 "Compilation/compiler/compiler.c" 3 4
-                                   ((void *)0)
-# 326 "Compilation/compiler/compiler.c"
-                                       , PREC_NONE},
-    [TOKEN_NIL] = {literal, 
+                                    , PREC_NONE},
+    [TK_BANGBANG] = {
 # 327 "Compilation/compiler/compiler.c" 3 4
-                                   ((void *)0)
+                       ((void *)0)
 # 327 "Compilation/compiler/compiler.c"
-                                       , PREC_NONE},
-    [TOKEN_PUTS] = {
+                           , 
+# 327 "Compilation/compiler/compiler.c" 3 4
+                                ((void *)0)
+# 327 "Compilation/compiler/compiler.c"
+                                    , PREC_NONE},
+    [TK_QUESTION] = {
 # 328 "Compilation/compiler/compiler.c" 3 4
-                          ((void *)0)
+                       ((void *)0)
 # 328 "Compilation/compiler/compiler.c"
-                              , 
+                           , 
 # 328 "Compilation/compiler/compiler.c" 3 4
-                                   ((void *)0)
+                                ((void *)0)
 # 328 "Compilation/compiler/compiler.c"
-                                       , PREC_NONE},
-    [TOKEN_RETURN] = {
+                                    , PREC_NONE},
+    [TK_COMMA] = {
 # 329 "Compilation/compiler/compiler.c" 3 4
-                          ((void *)0)
+                       ((void *)0)
 # 329 "Compilation/compiler/compiler.c"
-                              , 
+                           , 
 # 329 "Compilation/compiler/compiler.c" 3 4
-                                   ((void *)0)
+                                ((void *)0)
 # 329 "Compilation/compiler/compiler.c"
-                                       , PREC_NONE},
-    [TOKEN_THIS] = {
+                                    , PREC_NONE},
+    [TK_DOT] = {
 # 330 "Compilation/compiler/compiler.c" 3 4
-                          ((void *)0)
+                       ((void *)0)
 # 330 "Compilation/compiler/compiler.c"
-                              , 
+                           , 
 # 330 "Compilation/compiler/compiler.c" 3 4
-                                   ((void *)0)
+                                ((void *)0)
 # 330 "Compilation/compiler/compiler.c"
-                                       , PREC_NONE},
-    [TOKEN_TRUE] = {literal, 
+                                    , PREC_NONE},
+    [TK_DOTDOT] = {
 # 331 "Compilation/compiler/compiler.c" 3 4
-                                   ((void *)0)
+                       ((void *)0)
 # 331 "Compilation/compiler/compiler.c"
-                                       , PREC_NONE},
-    [TOKEN_WHEN] = {
+                           , 
+# 331 "Compilation/compiler/compiler.c" 3 4
+                                ((void *)0)
+# 331 "Compilation/compiler/compiler.c"
+                                    , PREC_NONE},
+    [TK_DOTDOTDOT] = {
 # 332 "Compilation/compiler/compiler.c" 3 4
-                          ((void *)0)
+                       ((void *)0)
 # 332 "Compilation/compiler/compiler.c"
-                              , 
+                           , 
 # 332 "Compilation/compiler/compiler.c" 3 4
-                                   ((void *)0)
+                                ((void *)0)
 # 332 "Compilation/compiler/compiler.c"
-                                       , PREC_NONE},
-    [TOKEN_WHILE] = {
+                                    , PREC_NONE},
+    [TK_SEMICOLON] = {
 # 333 "Compilation/compiler/compiler.c" 3 4
-                          ((void *)0)
+                       ((void *)0)
 # 333 "Compilation/compiler/compiler.c"
-                              , 
+                           , 
 # 333 "Compilation/compiler/compiler.c" 3 4
-                                   ((void *)0)
+                                ((void *)0)
 # 333 "Compilation/compiler/compiler.c"
-                                       , PREC_NONE},
+                                    , PREC_NONE},
+    [TK_COLON] = {
+# 334 "Compilation/compiler/compiler.c" 3 4
+                       ((void *)0)
+# 334 "Compilation/compiler/compiler.c"
+                           , 
+# 334 "Compilation/compiler/compiler.c" 3 4
+                                ((void *)0)
+# 334 "Compilation/compiler/compiler.c"
+                                    , PREC_NONE},
 
 
-    [TOKEN_LTTILDE] = {
-# 336 "Compilation/compiler/compiler.c" 3 4
-                          ((void *)0)
-# 336 "Compilation/compiler/compiler.c"
-                              , 
-# 336 "Compilation/compiler/compiler.c" 3 4
-                                   ((void *)0)
-# 336 "Compilation/compiler/compiler.c"
-                                       , PREC_NONE},
-    [TOKEN_TILDEGT] = {
+    [TK_CASE] = {
 # 337 "Compilation/compiler/compiler.c" 3 4
-                          ((void *)0)
+                       ((void *)0)
 # 337 "Compilation/compiler/compiler.c"
-                              , 
+                           , 
 # 337 "Compilation/compiler/compiler.c" 3 4
-                                   ((void *)0)
+                                ((void *)0)
 # 337 "Compilation/compiler/compiler.c"
-                                       , PREC_NONE},
-
-
-    [TOKEN_FIELD] = {
+                                    , PREC_NONE},
+    [TK_CLASS] = {
+# 338 "Compilation/compiler/compiler.c" 3 4
+                       ((void *)0)
+# 338 "Compilation/compiler/compiler.c"
+                           , 
+# 338 "Compilation/compiler/compiler.c" 3 4
+                                ((void *)0)
+# 338 "Compilation/compiler/compiler.c"
+                                    , PREC_NONE},
+    [TK_DEF] = {
+# 339 "Compilation/compiler/compiler.c" 3 4
+                       ((void *)0)
+# 339 "Compilation/compiler/compiler.c"
+                           , 
+# 339 "Compilation/compiler/compiler.c" 3 4
+                                ((void *)0)
+# 339 "Compilation/compiler/compiler.c"
+                                    , PREC_NONE},
+    [TK_ELSE] = {
 # 340 "Compilation/compiler/compiler.c" 3 4
-                          ((void *)0)
+                       ((void *)0)
 # 340 "Compilation/compiler/compiler.c"
-                              , 
+                           , 
 # 340 "Compilation/compiler/compiler.c" 3 4
-                                   ((void *)0)
+                                ((void *)0)
 # 340 "Compilation/compiler/compiler.c"
-                                       , PREC_NONE},
-    [TOKEN_NAME] = {
+                                    , PREC_NONE},
+    [TK_ELSIF] = {
 # 341 "Compilation/compiler/compiler.c" 3 4
-                          ((void *)0)
+                       ((void *)0)
 # 341 "Compilation/compiler/compiler.c"
-                              , 
+                           , 
 # 341 "Compilation/compiler/compiler.c" 3 4
-                                   ((void *)0)
+                                ((void *)0)
 # 341 "Compilation/compiler/compiler.c"
-                                       , PREC_NONE},
-    [TOKEN_NUMBER] = {number, 
+                                    , PREC_NONE},
+    [TK_FALSE] = {literal, 
 # 342 "Compilation/compiler/compiler.c" 3 4
-                                   ((void *)0)
+                                ((void *)0)
 # 342 "Compilation/compiler/compiler.c"
-                                       , PREC_NONE},
-    [TOKEN_IDENTIFIER] = {variable, 
+                                    , PREC_NONE},
+    [TK_FOR] = {
 # 343 "Compilation/compiler/compiler.c" 3 4
-                                    ((void *)0)
+                       ((void *)0)
 # 343 "Compilation/compiler/compiler.c"
-                                        , PREC_NONE},
-    [TOKEN_INTERPOLATION] = {
+                           , 
+# 343 "Compilation/compiler/compiler.c" 3 4
+                                ((void *)0)
+# 343 "Compilation/compiler/compiler.c"
+                                    , PREC_NONE},
+    [TK_IF] = {
 # 344 "Compilation/compiler/compiler.c" 3 4
-                            ((void *)0)
+                       ((void *)0)
 # 344 "Compilation/compiler/compiler.c"
-                                , 
+                           , 
 # 344 "Compilation/compiler/compiler.c" 3 4
-                                   ((void *)0)
+                                ((void *)0)
 # 344 "Compilation/compiler/compiler.c"
-                                       , PREC_NONE},
-    [TOKEN_LINE] = {
+                                    , PREC_NONE},
+    [TK_IN] = {
 # 345 "Compilation/compiler/compiler.c" 3 4
-                          ((void *)0)
+                       ((void *)0)
 # 345 "Compilation/compiler/compiler.c"
-                              , 
+                           , 
 # 345 "Compilation/compiler/compiler.c" 3 4
-                                   ((void *)0)
+                                ((void *)0)
 # 345 "Compilation/compiler/compiler.c"
-                                       , PREC_NONE},
-    [TOKEN_STATIC_FIELD] = {
+                                    , PREC_NONE},
+    [TK_LET] = {
 # 346 "Compilation/compiler/compiler.c" 3 4
-                           ((void *)0)
+                       ((void *)0)
 # 346 "Compilation/compiler/compiler.c"
-                               , 
+                           , 
 # 346 "Compilation/compiler/compiler.c" 3 4
-                                   ((void *)0)
+                                ((void *)0)
 # 346 "Compilation/compiler/compiler.c"
-                                       , PREC_NONE},
-    [TOKEN_STRING] = {string, 
+                                    , PREC_NONE},
+    [TK_NIL] = {literal, 
 # 347 "Compilation/compiler/compiler.c" 3 4
-                                   ((void *)0)
+                                ((void *)0)
 # 347 "Compilation/compiler/compiler.c"
-                                       , PREC_NONE},
-
-
-    [TOKEN_ERROR] = {
+                                    , PREC_NONE},
+    [TK_PUTS] = {
+# 348 "Compilation/compiler/compiler.c" 3 4
+                       ((void *)0)
+# 348 "Compilation/compiler/compiler.c"
+                           , 
+# 348 "Compilation/compiler/compiler.c" 3 4
+                                ((void *)0)
+# 348 "Compilation/compiler/compiler.c"
+                                    , PREC_NONE},
+    [TK_RETURN] = {
+# 349 "Compilation/compiler/compiler.c" 3 4
+                       ((void *)0)
+# 349 "Compilation/compiler/compiler.c"
+                           , 
+# 349 "Compilation/compiler/compiler.c" 3 4
+                                ((void *)0)
+# 349 "Compilation/compiler/compiler.c"
+                                    , PREC_NONE},
+    [TK_THIS] = {
 # 350 "Compilation/compiler/compiler.c" 3 4
-                          ((void *)0)
+                       ((void *)0)
 # 350 "Compilation/compiler/compiler.c"
-                              , 
+                           , 
 # 350 "Compilation/compiler/compiler.c" 3 4
-                                   ((void *)0)
+                                ((void *)0)
 # 350 "Compilation/compiler/compiler.c"
-                                       , PREC_NONE},
-    [TOKEN_EOF] = {
+                                    , PREC_NONE},
+    [TK_TRUE] = {literal, 
 # 351 "Compilation/compiler/compiler.c" 3 4
-                          ((void *)0)
+                                ((void *)0)
 # 351 "Compilation/compiler/compiler.c"
-                              , 
-# 351 "Compilation/compiler/compiler.c" 3 4
-                                   ((void *)0)
-# 351 "Compilation/compiler/compiler.c"
-                                       , PREC_NONE},
+                                    , PREC_NONE},
+    [TK_WHEN] = {
+# 352 "Compilation/compiler/compiler.c" 3 4
+                       ((void *)0)
+# 352 "Compilation/compiler/compiler.c"
+                           , 
+# 352 "Compilation/compiler/compiler.c" 3 4
+                                ((void *)0)
+# 352 "Compilation/compiler/compiler.c"
+                                    , PREC_NONE},
+    [TK_WHILE] = {
+# 353 "Compilation/compiler/compiler.c" 3 4
+                       ((void *)0)
+# 353 "Compilation/compiler/compiler.c"
+                           , 
+# 353 "Compilation/compiler/compiler.c" 3 4
+                                ((void *)0)
+# 353 "Compilation/compiler/compiler.c"
+                                    , PREC_NONE},
 
 
-
-
-
-    [TOKEN_EQ] = {
+    [TK_LTTILDE] = {
+# 356 "Compilation/compiler/compiler.c" 3 4
+                       ((void *)0)
+# 356 "Compilation/compiler/compiler.c"
+                           , 
+# 356 "Compilation/compiler/compiler.c" 3 4
+                                ((void *)0)
+# 356 "Compilation/compiler/compiler.c"
+                                    , PREC_NONE},
+    [TK_TILDEGT] = {
 # 357 "Compilation/compiler/compiler.c" 3 4
-                          ((void *)0)
+                       ((void *)0)
 # 357 "Compilation/compiler/compiler.c"
-                              , 
+                           , 
 # 357 "Compilation/compiler/compiler.c" 3 4
-                                   ((void *)0)
+                                ((void *)0)
 # 357 "Compilation/compiler/compiler.c"
-                                       , PREC_ASSIGNMENT},
-    [TOKEN_COLONCOLON] = {
-# 358 "Compilation/compiler/compiler.c" 3 4
-                          ((void *)0)
-# 358 "Compilation/compiler/compiler.c"
-                              , 
-# 358 "Compilation/compiler/compiler.c" 3 4
-                                   ((void *)0)
-# 358 "Compilation/compiler/compiler.c"
-                                       , PREC_ASSIGNMENT},
+                                    , PREC_NONE},
 
 
-    [TOKEN_EQEQ] = {
+    [TK_FIELD] = {
+# 360 "Compilation/compiler/compiler.c" 3 4
+                       ((void *)0)
+# 360 "Compilation/compiler/compiler.c"
+                           , 
+# 360 "Compilation/compiler/compiler.c" 3 4
+                                ((void *)0)
+# 360 "Compilation/compiler/compiler.c"
+                                    , PREC_NONE},
+    [TK_NAME] = {
 # 361 "Compilation/compiler/compiler.c" 3 4
-                          ((void *)0)
+                       ((void *)0)
 # 361 "Compilation/compiler/compiler.c"
-                              , binary, PREC_EQUALITY},
-    [TOKEN_BANGEQ] = {
+                           , 
+# 361 "Compilation/compiler/compiler.c" 3 4
+                                ((void *)0)
+# 361 "Compilation/compiler/compiler.c"
+                                    , PREC_NONE},
+    [TK_NUMBER] = {number, 
 # 362 "Compilation/compiler/compiler.c" 3 4
-                          ((void *)0)
+                                ((void *)0)
 # 362 "Compilation/compiler/compiler.c"
-                              , binary, PREC_EQUALITY},
-    [TOKEN_LT] = {
+                                    , PREC_NONE},
+    [TK_IDENTIFIER] = {variable, 
 # 363 "Compilation/compiler/compiler.c" 3 4
-                          ((void *)0)
+                                 ((void *)0)
 # 363 "Compilation/compiler/compiler.c"
-                              , binary, PREC_COMPARISON},
-    [TOKEN_GT] = {
+                                     , PREC_NONE},
+    [TK_INTERPOLATION] = {
 # 364 "Compilation/compiler/compiler.c" 3 4
-                          ((void *)0)
+                         ((void *)0)
 # 364 "Compilation/compiler/compiler.c"
-                              , binary, PREC_COMPARISON},
-    [TOKEN_LTEQ] = {
+                             , 
+# 364 "Compilation/compiler/compiler.c" 3 4
+                                ((void *)0)
+# 364 "Compilation/compiler/compiler.c"
+                                    , PREC_NONE},
+    [TK_LINE] = {
 # 365 "Compilation/compiler/compiler.c" 3 4
-                          ((void *)0)
+                       ((void *)0)
 # 365 "Compilation/compiler/compiler.c"
-                              , binary, PREC_COMPARISON},
-    [TOKEN_GTEQ] = {
+                           , 
+# 365 "Compilation/compiler/compiler.c" 3 4
+                                ((void *)0)
+# 365 "Compilation/compiler/compiler.c"
+                                    , PREC_NONE},
+    [TK_STATIC_FIELD] = {
 # 366 "Compilation/compiler/compiler.c" 3 4
-                          ((void *)0)
+                        ((void *)0)
 # 366 "Compilation/compiler/compiler.c"
-                              , binary, PREC_COMPARISON},
+                            , 
+# 366 "Compilation/compiler/compiler.c" 3 4
+                                ((void *)0)
+# 366 "Compilation/compiler/compiler.c"
+                                    , PREC_NONE},
+    [TK_STRING] = {string, 
+# 367 "Compilation/compiler/compiler.c" 3 4
+                                ((void *)0)
+# 367 "Compilation/compiler/compiler.c"
+                                    , PREC_NONE},
 
 
-    [TOKEN_MINUS] = {unary, binary, PREC_TERM},
-    [TOKEN_PLUS] = {
+    [TK_ERROR] = {
 # 370 "Compilation/compiler/compiler.c" 3 4
-                          ((void *)0)
+                       ((void *)0)
 # 370 "Compilation/compiler/compiler.c"
-                              , binary, PREC_TERM},
-    [TOKEN_STAR] = {
+                           , 
+# 370 "Compilation/compiler/compiler.c" 3 4
+                                ((void *)0)
+# 370 "Compilation/compiler/compiler.c"
+                                    , PREC_NONE},
+    [TK_EOF] = {
 # 371 "Compilation/compiler/compiler.c" 3 4
-                          ((void *)0)
+                       ((void *)0)
 # 371 "Compilation/compiler/compiler.c"
-                              , binary, PREC_FACTOR},
-    [TOKEN_SLASH] = {
-# 372 "Compilation/compiler/compiler.c" 3 4
-                          ((void *)0)
-# 372 "Compilation/compiler/compiler.c"
-                              , binary, PREC_FACTOR},
-    [TOKEN_MOD] = {
-# 373 "Compilation/compiler/compiler.c" 3 4
-                          ((void *)0)
-# 373 "Compilation/compiler/compiler.c"
-                              , binary, PREC_FACTOR},
-    [TOKEN_STARSTAR] = {
-# 374 "Compilation/compiler/compiler.c" 3 4
-                          ((void *)0)
-# 374 "Compilation/compiler/compiler.c"
-                              , binary, PREC_EXPONENT},
+                           , 
+# 371 "Compilation/compiler/compiler.c" 3 4
+                                ((void *)0)
+# 371 "Compilation/compiler/compiler.c"
+                                    , PREC_NONE},
+
+
+
+
+
+    [TK_EQ] = {
+# 377 "Compilation/compiler/compiler.c" 3 4
+                       ((void *)0)
+# 377 "Compilation/compiler/compiler.c"
+                           , 
+# 377 "Compilation/compiler/compiler.c" 3 4
+                                ((void *)0)
+# 377 "Compilation/compiler/compiler.c"
+                                    , PREC_ASSIGNMENT},
+    [TK_COLONCOLON] = {
+# 378 "Compilation/compiler/compiler.c" 3 4
+                       ((void *)0)
+# 378 "Compilation/compiler/compiler.c"
+                           , 
+# 378 "Compilation/compiler/compiler.c" 3 4
+                                ((void *)0)
+# 378 "Compilation/compiler/compiler.c"
+                                    , PREC_ASSIGNMENT},
+
+
+    [TK_EQEQ] = {
+# 381 "Compilation/compiler/compiler.c" 3 4
+                       ((void *)0)
+# 381 "Compilation/compiler/compiler.c"
+                           , binary, PREC_EQUALITY},
+    [TK_BANGEQ] = {
+# 382 "Compilation/compiler/compiler.c" 3 4
+                       ((void *)0)
+# 382 "Compilation/compiler/compiler.c"
+                           , binary, PREC_EQUALITY},
+    [TK_LT] = {
+# 383 "Compilation/compiler/compiler.c" 3 4
+                       ((void *)0)
+# 383 "Compilation/compiler/compiler.c"
+                           , binary, PREC_COMPARISON},
+    [TK_GT] = {
+# 384 "Compilation/compiler/compiler.c" 3 4
+                       ((void *)0)
+# 384 "Compilation/compiler/compiler.c"
+                           , binary, PREC_COMPARISON},
+    [TK_LTEQ] = {
+# 385 "Compilation/compiler/compiler.c" 3 4
+                       ((void *)0)
+# 385 "Compilation/compiler/compiler.c"
+                           , binary, PREC_COMPARISON},
+    [TK_GTEQ] = {
+# 386 "Compilation/compiler/compiler.c" 3 4
+                       ((void *)0)
+# 386 "Compilation/compiler/compiler.c"
+                           , binary, PREC_COMPARISON},
+
+
+    [TK_MINUS] = {unary, binary, PREC_TERM},
+    [TK_PLUS] = {
+# 390 "Compilation/compiler/compiler.c" 3 4
+                       ((void *)0)
+# 390 "Compilation/compiler/compiler.c"
+                           , binary, PREC_TERM},
+    [TK_STAR] = {
+# 391 "Compilation/compiler/compiler.c" 3 4
+                       ((void *)0)
+# 391 "Compilation/compiler/compiler.c"
+                           , binary, PREC_FACTOR},
+    [TK_SLASH] = {
+# 392 "Compilation/compiler/compiler.c" 3 4
+                       ((void *)0)
+# 392 "Compilation/compiler/compiler.c"
+                           , binary, PREC_FACTOR},
+    [TK_MOD] = {
+# 393 "Compilation/compiler/compiler.c" 3 4
+                       ((void *)0)
+# 393 "Compilation/compiler/compiler.c"
+                           , binary, PREC_FACTOR},
+    [TK_STARSTAR] = {
+# 394 "Compilation/compiler/compiler.c" 3 4
+                       ((void *)0)
+# 394 "Compilation/compiler/compiler.c"
+                           , binary, PREC_EXPONENT},
 };
 
 static void parsePrecedence(Precedence precedence){
     advance();
     ParseFn prefixRule = getRule(parser.previous.type)->prefix;
     if(prefixRule == 
-# 380 "Compilation/compiler/compiler.c" 3 4
+# 400 "Compilation/compiler/compiler.c" 3 4
                     ((void *)0)
-# 380 "Compilation/compiler/compiler.c"
+# 400 "Compilation/compiler/compiler.c"
                         ){
         error("Expect expression.");
         return;
     }
 
     
-# 385 "Compilation/compiler/compiler.c" 3 4
+# 405 "Compilation/compiler/compiler.c" 3 4
    _Bool 
-# 385 "Compilation/compiler/compiler.c"
+# 405 "Compilation/compiler/compiler.c"
         canAssign = precedence <= PREC_ASSIGNMENT;
     prefixRule(canAssign);
 
@@ -3857,42 +3918,41 @@ static void parsePrecedence(Precedence precedence){
         infixRule(canAssign);
     }
 
-    if(canAssign && match(TOKEN_COLONCOLON)){
+    if(canAssign && match(TK_COLONCOLON)){
         error("Invalid assignment target.");
     }
 }
 
 static void endExpression(){
-    if(parser.current.type == TOKEN_SEMICOLON){
+    if(parser.current.type == TK_ENDEXPRESSION){
         advance();
         return;
     }
-
 }
 
 static uint8_t identifierConstant(Token* name){
     Value index;
     ObjString* identifier = copyString(name->start, name->length);
     if(tableGet(&vm.globalNames, identifier, &index)){
-        return (uint8_t)((index).as.dbl);
+        return (uint8_t)((index).as.f64);
     }
 
     uint8_t newIndex = (uint8_t)vm.globalValues.count;
     writeValueArray(&vm.globalValues, ((Value){VAL_UNDEFINED}));
 
-    tableSet(&vm.globalNames, identifier, ((Value){VAL_DOUBLE, {.dbl = (double)newIndex}}));
+    tableSet(&vm.globalNames, identifier, ((Value){VAL_F64, {.f64 = (double)newIndex}}));
     return newIndex;
 }
 
 static 
-# 421 "Compilation/compiler/compiler.c" 3 4
+# 440 "Compilation/compiler/compiler.c" 3 4
       _Bool 
-# 421 "Compilation/compiler/compiler.c"
+# 440 "Compilation/compiler/compiler.c"
            identifiersEqual(Token* a, Token* b){
     if(a->length != b->length) return 
-# 422 "Compilation/compiler/compiler.c" 3 4
+# 441 "Compilation/compiler/compiler.c" 3 4
                                      0
-# 422 "Compilation/compiler/compiler.c"
+# 441 "Compilation/compiler/compiler.c"
                                           ;
     return memcmp(a->start, b->start, a->length) == 0;
 }
@@ -3912,9 +3972,9 @@ static int resolveLocal(Compiler* compiler, Token* name){
 
 static void addLocal(Token name){
     if(current->localCount == (
-# 440 "Compilation/compiler/compiler.c" 3 4
+# 459 "Compilation/compiler/compiler.c" 3 4
                              (255) 
-# 440 "Compilation/compiler/compiler.c"
+# 459 "Compilation/compiler/compiler.c"
                              + 1)){
         error("Too many local variables in function.");
         return;
@@ -3944,7 +4004,7 @@ static void declareVariable(){
 }
 
 static uint8_t parseVariable(const int8_t* errorMessage){
-    consume(TOKEN_IDENTIFIER, errorMessage);
+    consume(TK_IDENTIFIER, errorMessage);
 
     declareVariable();
     if(current->scopeDepth > 0) return 0;
@@ -3969,47 +4029,51 @@ static ParseRule* getRule(TokenType type){
     return &rules[type];
 }
 
-static void expression(){
+static Token expression(){
+    parsePrecedence(PREC_ASSIGNMENT);
+    return makeToken(TK_ENDEXPRESSION);
+}
+
+static void noTokenExpression(){
     parsePrecedence(PREC_ASSIGNMENT);
 }
 
 static void block(){
-    while(!verify(TOKEN_RBRACEGT) && !verify(TOKEN_EOF)){
-        declaration();
+    while(!verify(TK_RIGHT_BRACE) && !verify(TK_EOF)){
+        statement();
     }
 
-    consume(TOKEN_RBRACEGT, "Expected '}>' after block.");
+    consume(TK_RIGHT_BRACE, "Expected '}' after block.");
 }
 
-static void letDeclaration(){
-    uint8_t global = parseVariable("Expected variable name.");
-# 517 "Compilation/compiler/compiler.c"
-    if(match(TOKEN_COLONCOLON)){
+static void varDeclaration(){
+    uint8_t var = parseVariable("Expected variable name.");
+
+    if(match(TK_COLONCOLON)){
         expression();
 
-        consume(TOKEN_NEWLINE, "Expected a newline after variable declaration.");
-        defineVariable(global);
-    } else if(match(TOKEN_EQ)) {
+        consume(TK_NEWLINE, "Expected a newline after variable declaration.");
+        defineVariable(var);
+    } else if(match(TK_EQ)) {
         variable(
-# 523 "Compilation/compiler/compiler.c" 3 4
+# 539 "Compilation/compiler/compiler.c" 3 4
                 1
-# 523 "Compilation/compiler/compiler.c"
+# 539 "Compilation/compiler/compiler.c"
                     );
-        consume(TOKEN_NEWLINE, "Expected a newline after value.");
+        consume(TK_NEWLINE, "Expected a newline after value.");
         emitByte(OP_POP);
     }
 }
 
 static void expressionStatement(){
     expression();
-    consume(TOKEN_NEWLINE, "Expected a newline after value.");
     emitByte(OP_POP);
 }
 
 static void ifStatement(){
-    consume(TOKEN_LEFT_PAREN, "Expected '(' after 'if'");
-    expression();
-    consume(TOKEN_RIGHT_PAREN, "Expected ')' after condition.");
+    consume(TK_LEFT_PAREN, "Expected '(' after 'if'");
+    noTokenExpression();
+    consume(TK_RIGHT_PAREN, "Expected ')' after condition.");
 
     int16_t thenJump = emitJump(OP_JUMP_IF_FALSE);
     statement();
@@ -4020,28 +4084,29 @@ static void ifStatement(){
 
 static void putsStatement(){
     expression();
-    consume(TOKEN_NEWLINE, "Expected a newline after value.");
     emitByte(OP_PUTS);
+
+    endExpression();
 }
 
 static void synchronize(){
     parser.panicMode = 
-# 554 "Compilation/compiler/compiler.c" 3 4
+# 570 "Compilation/compiler/compiler.c" 3 4
                       0
-# 554 "Compilation/compiler/compiler.c"
+# 570 "Compilation/compiler/compiler.c"
                            ;
 
-    while(parser.current.type != TOKEN_EOF){
-        if(parser.previous.type == TOKEN_NEWLINE) return;
+    while(parser.current.type != TK_EOF){
+        if(parser.previous.type == TK_NEWLINE) return;
         switch(parser.current.type){
-            case TOKEN_CLASS:
-            case TOKEN_DEF:
-            case TOKEN_LET:
-            case TOKEN_FOR:
-            case TOKEN_IF:
-            case TOKEN_WHILE:
-            case TOKEN_PUTS:
-            case TOKEN_RETURN:
+            case TK_CLASS:
+            case TK_DEF:
+            case TK_LET:
+            case TK_FOR:
+            case TK_IF:
+            case TK_WHILE:
+            case TK_PUTS:
+            case TK_RETURN:
                 return;
             default:
                 ;
@@ -4051,20 +4116,25 @@ static void synchronize(){
 }
 
 static void declaration(){
-    uint8_t global = parseVariable("Expected variable name.");
+    uint8_t var;
 
-    if(match(TOKEN_COLONCOLON)){
+        var = parseVariable("Expected variable name.");
+
+    if(match(TK_COLONCOLON)){
+
+        if(match(TK_SEMICOLON)){
+            emitByte(OP_NIL);
+            defineVariable(var);
+            return;
+        }
         expression();
-        consume(TOKEN_NEWLINE, "Expected a newline after variable declaration.");
-        defineVariable(global);
-    } else {
-        variable(
-# 583 "Compilation/compiler/compiler.c" 3 4
-                1
-# 583 "Compilation/compiler/compiler.c"
-                    );
-        consume(TOKEN_NEWLINE, "Expected a newline after value.");
-        emitByte(OP_POP);
+        defineVariable(var);
+
+        endExpression();
+    } else if(match(TK_EQ)){
+        expressionStatement();
+
+        endExpression();
     }
     if(parser.panicMode) synchronize();
 }
@@ -4072,35 +4142,36 @@ static void declaration(){
 static void statement(){
     if(parser.panicMode) synchronize();
     switch(parser.current.type){
-        case TOKEN_PUTS:{
+        case TK_PUTS:{
             advance();
             putsStatement();
             break;
         }
-        case TOKEN_IF:{
+        case TK_IF:{
             advance();
             ifStatement();
             break;
         }
-        case TOKEN_LTLBRACE:{
+        case TK_LEFT_BRACE:{
             advance();
             beginScope();
             block();
             endScope();
             break;
         }
-        case TOKEN_EOF: break;
+        case TK_EOF: break;
+
         default:{
             declaration();
             break;
         }
     }
 }
-# 638 "Compilation/compiler/compiler.c"
 
-# 638 "Compilation/compiler/compiler.c" 3 4
+
+# 644 "Compilation/compiler/compiler.c" 3 4
 _Bool 
-# 638 "Compilation/compiler/compiler.c"
+# 644 "Compilation/compiler/compiler.c"
     compile(const int8_t* source, Chunk* chunk){
     initScanner(source);
     Compiler compiler;
@@ -4108,19 +4179,19 @@ _Bool
     compilingChunk = chunk;
 
     parser.hadError = 
-# 644 "Compilation/compiler/compiler.c" 3 4
+# 650 "Compilation/compiler/compiler.c" 3 4
                      0
-# 644 "Compilation/compiler/compiler.c"
+# 650 "Compilation/compiler/compiler.c"
                           ;
     parser.panicMode = 
-# 645 "Compilation/compiler/compiler.c" 3 4
+# 651 "Compilation/compiler/compiler.c" 3 4
                       0
-# 645 "Compilation/compiler/compiler.c"
+# 651 "Compilation/compiler/compiler.c"
                            ;
 
     advance();
 
-    while(!match(TOKEN_EOF)){
+    while(!match(TK_EOF)){
 
         statement();
     }

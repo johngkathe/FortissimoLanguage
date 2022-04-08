@@ -357,10 +357,10 @@ printObject:
 	.long	.Ldebug_abbrev0
 	.byte	0x8
 	.uleb128 0x1
-	.long	.LASF901
+	.long	.LASF898
 	.byte	0xc
-	.long	.LASF902
-	.long	.LASF903
+	.long	.LASF899
+	.long	.LASF900
 	.quad	.Ltext0
 	.quad	.Letext0-.Ltext0
 	.long	.Ldebug_line0
@@ -665,67 +665,67 @@ printObject:
 	.byte	0xd
 	.long	0x2fc
 	.uleb128 0x11
-	.string	"ch"
+	.string	"i8"
 	.byte	0x7
 	.byte	0x4e
 	.byte	0x10
 	.long	0xfc
 	.uleb128 0x11
-	.string	"uCh"
+	.string	"u8"
 	.byte	0x7
 	.byte	0x4f
 	.byte	0x11
 	.long	0x131
 	.uleb128 0x11
-	.string	"in"
+	.string	"i16"
 	.byte	0x7
 	.byte	0x50
 	.byte	0x11
 	.long	0x10d
 	.uleb128 0x11
-	.string	"uIn"
+	.string	"u16"
 	.byte	0x7
 	.byte	0x51
 	.byte	0x12
 	.long	0x13d
 	.uleb128 0x11
-	.string	"lng"
+	.string	"i32"
 	.byte	0x7
 	.byte	0x52
 	.byte	0x11
 	.long	0x119
-	.uleb128 0x10
-	.long	.LASF820
+	.uleb128 0x11
+	.string	"u32"
 	.byte	0x7
 	.byte	0x53
 	.byte	0x12
 	.long	0x149
 	.uleb128 0x11
-	.string	"flt"
+	.string	"i64"
 	.byte	0x7
 	.byte	0x54
-	.byte	0xf
-	.long	0x303
-	.uleb128 0x10
-	.long	.LASF821
-	.byte	0x7
-	.byte	0x55
 	.byte	0x11
 	.long	0x125
-	.uleb128 0x10
-	.long	.LASF822
+	.uleb128 0x11
+	.string	"u64"
 	.byte	0x7
-	.byte	0x56
+	.byte	0x55
 	.byte	0x12
 	.long	0x155
 	.uleb128 0x11
-	.string	"dbl"
+	.string	"f32"
+	.byte	0x7
+	.byte	0x56
+	.byte	0xf
+	.long	0x303
+	.uleb128 0x11
+	.string	"f64"
 	.byte	0x7
 	.byte	0x57
 	.byte	0x10
 	.long	0x30a
 	.uleb128 0x10
-	.long	.LASF823
+	.long	.LASF820
 	.byte	0x7
 	.byte	0x58
 	.byte	0x15
@@ -740,19 +740,19 @@ printObject:
 	.uleb128 0x2
 	.byte	0x1
 	.byte	0x2
-	.long	.LASF824
+	.long	.LASF821
 	.uleb128 0x2
 	.byte	0x4
 	.byte	0x4
-	.long	.LASF825
+	.long	.LASF822
 	.uleb128 0x2
 	.byte	0x8
 	.byte	0x4
-	.long	.LASF826
+	.long	.LASF823
 	.uleb128 0x2
 	.byte	0x10
 	.byte	0x4
-	.long	.LASF827
+	.long	.LASF824
 	.uleb128 0x6
 	.byte	0x8
 	.long	0x161
@@ -778,7 +778,7 @@ printObject:
 	.byte	0x10
 	.byte	0
 	.uleb128 0x3
-	.long	.LASF828
+	.long	.LASF825
 	.byte	0x7
 	.byte	0x5b
 	.byte	0x3
@@ -790,21 +790,21 @@ printObject:
 	.byte	0x9
 	.long	0x37e
 	.uleb128 0xa
-	.long	.LASF829
+	.long	.LASF826
 	.byte	0x7
 	.byte	0x8f
 	.byte	0xd
 	.long	0x10d
 	.byte	0
 	.uleb128 0xa
-	.long	.LASF830
+	.long	.LASF827
 	.byte	0x7
 	.byte	0x90
 	.byte	0xd
 	.long	0x10d
 	.byte	0x2
 	.uleb128 0xa
-	.long	.LASF831
+	.long	.LASF828
 	.byte	0x7
 	.byte	0x91
 	.byte	0xc
@@ -815,7 +815,7 @@ printObject:
 	.byte	0x8
 	.long	0x341
 	.uleb128 0x3
-	.long	.LASF832
+	.long	.LASF829
 	.byte	0x7
 	.byte	0x92
 	.byte	0x3
@@ -829,11 +829,11 @@ printObject:
 	.byte	0xe
 	.long	0x3a5
 	.uleb128 0xe
-	.long	.LASF833
+	.long	.LASF830
 	.byte	0
 	.byte	0
 	.uleb128 0x3
-	.long	.LASF834
+	.long	.LASF831
 	.byte	0x6
 	.byte	0x12
 	.byte	0x3
@@ -858,7 +858,7 @@ printObject:
 	.long	0x3e1
 	.byte	0
 	.uleb128 0xa
-	.long	.LASF835
+	.long	.LASF832
 	.byte	0x8
 	.byte	0xc
 	.byte	0xb
@@ -869,7 +869,7 @@ printObject:
 	.byte	0x8
 	.long	0x195
 	.uleb128 0x3
-	.long	.LASF836
+	.long	.LASF833
 	.byte	0x8
 	.byte	0xd
 	.byte	0x3
@@ -881,21 +881,21 @@ printObject:
 	.byte	0x9
 	.long	0x424
 	.uleb128 0xa
-	.long	.LASF830
+	.long	.LASF827
 	.byte	0x8
 	.byte	0x10
 	.byte	0xc
 	.long	0x38
 	.byte	0
 	.uleb128 0xa
-	.long	.LASF829
+	.long	.LASF826
 	.byte	0x8
 	.byte	0x11
 	.byte	0xc
 	.long	0x38
 	.byte	0x8
 	.uleb128 0xa
-	.long	.LASF837
+	.long	.LASF834
 	.byte	0x8
 	.byte	0x12
 	.byte	0xc
@@ -906,7 +906,7 @@ printObject:
 	.byte	0x8
 	.long	0x3e7
 	.uleb128 0x3
-	.long	.LASF838
+	.long	.LASF835
 	.byte	0x8
 	.byte	0x13
 	.byte	0x3
@@ -918,14 +918,14 @@ printObject:
 	.byte	0x9
 	.long	0x45a
 	.uleb128 0xa
-	.long	.LASF839
+	.long	.LASF836
 	.byte	0x9
 	.byte	0x26
 	.byte	0xd
 	.long	0x10d
 	.byte	0
 	.uleb128 0xa
-	.long	.LASF840
+	.long	.LASF837
 	.byte	0x9
 	.byte	0x27
 	.byte	0xe
@@ -933,7 +933,7 @@ printObject:
 	.byte	0x2
 	.byte	0
 	.uleb128 0x3
-	.long	.LASF841
+	.long	.LASF838
 	.byte	0x9
 	.byte	0x28
 	.byte	0x3
@@ -945,49 +945,49 @@ printObject:
 	.byte	0x9
 	.long	0x4cb
 	.uleb128 0xa
-	.long	.LASF830
+	.long	.LASF827
 	.byte	0x9
 	.byte	0x2b
 	.byte	0xd
 	.long	0x10d
 	.byte	0
 	.uleb128 0xa
-	.long	.LASF829
+	.long	.LASF826
 	.byte	0x9
 	.byte	0x2c
 	.byte	0xd
 	.long	0x10d
 	.byte	0x2
 	.uleb128 0xa
-	.long	.LASF842
+	.long	.LASF839
 	.byte	0x9
 	.byte	0x2d
 	.byte	0xe
 	.long	0x4cb
 	.byte	0x8
 	.uleb128 0xa
-	.long	.LASF843
+	.long	.LASF840
 	.byte	0x9
 	.byte	0x2e
 	.byte	0x10
 	.long	0x384
 	.byte	0x10
 	.uleb128 0xa
-	.long	.LASF844
+	.long	.LASF841
 	.byte	0x9
 	.byte	0x2f
 	.byte	0xd
 	.long	0x10d
 	.byte	0x20
 	.uleb128 0xa
-	.long	.LASF845
+	.long	.LASF842
 	.byte	0x9
 	.byte	0x30
 	.byte	0xd
 	.long	0x10d
 	.byte	0x22
 	.uleb128 0xa
-	.long	.LASF846
+	.long	.LASF843
 	.byte	0x9
 	.byte	0x31
 	.byte	0x10
@@ -1001,7 +1001,7 @@ printObject:
 	.byte	0x8
 	.long	0x45a
 	.uleb128 0x3
-	.long	.LASF847
+	.long	.LASF844
 	.byte	0x9
 	.byte	0x32
 	.byte	0x3
@@ -1013,7 +1013,7 @@ printObject:
 	.byte	0x9
 	.long	0x55a
 	.uleb128 0xa
-	.long	.LASF848
+	.long	.LASF845
 	.byte	0xa
 	.byte	0xd
 	.byte	0xc
@@ -1027,42 +1027,42 @@ printObject:
 	.long	0x4cb
 	.byte	0x8
 	.uleb128 0xa
-	.long	.LASF849
+	.long	.LASF846
 	.byte	0xa
 	.byte	0xf
 	.byte	0xb
 	.long	0x560
 	.byte	0x10
 	.uleb128 0x14
-	.long	.LASF850
+	.long	.LASF847
 	.byte	0xa
 	.byte	0x10
 	.byte	0xc
 	.long	0x37e
 	.value	0x2010
 	.uleb128 0x14
-	.long	.LASF851
+	.long	.LASF848
 	.byte	0xa
 	.byte	0x12
 	.byte	0xb
 	.long	0x42a
 	.value	0x2018
 	.uleb128 0x14
-	.long	.LASF852
+	.long	.LASF849
 	.byte	0xa
 	.byte	0x13
 	.byte	0x10
 	.long	0x384
 	.value	0x2030
 	.uleb128 0x14
-	.long	.LASF853
+	.long	.LASF850
 	.byte	0xa
 	.byte	0x14
 	.byte	0xb
 	.long	0x42a
 	.value	0x2040
 	.uleb128 0x14
-	.long	.LASF854
+	.long	.LASF851
 	.byte	0xa
 	.byte	0x15
 	.byte	0xa
@@ -1092,210 +1092,210 @@ printObject:
 	.byte	0xb
 	.long	0x570
 	.uleb128 0xb
-	.long	.LASF855
+	.long	.LASF852
 	.byte	0xd8
 	.byte	0xb
 	.byte	0x31
 	.byte	0x8
 	.long	0x70d
 	.uleb128 0xa
-	.long	.LASF856
+	.long	.LASF853
 	.byte	0xb
 	.byte	0x33
 	.byte	0x7
 	.long	0x4b
 	.byte	0
 	.uleb128 0xa
-	.long	.LASF857
+	.long	.LASF854
 	.byte	0xb
 	.byte	0x36
 	.byte	0x9
 	.long	0xef
 	.byte	0x8
 	.uleb128 0xa
-	.long	.LASF858
+	.long	.LASF855
 	.byte	0xb
 	.byte	0x37
 	.byte	0x9
 	.long	0xef
 	.byte	0x10
 	.uleb128 0xa
-	.long	.LASF859
+	.long	.LASF856
 	.byte	0xb
 	.byte	0x38
 	.byte	0x9
 	.long	0xef
 	.byte	0x18
 	.uleb128 0xa
-	.long	.LASF860
+	.long	.LASF857
 	.byte	0xb
 	.byte	0x39
 	.byte	0x9
 	.long	0xef
 	.byte	0x20
 	.uleb128 0xa
-	.long	.LASF861
+	.long	.LASF858
 	.byte	0xb
 	.byte	0x3a
 	.byte	0x9
 	.long	0xef
 	.byte	0x28
 	.uleb128 0xa
-	.long	.LASF862
+	.long	.LASF859
 	.byte	0xb
 	.byte	0x3b
 	.byte	0x9
 	.long	0xef
 	.byte	0x30
 	.uleb128 0xa
-	.long	.LASF863
+	.long	.LASF860
 	.byte	0xb
 	.byte	0x3c
 	.byte	0x9
 	.long	0xef
 	.byte	0x38
 	.uleb128 0xa
-	.long	.LASF864
+	.long	.LASF861
 	.byte	0xb
 	.byte	0x3d
 	.byte	0x9
 	.long	0xef
 	.byte	0x40
 	.uleb128 0xa
-	.long	.LASF865
+	.long	.LASF862
 	.byte	0xb
 	.byte	0x40
 	.byte	0x9
 	.long	0xef
 	.byte	0x48
 	.uleb128 0xa
-	.long	.LASF866
+	.long	.LASF863
 	.byte	0xb
 	.byte	0x41
 	.byte	0x9
 	.long	0xef
 	.byte	0x50
 	.uleb128 0xa
-	.long	.LASF867
+	.long	.LASF864
 	.byte	0xb
 	.byte	0x42
 	.byte	0x9
 	.long	0xef
 	.byte	0x58
 	.uleb128 0xa
-	.long	.LASF868
+	.long	.LASF865
 	.byte	0xb
 	.byte	0x44
 	.byte	0x16
 	.long	0x726
 	.byte	0x60
 	.uleb128 0xa
-	.long	.LASF869
+	.long	.LASF866
 	.byte	0xb
 	.byte	0x46
 	.byte	0x14
 	.long	0x72c
 	.byte	0x68
 	.uleb128 0xa
-	.long	.LASF870
+	.long	.LASF867
 	.byte	0xb
 	.byte	0x48
 	.byte	0x7
 	.long	0x4b
 	.byte	0x70
 	.uleb128 0xa
-	.long	.LASF871
+	.long	.LASF868
 	.byte	0xb
 	.byte	0x49
 	.byte	0x7
 	.long	0x4b
 	.byte	0x74
 	.uleb128 0xa
-	.long	.LASF872
+	.long	.LASF869
 	.byte	0xb
 	.byte	0x4a
 	.byte	0xb
 	.long	0xd5
 	.byte	0x78
 	.uleb128 0xa
-	.long	.LASF873
+	.long	.LASF870
 	.byte	0xb
 	.byte	0x4d
 	.byte	0x12
 	.long	0x59
 	.byte	0x80
 	.uleb128 0xa
-	.long	.LASF874
+	.long	.LASF871
 	.byte	0xb
 	.byte	0x4e
 	.byte	0xf
 	.long	0x73
 	.byte	0x82
 	.uleb128 0xa
-	.long	.LASF875
+	.long	.LASF872
 	.byte	0xb
 	.byte	0x4f
 	.byte	0x8
 	.long	0x732
 	.byte	0x83
 	.uleb128 0xa
-	.long	.LASF876
+	.long	.LASF873
 	.byte	0xb
 	.byte	0x51
 	.byte	0xf
 	.long	0x742
 	.byte	0x88
 	.uleb128 0xa
-	.long	.LASF877
+	.long	.LASF874
 	.byte	0xb
 	.byte	0x59
 	.byte	0xd
 	.long	0xe1
 	.byte	0x90
 	.uleb128 0xa
-	.long	.LASF878
+	.long	.LASF875
 	.byte	0xb
 	.byte	0x5b
 	.byte	0x17
 	.long	0x74d
 	.byte	0x98
 	.uleb128 0xa
-	.long	.LASF879
+	.long	.LASF876
 	.byte	0xb
 	.byte	0x5c
 	.byte	0x19
 	.long	0x758
 	.byte	0xa0
 	.uleb128 0xa
-	.long	.LASF880
+	.long	.LASF877
 	.byte	0xb
 	.byte	0x5d
 	.byte	0x14
 	.long	0x72c
 	.byte	0xa8
 	.uleb128 0xa
-	.long	.LASF881
+	.long	.LASF878
 	.byte	0xb
 	.byte	0x5e
 	.byte	0x9
 	.long	0xed
 	.byte	0xb0
 	.uleb128 0xa
-	.long	.LASF882
+	.long	.LASF879
 	.byte	0xb
 	.byte	0x5f
 	.byte	0xa
 	.long	0x38
 	.byte	0xb8
 	.uleb128 0xa
-	.long	.LASF883
+	.long	.LASF880
 	.byte	0xb
 	.byte	0x60
 	.byte	0x7
 	.long	0x4b
 	.byte	0xc0
 	.uleb128 0xa
-	.long	.LASF884
+	.long	.LASF881
 	.byte	0xb
 	.byte	0x62
 	.byte	0x8
@@ -1303,18 +1303,18 @@ printObject:
 	.byte	0xc4
 	.byte	0
 	.uleb128 0x3
-	.long	.LASF885
+	.long	.LASF882
 	.byte	0xc
 	.byte	0x7
 	.byte	0x19
 	.long	0x586
 	.uleb128 0x18
-	.long	.LASF904
+	.long	.LASF901
 	.byte	0xb
 	.byte	0x2b
 	.byte	0xe
 	.uleb128 0x19
-	.long	.LASF886
+	.long	.LASF883
 	.uleb128 0x6
 	.byte	0x8
 	.long	0x721
@@ -1332,12 +1332,12 @@ printObject:
 	.byte	0x8
 	.long	0x719
 	.uleb128 0x19
-	.long	.LASF887
+	.long	.LASF884
 	.uleb128 0x6
 	.byte	0x8
 	.long	0x748
 	.uleb128 0x19
-	.long	.LASF888
+	.long	.LASF885
 	.uleb128 0x6
 	.byte	0x8
 	.long	0x753
@@ -1349,7 +1349,7 @@ printObject:
 	.byte	0x13
 	.byte	0
 	.uleb128 0x1a
-	.long	.LASF889
+	.long	.LASF886
 	.byte	0xd
 	.byte	0x89
 	.byte	0xe
@@ -1358,19 +1358,19 @@ printObject:
 	.byte	0x8
 	.long	0x70d
 	.uleb128 0x1a
-	.long	.LASF890
+	.long	.LASF887
 	.byte	0xd
 	.byte	0x8a
 	.byte	0xe
 	.long	0x77a
 	.uleb128 0x1a
-	.long	.LASF891
+	.long	.LASF888
 	.byte	0xd
 	.byte	0x8b
 	.byte	0xe
 	.long	0x77a
 	.uleb128 0x1b
-	.long	.LASF905
+	.long	.LASF902
 	.byte	0x1
 	.byte	0x42
 	.byte	0x6
@@ -1380,7 +1380,7 @@ printObject:
 	.byte	0x9c
 	.long	0x7c6
 	.uleb128 0x1c
-	.long	.LASF835
+	.long	.LASF832
 	.byte	0x1
 	.byte	0x42
 	.byte	0x18
@@ -1390,7 +1390,7 @@ printObject:
 	.sleb128 0
 	.byte	0
 	.uleb128 0x1d
-	.long	.LASF894
+	.long	.LASF891
 	.byte	0x1
 	.byte	0x37
 	.byte	0xc
@@ -1428,7 +1428,7 @@ printObject:
 	.byte	0x91
 	.sleb128 -36
 	.uleb128 0x1e
-	.long	.LASF892
+	.long	.LASF889
 	.byte	0x1
 	.byte	0x39
 	.byte	0x10
@@ -1437,7 +1437,7 @@ printObject:
 	.byte	0x91
 	.sleb128 -32
 	.uleb128 0x1e
-	.long	.LASF893
+	.long	.LASF890
 	.byte	0x1
 	.byte	0x3c
 	.byte	0xd
@@ -1450,7 +1450,7 @@ printObject:
 	.byte	0x8
 	.long	0x108
 	.uleb128 0x1d
-	.long	.LASF895
+	.long	.LASF892
 	.byte	0x1
 	.byte	0x2c
 	.byte	0xc
@@ -1488,7 +1488,7 @@ printObject:
 	.byte	0x91
 	.sleb128 -28
 	.uleb128 0x1e
-	.long	.LASF892
+	.long	.LASF889
 	.byte	0x1
 	.byte	0x2e
 	.byte	0x10
@@ -1498,7 +1498,7 @@ printObject:
 	.sleb128 -24
 	.byte	0
 	.uleb128 0x1f
-	.long	.LASF896
+	.long	.LASF893
 	.byte	0x1
 	.byte	0x21
 	.byte	0x11
@@ -1550,7 +1550,7 @@ printObject:
 	.byte	0
 	.byte	0
 	.uleb128 0x23
-	.long	.LASF897
+	.long	.LASF894
 	.byte	0x1
 	.byte	0x17
 	.byte	0x13
@@ -1588,7 +1588,7 @@ printObject:
 	.byte	0x91
 	.sleb128 -80
 	.uleb128 0x1e
-	.long	.LASF898
+	.long	.LASF895
 	.byte	0x1
 	.byte	0x18
 	.byte	0x10
@@ -1598,7 +1598,7 @@ printObject:
 	.sleb128 -56
 	.byte	0
 	.uleb128 0x24
-	.long	.LASF906
+	.long	.LASF903
 	.byte	0x1
 	.byte	0xe
 	.byte	0xd
@@ -1608,7 +1608,7 @@ printObject:
 	.uleb128 0x1
 	.byte	0x9c
 	.uleb128 0x1c
-	.long	.LASF899
+	.long	.LASF896
 	.byte	0x1
 	.byte	0xe
 	.byte	0x23
@@ -1626,7 +1626,7 @@ printObject:
 	.byte	0x91
 	.sleb128 -44
 	.uleb128 0x1e
-	.long	.LASF900
+	.long	.LASF897
 	.byte	0x1
 	.byte	0xf
 	.byte	0xa
@@ -4793,7 +4793,7 @@ printObject:
 	.uleb128 0x196
 	.long	.LASF403
 	.byte	0
-	.section	.debug_macro,"G",@progbits,wm4.value.h.93.bfaea07e85ae46c62b090a885a200a26,comdat
+	.section	.debug_macro,"G",@progbits,wm4.value.h.93.ea04d39224bdd560e06214733f3719e5,comdat
 .Ldebug_macro22:
 	.value	0x4
 	.byte	0
@@ -5108,15 +5108,13 @@ printObject:
 	.string	"IS_NIL(value) ((value).type == VAL_NIL)"
 .LASF558:
 	.string	"__STD_TYPE typedef"
-.LASF533:
-	.string	"__GLIBC_USE_IEC_60559_BFP_EXT 0"
 .LASF789:
 	.string	"int8_t"
 .LASF225:
 	.string	"__FLT128_MIN_10_EXP__ (-4931)"
 .LASF283:
 	.string	"__DEC128_EPSILON__ 1E-33DL"
-.LASF848:
+.LASF845:
 	.string	"chunk"
 .LASF24:
 	.string	"__SIZEOF_FLOAT__ 4"
@@ -5128,8 +5126,6 @@ printObject:
 	.string	"__UINT32_MAX__ 0xffffffffU"
 .LASF775:
 	.string	"size_t"
-.LASF808:
-	.string	"VAL_INT"
 .LASF674:
 	.string	"value_h "
 .LASF495:
@@ -5140,6 +5136,8 @@ printObject:
 	.string	"__FLT64_HAS_INFINITY__ 1"
 .LASF755:
 	.string	"BUFSIZ 8192"
+.LASF689:
+	.string	"IS_U64(value) ((value).type == VAL_U64)"
 .LASF93:
 	.string	"__SIZE_WIDTH__ 64"
 .LASF505:
@@ -5152,15 +5150,15 @@ printObject:
 	.string	"__stub_sigreturn "
 .LASF422:
 	.string	"__USE_XOPEN2K8XSI"
-.LASF900:
+.LASF897:
 	.string	"object"
 .LASF214:
 	.string	"__FLT64_DECIMAL_DIG__ 17"
 .LASF491:
 	.string	"__always_inline __inline __attribute__ ((__always_inline__))"
-.LASF12:
-	.string	"__ATOMIC_CONSUME 1"
-.LASF887:
+.LASF571:
+	.string	"__OFF64_T_TYPE __SQUAD_TYPE"
+.LASF884:
 	.string	"_IO_codecvt"
 .LASF433:
 	.string	"__GLIBC_USE_DEPRECATED_SCANF"
@@ -5172,8 +5170,6 @@ printObject:
 	.string	"INT16_C(c) c"
 .LASF791:
 	.string	"int32_t"
-.LASF713:
-	.string	"UINT_VAL(value) ((Value){VAL_UINT, {.uIn = value}})"
 .LASF337:
 	.string	"__unix 1"
 .LASF444:
@@ -5182,12 +5178,14 @@ printObject:
 	.string	"__UINT_FAST16_MAX__ 0xffffffffffffffffUL"
 .LASF170:
 	.string	"__DBL_MAX_10_EXP__ 308"
-.LASF867:
+.LASF864:
 	.string	"_IO_save_end"
-.LASF98:
-	.string	"__INTMAX_WIDTH__ 64"
+.LASF136:
+	.string	"__INT_FAST64_MAX__ 0x7fffffffffffffffL"
 .LASF681:
 	.string	"IS_NUMBER(value) ((value).type != VAL_NIL && (value).type != VAL_BOOL);"
+.LASF808:
+	.string	"VAL_I16"
 .LASF32:
 	.string	"__ORDER_PDP_ENDIAN__ 3412"
 .LASF273:
@@ -5196,6 +5194,8 @@ printObject:
 	.string	"__FLT_HAS_DENORM__ 1"
 .LASF790:
 	.string	"int16_t"
+.LASF432:
+	.string	"__GLIBC_USE_DEPRECATED_GETS"
 .LASF200:
 	.string	"__FLT32_DECIMAL_DIG__ 9"
 .LASF403:
@@ -5208,17 +5208,15 @@ printObject:
 	.string	"__UINT8_C(c) c"
 .LASF46:
 	.string	"__INT16_TYPE__ short int"
-.LASF349:
-	.string	"true 1"
 .LASF729:
 	.string	"GROW_ARRAY(type,pointer,oldCount,newCount) (type*)reallocate(pointer, sizeof(type) * (oldCount), sizeof(type) * (newCount))"
 .LASF733:
 	.string	"chunk_h "
 .LASF629:
 	.string	"UINT_LEAST16_MAX (65535)"
-.LASF696:
-	.string	"AS_UCHAR(value) ((value).as.uCh)"
-.LASF860:
+.LASF699:
+	.string	"AS_I32(value) ((value).as.i32)"
+.LASF857:
 	.string	"_IO_write_base"
 .LASF482:
 	.string	"__attribute_noinline__ __attribute__ ((__noinline__))"
@@ -5234,66 +5232,58 @@ printObject:
 	.string	"INT_FAST64_MAX (__INT64_C(9223372036854775807))"
 .LASF458:
 	.string	"__P(args) args"
-.LASF685:
-	.string	"IS_UINT(value) ((value).type == VAL_UINT)"
-.LASF876:
+.LASF873:
 	.string	"_lock"
 .LASF366:
 	.string	"__SIZE_T__ "
 .LASF202:
 	.string	"__FLT32_MIN__ 1.17549435082228750796873653722224568e-38F32"
-.LASF855:
+.LASF852:
 	.string	"_IO_FILE"
 .LASF50:
 	.string	"__UINT16_TYPE__ short unsigned int"
 .LASF105:
 	.string	"__INT64_MAX__ 0x7fffffffffffffffL"
-.LASF571:
-	.string	"__OFF64_T_TYPE __SQUAD_TYPE"
+.LASF711:
+	.string	"U8_VAL(value) ((Value){VAL_U8, {.u8 = value}})"
 .LASF399:
 	.string	"__need_wchar_t"
 .LASF196:
 	.string	"__FLT32_MIN_EXP__ (-125)"
 .LASF179:
 	.string	"__LDBL_MANT_DIG__ 64"
-.LASF703:
-	.string	"AS_ULONGLONG(value) ((value).as.uLnglng)"
 .LASF797:
 	.string	"type"
-.LASF858:
+.LASF855:
 	.string	"_IO_read_end"
 .LASF643:
 	.string	"UINT_FAST64_MAX (__UINT64_C(18446744073709551615))"
 .LASF360:
 	.string	"_BSD_PTRDIFF_T_ "
-.LASF865:
+.LASF862:
 	.string	"_IO_save_base"
 .LASF664:
 	.string	"UINT16_C(c) c"
 .LASF211:
 	.string	"__FLT64_MIN_10_EXP__ (-307)"
-.LASF600:
-	.string	"__TIME64_T_TYPE __TIME_T_TYPE"
 .LASF381:
 	.string	"__size_t "
+.LASF7:
+	.string	"__ATOMIC_RELAXED 0"
 .LASF608:
 	.string	"INT8_MIN (-128)"
-.LASF137:
-	.string	"__INT_FAST64_WIDTH__ 64"
 .LASF1:
 	.string	"__STDC_VERSION__ 199901L"
 .LASF555:
 	.string	"__ULONG32_TYPE unsigned int"
-.LASF717:
-	.string	"LONGLONG_VAL(value) ((Value){VAL_LONGLONG, {.lnglng = value}})"
+.LASF723:
+	.string	"IS_STRING(value) isObjType(value, OBJ_STRING)"
 .LASF448:
 	.string	"__GLIBC_PREREQ(maj,min) ((__GLIBC__ << 16) + __GLIBC_MINOR__ >= ((maj) << 16) + (min))"
 .LASF265:
 	.string	"__DEC32_MIN_EXP__ (-94)"
 .LASF472:
 	.string	"__REDIRECT(name,proto,alias) name proto __asm__ (__ASMNAME (#alias))"
-.LASF370:
-	.string	"_T_SIZE "
 .LASF168:
 	.string	"__DBL_MIN_10_EXP__ (-307)"
 .LASF31:
@@ -5308,7 +5298,7 @@ printObject:
 	.string	"INT_FAST32_MAX (9223372036854775807L)"
 .LASF517:
 	.string	"__glibc_macro_warning1(message) _Pragma (#message)"
-.LASF869:
+.LASF866:
 	.string	"_chain"
 .LASF801:
 	.string	"chars"
@@ -5320,14 +5310,20 @@ printObject:
 	.string	"__USE_FILE_OFFSET64"
 .LASF210:
 	.string	"__FLT64_MIN_EXP__ (-1021)"
-.LASF873:
+.LASF870:
 	.string	"_cur_column"
+.LASF705:
+	.string	"AS_F128(value) ((value).as.f128)"
 .LASF199:
 	.string	"__FLT32_MAX_10_EXP__ 38"
 .LASF412:
 	.string	"__USE_POSIX"
+.LASF475:
+	.string	"__ASMNAME(cname) __ASMNAME2 (__USER_LABEL_PREFIX__, cname)"
 .LASF269:
 	.string	"__DEC32_EPSILON__ 1E-6DF"
+.LASF700:
+	.string	"AS_U32(value) ((value).as.u32)"
 .LASF400:
 	.string	"NULL"
 .LASF735:
@@ -5336,12 +5332,16 @@ printObject:
 	.string	"_BITS_TIME64_H 1"
 .LASF255:
 	.string	"__FLT64X_MAX_10_EXP__ 4932"
+.LASF820:
+	.string	"f128"
 .LASF655:
 	.string	"WCHAR_MIN __WCHAR_MIN"
 .LASF522:
 	.string	"__stub_fchflags "
 .LASF304:
 	.string	"__GCC_ATOMIC_POINTER_LOCK_FREE 2"
+.LASF352:
+	.string	"_STDDEF_H "
 .LASF40:
 	.string	"__INTMAX_TYPE__ long int"
 .LASF580:
@@ -5362,7 +5362,7 @@ printObject:
 	.string	"__always_inline"
 .LASF368:
 	.string	"_SYS_SIZE_T_H "
-.LASF853:
+.LASF850:
 	.string	"strings"
 .LASF57:
 	.string	"__UINT_LEAST8_TYPE__ unsigned char"
@@ -5376,8 +5376,6 @@ printObject:
 	.string	"__GLIBC__ 2"
 .LASF770:
 	.string	"long int"
-.LASF543:
-	.string	"__TIMESIZE __WORDSIZE"
 .LASF242:
 	.string	"__FLT32X_DECIMAL_DIG__ 17"
 .LASF346:
@@ -5390,8 +5388,8 @@ printObject:
 	.string	"__CLOCKID_T_TYPE __S32_TYPE"
 .LASF279:
 	.string	"__DEC128_MIN_EXP__ (-6142)"
-.LASF432:
-	.string	"__GLIBC_USE_DEPRECATED_GETS"
+.LASF365:
+	.string	"__size_t__ "
 .LASF224:
 	.string	"__FLT128_MIN_EXP__ (-16381)"
 .LASF213:
@@ -5402,20 +5400,22 @@ printObject:
 	.string	"__need_ptrdiff_t"
 .LASF53:
 	.string	"__INT_LEAST8_TYPE__ signed char"
-.LASF35:
-	.string	"__SIZEOF_POINTER__ 8"
+.LASF455:
+	.string	"__NTH(fct) __attribute__ ((__nothrow__ __LEAF)) fct"
 .LASF294:
 	.string	"__GCC_ATOMIC_BOOL_LOCK_FREE 2"
 .LASF598:
 	.string	"__FD_SETSIZE 1024"
 .LASF261:
 	.string	"__FLT64X_HAS_DENORM__ 1"
-.LASF886:
+.LASF883:
 	.string	"_IO_marker"
 .LASF585:
 	.string	"__SUSECONDS_T_TYPE __SYSCALL_SLONG_TYPE"
 .LASF198:
 	.string	"__FLT32_MAX_EXP__ 128"
+.LASF708:
+	.string	"NIL_VAL ((Value){VAL_NIL, {.f64 = 0}})"
 .LASF765:
 	.string	"FOPEN_MAX 16"
 .LASF67:
@@ -5424,8 +5424,6 @@ printObject:
 	.string	"INTPTR_MAX (9223372036854775807L)"
 .LASF579:
 	.string	"__FSFILCNT_T_TYPE __SYSCALL_ULONG_TYPE"
-.LASF701:
-	.string	"AS_FLOAT(value) ((value).as.flt)"
 .LASF361:
 	.string	"___int_ptrdiff_t_h "
 .LASF488:
@@ -5436,11 +5434,13 @@ printObject:
 	.string	"__CONCAT(x,y) x ## y"
 .LASF767:
 	.string	"stdout stdout"
+.LASF515:
+	.string	"__REDIRECT_LDBL(name,proto,alias) __REDIRECT (name, proto, alias)"
 .LASF141:
 	.string	"__UINT_FAST64_MAX__ 0xffffffffffffffffUL"
 .LASF231:
 	.string	"__FLT128_EPSILON__ 1.92592994438723585305597794258492732e-34F128"
-.LASF850:
+.LASF847:
 	.string	"stackTop"
 .LASF155:
 	.string	"__FLT_MAX_EXP__ 128"
@@ -5464,7 +5464,7 @@ printObject:
 	.string	"__GLIBC_INTERNAL_STARTING_HEADER_IMPLEMENTATION "
 .LASF341:
 	.string	"_STDC_PREDEF_H 1"
-.LASF845:
+.LASF842:
 	.string	"lineCapacity"
 .LASF16:
 	.string	"__PIE__ 2"
@@ -5478,6 +5478,8 @@ printObject:
 	.string	"__glibc_clang_has_extension(ext) 0"
 .LASF531:
 	.string	"__GLIBC_USE_LIB_EXT2 0"
+.LASF685:
+	.string	"IS_U16(value) ((value).type == VAL_U16)"
 .LASF154:
 	.string	"__FLT_MIN_10_EXP__ (-37)"
 .LASF443:
@@ -5486,24 +5488,20 @@ printObject:
 	.string	"__FLT_DECIMAL_DIG__ 9"
 .LASF680:
 	.string	"IS_BOOL(value) ((value).type == VAL_BOOL)"
-.LASF718:
-	.string	"ULONGLONG_VAL(value) ((Value){VAL_ULONGLONG, {.uLnglng = value}})"
 .LASF777:
 	.string	"signed char"
 .LASF793:
 	.string	"uint8_t"
-.LASF545:
-	.string	"__U16_TYPE unsigned short int"
+.LASF812:
+	.string	"VAL_I64"
 .LASF204:
 	.string	"__FLT32_DENORM_MIN__ 1.40129846432481707092372958328991613e-45F32"
 .LASF462:
 	.string	"__ptr_t void *"
 .LASF287:
 	.string	"__GNUC_STDC_INLINE__ 1"
-.LASF902:
+.LASF899:
 	.string	"Language/object/object.c"
-.LASF469:
-	.string	"__errordecl(name,msg) extern void name (void) __attribute__((__error__ (msg)))"
 .LASF164:
 	.string	"__FLT_HAS_QUIET_NAN__ 1"
 .LASF593:
@@ -5518,13 +5516,11 @@ printObject:
 	.string	"__UINT_LEAST16_MAX__ 0xffff"
 .LASF736:
 	.string	"__need___va_list "
-.LASF708:
-	.string	"NIL_VAL ((Value){VAL_NIL, {.dbl = 0}})"
 .LASF576:
 	.string	"__BLKCNT64_T_TYPE __SQUAD_TYPE"
 .LASF246:
 	.string	"__FLT32X_DENORM_MIN__ 4.94065645841246544176568792868221372e-324F32x"
-.LASF841:
+.LASF838:
 	.string	"LineStart"
 .LASF133:
 	.string	"__INT_FAST16_WIDTH__ 64"
@@ -5548,14 +5544,16 @@ printObject:
 	.string	"__FLT64X_MIN_EXP__ (-16381)"
 .LASF8:
 	.string	"__ATOMIC_SEQ_CST 5"
-.LASF809:
-	.string	"VAL_UINT"
-.LASF813:
-	.string	"VAL_LONGLONG"
+.LASF690:
+	.string	"IS_F32(value) ((value).type == VAL_F32)"
 .LASF732:
 	.string	"vm_h "
-.LASF107:
-	.string	"__UINT16_MAX__ 0xffff"
+.LASF683:
+	.string	"IS_U8(value) ((value).type == VAL_U8)"
+.LASF806:
+	.string	"VAL_I8"
+.LASF169:
+	.string	"__DBL_MAX_EXP__ 1024"
 .LASF127:
 	.string	"__UINT32_C(c) c ## U"
 .LASF330:
@@ -5568,9 +5566,7 @@ printObject:
 	.string	"INT16_MIN (-32767-1)"
 .LASF23:
 	.string	"__SIZEOF_SHORT__ 2"
-.LASF695:
-	.string	"AS_CHAR(value) ((value).as.ch)"
-.LASF824:
+.LASF821:
 	.string	"_Bool"
 .LASF120:
 	.string	"__INT64_C(c) c ## L"
@@ -5582,7 +5578,7 @@ printObject:
 	.string	"__STRICT_ANSI__ 1"
 .LASF374:
 	.string	"_SIZE_T_DEFINED_ "
-.LASF835:
+.LASF832:
 	.string	"value"
 .LASF467:
 	.string	"__warndecl(name,msg) extern void name (void) __attribute__((__warning__ (msg)))"
@@ -5590,14 +5586,14 @@ printObject:
 	.string	"__DADDR_T_TYPE __S32_TYPE"
 .LASF230:
 	.string	"__FLT128_MIN__ 3.36210314311209350626267781732175260e-4932F128"
-.LASF715:
-	.string	"ULONG_VAL(value) ((Value){VAL_ULONG, {.uLng = value}})"
 .LASF428:
 	.string	"__USE_GNU"
 .LASF442:
 	.string	"__GLIBC_USE_DEPRECATED_GETS 1"
 .LASF625:
 	.string	"INT_LEAST16_MAX (32767)"
+.LASF74:
+	.string	"__SCHAR_MAX__ 0x7f"
 .LASF788:
 	.string	"char"
 .LASF195:
@@ -5608,8 +5604,14 @@ printObject:
 	.string	"__GCC_HAVE_SYNC_COMPARE_AND_SWAP_2 1"
 .LASF64:
 	.string	"__INT_FAST64_TYPE__ long int"
-.LASF807:
-	.string	"VAL_UCHAR"
+.LASF701:
+	.string	"AS_I64(value) ((value).as.i64)"
+.LASF713:
+	.string	"U16_VAL(value) ((Value){VAL_U16, {.u16 = value}})"
+.LASF533:
+	.string	"__GLIBC_USE_IEC_60559_BFP_EXT 0"
+.LASF698:
+	.string	"AS_U16(value) ((value).as.u16)"
 .LASF676:
 	.string	"__need_size_t "
 .LASF548:
@@ -5620,11 +5622,11 @@ printObject:
 	.string	"__LDBL_REDIR_DECL(name) "
 .LASF29:
 	.string	"__BIGGEST_ALIGNMENT__ 16"
-.LASF829:
+.LASF826:
 	.string	"capacity"
 .LASF316:
 	.string	"__x86_64__ 1"
-.LASF904:
+.LASF901:
 	.string	"_IO_lock_t"
 .LASF669:
 	.string	"_GCC_WRAP_STDINT_H "
@@ -5632,13 +5634,17 @@ printObject:
 	.string	"__uint16_t"
 .LASF419:
 	.string	"__USE_XOPEN2K"
+.LASF600:
+	.string	"__TIME64_T_TYPE __TIME_T_TYPE"
+.LASF714:
+	.string	"I32_VAL(value) ((Value){VAL_I32, {.i32 = value}})"
 .LASF524:
 	.string	"__stub_lchmod "
 .LASF106:
 	.string	"__UINT8_MAX__ 0xff"
 .LASF160:
 	.string	"__FLT_EPSILON__ 1.19209289550781250000000000000000000e-7F"
-.LASF894:
+.LASF891:
 	.string	"copyString"
 .LASF253:
 	.string	"__FLT64X_MIN_10_EXP__ (-4931)"
@@ -5646,16 +5652,12 @@ printObject:
 	.string	"__extern_inline extern __inline __attribute__ ((__gnu_inline__))"
 .LASF536:
 	.string	"__GLIBC_USE_IEC_60559_FUNCS_EXT"
+.LASF719:
+	.string	"F64_VAL(value) ((Value){VAL_F64, {.f64 = value}})"
 .LASF176:
 	.string	"__DBL_HAS_DENORM__ 1"
-.LASF714:
-	.string	"LONG_VAL(value) ((Value){VAL_LONG, {.lng = value}})"
-.LASF365:
-	.string	"__size_t__ "
-.LASF705:
-	.string	"AS_DOUBLELONG(value) ((value).as.dbllng)"
-.LASF331:
-	.string	"__SEG_FS 1"
+.LASF174:
+	.string	"__DBL_EPSILON__ ((double)2.22044604925031308084726333618164062e-16L)"
 .LASF693:
 	.string	"IS_OBJ(value) ((value).type == VAL_OBJ)"
 .LASF636:
@@ -5670,12 +5672,10 @@ printObject:
 	.string	"DEBUG_PRINT_CODE "
 .LASF113:
 	.string	"__INT_LEAST16_MAX__ 0x7fff"
-.LASF857:
+.LASF854:
 	.string	"_IO_read_ptr"
 .LASF226:
 	.string	"__FLT128_MAX_EXP__ 16384"
-.LASF691:
-	.string	"IS_DOUBLE(value) ((value).type == VAL_DOUBLE)"
 .LASF665:
 	.string	"UINT32_C(c) c ## U"
 .LASF644:
@@ -5700,11 +5700,11 @@ printObject:
 	.string	"INT_FAST32_MIN (-9223372036854775807L-1)"
 .LASF447:
 	.string	"__GLIBC_MINOR__ 31"
-.LASF889:
+.LASF886:
 	.string	"stdin"
 .LASF743:
 	.string	"__FILE_defined 1"
-.LASF897:
+.LASF894:
 	.string	"allocateString"
 .LASF418:
 	.string	"__USE_UNIX98"
@@ -5714,8 +5714,8 @@ printObject:
 	.string	"__KERNEL_STRICT_NAMES "
 .LASF564:
 	.string	"__GID_T_TYPE __U32_TYPE"
-.LASF751:
-	.string	"_IO_USER_LOCK 0x8000"
+.LASF720:
+	.string	"F128_VAL(value) ((Value){VAL_F128, {.f128 = value}})"
 .LASF299:
 	.string	"__GCC_ATOMIC_SHORT_LOCK_FREE 2"
 .LASF14:
@@ -5724,7 +5724,7 @@ printObject:
 	.string	"__ULONGWORD_TYPE unsigned long int"
 .LASF303:
 	.string	"__GCC_ATOMIC_TEST_AND_SET_TRUEVAL 1"
-.LASF868:
+.LASF865:
 	.string	"_markers"
 .LASF339:
 	.string	"__ELF__ 1"
@@ -5744,7 +5744,7 @@ printObject:
 	.string	"__DEC32_MAX__ 9.999999E96DF"
 .LASF595:
 	.string	"__INO_T_MATCHES_INO64_T 1"
-.LASF854:
+.LASF851:
 	.string	"objects"
 .LASF769:
 	.string	"ALLOCATE_OBJ(type,objectType) (type*)allocateObject(sizeof(type), objectType)"
@@ -5760,7 +5760,7 @@ printObject:
 	.string	"OBJ_VAL(object) ((Value){VAL_OBJ, {.obj = (Obj*)object}})"
 .LASF727:
 	.string	"FREE(type,pointer) reallocate(pointer, sizeof(type), 0)"
-.LASF861:
+.LASF858:
 	.string	"_IO_write_ptr"
 .LASF778:
 	.string	"__uint8_t"
@@ -5790,6 +5790,8 @@ printObject:
 	.string	"L_tmpnam 20"
 .LASF740:
 	.string	"____mbstate_t_defined 1"
+.LASF687:
+	.string	"IS_U32(value) ((value).type == VAL_U32)"
 .LASF115:
 	.string	"__INT_LEAST16_WIDTH__ 16"
 .LASF149:
@@ -5798,8 +5800,8 @@ printObject:
 	.string	"__off_t"
 .LASF642:
 	.string	"UINT_FAST32_MAX (18446744073709551615UL)"
-.LASF822:
-	.string	"uLnglng"
+.LASF633:
+	.string	"INT_FAST16_MIN (-9223372036854775807L-1)"
 .LASF635:
 	.string	"INT_FAST64_MIN (-__INT64_C(9223372036854775807)-1)"
 .LASF277:
@@ -5808,7 +5810,7 @@ printObject:
 	.string	"__GLIBC_USE_IEC_60559_BFP_EXT_C2X 0"
 .LASF401:
 	.string	"NULL ((void *)0)"
-.LASF893:
+.LASF890:
 	.string	"heapChars"
 .LASF402:
 	.string	"__need_NULL"
@@ -5840,10 +5842,10 @@ printObject:
 	.string	"_BITS_STDINT_UINTN_H 1"
 .LASF532:
 	.string	"__GLIBC_USE_IEC_60559_BFP_EXT"
-.LASF704:
-	.string	"AS_DOUBLE(value) ((value).as.dbl)"
-.LASF905:
+.LASF902:
 	.string	"printObject"
+.LASF12:
+	.string	"__ATOMIC_CONSUME 1"
 .LASF121:
 	.string	"__INT_LEAST64_WIDTH__ 64"
 .LASF163:
@@ -5878,8 +5880,6 @@ printObject:
 	.string	"__uint32_t"
 .LASF440:
 	.string	"__USE_ISOC95 1"
-.LASF682:
-	.string	"IS_CHAR(value) ((value).type == VAL_CHAR)"
 .LASF518:
 	.string	"__glibc_macro_warning(message) __glibc_macro_warning1 (GCC warning message)"
 .LASF189:
@@ -5894,17 +5894,13 @@ printObject:
 	.string	"__SCHAR_WIDTH__ 8"
 .LASF471:
 	.string	"__glibc_c99_flexarr_available 1"
-.LASF859:
+.LASF856:
 	.string	"_IO_read_base"
-.LASF223:
-	.string	"__FLT128_DIG__ 33"
-.LASF712:
-	.string	"INT_VAL(value) ((Value){VAL_INT, {.in = value}})"
 .LASF323:
 	.string	"__k8__ 1"
 .LASF18:
 	.string	"_LP64 1"
-.LASF840:
+.LASF837:
 	.string	"line"
 .LASF131:
 	.string	"__INT_FAST8_WIDTH__ 8"
@@ -5918,20 +5914,22 @@ printObject:
 	.string	"__need_NULL "
 .LASF407:
 	.string	"_FEATURES_H 1"
-.LASF884:
+.LASF881:
 	.string	"_unused2"
 .LASF194:
 	.string	"__FLT32_MANT_DIG__ 24"
+.LASF696:
+	.string	"AS_U8(value) ((value).as.u8)"
 .LASF451:
 	.string	"__LEAF , __leaf__"
-.LASF604:
-	.string	"__WCHAR_MIN __WCHAR_MIN__"
+.LASF423:
+	.string	"__USE_LARGEFILE"
 .LASF481:
 	.string	"__attribute_used__ __attribute__ ((__used__))"
 .LASF296:
 	.string	"__GCC_ATOMIC_CHAR16_T_LOCK_FREE 2"
-.LASF169:
-	.string	"__DBL_MAX_EXP__ 1024"
+.LASF682:
+	.string	"IS_I8(value) ((value).type == VAL_I8)"
 .LASF559:
 	.string	"_BITS_TYPESIZES_H 1"
 .LASF10:
@@ -5940,19 +5938,15 @@ printObject:
 	.string	"__FLT32X_HAS_DENORM__ 1"
 .LASF151:
 	.string	"__FLT_MANT_DIG__ 24"
-.LASF820:
-	.string	"uLng"
-.LASF684:
-	.string	"IS_INT(value) ((value).type == VAL_INT)"
-.LASF816:
-	.string	"VAL_DOUBLELONG"
+.LASF809:
+	.string	"VAL_U16"
 .LASF94:
 	.string	"__INTMAX_MAX__ 0x7fffffffffffffffL"
 .LASF216:
 	.string	"__FLT64_MIN__ 2.22507385850720138309023271733240406e-308F64"
 .LASF356:
 	.string	"_T_PTRDIFF_ "
-.LASF872:
+.LASF869:
 	.string	"_old_offset"
 .LASF427:
 	.string	"__USE_ATFILE"
@@ -5960,15 +5954,17 @@ printObject:
 	.string	"__UINTMAX_MAX__ 0xffffffffffffffffUL"
 .LASF239:
 	.string	"__FLT32X_MIN_10_EXP__ (-307)"
+.LASF703:
+	.string	"AS_F32(value) ((value).as.f32)"
+.LASF695:
+	.string	"AS_I8(value) ((value).as.i8)"
 .LASF326:
 	.string	"__SSE__ 1"
 .LASF730:
 	.string	"FREE_ARRAY(type,pointer,oldCount) reallocate(pointer, sizeof(type) * (oldCount), 0)"
-.LASF352:
-	.string	"_STDDEF_H "
-.LASF692:
-	.string	"IS_DOUBLELONG(value) ((value).type == VAL_DOUBLELONG)"
-.LASF895:
+.LASF98:
+	.string	"__INTMAX_WIDTH__ 64"
+.LASF892:
 	.string	"takeString"
 .LASF293:
 	.string	"__GCC_HAVE_SYNC_COMPARE_AND_SWAP_8 1"
@@ -5984,7 +5980,7 @@ printObject:
 	.string	"__INT_LEAST32_MAX__ 0x7fffffff"
 .LASF512:
 	.string	"__LDBL_REDIR1_NTH(name,proto,alias) name proto __THROW"
-.LASF844:
+.LASF841:
 	.string	"lineCount"
 .LASF413:
 	.string	"__USE_POSIX2"
@@ -5994,8 +5990,6 @@ printObject:
 	.string	"__GCC_ATOMIC_LONG_LOCK_FREE 2"
 .LASF382:
 	.string	"__need_size_t"
-.LASF633:
-	.string	"INT_FAST16_MIN (-9223372036854775807L-1)"
 .LASF372:
 	.string	"_SIZE_T_ "
 .LASF150:
@@ -6018,7 +6012,9 @@ printObject:
 	.string	"_STDINT_H 1"
 .LASF132:
 	.string	"__INT_FAST16_MAX__ 0x7fffffffffffffffL"
-.LASF880:
+.LASF751:
+	.string	"_IO_USER_LOCK 0x8000"
+.LASF877:
 	.string	"_freeres_list"
 .LASF302:
 	.string	"__GCC_ATOMIC_LLONG_LOCK_FREE 2"
@@ -6030,21 +6026,19 @@ printObject:
 	.string	"__attribute_copy__"
 .LASF212:
 	.string	"__FLT64_MAX_EXP__ 1024"
-.LASF806:
-	.string	"VAL_CHAR"
 .LASF388:
 	.string	"__WCHAR_T "
-.LASF826:
+.LASF823:
 	.string	"double"
 .LASF134:
 	.string	"__INT_FAST32_MAX__ 0x7fffffffffffffffL"
-.LASF849:
+.LASF846:
 	.string	"stack"
 .LASF456:
 	.string	"__NTHNL(fct) __attribute__ ((__nothrow__)) fct"
 .LASF41:
 	.string	"__UINTMAX_TYPE__ long unsigned int"
-.LASF862:
+.LASF859:
 	.string	"_IO_write_end"
 .LASF818:
 	.string	"ValueType"
@@ -6060,14 +6054,18 @@ printObject:
 	.string	"__attribute_nonstring__ __attribute__ ((__nonstring__))"
 .LASF80:
 	.string	"__WCHAR_MIN__ (-__WCHAR_MAX__ - 1)"
-.LASF450:
-	.string	"__PMT"
-.LASF832:
+.LASF811:
+	.string	"VAL_U32"
+.LASF829:
 	.string	"ValueArray"
 .LASF308:
 	.string	"__SSP_STRONG__ 3"
+.LASF47:
+	.string	"__INT32_TYPE__ int"
 .LASF140:
 	.string	"__UINT_FAST32_MAX__ 0xffffffffffffffffUL"
+.LASF715:
+	.string	"U32_VAL(value) ((Value){VAL_U32, {.u32 = value}})"
 .LASF581:
 	.string	"__ID_T_TYPE __U32_TYPE"
 .LASF550:
@@ -6078,7 +6076,7 @@ printObject:
 	.string	"__BYTE_ORDER__ __ORDER_LITTLE_ENDIAN__"
 .LASF117:
 	.string	"__INT32_C(c) c"
-.LASF842:
+.LASF839:
 	.string	"code"
 .LASF38:
 	.string	"__WCHAR_TYPE__ int"
@@ -6094,7 +6092,7 @@ printObject:
 	.string	"EOF (-1)"
 .LASF286:
 	.string	"__USER_LABEL_PREFIX__ "
-.LASF830:
+.LASF827:
 	.string	"count"
 .LASF39:
 	.string	"__WINT_TYPE__ unsigned int"
@@ -6106,18 +6104,18 @@ printObject:
 	.string	"__ferror_unlocked_body(_fp) (((_fp)->_flags & _IO_ERR_SEEN) != 0)"
 .LASF612:
 	.string	"INT8_MAX (127)"
-.LASF863:
+.LASF860:
 	.string	"_IO_buf_base"
-.LASF812:
-	.string	"VAL_FLOAT"
-.LASF898:
+.LASF868:
+	.string	"_flags2"
+.LASF895:
 	.string	"string"
 .LASF59:
 	.string	"__UINT_LEAST32_TYPE__ unsigned int"
 .LASF774:
 	.string	"unsigned int"
-.LASF603:
-	.string	"__WCHAR_MAX __WCHAR_MAX__"
+.LASF469:
+	.string	"__errordecl(name,msg) extern void name (void) __attribute__((__error__ (msg)))"
 .LASF63:
 	.string	"__INT_FAST32_TYPE__ long int"
 .LASF741:
@@ -6132,8 +6130,8 @@ printObject:
 	.string	"__USE_MISC"
 .LASF243:
 	.string	"__FLT32X_MAX__ 1.79769313486231570814527423731704357e+308F32x"
-.LASF423:
-	.string	"__USE_LARGEFILE"
+.LASF219:
+	.string	"__FLT64_HAS_DENORM__ 1"
 .LASF152:
 	.string	"__FLT_DIG__ 6"
 .LASF347:
@@ -6146,13 +6144,11 @@ printObject:
 	.string	"__KEY_T_TYPE __S32_TYPE"
 .LASF158:
 	.string	"__FLT_MAX__ 3.40282346638528859811704183484516925e+38F"
-.LASF74:
-	.string	"__SCHAR_MAX__ 0x7f"
-.LASF821:
-	.string	"lnglng"
-.LASF852:
+.LASF584:
+	.string	"__USECONDS_T_TYPE __U32_TYPE"
+.LASF849:
 	.string	"globalValues"
-.LASF882:
+.LASF879:
 	.string	"__pad5"
 .LASF547:
 	.string	"__U32_TYPE unsigned int"
@@ -6166,8 +6162,6 @@ printObject:
 	.string	"__DEC64_MIN_EXP__ (-382)"
 .LASF145:
 	.string	"__GCC_IEC_559 2"
-.LASF719:
-	.string	"DOUBLE_VAL(value) ((Value){VAL_DOUBLE, {.dbl = value}})"
 .LASF97:
 	.string	"__UINTMAX_C(c) c ## UL"
 .LASF500:
@@ -6180,8 +6174,6 @@ printObject:
 	.string	"INT_LEAST64_MAX (__INT64_C(9223372036854775807))"
 .LASF312:
 	.string	"__SIZEOF_PTRDIFF_T__ 8"
-.LASF584:
-	.string	"__USECONDS_T_TYPE __U32_TYPE"
 .LASF620:
 	.string	"INT_LEAST8_MIN (-128)"
 .LASF34:
@@ -6198,19 +6190,23 @@ printObject:
 	.string	"__SIZEOF_LONG_LONG__ 8"
 .LASF350:
 	.string	"false 0"
+.LASF716:
+	.string	"I64_VAL(value) ((Value){VAL_I64, {.i64 = value}})"
 .LASF86:
 	.string	"__SHRT_WIDTH__ 16"
 .LASF734:
 	.string	"STACK_MAX 256"
 .LASF278:
 	.string	"__DEC128_MANT_DIG__ 34"
-.LASF856:
+.LASF853:
 	.string	"_flags"
-.LASF219:
-	.string	"__FLT64_HAS_DENORM__ 1"
+.LASF815:
+	.string	"VAL_F64"
+.LASF349:
+	.string	"true 1"
 .LASF363:
 	.string	"_PTRDIFF_T_DECLARED "
-.LASF839:
+.LASF836:
 	.string	"offset"
 .LASF324:
 	.string	"__code_model_small__ 1"
@@ -6224,9 +6220,7 @@ printObject:
 	.string	"__FLT32X_MIN_EXP__ (-1021)"
 .LASF295:
 	.string	"__GCC_ATOMIC_CHAR_LOCK_FREE 2"
-.LASF689:
-	.string	"IS_LONGLONG(value) ((value).type == VAL_LONGLONG)"
-.LASF883:
+.LASF880:
 	.string	"_mode"
 .LASF572:
 	.string	"__PID_T_TYPE __S32_TYPE"
@@ -6240,11 +6234,13 @@ printObject:
 	.string	"__LDBL_REDIR1(name,proto,alias) name proto"
 .LASF461:
 	.string	"__STRING(x) #x"
+.LASF810:
+	.string	"VAL_I32"
 .LASF772:
 	.string	"unsigned char"
 .LASF504:
 	.string	"__attribute_copy__(arg) __attribute__ ((__copy__ (arg)))"
-.LASF878:
+.LASF875:
 	.string	"_codecvt"
 .LASF45:
 	.string	"__INT8_TYPE__ signed char"
@@ -6252,10 +6248,12 @@ printObject:
 	.string	"__UINT64_C(c) c ## UL"
 .LASF197:
 	.string	"__FLT32_MIN_10_EXP__ (-37)"
-.LASF836:
+.LASF833:
 	.string	"Entry"
 .LASF385:
 	.string	"_WCHAR_T "
+.LASF813:
+	.string	"VAL_U64"
 .LASF161:
 	.string	"__FLT_DENORM_MIN__ 1.40129846432481707092372958328991613e-45F"
 .LASF264:
@@ -6266,10 +6264,12 @@ printObject:
 	.string	"_GCC_PTRDIFF_T "
 .LASF525:
 	.string	"__stub_revoke "
-.LASF903:
+.LASF328:
+	.string	"__FXSR__ 1"
+.LASF900:
 	.string	"/mnt/d/coding portfolio/fortissimolanguage"
-.LASF455:
-	.string	"__NTH(fct) __attribute__ ((__nothrow__ __LEAF)) fct"
+.LASF807:
+	.string	"VAL_U8"
 .LASF516:
 	.string	"__REDIRECT_NTH_LDBL(name,proto,alias) __REDIRECT_NTH (name, proto, alias)"
 .LASF367:
@@ -6286,20 +6286,20 @@ printObject:
 	.string	"INT_LEAST32_MIN (-2147483647-1)"
 .LASF78:
 	.string	"__LONG_LONG_MAX__ 0x7fffffffffffffffLL"
-.LASF892:
+.LASF889:
 	.string	"interned"
-.LASF827:
+.LASF824:
 	.string	"long double"
 .LASF742:
 	.string	"____FILE_defined 1"
-.LASF475:
-	.string	"__ASMNAME(cname) __ASMNAME2 (__USER_LABEL_PREFIX__, cname)"
+.LASF814:
+	.string	"VAL_F32"
 .LASF619:
 	.string	"UINT64_MAX (__UINT64_C(18446744073709551615))"
 .LASF263:
 	.string	"__FLT64X_HAS_QUIET_NAN__ 1"
-.LASF811:
-	.string	"VAL_ULONG"
+.LASF223:
+	.string	"__FLT128_DIG__ 33"
 .LASF111:
 	.string	"__INT8_C(c) c"
 .LASF201:
@@ -6310,15 +6310,13 @@ printObject:
 	.string	"__DBL_MIN_EXP__ (-1021)"
 .LASF371:
 	.string	"__SIZE_T "
-.LASF885:
+.LASF882:
 	.string	"FILE"
-.LASF136:
-	.string	"__INT_FAST64_MAX__ 0x7fffffffffffffffL"
-.LASF47:
-	.string	"__INT32_TYPE__ int"
+.LASF543:
+	.string	"__TIMESIZE __WORDSIZE"
 .LASF271:
 	.string	"__DEC64_MANT_DIG__ 16"
-.LASF843:
+.LASF840:
 	.string	"constants"
 .LASF591:
 	.string	"__FSID_T_TYPE struct { int __val[2]; }"
@@ -6330,11 +6328,9 @@ printObject:
 	.string	"__USE_ISOC99"
 .LASF709:
 	.string	"BOOL_VAL(value) ((Value){VAL_BOOL, {.boolean = value}})"
-.LASF697:
-	.string	"AS_INT(value) ((value).as.in)"
 .LASF417:
 	.string	"__USE_XOPEN_EXTENDED"
-.LASF877:
+.LASF874:
 	.string	"_offset"
 .LASF191:
 	.string	"__LDBL_HAS_DENORM__ 1"
@@ -6358,14 +6354,14 @@ printObject:
 	.string	"__INT64_TYPE__ long int"
 .LASF30:
 	.string	"__ORDER_LITTLE_ENDIAN__ 1234"
-.LASF899:
+.LASF896:
 	.string	"size"
 .LASF590:
 	.string	"__BLKSIZE_T_TYPE __SYSCALL_SLONG_TYPE"
 .LASF250:
 	.string	"__FLT64X_MANT_DIG__ 64"
-.LASF815:
-	.string	"VAL_DOUBLE"
+.LASF712:
+	.string	"I16_VAL(value) ((Value){VAL_I16, {.i16 = value}})"
 .LASF758:
 	.string	"SEEK_CUR 1"
 .LASF75:
@@ -6392,22 +6388,20 @@ printObject:
 	.string	"UINT_LEAST8_MAX (255)"
 .LASF771:
 	.string	"long unsigned int"
-.LASF690:
-	.string	"IS_ULONGLONG(value) ((value).type == VAL_ULONGLONG)"
+.LASF691:
+	.string	"IS_F64(value) ((value).type == VAL_F64)"
 .LASF58:
 	.string	"__UINT_LEAST16_TYPE__ short unsigned int"
+.LASF370:
+	.string	"_T_SIZE "
 .LASF42:
 	.string	"__CHAR16_TYPE__ short unsigned int"
 .LASF237:
 	.string	"__FLT32X_DIG__ 15"
-.LASF688:
-	.string	"IS_FLOAT(value) ((value).type == VAL_FLOAT)"
 .LASF484:
 	.string	"__attribute_deprecated_msg__(msg) __attribute__ ((__deprecated__ (msg)))"
 .LASF415:
 	.string	"__USE_POSIX199506"
-.LASF683:
-	.string	"IS_UCHAR(value) ((value).type == VAL_UCHAR)"
 .LASF661:
 	.string	"INT32_C(c) c"
 .LASF142:
@@ -6416,20 +6410,18 @@ printObject:
 	.string	"__FINITE_MATH_ONLY__ 0"
 .LASF666:
 	.string	"UINT64_C(c) c ## UL"
-.LASF881:
+.LASF878:
 	.string	"_freeres_buf"
 .LASF317:
 	.string	"__SIZEOF_FLOAT80__ 16"
 .LASF759:
 	.string	"SEEK_END 2"
-.LASF328:
-	.string	"__FXSR__ 1"
+.LASF331:
+	.string	"__SEG_FS 1"
 .LASF506:
 	.string	"__WORDSIZE 64"
-.LASF702:
-	.string	"AS_LONGLONG(value) ((value).as.lnglng)"
-.LASF814:
-	.string	"VAL_ULONGLONG"
+.LASF392:
+	.string	"_WCHAR_T_DEFINED "
 .LASF509:
 	.string	"__LONG_DOUBLE_USES_FLOAT128 0"
 .LASF309:
@@ -6440,8 +6432,6 @@ printObject:
 	.string	"__stub_stty "
 .LASF37:
 	.string	"__PTRDIFF_TYPE__ long int"
-.LASF568:
-	.string	"__NLINK_T_TYPE __SYSCALL_ULONG_TYPE"
 .LASF270:
 	.string	"__DEC32_SUBNORMAL_MIN__ 0.000001E-95DF"
 .LASF468:
@@ -6470,9 +6460,9 @@ printObject:
 	.string	"__SIZE_MAX__ 0xffffffffffffffffUL"
 .LASF779:
 	.string	"__int16_t"
-.LASF866:
+.LASF863:
 	.string	"_IO_backup_base"
-.LASF875:
+.LASF872:
 	.string	"_shortbuf"
 .LASF395:
 	.string	"__INT_WCHAR_T_H "
@@ -6482,10 +6472,10 @@ printObject:
 	.string	"_STRING_H 1"
 .LASF602:
 	.string	"_BITS_WCHAR_H 1"
-.LASF699:
-	.string	"AS_LONG(value) ((value).as.lng)"
 .LASF662:
 	.string	"INT64_C(c) c ## L"
+.LASF688:
+	.string	"IS_I64(value) ((value).type == VAL_I64)"
 .LASF60:
 	.string	"__UINT_LEAST64_TYPE__ long unsigned int"
 .LASF173:
@@ -6508,10 +6498,12 @@ printObject:
 	.string	"__FLT64X_EPSILON__ 1.08420217248550443400745280086994171e-19F64x"
 .LASF4:
 	.string	"__GNUC_MINOR__ 3"
-.LASF831:
+.LASF828:
 	.string	"values"
 .LASF182:
 	.string	"__LDBL_MIN_10_EXP__ (-4931)"
+.LASF704:
+	.string	"AS_F64(value) ((value).as.f64)"
 .LASF300:
 	.string	"__GCC_ATOMIC_INT_LOCK_FREE 2"
 .LASF245:
@@ -6528,12 +6520,12 @@ printObject:
 	.string	"__SSE2__ 1"
 .LASF232:
 	.string	"__FLT128_DENORM_MIN__ 6.47517511943802511092443895822764655e-4966F128"
-.LASF864:
+.LASF861:
 	.string	"_IO_buf_end"
 .LASF583:
 	.string	"__TIME_T_TYPE __SYSCALL_SLONG_TYPE"
-.LASF515:
-	.string	"__REDIRECT_LDBL(name,proto,alias) __REDIRECT (name, proto, alias)"
+.LASF561:
+	.string	"__SYSCALL_ULONG_TYPE __ULONGWORD_TYPE"
 .LASF494:
 	.string	"__extern_always_inline extern __always_inline __attribute__ ((__gnu_inline__))"
 .LASF285:
@@ -6542,11 +6534,11 @@ printObject:
 	.string	"__DEC128_SUBNORMAL_MIN__ 0.000000000000000000000000000000001E-6143DL"
 .LASF166:
 	.string	"__DBL_DIG__ 15"
-.LASF851:
+.LASF848:
 	.string	"globalNames"
 .LASF486:
 	.string	"__attribute_format_strfmon__(a,b) __attribute__ ((__format__ (__strfmon__, a, b)))"
-.LASF906:
+.LASF903:
 	.string	"allocateObject"
 .LASF27:
 	.string	"__SIZEOF_SIZE_T__ 8"
@@ -6554,8 +6546,6 @@ printObject:
 	.string	"UINT_FAST8_MAX (255)"
 .LASF217:
 	.string	"__FLT64_EPSILON__ 2.22044604925031308084726333618164062e-16F64"
-.LASF716:
-	.string	"FLOAT_VAL(value) ((Value){VAL_FLOAT, {.flt = value}})"
 .LASF464:
 	.string	"__END_DECLS "
 .LASF332:
@@ -6570,11 +6560,11 @@ printObject:
 	.string	"__ATOMIC_HLE_RELEASE 131072"
 .LASF65:
 	.string	"__UINT_FAST8_TYPE__ unsigned char"
-.LASF834:
+.LASF831:
 	.string	"ObjType"
 .LASF109:
 	.string	"__UINT64_MAX__ 0xffffffffffffffffUL"
-.LASF891:
+.LASF888:
 	.string	"stderr"
 .LASF329:
 	.string	"__SSE_MATH__ 1"
@@ -6594,8 +6584,8 @@ printObject:
 	.string	"INT8_C(c) c"
 .LASF254:
 	.string	"__FLT64X_MAX_EXP__ 16384"
-.LASF7:
-	.string	"__ATOMIC_RELAXED 0"
+.LASF604:
+	.string	"__WCHAR_MIN __WCHAR_MIN__"
 .LASF476:
 	.string	"__ASMNAME2(prefix,cname) __STRING (prefix) cname"
 .LASF177:
@@ -6610,27 +6600,25 @@ printObject:
 	.string	"__GNUC_PATCHLEVEL__ 0"
 .LASF62:
 	.string	"__INT_FAST16_TYPE__ long int"
-.LASF720:
-	.string	"DOUBLELONG_VAL(value) ((Value){VAL_DOUBLELONG, {.dbllng = value}})"
-.LASF700:
-	.string	"AS_ULONG(value) ((value).as.uLng)"
 .LASF551:
 	.string	"__UQUAD_TYPE unsigned long int"
 .LASF553:
 	.string	"__UWORD_TYPE unsigned long int"
 .LASF274:
 	.string	"__DEC64_MIN__ 1E-383DD"
-.LASF874:
+.LASF871:
 	.string	"_vtable_offset"
-.LASF901:
+.LASF898:
 	.string	"GNU C99 9.3.0 -mtune=generic -march=x86-64 -g -ggdb3 -O0 -std=c99 -fasynchronous-unwind-tables -fstack-protector-strong -fstack-clash-protection -fcf-protection"
 .LASF359:
 	.string	"_PTRDIFF_T_ "
 .LASF474:
 	.string	"__REDIRECT_NTHNL(name,proto,alias) name proto __asm__ (__ASMNAME (#alias)) __THROWNL"
-.LASF392:
-	.string	"_WCHAR_T_DEFINED "
-.LASF896:
+.LASF717:
+	.string	"U64_VAL(value) ((Value){VAL_U64, {.u64 = value}})"
+.LASF568:
+	.string	"__NLINK_T_TYPE __SYSCALL_ULONG_TYPE"
+.LASF893:
 	.string	"hashString"
 .LASF103:
 	.string	"__INT16_MAX__ 0x7fff"
@@ -6660,10 +6648,10 @@ printObject:
 	.string	"__feof_unlocked_body(_fp) (((_fp)->_flags & _IO_EOF_SEEN) != 0)"
 .LASF673:
 	.string	"object_h "
+.LASF450:
+	.string	"__PMT"
 .LASF267:
 	.string	"__DEC32_MIN__ 1E-95DF"
-.LASF711:
-	.string	"UCHAR_VAL(value) ((Value){VAL_UCHAR, {.uCh = value}})"
 .LASF544:
 	.string	"__S16_TYPE short int"
 .LASF311:
@@ -6684,7 +6672,7 @@ printObject:
 	.string	"__attribute_artificial__ __attribute__ ((__artificial__))"
 .LASF205:
 	.string	"__FLT32_HAS_DENORM__ 1"
-.LASF888:
+.LASF885:
 	.string	"_IO_wide_data"
 .LASF52:
 	.string	"__UINT64_TYPE__ long unsigned int"
@@ -6708,32 +6696,36 @@ printObject:
 	.string	"INT64_MIN (-__INT64_C(9223372036854775807)-1)"
 .LASF747:
 	.string	"_IO_EOF_SEEN 0x0010"
-.LASF687:
-	.string	"IS_ULONG(value) ((value).type == VAL_ULONG)"
+.LASF816:
+	.string	"VAL_F128"
+.LASF684:
+	.string	"IS_I16(value) ((value).type == VAL_I16)"
 .LASF215:
 	.string	"__FLT64_MAX__ 1.79769313486231570814527423731704357e+308F64"
 .LASF799:
 	.string	"ObjString"
 .LASF379:
 	.string	"_GCC_SIZE_T "
-.LASF810:
-	.string	"VAL_LONG"
 .LASF91:
 	.string	"__WINT_WIDTH__ 32"
 .LASF773:
 	.string	"short unsigned int"
-.LASF838:
+.LASF835:
 	.string	"Table"
 .LASF77:
 	.string	"__LONG_MAX__ 0x7fffffffffffffffL"
-.LASF828:
+.LASF825:
 	.string	"Value"
 .LASF20:
 	.string	"__SIZEOF_INT__ 4"
 .LASF398:
 	.string	"_BSD_WCHAR_T_"
+.LASF697:
+	.string	"AS_I16(value) ((value).as.i16)"
 .LASF626:
 	.string	"INT_LEAST32_MAX (2147483647)"
+.LASF35:
+	.string	"__SIZEOF_POINTER__ 8"
 .LASF795:
 	.string	"uint32_t"
 .LASF438:
@@ -6748,7 +6740,7 @@ printObject:
 	.string	"__UINTPTR_MAX__ 0xffffffffffffffffUL"
 .LASF321:
 	.string	"__GCC_ASM_FLAG_OUTPUTS__ 1"
-.LASF870:
+.LASF867:
 	.string	"_fileno"
 .LASF465:
 	.string	"__bos(ptr) __builtin_object_size (ptr, __USE_FORTIFY_LEVEL > 1)"
@@ -6760,15 +6752,13 @@ printObject:
 	.string	"__unix__ 1"
 .LASF574:
 	.string	"__RLIM64_T_TYPE __UQUAD_TYPE"
-.LASF723:
-	.string	"IS_STRING(value) isObjType(value, OBJ_STRING)"
 .LASF519:
 	.string	"__HAVE_GENERIC_SELECTION 1"
 .LASF613:
 	.string	"INT16_MAX (32767)"
 .LASF657:
 	.string	"WINT_MIN (0u)"
-.LASF879:
+.LASF876:
 	.string	"_wide_data"
 .LASF180:
 	.string	"__LDBL_DIG__ 18"
@@ -6794,9 +6784,9 @@ printObject:
 	.string	"_BSD_SIZE_T_DEFINED_ "
 .LASF605:
 	.string	"_BITS_STDINT_INTN_H 1"
-.LASF825:
+.LASF822:
 	.string	"float"
-.LASF890:
+.LASF887:
 	.string	"stdout"
 .LASF206:
 	.string	"__FLT32_HAS_INFINITY__ 1"
@@ -6804,7 +6794,7 @@ printObject:
 	.string	"INT_FAST16_MAX (9223372036854775807L)"
 .LASF537:
 	.string	"__GLIBC_USE_IEC_60559_FUNCS_EXT 0"
-.LASF846:
+.LASF843:
 	.string	"lines"
 .LASF336:
 	.string	"__linux__ 1"
@@ -6822,32 +6812,36 @@ printObject:
 	.string	"DEBUG_TRACE_EXECUTION "
 .LASF592:
 	.string	"__SSIZE_T_TYPE __SWORD_TYPE"
-.LASF174:
-	.string	"__DBL_EPSILON__ ((double)2.22044604925031308084726333618164062e-16L)"
+.LASF603:
+	.string	"__WCHAR_MAX __WCHAR_MAX__"
 .LASF737:
 	.string	"__need___va_list"
-.LASF837:
+.LASF834:
 	.string	"entries"
 .LASF318:
 	.string	"__SIZEOF_FLOAT128__ 16"
-.LASF833:
+.LASF830:
 	.string	"OBJ_STRING"
 .LASF126:
 	.string	"__UINT_LEAST32_MAX__ 0xffffffffU"
 .LASF171:
 	.string	"__DBL_DECIMAL_DIG__ 17"
+.LASF686:
+	.string	"IS_I32(value) ((value).type == VAL_I32)"
 .LASF744:
 	.string	"__struct_FILE_defined 1"
-.LASF871:
-	.string	"_flags2"
+.LASF702:
+	.string	"AS_U64(value) ((value).as.u64)"
 .LASF782:
 	.string	"__int32_t"
+.LASF692:
+	.string	"IS_F128(value) ((value).type == VAL_F128)"
 .LASF792:
 	.string	"int64_t"
 .LASF569:
 	.string	"__FSWORD_T_TYPE __SYSCALL_SLONG_TYPE"
-.LASF698:
-	.string	"AS_UINT(value) ((value).as.uIn)"
+.LASF710:
+	.string	"I8_VAL(value) ((Value){VAL_I8, {.i8 = value}})"
 .LASF430:
 	.string	"__KERNEL_STRICT_NAMES"
 .LASF49:
@@ -6860,7 +6854,7 @@ printObject:
 	.string	"__USE_LARGEFILE64"
 .LASF745:
 	.string	"__getc_unlocked_body(_fp) (__glibc_unlikely ((_fp)->_IO_read_ptr >= (_fp)->_IO_read_end) ? __uflow (_fp) : *(unsigned char *) (_fp)->_IO_read_ptr++)"
-.LASF847:
+.LASF844:
 	.string	"Chunk"
 .LASF819:
 	.string	"boolean"
@@ -6868,8 +6862,8 @@ printObject:
 	.string	"__FLT64X_DIG__ 18"
 .LASF802:
 	.string	"hash"
-.LASF686:
-	.string	"IS_LONG(value) ((value).type == VAL_LONG)"
+.LASF545:
+	.string	"__U16_TYPE unsigned short int"
 .LASF728:
 	.string	"GROW_CAPACITY(capacity) ((capacity) < 8 ? 8 : (capacity) * 2)"
 .LASF11:
@@ -6882,8 +6876,6 @@ printObject:
 	.string	"next"
 .LASF135:
 	.string	"__INT_FAST32_WIDTH__ 64"
-.LASF710:
-	.string	"CHAR_VAL(value) ((Value){VAL_CHAR, {.ch = value}})"
 .LASF175:
 	.string	"__DBL_DENORM_MIN__ ((double)4.94065645841246544176568792868221372e-324L)"
 .LASF256:
@@ -6892,22 +6884,24 @@ printObject:
 	.string	"__GLIBC_USE_LIB_EXT2"
 .LASF597:
 	.string	"__STATFS_MATCHES_STATFS64 1"
-.LASF823:
-	.string	"dbllng"
 .LASF651:
 	.string	"PTRDIFF_MAX (9223372036854775807L)"
+.LASF718:
+	.string	"F32_VAL(value) ((Value){VAL_F32, {.f32 = value}})"
 .LASF165:
 	.string	"__DBL_MANT_DIG__ 53"
 .LASF667:
 	.string	"INTMAX_C(c) c ## L"
-.LASF561:
-	.string	"__SYSCALL_ULONG_TYPE __ULONGWORD_TYPE"
+.LASF137:
+	.string	"__INT_FAST64_WIDTH__ 64"
 .LASF499:
 	.string	"__glibc_unlikely(cond) __builtin_expect ((cond), 0)"
 .LASF76:
 	.string	"__INT_MAX__ 0x7fffffff"
 .LASF128:
 	.string	"__UINT_LEAST64_MAX__ 0xffffffffffffffffUL"
+.LASF107:
+	.string	"__UINT16_MAX__ 0xffff"
 .LASF726:
 	.string	"ALLOCATE(type,count) (type*)reallocate(NULL, 0, sizeof(type) * (count))"
 .LASF762:

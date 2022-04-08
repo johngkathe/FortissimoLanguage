@@ -2,13 +2,63 @@
 	.text
 .Ltext0:
 	.comm	scanner,24,16
+	.type	makeToken, @function
+makeToken:
+.LFB0:
+	.file 1 "Tokenization/scanner/scanner.h"
+	.loc 1 193 39
+	.cfi_startproc
+	endbr64
+	pushq	%rbp
+	.cfi_def_cfa_offset 16
+	.cfi_offset 6, -16
+	movq	%rsp, %rbp
+	.cfi_def_cfa_register 6
+	movq	%rdi, -40(%rbp)
+	movl	%esi, -44(%rbp)
+	.loc 1 195 16
+	movl	-44(%rbp), %eax
+	movl	%eax, -32(%rbp)
+	.loc 1 196 26
+	movq	scanner(%rip), %rax
+	.loc 1 196 17
+	movq	%rax, -24(%rbp)
+	.loc 1 197 37
+	movq	8+scanner(%rip), %rdx
+	.loc 1 197 55
+	movq	scanner(%rip), %rax
+	.loc 1 197 46
+	subq	%rax, %rdx
+	movq	%rdx, %rax
+	.loc 1 197 18
+	movw	%ax, -16(%rbp)
+	.loc 1 198 25
+	movzwl	16+scanner(%rip), %eax
+	.loc 1 198 16
+	movw	%ax, -14(%rbp)
+	.loc 1 199 12
+	movq	-40(%rbp), %rcx
+	movq	-32(%rbp), %rax
+	movq	-24(%rbp), %rdx
+	movq	%rax, (%rcx)
+	movq	%rdx, 8(%rcx)
+	movq	-16(%rbp), %rax
+	movq	%rax, 16(%rcx)
+	.loc 1 200 1
+	movq	-40(%rbp), %rax
+	popq	%rbp
+	.cfi_def_cfa 7, 8
+	ret
+	.cfi_endproc
+.LFE0:
+	.size	makeToken, .-makeToken
 	.comm	token,24,16
 	.globl	initScanner
 	.type	initScanner, @function
 initScanner:
-.LFB0:
-	.file 1 "Tokenization/scanner/scanner.c"
-	.loc 1 17 39
+.LFB1:
+	.file 2 "Tokenization/scanner/scanner.c"
+	.loc 2 17 39
 	.cfi_startproc
 	endbr64
 	pushq	%rbp
@@ -17,73 +67,26 @@ initScanner:
 	movq	%rsp, %rbp
 	.cfi_def_cfa_register 6
 	movq	%rdi, -8(%rbp)
-	.loc 1 18 19
+	.loc 2 18 19
 	movq	-8(%rbp), %rax
 	movq	%rax, scanner(%rip)
-	.loc 1 19 21
+	.loc 2 19 21
 	movq	-8(%rbp), %rax
 	movq	%rax, 8+scanner(%rip)
-	.loc 1 20 18
+	.loc 2 20 18
 	movw	$1, 16+scanner(%rip)
-	.loc 1 21 1
+	.loc 2 21 1
 	nop
 	popq	%rbp
 	.cfi_def_cfa 7, 8
 	ret
 	.cfi_endproc
-.LFE0:
+.LFE1:
 	.size	initScanner, .-initScanner
 	.type	isAlpha, @function
 isAlpha:
-.LFB1:
-	.loc 1 23 29
-	.cfi_startproc
-	endbr64
-	pushq	%rbp
-	.cfi_def_cfa_offset 16
-	.cfi_offset 6, -16
-	movq	%rsp, %rbp
-	.cfi_def_cfa_register 6
-	movl	%edi, %eax
-	movb	%al, -4(%rbp)
-	.loc 1 24 61
-	cmpb	$96, -4(%rbp)
-	jle	.L3
-	.loc 1 24 22 discriminator 1
-	cmpb	$122, -4(%rbp)
-	jle	.L4
-.L3:
-	.loc 1 24 35 discriminator 4
-	cmpb	$64, -4(%rbp)
-	jle	.L5
-	.loc 1 24 48 discriminator 5
-	cmpb	$90, -4(%rbp)
-	jle	.L4
-.L5:
-	.loc 1 24 61 discriminator 8
-	cmpb	$95, -4(%rbp)
-	jne	.L6
-.L4:
-	.loc 1 24 61 is_stmt 0 discriminator 9
-	movl	$1, %eax
-	jmp	.L7
-.L6:
-	.loc 1 24 61 discriminator 10
-	movl	$0, %eax
-.L7:
-	.loc 1 24 61 discriminator 12
-	andl	$1, %eax
-	.loc 1 25 1 is_stmt 1 discriminator 12
-	popq	%rbp
-	.cfi_def_cfa 7, 8
-	ret
-	.cfi_endproc
-.LFE1:
-	.size	isAlpha, .-isAlpha
-	.type	isDigit, @function
-isDigit:
 .LFB2:
-	.loc 1 27 29
+	.loc 2 23 29
 	.cfi_startproc
 	endbr64
 	pushq	%rbp
@@ -93,32 +96,44 @@ isDigit:
 	.cfi_def_cfa_register 6
 	movl	%edi, %eax
 	movb	%al, -4(%rbp)
-	.loc 1 28 21
-	cmpb	$47, -4(%rbp)
-	jle	.L10
-	.loc 1 28 21 is_stmt 0 discriminator 1
-	cmpb	$57, -4(%rbp)
-	jg	.L10
-	.loc 1 28 21 discriminator 3
+	.loc 2 24 61
+	cmpb	$96, -4(%rbp)
+	jle	.L5
+	.loc 2 24 22 discriminator 1
+	cmpb	$122, -4(%rbp)
+	jle	.L6
+.L5:
+	.loc 2 24 35 discriminator 4
+	cmpb	$64, -4(%rbp)
+	jle	.L7
+	.loc 2 24 48 discriminator 5
+	cmpb	$90, -4(%rbp)
+	jle	.L6
+.L7:
+	.loc 2 24 61 discriminator 8
+	cmpb	$95, -4(%rbp)
+	jne	.L8
+.L6:
+	.loc 2 24 61 is_stmt 0 discriminator 9
 	movl	$1, %eax
-	jmp	.L11
-.L10:
-	.loc 1 28 21 discriminator 4
+	jmp	.L9
+.L8:
+	.loc 2 24 61 discriminator 10
 	movl	$0, %eax
-.L11:
-	.loc 1 28 21 discriminator 6
+.L9:
+	.loc 2 24 61 discriminator 12
 	andl	$1, %eax
-	.loc 1 29 1 is_stmt 1 discriminator 6
+	.loc 2 25 1 is_stmt 1 discriminator 12
 	popq	%rbp
 	.cfi_def_cfa 7, 8
 	ret
 	.cfi_endproc
 .LFE2:
-	.size	isDigit, .-isDigit
-	.type	isAtEnd, @function
-isAtEnd:
+	.size	isAlpha, .-isAlpha
+	.type	isDigit, @function
+isDigit:
 .LFB3:
-	.loc 1 31 21
+	.loc 2 27 29
 	.cfi_startproc
 	endbr64
 	pushq	%rbp
@@ -126,24 +141,34 @@ isAtEnd:
 	.cfi_offset 6, -16
 	movq	%rsp, %rbp
 	.cfi_def_cfa_register 6
-	.loc 1 32 20
-	movq	8+scanner(%rip), %rax
-	.loc 1 32 12
-	movzbl	(%rax), %eax
-	.loc 1 32 29
-	testb	%al, %al
-	sete	%al
-	.loc 1 33 1
+	movl	%edi, %eax
+	movb	%al, -4(%rbp)
+	.loc 2 28 21
+	cmpb	$47, -4(%rbp)
+	jle	.L12
+	.loc 2 28 21 is_stmt 0 discriminator 1
+	cmpb	$57, -4(%rbp)
+	jg	.L12
+	.loc 2 28 21 discriminator 3
+	movl	$1, %eax
+	jmp	.L13
+.L12:
+	.loc 2 28 21 discriminator 4
+	movl	$0, %eax
+.L13:
+	.loc 2 28 21 discriminator 6
+	andl	$1, %eax
+	.loc 2 29 1 is_stmt 1 discriminator 6
 	popq	%rbp
 	.cfi_def_cfa 7, 8
 	ret
 	.cfi_endproc
 .LFE3:
-	.size	isAtEnd, .-isAtEnd
-	.type	checkChar, @function
-checkChar:
+	.size	isDigit, .-isDigit
+	.type	isAtEnd, @function
+isAtEnd:
 .LFB4:
-	.loc 1 40 26
+	.loc 2 31 21
 	.cfi_startproc
 	endbr64
 	pushq	%rbp
@@ -151,21 +176,24 @@ checkChar:
 	.cfi_offset 6, -16
 	movq	%rsp, %rbp
 	.cfi_def_cfa_register 6
-	.loc 1 41 20
+	.loc 2 32 20
 	movq	8+scanner(%rip), %rax
-	.loc 1 41 12
+	.loc 2 32 12
 	movzbl	(%rax), %eax
-	.loc 1 42 1
+	.loc 2 32 29
+	testb	%al, %al
+	sete	%al
+	.loc 2 33 1
 	popq	%rbp
 	.cfi_def_cfa 7, 8
 	ret
 	.cfi_endproc
 .LFE4:
-	.size	checkChar, .-checkChar
-	.type	checkNextChar, @function
-checkNextChar:
+	.size	isAtEnd, .-isAtEnd
+	.type	checkChar, @function
+checkChar:
 .LFB5:
-	.loc 1 44 30
+	.loc 2 40 26
 	.cfi_startproc
 	endbr64
 	pushq	%rbp
@@ -173,33 +201,55 @@ checkNextChar:
 	.cfi_offset 6, -16
 	movq	%rsp, %rbp
 	.cfi_def_cfa_register 6
-	.loc 1 45 8
-	movl	$0, %eax
-	call	isAtEnd
-	.loc 1 45 7
-	testb	%al, %al
-	je	.L18
-	.loc 1 45 26 discriminator 1
-	movl	$0, %eax
-	jmp	.L19
-.L18:
-	.loc 1 46 19
+	.loc 2 41 20
 	movq	8+scanner(%rip), %rax
-	.loc 1 46 27
-	addq	$1, %rax
+	.loc 2 41 12
 	movzbl	(%rax), %eax
-.L19:
-	.loc 1 47 1
+	.loc 2 42 1
 	popq	%rbp
 	.cfi_def_cfa 7, 8
 	ret
 	.cfi_endproc
 .LFE5:
+	.size	checkChar, .-checkChar
+	.type	checkNextChar, @function
+checkNextChar:
+.LFB6:
+	.loc 2 44 30
+	.cfi_startproc
+	endbr64
+	pushq	%rbp
+	.cfi_def_cfa_offset 16
+	.cfi_offset 6, -16
+	movq	%rsp, %rbp
+	.cfi_def_cfa_register 6
+	.loc 2 45 8
+	movl	$0, %eax
+	call	isAtEnd
+	.loc 2 45 7
+	testb	%al, %al
+	je	.L20
+	.loc 2 45 26 discriminator 1
+	movl	$0, %eax
+	jmp	.L21
+.L20:
+	.loc 2 46 19
+	movq	8+scanner(%rip), %rax
+	.loc 2 46 27
+	addq	$1, %rax
+	movzbl	(%rax), %eax
+.L21:
+	.loc 2 47 1
+	popq	%rbp
+	.cfi_def_cfa 7, 8
+	ret
+	.cfi_endproc
+.LFE6:
 	.size	checkNextChar, .-checkNextChar
 	.type	nextChar, @function
 nextChar:
-.LFB6:
-	.loc 1 49 25
+.LFB7:
+	.loc 2 49 25
 	.cfi_startproc
 	endbr64
 	pushq	%rbp
@@ -208,37 +258,37 @@ nextChar:
 	movq	%rsp, %rbp
 	.cfi_def_cfa_register 6
 	subq	$16, %rsp
-	.loc 1 50 16
+	.loc 2 50 16
 	movl	$0, %eax
 	call	checkChar
 	movb	%al, -1(%rbp)
-	.loc 1 51 12
+	.loc 2 51 12
 	movq	8+scanner(%rip), %rax
-	.loc 1 51 20
+	.loc 2 51 20
 	addq	$1, %rax
 	movq	%rax, 8+scanner(%rip)
-	.loc 1 52 7
+	.loc 2 52 7
 	cmpb	$10, -1(%rbp)
-	jne	.L21
-	.loc 1 52 26 discriminator 1
+	jne	.L23
+	.loc 2 52 26 discriminator 1
 	movzwl	16+scanner(%rip), %eax
-	.loc 1 52 31 discriminator 1
+	.loc 2 52 31 discriminator 1
 	addl	$1, %eax
 	movw	%ax, 16+scanner(%rip)
-.L21:
-	.loc 1 53 12
+.L23:
+	.loc 2 53 12
 	movzbl	-1(%rbp), %eax
-	.loc 1 54 1
+	.loc 2 54 1
 	leave
 	.cfi_def_cfa 7, 8
 	ret
 	.cfi_endproc
-.LFE6:
+.LFE7:
 	.size	nextChar, .-nextChar
 	.type	compareChar, @function
 compareChar:
-.LFB7:
-	.loc 1 56 33
+.LFB8:
+	.loc 2 56 33
 	.cfi_startproc
 	endbr64
 	pushq	%rbp
@@ -249,82 +299,33 @@ compareChar:
 	subq	$8, %rsp
 	movl	%edi, %eax
 	movb	%al, -4(%rbp)
-	.loc 1 57 8
+	.loc 2 57 8
 	movl	$0, %eax
 	call	checkChar
-	.loc 1 57 7
+	.loc 2 57 7
 	cmpb	%al, -4(%rbp)
-	je	.L24
-	.loc 1 57 32 discriminator 1
+	je	.L26
+	.loc 2 57 32 discriminator 1
 	movl	$0, %eax
-	jmp	.L25
-.L24:
-	.loc 1 58 5
+	jmp	.L27
+.L26:
+	.loc 2 58 5
 	movl	$0, %eax
 	call	nextChar
-	.loc 1 59 11
+	.loc 2 59 11
 	movl	$1, %eax
-.L25:
-	.loc 1 60 1
+.L27:
+	.loc 2 60 1
 	leave
 	.cfi_def_cfa 7, 8
 	ret
 	.cfi_endproc
-.LFE7:
-	.size	compareChar, .-compareChar
-	.type	makeToken, @function
-makeToken:
-.LFB8:
-	.loc 1 62 39
-	.cfi_startproc
-	endbr64
-	pushq	%rbp
-	.cfi_def_cfa_offset 16
-	.cfi_offset 6, -16
-	movq	%rsp, %rbp
-	.cfi_def_cfa_register 6
-	movq	%rdi, -40(%rbp)
-	movl	%esi, -44(%rbp)
-	.loc 1 64 16
-	movl	-44(%rbp), %eax
-	movl	%eax, -32(%rbp)
-	.loc 1 65 26
-	movq	scanner(%rip), %rax
-	.loc 1 65 17
-	movq	%rax, -24(%rbp)
-	.loc 1 66 33
-	movq	8+scanner(%rip), %rdx
-	.loc 1 66 51
-	movq	scanner(%rip), %rax
-	.loc 1 66 42
-	subq	%rax, %rdx
-	movq	%rdx, %rax
-	.loc 1 66 18
-	movw	%ax, -16(%rbp)
-	.loc 1 67 25
-	movzwl	16+scanner(%rip), %eax
-	.loc 1 67 16
-	movw	%ax, -14(%rbp)
-	.loc 1 68 12
-	movq	-40(%rbp), %rcx
-	movq	-32(%rbp), %rax
-	movq	-24(%rbp), %rdx
-	movq	%rax, (%rcx)
-	movq	%rdx, 8(%rcx)
-	movq	-16(%rbp), %rax
-	movq	%rax, 16(%rcx)
-	.loc 1 69 1
-	movq	-40(%rbp), %rax
-	popq	%rbp
-	.cfi_def_cfa 7, 8
-	ret
-	.cfi_endproc
 .LFE8:
-	.size	makeToken, .-makeToken
+	.size	compareChar, .-compareChar
 	.type	makeTwoCharToken, @function
 makeTwoCharToken:
 .LFB9:
-	.loc 1 73 70
+	.loc 2 74 70
 	.cfi_startproc
 	endbr64
 	pushq	%rbp
@@ -338,34 +339,34 @@ makeTwoCharToken:
 	movl	%edx, -32(%rbp)
 	movl	%ecx, -36(%rbp)
 	movb	%al, -28(%rbp)
-	.loc 1 73 70
+	.loc 2 74 70
 	movq	%fs:40, %rax
 	movq	%rax, -8(%rbp)
 	xorl	%eax, %eax
-	.loc 1 74 22
+	.loc 2 75 22
 	movsbl	-28(%rbp), %eax
 	movl	%eax, %edi
 	call	compareChar
-	.loc 1 74 12
+	.loc 2 75 12
 	testb	%al, %al
 	je	.L29
-	.loc 1 74 12 is_stmt 0 discriminator 1
+	.loc 2 75 12 is_stmt 0 discriminator 1
 	movl	-32(%rbp), %eax
 	jmp	.L30
 .L29:
-	.loc 1 74 12 discriminator 2
+	.loc 2 75 12 discriminator 2
 	movl	-36(%rbp), %eax
 .L30:
-	.loc 1 74 12 discriminator 4
+	.loc 2 75 12 discriminator 4
 	movq	-24(%rbp), %rdx
 	movl	%eax, %esi
 	movq	%rdx, %rdi
 	call	makeToken
-	.loc 1 75 1 is_stmt 1 discriminator 4
+	.loc 2 76 1 is_stmt 1 discriminator 4
 	movq	-8(%rbp), %rax
 	xorq	%fs:40, %rax
 	je	.L32
-	.loc 1 75 1 is_stmt 0
+	.loc 2 76 1 is_stmt 0
 	call	__stack_chk_fail@PLT
 .L32:
 	movq	-24(%rbp), %rax
@@ -378,7 +379,7 @@ makeTwoCharToken:
 	.type	errorToken, @function
 errorToken:
 .LFB10:
-	.loc 1 77 47 is_stmt 1
+	.loc 2 78 47 is_stmt 1
 	.cfi_startproc
 	endbr64
 	pushq	%rbp
@@ -389,22 +390,22 @@ errorToken:
 	subq	$48, %rsp
 	movq	%rdi, -40(%rbp)
 	movq	%rsi, -48(%rbp)
-	.loc 1 79 16
-	movl	$119, -32(%rbp)
-	.loc 1 80 17
+	.loc 2 80 16
+	movl	$122, -32(%rbp)
+	.loc 2 81 17
 	movq	-48(%rbp), %rax
 	movq	%rax, -24(%rbp)
-	.loc 1 81 29
+	.loc 2 82 29
 	movq	-48(%rbp), %rax
 	movq	%rax, %rdi
 	call	strlen@PLT
-	.loc 1 81 18
+	.loc 2 82 18
 	movw	%ax, -16(%rbp)
-	.loc 1 82 25
+	.loc 2 83 25
 	movzwl	16+scanner(%rip), %eax
-	.loc 1 82 16
+	.loc 2 83 16
 	movw	%ax, -14(%rbp)
-	.loc 1 83 12
+	.loc 2 84 12
 	movq	-40(%rbp), %rcx
 	movq	-32(%rbp), %rax
 	movq	-24(%rbp), %rdx
@@ -412,7 +413,7 @@ errorToken:
 	movq	%rdx, 8(%rcx)
 	movq	-16(%rbp), %rax
 	movq	%rax, 16(%rcx)
-	.loc 1 84 1
+	.loc 2 85 1
 	movq	-40(%rbp), %rax
 	leave
 	.cfi_def_cfa 7, 8
@@ -427,7 +428,7 @@ errorToken:
 	.type	invalidToken, @function
 invalidToken:
 .LFB11:
-	.loc 1 86 36
+	.loc 2 87 36
 	.cfi_startproc
 	endbr64
 	pushq	%rbp
@@ -438,11 +439,11 @@ invalidToken:
 	subq	$64, %rsp
 	movl	%edi, %eax
 	movb	%al, -52(%rbp)
-	.loc 1 86 36
+	.loc 2 87 36
 	movq	%fs:40, %rax
 	movq	%rax, -8(%rbp)
 	xorl	%eax, %eax
-	.loc 1 88 5
+	.loc 2 89 5
 	movabsq	$8386658464824651349, %rax
 	movabsq	$7021781869991584869, %rdx
 	movq	%rax, -48(%rbp)
@@ -450,26 +451,26 @@ invalidToken:
 	movabsq	$4838871760032330851, %rax
 	movq	%rax, -32(%rbp)
 	movw	$39, -24(%rbp)
-	.loc 1 89 12
+	.loc 2 90 12
 	leaq	-48(%rbp), %rax
 	movq	%rax, %rdi
 	call	strlen@PLT
-	.loc 1 89 27
+	.loc 2 90 27
 	leaq	-2(%rax), %rdx
-	.loc 1 89 32
+	.loc 2 90 32
 	movzbl	-52(%rbp), %eax
 	movb	%al, -48(%rbp,%rdx)
-	.loc 1 91 5
+	.loc 2 92 5
 	movzbl	-52(%rbp), %eax
 	movl	%eax, %esi
 	leaq	.LC0(%rip), %rdi
 	movl	$0, %eax
 	call	printf@PLT
-	.loc 1 92 5
+	.loc 2 93 5
 	leaq	-48(%rbp), %rax
 	movq	%rax, %rdi
 	call	puts@PLT
-	.loc 1 93 1
+	.loc 2 94 1
 	nop
 	movq	-8(%rbp), %rax
 	xorq	%fs:40, %rax
@@ -485,7 +486,7 @@ invalidToken:
 	.type	skipLineComment, @function
 skipLineComment:
 .LFB12:
-	.loc 1 95 30
+	.loc 2 96 30
 	.cfi_startproc
 	endbr64
 	pushq	%rbp
@@ -493,29 +494,29 @@ skipLineComment:
 	.cfi_offset 6, -16
 	movq	%rsp, %rbp
 	.cfi_def_cfa_register 6
-	.loc 1 96 10
+	.loc 2 97 10
 	jmp	.L38
 .L40:
-	.loc 1 97 9
+	.loc 2 98 9
 	movl	$0, %eax
 	call	nextChar
 .L38:
-	.loc 1 96 11
+	.loc 2 97 11
 	movl	$0, %eax
 	call	checkChar
-	.loc 1 96 10
+	.loc 2 97 10
 	cmpb	$10, %al
 	je	.L41
-	.loc 1 96 35 discriminator 1
+	.loc 2 97 35 discriminator 1
 	movl	$0, %eax
 	call	isAtEnd
-	.loc 1 96 34 discriminator 1
+	.loc 2 97 34 discriminator 1
 	xorl	$1, %eax
-	.loc 1 96 31 discriminator 1
+	.loc 2 97 31 discriminator 1
 	testb	%al, %al
 	jne	.L40
 .L41:
-	.loc 1 99 1
+	.loc 2 100 1
 	nop
 	popq	%rbp
 	.cfi_def_cfa 7, 8
@@ -530,7 +531,7 @@ skipLineComment:
 	.type	skipBlockComment, @function
 skipBlockComment:
 .LFB13:
-	.loc 1 101 31
+	.loc 2 102 31
 	.cfi_startproc
 	endbr64
 	pushq	%rbp
@@ -539,90 +540,90 @@ skipBlockComment:
 	movq	%rsp, %rbp
 	.cfi_def_cfa_register 6
 	subq	$48, %rsp
-	.loc 1 101 31
+	.loc 2 102 31
 	movq	%fs:40, %rax
 	movq	%rax, -8(%rbp)
 	xorl	%eax, %eax
-	.loc 1 102 5
+	.loc 2 103 5
 	movl	$0, %eax
 	call	nextChar
-	.loc 1 103 5
+	.loc 2 104 5
 	movl	$0, %eax
 	call	nextChar
-	.loc 1 104 9
+	.loc 2 105 9
 	movl	$1, -12(%rbp)
-	.loc 1 105 10
+	.loc 2 106 10
 	jmp	.L43
 .L48:
-	.loc 1 107 12
+	.loc 2 108 12
 	movl	$0, %eax
 	call	isAtEnd
-	.loc 1 107 11
+	.loc 2 108 11
 	testb	%al, %al
 	je	.L44
-	.loc 1 108 13
+	.loc 2 109 13
 	leaq	-48(%rbp), %rax
 	leaq	.LC1(%rip), %rsi
 	movq	%rax, %rdi
 	call	errorToken
-	.loc 1 108 56
+	.loc 2 109 56
 	jmp	.L42
 .L44:
-	.loc 1 111 12
+	.loc 2 112 12
 	movl	$0, %eax
 	call	checkChar
-	.loc 1 111 11
+	.loc 2 112 11
 	cmpb	$35, %al
 	jne	.L46
-	.loc 1 111 34 discriminator 1
+	.loc 2 112 34 discriminator 1
 	movl	$0, %eax
 	call	checkNextChar
-	.loc 1 111 31 discriminator 1
+	.loc 2 112 31 discriminator 1
 	cmpb	$124, %al
 	jne	.L46
-	.loc 1 112 13
+	.loc 2 113 13
 	movl	$0, %eax
 	call	nextChar
-	.loc 1 113 13
+	.loc 2 114 13
 	movl	$0, %eax
 	call	nextChar
-	.loc 1 114 20
+	.loc 2 115 20
 	addl	$1, -12(%rbp)
-	.loc 1 115 13
+	.loc 2 116 13
 	jmp	.L43
 .L46:
-	.loc 1 118 12
+	.loc 2 119 12
 	movl	$0, %eax
 	call	checkChar
-	.loc 1 118 11
+	.loc 2 119 11
 	cmpb	$124, %al
 	jne	.L47
-	.loc 1 118 34 discriminator 1
+	.loc 2 119 34 discriminator 1
 	movl	$0, %eax
 	call	checkNextChar
-	.loc 1 118 31 discriminator 1
+	.loc 2 119 31 discriminator 1
 	cmpb	$35, %al
 	jne	.L47
-	.loc 1 119 13
+	.loc 2 120 13
 	movl	$0, %eax
 	call	nextChar
-	.loc 1 120 13
+	.loc 2 121 13
 	movl	$0, %eax
 	call	nextChar
-	.loc 1 121 20
+	.loc 2 122 20
 	subl	$1, -12(%rbp)
-	.loc 1 122 13
+	.loc 2 123 13
 	jmp	.L43
 .L47:
-	.loc 1 125 9
+	.loc 2 126 9
 	movl	$0, %eax
 	call	nextChar
 .L43:
-	.loc 1 105 10
+	.loc 2 106 10
 	cmpl	$0, -12(%rbp)
 	jg	.L48
 .L42:
-	.loc 1 127 1
+	.loc 2 128 1
 	movq	-8(%rbp), %rax
 	xorq	%fs:40, %rax
 	je	.L49
@@ -637,7 +638,7 @@ skipBlockComment:
 	.type	skipWhitespace, @function
 skipWhitespace:
 .LFB14:
-	.loc 1 129 29
+	.loc 2 130 29
 	.cfi_startproc
 	endbr64
 	pushq	%rbp
@@ -646,61 +647,103 @@ skipWhitespace:
 	movq	%rsp, %rbp
 	.cfi_def_cfa_register 6
 	subq	$16, %rsp
-.L58:
+.L60:
 .LBB2:
-	.loc 1 131 20
+	.loc 2 132 20
 	movl	$0, %eax
 	call	checkChar
 	movb	%al, -1(%rbp)
-	.loc 1 132 9
+	.loc 2 133 9
 	movsbl	-1(%rbp), %eax
-	cmpl	$35, %eax
-	je	.L51
-	cmpl	$35, %eax
-	jg	.L59
-	cmpl	$32, %eax
-	je	.L53
-	cmpl	$32, %eax
-	jg	.L59
-	cmpl	$9, %eax
-	je	.L53
-	cmpl	$13, %eax
-	jne	.L59
+	subl	$9, %eax
+	cmpl	$26, %eax
+	ja	.L61
+	movl	%eax, %eax
+	leaq	0(,%rax,4), %rdx
+	leaq	.L53(%rip), %rax
+	movl	(%rdx,%rax), %eax
+	cltq
+	leaq	.L53(%rip), %rdx
+	addq	%rdx, %rax
+	notrack jmp	*%rax
+	.section	.rodata
+	.align 4
+	.align 4
 .L53:
-	.loc 1 136 17
+	.long	.L54-.L53
+	.long	.L55-.L53
+	.long	.L61-.L53
+	.long	.L61-.L53
+	.long	.L54-.L53
+	.long	.L61-.L53
+	.long	.L61-.L53
+	.long	.L61-.L53
+	.long	.L61-.L53
+	.long	.L61-.L53
+	.long	.L61-.L53
+	.long	.L61-.L53
+	.long	.L61-.L53
+	.long	.L61-.L53
+	.long	.L61-.L53
+	.long	.L61-.L53
+	.long	.L61-.L53
+	.long	.L61-.L53
+	.long	.L61-.L53
+	.long	.L61-.L53
+	.long	.L61-.L53
+	.long	.L61-.L53
+	.long	.L61-.L53
+	.long	.L54-.L53
+	.long	.L61-.L53
+	.long	.L61-.L53
+	.long	.L52-.L53
+	.text
+.L54:
+	.loc 2 137 17
 	movl	$0, %eax
 	call	nextChar
-	.loc 1 137 17
-	jmp	.L54
-.L51:
-	.loc 1 144 20
+	.loc 2 138 17
+	jmp	.L56
+.L55:
+	.loc 2 140 24
+	movzwl	16+scanner(%rip), %eax
+	.loc 2 140 29
+	addl	$1, %eax
+	movw	%ax, 16+scanner(%rip)
+	.loc 2 141 17
+	movl	$0, %eax
+	call	nextChar
+	.loc 2 142 17
+	jmp	.L56
+.L52:
+	.loc 2 144 20
 	movl	$0, %eax
 	call	checkNextChar
-	.loc 1 144 19
+	.loc 2 144 19
 	cmpb	$124, %al
-	jne	.L55
-	.loc 1 144 43 discriminator 1
+	jne	.L57
+	.loc 2 144 43 discriminator 1
 	movl	$0, %eax
 	call	skipBlockComment
-	.loc 1 146 17 discriminator 1
-	jmp	.L60
-.L55:
-	.loc 1 145 22
+	.loc 2 146 17 discriminator 1
+	jmp	.L62
+.L57:
+	.loc 2 145 22
 	movl	$0, %eax
 	call	skipLineComment
-.L60:
-	.loc 1 146 17
+.L62:
+	.loc 2 146 17
 	nop
-.L54:
+.L56:
 .LBE2:
-	.loc 1 130 12
-	jmp	.L58
-.L59:
+	.loc 2 131 12
+	jmp	.L60
+.L61:
 .LBB3:
-	.loc 1 148 17
+	.loc 2 148 17
 	nop
 .LBE3:
-	.loc 1 151 1
+	.loc 2 151 1
 	leave
 	.cfi_def_cfa 7, 8
 	ret
@@ -710,7 +753,7 @@ skipWhitespace:
 	.type	checkKeyword, @function
 checkKeyword:
 .LFB15:
-	.loc 1 155 97
+	.loc 2 155 97
 	.cfi_startproc
 	endbr64
 	pushq	%rbp
@@ -725,45 +768,45 @@ checkKeyword:
 	movl	%edi, %edx
 	movw	%dx, -4(%rbp)
 	movw	%ax, -8(%rbp)
-	.loc 1 156 15
+	.loc 2 156 15
 	movq	8+scanner(%rip), %rdx
-	.loc 1 156 33
+	.loc 2 156 33
 	movq	scanner(%rip), %rax
-	.loc 1 156 24
+	.loc 2 156 24
 	movq	%rdx, %rcx
 	subq	%rax, %rcx
-	.loc 1 156 49
+	.loc 2 156 49
 	movswl	-4(%rbp), %edx
 	movswl	-8(%rbp), %eax
 	addl	%edx, %eax
 	cltq
-	.loc 1 156 7
+	.loc 2 156 7
 	cmpq	%rax, %rcx
-	jne	.L62
-	.loc 1 156 61 discriminator 1
+	jne	.L64
+	.loc 2 156 61 discriminator 1
 	movswq	-8(%rbp), %rdx
-	.loc 1 156 75 discriminator 1
+	.loc 2 156 75 discriminator 1
 	movq	scanner(%rip), %rcx
-	.loc 1 156 61 discriminator 1
+	.loc 2 156 61 discriminator 1
 	movswq	-4(%rbp), %rax
-	.loc 1 156 82 discriminator 1
+	.loc 2 156 82 discriminator 1
 	addq	%rax, %rcx
-	.loc 1 156 61 discriminator 1
+	.loc 2 156 61 discriminator 1
 	movq	-16(%rbp), %rax
 	movq	%rax, %rsi
 	movq	%rcx, %rdi
 	call	memcmp@PLT
-	.loc 1 156 58 discriminator 1
+	.loc 2 156 58 discriminator 1
 	testl	%eax, %eax
-	jne	.L62
-	.loc 1 157 16
+	jne	.L64
+	.loc 2 157 16
 	movl	-20(%rbp), %eax
-	jmp	.L63
-.L62:
-	.loc 1 159 12
-	movl	$114, %eax
-.L63:
-	.loc 1 160 1
+	jmp	.L65
+.L64:
+	.loc 2 159 12
+	movl	$117, %eax
+.L65:
+	.loc 2 160 1
 	leave
 	.cfi_def_cfa 7, 8
 	ret
@@ -776,11 +819,11 @@ checkKeyword:
 .LC3:
 	.string	"ass"
 .LC4:
-	.string	""
-.LC5:
-	.string	"ef"
-.LC6:
 	.string	"f"
+.LC5:
+	.string	""
+.LC6:
+	.string	"um"
 .LC7:
 	.string	"lse"
 .LC8:
@@ -788,17 +831,17 @@ checkKeyword:
 .LC9:
 	.string	"n"
 .LC10:
-	.string	"="
-.LC11:
 	.string	"t"
-.LC12:
+.LC11:
 	.string	"il"
-.LC13:
+.LC12:
 	.string	"uts"
-.LC14:
+.LC13:
 	.string	"eturn"
+.LC14:
+	.string	"per"
 .LC15:
-	.string	"uper"
+	.string	"ruct"
 .LC16:
 	.string	"is"
 .LC17:
@@ -809,7 +852,7 @@ checkKeyword:
 	.type	identifierType, @function
 identifierType:
 .LFB16:
-	.loc 1 162 34
+	.loc 2 162 34
 	.cfi_startproc
 	endbr64
 	pushq	%rbp
@@ -817,569 +860,458 @@ identifierType:
 	.cfi_offset 6, -16
 	movq	%rsp, %rbp
 	.cfi_def_cfa_register 6
-	.loc 1 163 19
+	.loc 2 163 19
 	movq	scanner(%rip), %rax
-	.loc 1 163 25
+	.loc 2 163 25
 	movzbl	(%rax), %eax
 	movsbl	%al, %eax
 	subl	$99, %eax
 	cmpl	$20, %eax
-	ja	.L65
+	ja	.L67
 	movl	%eax, %eax
 	leaq	0(,%rax,4), %rdx
-	leaq	.L67(%rip), %rax
+	leaq	.L69(%rip), %rax
 	movl	(%rdx,%rax), %eax
 	cltq
-	leaq	.L67(%rip), %rdx
+	leaq	.L69(%rip), %rdx
 	addq	%rdx, %rax
 	notrack jmp	*%rax
 	.section	.rodata
 	.align 4
 	.align 4
-.L67:
-	.long	.L79-.L67
-	.long	.L78-.L67
-	.long	.L77-.L67
-	.long	.L76-.L67
-	.long	.L65-.L67
-	.long	.L65-.L67
-	.long	.L75-.L67
-	.long	.L65-.L67
-	.long	.L65-.L67
-	.long	.L74-.L67
-	.long	.L65-.L67
-	.long	.L73-.L67
-	.long	.L65-.L67
-	.long	.L72-.L67
-	.long	.L65-.L67
-	.long	.L71-.L67
-	.long	.L70-.L67
-	.long	.L69-.L67
-	.long	.L68-.L67
-	.long	.L65-.L67
-	.long	.L66-.L67
+.L69:
+	.long	.L80-.L69
+	.long	.L79-.L69
+	.long	.L78-.L69
+	.long	.L77-.L69
+	.long	.L67-.L69
+	.long	.L67-.L69
+	.long	.L76-.L69
+	.long	.L67-.L69
+	.long	.L67-.L69
+	.long	.L75-.L69
+	.long	.L67-.L69
+	.long	.L74-.L69
+	.long	.L67-.L69
+	.long	.L73-.L69
+	.long	.L67-.L69
+	.long	.L72-.L69
+	.long	.L71-.L69
+	.long	.L70-.L69
+	.long	.L67-.L69
+	.long	.L67-.L69
+	.long	.L68-.L69
 	.text
-.L79:
-	.loc 1 165 23
+.L80:
+	.loc 2 165 23
 	movq	8+scanner(%rip), %rdx
-	.loc 1 165 41
+	.loc 2 165 41
 	movq	scanner(%rip), %rax
-	.loc 1 165 32
+	.loc 2 165 32
 	subq	%rax, %rdx
 	movq	%rdx, %rax
-	.loc 1 165 15
+	.loc 2 165 15
 	cmpq	$1, %rax
-	jle	.L110
-	.loc 1 166 31
+	jle	.L105
+	.loc 2 166 31
 	movq	scanner(%rip), %rax
-	.loc 1 166 37
+	.loc 2 166 37
 	addq	$1, %rax
 	movzbl	(%rax), %eax
 	movsbl	%al, %eax
-	cmpl	$108, %eax
-	je	.L81
-	cmpl	$108, %eax
-	jg	.L110
-	cmpl	$61, %eax
-	je	.L82
 	cmpl	$97, %eax
-	jne	.L110
-	.loc 1 167 38
-	movl	$93, %ecx
+	je	.L82
+	cmpl	$108, %eax
+	je	.L83
+	.loc 2 171 13
+	jmp	.L105
+.L82:
+	.loc 2 167 38
+	movl	$94, %ecx
 	leaq	.LC2(%rip), %rdx
 	movl	$2, %esi
 	movl	$2, %edi
 	call	checkKeyword
-	jmp	.L83
-.L81:
-	.loc 1 168 38
-	movl	$94, %ecx
+	jmp	.L84
+.L83:
+	.loc 2 168 38
+	movl	$95, %ecx
 	leaq	.LC3(%rip), %rdx
 	movl	$3, %esi
 	movl	$2, %edi
 	call	checkKeyword
-	jmp	.L83
-.L82:
-	.loc 1 169 38
-	movl	$75, %ecx
-	leaq	.LC4(%rip), %rdx
-	movl	$0, %esi
-	movl	$2, %edi
-	call	checkKeyword
-	jmp	.L83
-.L78:
-	.loc 1 174 23
+	jmp	.L84
+.L79:
+	.loc 2 173 23
 	movq	8+scanner(%rip), %rdx
-	.loc 1 174 41
+	.loc 2 173 41
 	movq	scanner(%rip), %rax
-	.loc 1 174 32
+	.loc 2 173 32
 	subq	%rax, %rdx
 	movq	%rdx, %rax
-	.loc 1 174 15
+	.loc 2 173 15
 	cmpq	$1, %rax
-	jle	.L77
-	.loc 1 175 31
+	jle	.L78
+	.loc 2 174 31
 	movq	scanner(%rip), %rax
-	.loc 1 175 37
+	.loc 2 174 37
 	addq	$1, %rax
 	movzbl	(%rax), %eax
 	movsbl	%al, %eax
-	cmpl	$61, %eax
-	je	.L84
 	cmpl	$101, %eax
-	jne	.L77
-	.loc 1 176 38
-	movl	$98, %ecx
-	leaq	.LC5(%rip), %rdx
-	movl	$2, %esi
-	movl	$2, %edi
-	call	checkKeyword
-	jmp	.L83
-.L84:
-	.loc 1 177 38
-	movl	$84, %ecx
+	jne	.L78
+	.loc 2 175 38
+	movl	$100, %ecx
 	leaq	.LC4(%rip), %rdx
-	movl	$0, %esi
+	movl	$1, %esi
 	movl	$2, %edi
 	call	checkKeyword
-	jmp	.L83
-.L77:
-	.loc 1 181 23
+	jmp	.L84
+.L78:
+	.loc 2 179 23
 	movq	8+scanner(%rip), %rdx
-	.loc 1 181 41
+	.loc 2 179 41
 	movq	scanner(%rip), %rax
-	.loc 1 181 32
+	.loc 2 179 32
 	subq	%rax, %rdx
 	movq	%rdx, %rax
-	.loc 1 181 15
+	.loc 2 179 15
 	cmpq	$1, %rax
-	jle	.L111
-	.loc 1 182 31
+	jle	.L106
+	.loc 2 180 31
 	movq	scanner(%rip), %rax
-	.loc 1 182 37
+	.loc 2 180 37
+	addq	$1, %rax
+	movzbl	(%rax), %eax
+	movsbl	%al, %eax
+	cmpl	$108, %eax
+	je	.L86
+	cmpl	$110, %eax
+	je	.L87
+	.loc 2 190 13
+	jmp	.L106
+.L86:
+	.loc 2 181 45 discriminator 3
+	movq	scanner(%rip), %rax
+	.loc 2 181 51 discriminator 3
+	addq	$2, %rax
+	movzbl	(%rax), %eax
+	movsbl	%al, %eax
+	cmpl	$115, %eax
+	jne	.L87
+	.loc 2 182 49 discriminator 4
+	movq	scanner(%rip), %rax
+	.loc 2 182 55 discriminator 4
 	addq	$3, %rax
 	movzbl	(%rax), %eax
 	movsbl	%al, %eax
 	cmpl	$101, %eax
-	je	.L86
+	je	.L88
 	cmpl	$105, %eax
-	je	.L87
-	.loc 1 187 13
-	jmp	.L111
-.L86:
-	.loc 1 183 38
-	movl	$95, %ecx
-	leaq	.LC4(%rip), %rdx
+	je	.L89
+	jmp	.L87
+.L88:
+	.loc 2 183 46
+	movl	$96, %ecx
+	leaq	.LC5(%rip), %rdx
 	movl	$0, %esi
 	movl	$4, %edi
 	call	checkKeyword
-	jmp	.L83
-.L87:
-	.loc 1 184 38
-	movl	$96, %ecx
-	leaq	.LC6(%rip), %rdx
+	jmp	.L84
+.L89:
+	.loc 2 184 46
+	movl	$97, %ecx
+	leaq	.LC4(%rip), %rdx
 	movl	$1, %esi
 	movl	$4, %edi
 	call	checkKeyword
-	jmp	.L83
-.L76:
-	.loc 1 189 23
+	jmp	.L84
+.L87:
+	.loc 2 187 38
+	movl	$98, %ecx
+	leaq	.LC6(%rip), %rdx
+	movl	$2, %esi
+	movl	$2, %edi
+	call	checkKeyword
+	jmp	.L84
+.L77:
+	.loc 2 192 23
 	movq	8+scanner(%rip), %rdx
-	.loc 1 189 41
+	.loc 2 192 41
 	movq	scanner(%rip), %rax
-	.loc 1 189 32
+	.loc 2 192 32
 	subq	%rax, %rdx
 	movq	%rdx, %rax
-	.loc 1 189 15
+	.loc 2 192 15
 	cmpq	$1, %rax
-	jle	.L112
-	.loc 1 190 31
+	jle	.L107
+	.loc 2 193 31
 	movq	scanner(%rip), %rax
-	.loc 1 190 37
+	.loc 2 193 37
 	addq	$1, %rax
 	movzbl	(%rax), %eax
 	movsbl	%al, %eax
-	cmpl	$111, %eax
-	je	.L89
-	cmpl	$111, %eax
-	jg	.L112
-	cmpl	$61, %eax
-	je	.L90
 	cmpl	$97, %eax
-	jne	.L112
-	.loc 1 191 38
-	movl	$97, %ecx
+	je	.L91
+	cmpl	$111, %eax
+	je	.L92
+	.loc 2 198 13
+	jmp	.L107
+.L91:
+	.loc 2 194 38
+	movl	$99, %ecx
 	leaq	.LC7(%rip), %rdx
 	movl	$3, %esi
 	movl	$2, %edi
 	call	checkKeyword
-	jmp	.L83
-.L89:
-	.loc 1 192 38
-	movl	$99, %ecx
+	jmp	.L84
+.L92:
+	.loc 2 195 38
+	movl	$101, %ecx
 	leaq	.LC8(%rip), %rdx
 	movl	$1, %esi
 	movl	$2, %edi
 	call	checkKeyword
-	jmp	.L83
-.L90:
-	.loc 1 193 38
-	movl	$83, %ecx
-	leaq	.LC4(%rip), %rdx
-	movl	$0, %esi
-	movl	$2, %edi
-	call	checkKeyword
-	jmp	.L83
-.L75:
-	.loc 1 198 23
+	jmp	.L84
+.L76:
+	.loc 2 200 23
 	movq	8+scanner(%rip), %rdx
-	.loc 1 198 41
+	.loc 2 200 41
 	movq	scanner(%rip), %rax
-	.loc 1 198 32
+	.loc 2 200 32
 	subq	%rax, %rdx
 	movq	%rdx, %rax
-	.loc 1 198 15
+	.loc 2 200 15
 	cmpq	$1, %rax
-	jle	.L113
-	.loc 1 199 31
+	jle	.L108
+	.loc 2 201 31
 	movq	scanner(%rip), %rax
-	.loc 1 199 37
+	.loc 2 201 37
 	addq	$1, %rax
 	movzbl	(%rax), %eax
 	movsbl	%al, %eax
-	cmpl	$110, %eax
-	je	.L92
-	cmpl	$110, %eax
-	jg	.L113
-	cmpl	$61, %eax
-	je	.L93
 	cmpl	$102, %eax
-	jne	.L113
-	.loc 1 200 38
-	movl	$100, %ecx
-	leaq	.LC4(%rip), %rdx
+	je	.L94
+	cmpl	$110, %eax
+	je	.L95
+	.loc 2 206 13
+	jmp	.L108
+.L94:
+	.loc 2 202 38
+	movl	$102, %ecx
+	leaq	.LC5(%rip), %rdx
 	movl	$0, %esi
 	movl	$2, %edi
 	call	checkKeyword
-	jmp	.L83
-.L92:
-	.loc 1 201 38
-	movl	$101, %ecx
+	jmp	.L84
+.L95:
+	.loc 2 203 38
+	movl	$103, %ecx
 	leaq	.LC9(%rip), %rdx
 	movl	$1, %esi
 	movl	$2, %edi
 	call	checkKeyword
-	jmp	.L83
-.L93:
-	.loc 1 202 38
-	movl	$77, %ecx
-	leaq	.LC4(%rip), %rdx
-	movl	$0, %esi
-	movl	$2, %edi
-	call	checkKeyword
-	jmp	.L83
-.L74:
-	.loc 1 207 23
+	jmp	.L84
+.L75:
+	.loc 2 208 23
 	movq	8+scanner(%rip), %rdx
-	.loc 1 207 41
+	.loc 2 208 41
 	movq	scanner(%rip), %rax
-	.loc 1 207 32
+	.loc 2 208 32
 	subq	%rax, %rdx
 	movq	%rdx, %rax
-	.loc 1 207 15
+	.loc 2 208 15
 	cmpq	$1, %rax
-	jle	.L114
-	.loc 1 208 31
+	jle	.L109
+	.loc 2 209 31
 	movq	scanner(%rip), %rax
-	.loc 1 208 37
+	.loc 2 209 37
 	addq	$1, %rax
 	movzbl	(%rax), %eax
 	movsbl	%al, %eax
-	cmpl	$108, %eax
-	je	.L95
-	cmpl	$108, %eax
-	jg	.L114
 	cmpl	$101, %eax
-	je	.L96
-	cmpl	$101, %eax
-	jg	.L114
-	cmpl	$61, %eax
-	je	.L97
-	cmpl	$100, %eax
-	jne	.L114
-	.loc 1 209 38
-	movl	$85, %ecx
+	jne	.L109
+	.loc 2 210 38
+	movl	$104, %ecx
 	leaq	.LC10(%rip), %rdx
 	movl	$1, %esi
 	movl	$2, %edi
 	call	checkKeyword
-	jmp	.L83
-.L96:
-	.loc 1 210 38
-	movl	$102, %ecx
+	jmp	.L84
+.L74:
+	.loc 2 214 26
+	movl	$105, %ecx
 	leaq	.LC11(%rip), %rdx
-	movl	$1, %esi
-	movl	$2, %edi
-	call	checkKeyword
-	jmp	.L83
-.L95:
-	.loc 1 211 38
-	movl	$81, %ecx
-	leaq	.LC10(%rip), %rdx
-	movl	$1, %esi
-	movl	$2, %edi
-	call	checkKeyword
-	jmp	.L83
-.L97:
-	.loc 1 212 38
-	movl	$79, %ecx
-	leaq	.LC4(%rip), %rdx
-	movl	$0, %esi
-	movl	$2, %edi
-	call	checkKeyword
-	jmp	.L83
-.L73:
-	.loc 1 216 26
-	movl	$103, %ecx
-	leaq	.LC12(%rip), %rdx
 	movl	$2, %esi
 	movl	$1, %edi
 	call	checkKeyword
-	jmp	.L83
-.L72:
-	.loc 1 217 26
-	movl	$104, %ecx
-	leaq	.LC13(%rip), %rdx
+	jmp	.L84
+.L73:
+	.loc 2 215 26
+	movl	$106, %ecx
+	leaq	.LC12(%rip), %rdx
 	movl	$3, %esi
 	movl	$1, %edi
 	call	checkKeyword
-	jmp	.L83
-.L71:
-	.loc 1 218 26
-	movl	$106, %ecx
-	leaq	.LC14(%rip), %rdx
+	jmp	.L84
+.L72:
+	.loc 2 216 26
+	movl	$109, %ecx
+	leaq	.LC13(%rip), %rdx
 	movl	$5, %esi
 	movl	$1, %edi
 	call	checkKeyword
-	jmp	.L83
-.L70:
-	.loc 1 220 24
+	jmp	.L84
+.L71:
+	.loc 2 218 24
 	movq	8+scanner(%rip), %rdx
-	.loc 1 220 42
+	.loc 2 218 42
 	movq	scanner(%rip), %rax
-	.loc 1 220 33
+	.loc 2 218 33
 	subq	%rax, %rdx
 	movq	%rdx, %rax
-	.loc 1 220 16
+	.loc 2 218 16
 	cmpq	$1, %rax
-	jle	.L115
-	.loc 1 221 31
+	jle	.L110
+	.loc 2 219 31
 	movq	scanner(%rip), %rax
-	.loc 1 221 37
+	.loc 2 219 37
 	addq	$1, %rax
 	movzbl	(%rax), %eax
 	movsbl	%al, %eax
-	cmpl	$61, %eax
-	je	.L99
+	cmpl	$116, %eax
+	je	.L98
 	cmpl	$117, %eax
-	jne	.L115
-	.loc 1 222 38
-	movl	$105, %ecx
+	jne	.L110
+	.loc 2 220 38
+	movl	$108, %ecx
+	leaq	.LC14(%rip), %rdx
+	movl	$3, %esi
+	movl	$2, %edi
+	call	checkKeyword
+	jmp	.L84
+.L98:
+	.loc 2 221 38
+	movl	$107, %ecx
 	leaq	.LC15(%rip), %rdx
 	movl	$4, %esi
 	movl	$2, %edi
 	call	checkKeyword
-	jmp	.L83
-.L99:
-	.loc 1 223 38
-	movl	$86, %ecx
-	leaq	.LC4(%rip), %rdx
-	movl	$0, %esi
-	movl	$2, %edi
-	call	checkKeyword
-	jmp	.L83
-.L69:
-	.loc 1 228 23
+	jmp	.L84
+.L70:
+	.loc 2 226 23
 	movq	8+scanner(%rip), %rdx
-	.loc 1 228 41
+	.loc 2 226 41
 	movq	scanner(%rip), %rax
-	.loc 1 228 32
+	.loc 2 226 32
 	subq	%rax, %rdx
 	movq	%rdx, %rax
-	.loc 1 228 15
+	.loc 2 226 15
 	cmpq	$1, %rax
-	jle	.L116
-	.loc 1 229 31
+	jle	.L111
+	.loc 2 227 31
 	movq	scanner(%rip), %rax
-	.loc 1 229 37
+	.loc 2 227 37
 	addq	$1, %rax
 	movzbl	(%rax), %eax
 	movsbl	%al, %eax
 	cmpl	$104, %eax
-	je	.L101
+	je	.L100
 	cmpl	$114, %eax
-	je	.L102
-	.loc 1 234 13
-	jmp	.L116
-.L101:
-	.loc 1 230 38
-	movl	$107, %ecx
+	je	.L101
+	.loc 2 232 13
+	jmp	.L111
+.L100:
+	.loc 2 228 38
+	movl	$110, %ecx
 	leaq	.LC16(%rip), %rdx
 	movl	$2, %esi
 	movl	$2, %edi
 	call	checkKeyword
-	jmp	.L83
-.L102:
-	.loc 1 231 38
-	movl	$108, %ecx
+	jmp	.L84
+.L101:
+	.loc 2 229 38
+	movl	$111, %ecx
 	leaq	.LC17(%rip), %rdx
 	movl	$2, %esi
 	movl	$2, %edi
 	call	checkKeyword
-	jmp	.L83
+	jmp	.L84
 .L68:
-	.loc 1 236 23
+	.loc 2 234 23
 	movq	8+scanner(%rip), %rdx
-	.loc 1 236 41
+	.loc 2 234 41
 	movq	scanner(%rip), %rax
-	.loc 1 236 32
+	.loc 2 234 32
 	subq	%rax, %rdx
 	movq	%rdx, %rax
-	.loc 1 236 15
+	.loc 2 234 15
 	cmpq	$1, %rax
-	jle	.L66
-	.loc 1 237 31
+	jle	.L112
+	.loc 2 235 31
 	movq	scanner(%rip), %rax
-	.loc 1 237 37
-	addq	$1, %rax
-	movzbl	(%rax), %eax
-	movsbl	%al, %eax
-	cmpl	$108, %eax
-	je	.L103
-	cmpl	$108, %eax
-	jg	.L66
-	cmpl	$99, %eax
-	je	.L104
-	cmpl	$105, %eax
-	je	.L105
-	jmp	.L66
-.L104:
-	.loc 1 238 46
-	movl	$76, %ecx
-	leaq	.LC10(%rip), %rdx
-	movl	$1, %esi
-	movl	$2, %edi
-	call	checkKeyword
-	jmp	.L83
-.L105:
-	.loc 1 239 46
-	movl	$78, %ecx
-	leaq	.LC10(%rip), %rdx
-	movl	$1, %esi
-	movl	$2, %edi
-	call	checkKeyword
-	jmp	.L83
-.L103:
-	.loc 1 241 47 discriminator 8
-	movq	scanner(%rip), %rax
-	.loc 1 241 53 discriminator 8
-	addq	$2, %rax
-	movzbl	(%rax), %eax
-	movsbl	%al, %eax
-	cmpl	$61, %eax
-	je	.L106
-	cmpl	$108, %eax
-	jne	.L66
-	.loc 1 242 54
-	movl	$82, %ecx
-	leaq	.LC10(%rip), %rdx
-	movl	$1, %esi
-	movl	$3, %edi
-	call	checkKeyword
-	jmp	.L83
-.L106:
-	.loc 1 243 54
-	movl	$80, %ecx
-	leaq	.LC4(%rip), %rdx
-	movl	$0, %esi
-	movl	$3, %edi
-	call	checkKeyword
-	jmp	.L83
-.L66:
-	.loc 1 248 23
-	movq	8+scanner(%rip), %rdx
-	.loc 1 248 41
-	movq	scanner(%rip), %rax
-	.loc 1 248 32
-	subq	%rax, %rdx
-	movq	%rdx, %rax
-	.loc 1 248 15
-	cmpq	$1, %rax
-	jle	.L117
-	.loc 1 249 31
-	movq	scanner(%rip), %rax
-	.loc 1 249 37
+	.loc 2 235 37
 	addq	$2, %rax
 	movzbl	(%rax), %eax
 	movsbl	%al, %eax
 	cmpl	$101, %eax
-	je	.L108
+	je	.L103
 	cmpl	$105, %eax
-	je	.L109
-	.loc 1 254 13
-	jmp	.L117
-.L108:
-	.loc 1 250 38
-	movl	$109, %ecx
+	je	.L104
+	.loc 2 240 13
+	jmp	.L112
+.L103:
+	.loc 2 236 38
+	movl	$112, %ecx
 	leaq	.LC9(%rip), %rdx
 	movl	$1, %esi
 	movl	$3, %edi
 	call	checkKeyword
-	jmp	.L83
-.L109:
-	.loc 1 251 38
-	movl	$110, %ecx
+	jmp	.L84
+.L104:
+	.loc 2 237 38
+	movl	$113, %ecx
 	leaq	.LC18(%rip), %rdx
 	movl	$2, %esi
 	movl	$3, %edi
 	call	checkKeyword
-	jmp	.L83
+	jmp	.L84
+.L105:
+	.loc 2 171 13
+	nop
+	jmp	.L67
+.L106:
+	.loc 2 190 13
+	nop
+	jmp	.L67
+.L107:
+	.loc 2 198 13
+	nop
+	jmp	.L67
+.L108:
+	.loc 2 206 13
+	nop
+	jmp	.L67
+.L109:
+	.loc 2 213 13
+	nop
+	jmp	.L67
 .L110:
-	.loc 1 172 13
+	.loc 2 224 13
 	nop
-	jmp	.L65
+	jmp	.L67
 .L111:
-	.loc 1 187 13
+	.loc 2 232 13
 	nop
-	jmp	.L65
+	jmp	.L67
 .L112:
-	.loc 1 196 13
+	.loc 2 240 13
 	nop
-	jmp	.L65
-.L113:
-	.loc 1 205 13
-	nop
-	jmp	.L65
-.L114:
-	.loc 1 215 13
-	nop
-	jmp	.L65
-.L115:
-	.loc 1 226 13
-	nop
-	jmp	.L65
-.L116:
-	.loc 1 234 13
-	nop
-	jmp	.L65
-.L117:
-	.loc 1 254 13
-	nop
-.L65:
-	.loc 1 256 12
-	movl	$114, %eax
-.L83:
-	.loc 1 257 1
+.L67:
+	.loc 2 242 12
+	movl	$117, %eax
+.L84:
+	.loc 2 243 1
 	popq	%rbp
 	.cfi_def_cfa 7, 8
 	ret
@@ -1389,7 +1321,7 @@ identifierType:
 	.type	identifier, @function
 identifier:
 .LFB17:
-	.loc 1 259 26
+	.loc 2 245 26
 	.cfi_startproc
 	endbr64
 	pushq	%rbp
@@ -1399,38 +1331,38 @@ identifier:
 	.cfi_def_cfa_register 6
 	subq	$32, %rsp
 	movq	%rdi, -24(%rbp)
-	.loc 1 259 26
+	.loc 2 245 26
 	movq	%fs:40, %rax
 	movq	%rax, -8(%rbp)
 	xorl	%eax, %eax
-	.loc 1 260 10
-	jmp	.L119
-.L120:
-	.loc 1 260 57 discriminator 4
+	.loc 2 246 10
+	jmp	.L114
+.L115:
+	.loc 2 246 57 discriminator 4
 	movl	$0, %eax
 	call	nextChar
-.L119:
-	.loc 1 260 19 discriminator 1
+.L114:
+	.loc 2 246 19 discriminator 1
 	movl	$0, %eax
 	call	checkChar
-	.loc 1 260 11 discriminator 1
+	.loc 2 246 11 discriminator 1
 	movsbl	%al, %eax
 	movl	%eax, %edi
 	call	isAlpha
-	.loc 1 260 10 discriminator 1
+	.loc 2 246 10 discriminator 1
 	testb	%al, %al
-	jne	.L120
-	.loc 1 260 43 discriminator 3
+	jne	.L115
+	.loc 2 246 43 discriminator 3
 	movl	$0, %eax
 	call	checkChar
-	.loc 1 260 35 discriminator 3
+	.loc 2 246 35 discriminator 3
 	movsbl	%al, %eax
 	movl	%eax, %edi
 	call	isDigit
-	.loc 1 260 32 discriminator 3
+	.loc 2 246 32 discriminator 3
 	testb	%al, %al
-	jne	.L120
-	.loc 1 261 12
+	jne	.L115
+	.loc 2 247 12
 	movl	$0, %eax
 	call	identifierType
 	movl	%eax, %edx
@@ -1438,12 +1370,12 @@ identifier:
 	movl	%edx, %esi
 	movq	%rax, %rdi
 	call	makeToken
-	.loc 1 262 1
+	.loc 2 248 1
 	movq	-8(%rbp), %rax
 	xorq	%fs:40, %rax
-	je	.L122
+	je	.L117
 	call	__stack_chk_fail@PLT
-.L122:
+.L117:
 	movq	-24(%rbp), %rax
 	leave
 	.cfi_def_cfa 7, 8
@@ -1454,7 +1386,7 @@ identifier:
 	.type	number, @function
 number:
 .LFB18:
-	.loc 1 264 22
+	.loc 2 250 22
 	.cfi_startproc
 	endbr64
 	pushq	%rbp
@@ -1464,75 +1396,75 @@ number:
 	.cfi_def_cfa_register 6
 	subq	$32, %rsp
 	movq	%rdi, -24(%rbp)
-	.loc 1 264 22
+	.loc 2 250 22
 	movq	%fs:40, %rax
 	movq	%rax, -8(%rbp)
 	xorl	%eax, %eax
-	.loc 1 265 10
-	jmp	.L124
-.L125:
-	.loc 1 265 33 discriminator 2
+	.loc 2 251 10
+	jmp	.L119
+.L120:
+	.loc 2 251 33 discriminator 2
 	movl	$0, %eax
 	call	nextChar
-.L124:
-	.loc 1 265 19 discriminator 1
+.L119:
+	.loc 2 251 19 discriminator 1
 	movl	$0, %eax
 	call	checkChar
-	.loc 1 265 11 discriminator 1
+	.loc 2 251 11 discriminator 1
 	movsbl	%al, %eax
 	movl	%eax, %edi
 	call	isDigit
-	.loc 1 265 10 discriminator 1
+	.loc 2 251 10 discriminator 1
 	testb	%al, %al
-	jne	.L125
-	.loc 1 268 8
+	jne	.L120
+	.loc 2 254 8
 	movl	$0, %eax
 	call	checkChar
-	.loc 1 268 7
+	.loc 2 254 7
 	cmpb	$46, %al
-	jne	.L126
-	.loc 1 268 38 discriminator 1
+	jne	.L121
+	.loc 2 254 38 discriminator 1
 	movl	$0, %eax
 	call	checkNextChar
-	.loc 1 268 30 discriminator 1
+	.loc 2 254 30 discriminator 1
 	movsbl	%al, %eax
 	movl	%eax, %edi
 	call	isDigit
-	.loc 1 268 27 discriminator 1
+	.loc 2 254 27 discriminator 1
 	testb	%al, %al
-	je	.L126
-	.loc 1 269 9
+	je	.L121
+	.loc 2 255 9
 	movl	$0, %eax
 	call	nextChar
-	.loc 1 270 14
-	jmp	.L127
-.L128:
-	.loc 1 270 37 discriminator 2
+	.loc 2 256 14
+	jmp	.L122
+.L123:
+	.loc 2 256 37 discriminator 2
 	movl	$0, %eax
 	call	nextChar
-.L127:
-	.loc 1 270 23 discriminator 1
+.L122:
+	.loc 2 256 23 discriminator 1
 	movl	$0, %eax
 	call	checkChar
-	.loc 1 270 15 discriminator 1
+	.loc 2 256 15 discriminator 1
 	movsbl	%al, %eax
 	movl	%eax, %edi
 	call	isDigit
-	.loc 1 270 14 discriminator 1
+	.loc 2 256 14 discriminator 1
 	testb	%al, %al
-	jne	.L128
-.L126:
-	.loc 1 273 12
+	jne	.L123
+.L121:
+	.loc 2 259 12
 	movq	-24(%rbp), %rax
-	movl	$113, %esi
+	movl	$116, %esi
 	movq	%rax, %rdi
 	call	makeToken
-	.loc 1 274 1
+	.loc 2 260 1
 	movq	-8(%rbp), %rax
 	xorq	%fs:40, %rax
-	je	.L130
+	je	.L125
 	call	__stack_chk_fail@PLT
-.L130:
+.L125:
 	movq	-24(%rbp), %rax
 	leave
 	.cfi_def_cfa 7, 8
@@ -1547,7 +1479,7 @@ number:
 	.type	string, @function
 string:
 .LFB19:
-	.loc 1 276 22
+	.loc 2 262 22
 	.cfi_startproc
 	endbr64
 	pushq	%rbp
@@ -1557,84 +1489,84 @@ string:
 	.cfi_def_cfa_register 6
 	subq	$32, %rsp
 	movq	%rdi, -24(%rbp)
-	.loc 1 276 22
+	.loc 2 262 22
 	movq	%fs:40, %rax
 	movq	%rax, -8(%rbp)
 	xorl	%eax, %eax
-	.loc 1 277 10
-	jmp	.L132
-.L135:
-	.loc 1 278 12
+	.loc 2 263 10
+	jmp	.L127
+.L130:
+	.loc 2 264 12
 	movl	$0, %eax
 	call	checkChar
-	.loc 1 278 11
+	.loc 2 264 11
 	cmpb	$10, %al
-	jne	.L133
-	.loc 1 278 40 discriminator 1
+	jne	.L128
+	.loc 2 264 40 discriminator 1
 	movzwl	16+scanner(%rip), %eax
-	.loc 1 278 45 discriminator 1
+	.loc 2 264 45 discriminator 1
 	addl	$1, %eax
 	movw	%ax, 16+scanner(%rip)
-.L133:
-	.loc 1 279 9
+.L128:
+	.loc 2 265 9
 	movl	$0, %eax
 	call	nextChar
-.L132:
-	.loc 1 277 12
+.L127:
+	.loc 2 263 12
 	movl	$0, %eax
 	call	checkChar
-	.loc 1 277 10
+	.loc 2 263 10
 	cmpb	$34, %al
-	je	.L134
-	.loc 1 277 34 discriminator 1
+	je	.L129
+	.loc 2 263 34 discriminator 1
 	movl	$0, %eax
 	call	checkChar
-	.loc 1 277 31 discriminator 1
+	.loc 2 263 31 discriminator 1
 	cmpb	$39, %al
-	je	.L134
-	.loc 1 277 57 discriminator 2
+	je	.L129
+	.loc 2 263 57 discriminator 2
 	movl	$0, %eax
 	call	checkChar
-	.loc 1 277 54 discriminator 2
+	.loc 2 263 54 discriminator 2
 	cmpb	$96, %al
-	je	.L134
-	.loc 1 277 81 discriminator 3
+	je	.L129
+	.loc 2 263 81 discriminator 3
 	movl	$0, %eax
 	call	isAtEnd
-	.loc 1 277 80 discriminator 3
+	.loc 2 263 80 discriminator 3
 	xorl	$1, %eax
-	.loc 1 277 77 discriminator 3
+	.loc 2 263 77 discriminator 3
 	testb	%al, %al
-	jne	.L135
-.L134:
-	.loc 1 282 8
+	jne	.L130
+.L129:
+	.loc 2 268 8
 	movl	$0, %eax
 	call	isAtEnd
-	.loc 1 282 7
+	.loc 2 268 7
 	testb	%al, %al
-	je	.L136
-	.loc 1 282 26 discriminator 1
+	je	.L131
+	.loc 2 268 26 discriminator 1
 	movq	-24(%rbp), %rax
 	leaq	.LC19(%rip), %rsi
 	movq	%rax, %rdi
 	call	errorToken
-	jmp	.L131
-.L136:
-	.loc 1 284 5
+	jmp	.L126
+.L131:
+	.loc 2 270 5
 	movl	$0, %eax
 	call	nextChar
-	.loc 1 285 12
+	.loc 2 271 12
 	movq	-24(%rbp), %rax
-	movl	$118, %esi
+	movl	$121, %esi
 	movq	%rax, %rdi
 	call	makeToken
-.L131:
-	.loc 1 286 1
+.L126:
+	.loc 2 272 1
 	movq	-8(%rbp), %rax
 	xorq	%fs:40, %rax
-	je	.L138
+	je	.L133
 	call	__stack_chk_fail@PLT
-.L138:
+.L133:
 	movq	-24(%rbp), %rax
 	leave
 	.cfi_def_cfa 7, 8
@@ -1650,7 +1582,7 @@ string:
 	.type	scanToken, @function
 scanToken:
 .LFB20:
-	.loc 1 288 18
+	.loc 2 274 18
 	.cfi_startproc
 	endbr64
 	pushq	%rbp
@@ -1660,1050 +1592,1005 @@ scanToken:
 	.cfi_def_cfa_register 6
 	subq	$32, %rsp
 	movq	%rdi, -24(%rbp)
-	.loc 1 288 18
+	.loc 2 274 18
 	movq	%fs:40, %rax
 	movq	%rax, -8(%rbp)
 	xorl	%eax, %eax
-	.loc 1 289 5
+	.loc 2 275 5
 	movl	$0, %eax
 	call	skipWhitespace
-	.loc 1 290 28
+	.loc 2 276 28
 	movq	8+scanner(%rip), %rax
-	.loc 1 290 19
+	.loc 2 276 19
 	movq	%rax, scanner(%rip)
-	.loc 1 292 8
+	.loc 2 278 8
 	movl	$0, %eax
 	call	isAtEnd
-	.loc 1 292 7
+	.loc 2 278 7
 	testb	%al, %al
-	je	.L140
-	.loc 1 292 26 discriminator 1
+	je	.L135
+	.loc 2 278 26 discriminator 1
 	movq	-24(%rbp), %rax
-	movl	$120, %esi
+	movl	$123, %esi
 	movq	%rax, %rdi
 	call	makeToken
-	jmp	.L139
-.L140:
-	.loc 1 294 17
+	jmp	.L134
+.L135:
+	.loc 2 280 17
 	movl	$0, %eax
 	call	nextChar
-	.loc 1 294 13
+	.loc 2 280 13
 	movb	%al, -9(%rbp)
-	.loc 1 295 8
+	.loc 2 281 8
 	movzbl	-9(%rbp), %eax
 	movsbl	%al, %eax
 	movl	%eax, %edi
 	call	isAlpha
-	.loc 1 295 7
+	.loc 2 281 7
 	testb	%al, %al
-	je	.L142
-	.loc 1 295 27 discriminator 1
+	je	.L137
+	.loc 2 281 27 discriminator 1
 	movq	-24(%rbp), %rax
 	movq	%rax, %rdi
 	movl	$0, %eax
 	call	identifier
-	jmp	.L139
-.L142:
-	.loc 1 296 8
+	jmp	.L134
+.L137:
+	.loc 2 282 8
 	movzbl	-9(%rbp), %eax
 	movsbl	%al, %eax
 	movl	%eax, %edi
 	call	isDigit
-	.loc 1 296 7
+	.loc 2 282 7
 	testb	%al, %al
-	je	.L143
-	.loc 1 296 27 discriminator 1
+	je	.L138
+	.loc 2 282 27 discriminator 1
 	movq	-24(%rbp), %rax
 	movq	%rax, %rdi
 	movl	$0, %eax
 	call	number
-	jmp	.L139
-.L143:
-	.loc 1 298 5
+	jmp	.L134
+.L138:
+	.loc 2 284 5
 	movzbl	-9(%rbp), %eax
-	subl	$10, %eax
-	cmpl	$116, %eax
-	ja	.L144
+	subl	$33, %eax
+	cmpl	$93, %eax
+	ja	.L139
 	movl	%eax, %eax
 	leaq	0(,%rax,4), %rdx
-	leaq	.L146(%rip), %rax
+	leaq	.L141(%rip), %rax
 	movl	(%rdx,%rax), %eax
 	cltq
-	leaq	.L146(%rip), %rdx
+	leaq	.L141(%rip), %rdx
 	addq	%rdx, %rax
 	notrack jmp	*%rax
 	.section	.rodata
 	.align 4
 	.align 4
-.L146:
-	.long	.L213-.L146
-	.long	.L144-.L146
-	.long	.L144-.L146
-	.long	.L144-.L146
-	.long	.L144-.L146
-	.long	.L144-.L146
-	.long	.L144-.L146
-	.long	.L144-.L146
-	.long	.L144-.L146
-	.long	.L144-.L146
-	.long	.L144-.L146
-	.long	.L144-.L146
-	.long	.L144-.L146
-	.long	.L144-.L146
-	.long	.L144-.L146
-	.long	.L144-.L146
-	.long	.L144-.L146
-	.long	.L144-.L146
-	.long	.L144-.L146
-	.long	.L144-.L146
-	.long	.L144-.L146
-	.long	.L144-.L146
-	.long	.L144-.L146
-	.long	.L170-.L146
-	.long	.L149-.L146
-	.long	.L144-.L146
-	.long	.L169-.L146
-	.long	.L168-.L146
-	.long	.L167-.L146
-	.long	.L149-.L146
-	.long	.L166-.L146
-	.long	.L165-.L146
-	.long	.L164-.L146
-	.long	.L163-.L146
-	.long	.L162-.L146
-	.long	.L161-.L146
-	.long	.L160-.L146
-	.long	.L159-.L146
-	.long	.L144-.L146
-	.long	.L144-.L146
-	.long	.L144-.L146
-	.long	.L144-.L146
-	.long	.L144-.L146
-	.long	.L144-.L146
-	.long	.L144-.L146
-	.long	.L144-.L146
-	.long	.L144-.L146
-	.long	.L144-.L146
-	.long	.L158-.L146
-	.long	.L157-.L146
-	.long	.L156-.L146
-	.long	.L155-.L146
-	.long	.L154-.L146
-	.long	.L153-.L146
-	.long	.L144-.L146
-	.long	.L144-.L146
-	.long	.L144-.L146
-	.long	.L144-.L146
-	.long	.L144-.L146
-	.long	.L144-.L146
-	.long	.L144-.L146
-	.long	.L144-.L146
-	.long	.L144-.L146
-	.long	.L144-.L146
-	.long	.L144-.L146
-	.long	.L144-.L146
-	.long	.L144-.L146
-	.long	.L144-.L146
-	.long	.L144-.L146
-	.long	.L144-.L146
-	.long	.L144-.L146
-	.long	.L144-.L146
-	.long	.L144-.L146
-	.long	.L144-.L146
-	.long	.L144-.L146
-	.long	.L144-.L146
-	.long	.L144-.L146
-	.long	.L144-.L146
-	.long	.L144-.L146
-	.long	.L144-.L146
-	.long	.L144-.L146
-	.long	.L152-.L146
-	.long	.L144-.L146
-	.long	.L151-.L146
-	.long	.L150-.L146
-	.long	.L144-.L146
-	.long	.L149-.L146
-	.long	.L144-.L146
-	.long	.L144-.L146
-	.long	.L144-.L146
-	.long	.L144-.L146
-	.long	.L144-.L146
-	.long	.L144-.L146
-	.long	.L144-.L146
-	.long	.L144-.L146
-	.long	.L144-.L146
-	.long	.L144-.L146
-	.long	.L144-.L146
-	.long	.L144-.L146
-	.long	.L144-.L146
-	.long	.L144-.L146
-	.long	.L144-.L146
-	.long	.L144-.L146
-	.long	.L144-.L146
-	.long	.L144-.L146
-	.long	.L144-.L146
-	.long	.L144-.L146
-	.long	.L144-.L146
-	.long	.L144-.L146
-	.long	.L144-.L146
-	.long	.L144-.L146
-	.long	.L144-.L146
-	.long	.L144-.L146
-	.long	.L148-.L146
-	.long	.L144-.L146
-	.long	.L147-.L146
-	.long	.L145-.L146
+.L141:
+	.long	.L165-.L141
+	.long	.L144-.L141
+	.long	.L139-.L141
+	.long	.L164-.L141
+	.long	.L163-.L141
+	.long	.L162-.L141
+	.long	.L144-.L141
+	.long	.L161-.L141
+	.long	.L160-.L141
+	.long	.L159-.L141
+	.long	.L158-.L141
+	.long	.L157-.L141
+	.long	.L156-.L141
+	.long	.L155-.L141
+	.long	.L154-.L141
+	.long	.L139-.L141
+	.long	.L139-.L141
+	.long	.L139-.L141
+	.long	.L139-.L141
+	.long	.L139-.L141
+	.long	.L139-.L141
+	.long	.L139-.L141
+	.long	.L139-.L141
+	.long	.L139-.L141
+	.long	.L139-.L141
+	.long	.L153-.L141
+	.long	.L152-.L141
+	.long	.L151-.L141
+	.long	.L150-.L141
+	.long	.L149-.L141
+	.long	.L148-.L141
+	.long	.L139-.L141
+	.long	.L139-.L141
+	.long	.L139-.L141
+	.long	.L139-.L141
+	.long	.L139-.L141
+	.long	.L139-.L141
+	.long	.L139-.L141
+	.long	.L139-.L141
+	.long	.L139-.L141
+	.long	.L139-.L141
+	.long	.L139-.L141
+	.long	.L139-.L141
+	.long	.L139-.L141
+	.long	.L139-.L141
+	.long	.L139-.L141
+	.long	.L139-.L141
+	.long	.L139-.L141
+	.long	.L139-.L141
+	.long	.L139-.L141
+	.long	.L139-.L141
+	.long	.L139-.L141
+	.long	.L139-.L141
+	.long	.L139-.L141
+	.long	.L139-.L141
+	.long	.L139-.L141
+	.long	.L139-.L141
+	.long	.L139-.L141
+	.long	.L147-.L141
+	.long	.L139-.L141
+	.long	.L146-.L141
+	.long	.L145-.L141
+	.long	.L139-.L141
+	.long	.L144-.L141
+	.long	.L139-.L141
+	.long	.L139-.L141
+	.long	.L139-.L141
+	.long	.L139-.L141
+	.long	.L139-.L141
+	.long	.L139-.L141
+	.long	.L139-.L141
+	.long	.L139-.L141
+	.long	.L139-.L141
+	.long	.L139-.L141
+	.long	.L139-.L141
+	.long	.L139-.L141
+	.long	.L139-.L141
+	.long	.L139-.L141
+	.long	.L139-.L141
+	.long	.L139-.L141
+	.long	.L139-.L141
+	.long	.L139-.L141
+	.long	.L139-.L141
+	.long	.L139-.L141
+	.long	.L139-.L141
+	.long	.L139-.L141
+	.long	.L139-.L141
+	.long	.L139-.L141
+	.long	.L139-.L141
+	.long	.L139-.L141
+	.long	.L143-.L141
+	.long	.L139-.L141
+	.long	.L142-.L141
+	.long	.L140-.L141
 	.text
-.L166:
-	.loc 1 300 26
+.L161:
+	.loc 2 286 26
 	movq	-24(%rbp), %rax
 	movl	$0, %esi
 	movq	%rax, %rdi
 	call	makeToken
-	jmp	.L139
-.L165:
-	.loc 1 302 16
+	jmp	.L134
+.L160:
+	.loc 2 288 16
 	movl	$62, %edi
 	call	compareChar
-	.loc 1 302 15
+	.loc 2 288 15
 	testb	%al, %al
-	je	.L172
-	.loc 1 302 41 discriminator 1
+	je	.L166
+	.loc 2 288 41 discriminator 1
 	movq	-24(%rbp), %rax
 	movl	$11, %esi
 	movq	%rax, %rdi
 	call	makeToken
-	jmp	.L139
-.L172:
-	.loc 1 303 20
+	jmp	.L134
+.L166:
+	.loc 2 289 20
 	movq	-24(%rbp), %rax
 	movl	$1, %ecx
 	movl	$9, %edx
 	movl	$123, %esi
 	movq	%rax, %rdi
 	call	makeTwoCharToken
-	jmp	.L139
-.L148:
-	.loc 1 304 26
+	jmp	.L134
+.L143:
+	.loc 2 290 26
 	movq	-24(%rbp), %rax
 	movl	$2, %esi
 	movq	%rax, %rdi
 	call	makeToken
-	jmp	.L139
-.L147:
-	.loc 1 306 16
+	jmp	.L134
+.L142:
+	.loc 2 292 16
 	movl	$62, %edi
 	call	compareChar
-	.loc 1 306 15
+	.loc 2 292 15
 	testb	%al, %al
-	je	.L173
-	.loc 1 306 41 discriminator 1
+	je	.L167
+	.loc 2 292 41 discriminator 1
 	movq	-24(%rbp), %rax
 	movl	$7, %esi
 	movq	%rax, %rdi
 	call	makeToken
-	jmp	.L139
-.L173:
-	.loc 1 307 20
+	jmp	.L134
+.L167:
+	.loc 2 293 20
 	movq	-24(%rbp), %rax
 	movl	$3, %ecx
 	movl	$10, %edx
 	movl	$40, %esi
 	movq	%rax, %rdi
 	call	makeTwoCharToken
-	jmp	.L139
-.L152:
-	.loc 1 308 26
+	jmp	.L134
+.L147:
+	.loc 2 294 26
 	movq	-24(%rbp), %rax
 	movl	$4, %esi
 	movq	%rax, %rdi
 	call	makeToken
-	jmp	.L139
-.L151:
-	.loc 1 309 26
+	jmp	.L134
+.L146:
+	.loc 2 295 26
 	movq	-24(%rbp), %rax
 	movl	$5, %esi
 	movq	%rax, %rdi
 	call	makeToken
-	jmp	.L139
-.L170:
-	.loc 1 313 16
+	jmp	.L134
+.L165:
+	.loc 2 299 16
 	movl	$33, %edi
 	call	compareChar
-	.loc 1 313 15
+	.loc 2 299 15
 	testb	%al, %al
-	je	.L174
-	.loc 1 313 41 discriminator 1
+	je	.L168
+	.loc 2 299 41 discriminator 1
 	movq	-24(%rbp), %rax
 	movl	$13, %esi
 	movq	%rax, %rdi
 	call	makeToken
-	jmp	.L139
-.L174:
-	.loc 1 314 20
+	jmp	.L134
+.L168:
+	.loc 2 300 20
 	movq	-24(%rbp), %rax
 	movl	$12, %ecx
-	movl	$92, %edx
+	movl	$93, %edx
 	movl	$61, %esi
 	movq	%rax, %rdi
 	call	makeTwoCharToken
-	jmp	.L139
-.L153:
-	.loc 1 315 26
+	jmp	.L134
+.L148:
+	.loc 2 301 26
 	movq	-24(%rbp), %rax
 	movl	$14, %esi
 	movq	%rax, %rdi
 	call	makeToken
-	jmp	.L139
-.L162:
-	.loc 1 316 26
+	jmp	.L134
+.L157:
+	.loc 2 302 26
 	movq	-24(%rbp), %rax
 	movl	$15, %esi
 	movq	%rax, %rdi
 	call	makeToken
-	jmp	.L139
-.L160:
-	.loc 1 318 16
+	jmp	.L134
+.L155:
+	.loc 2 304 16
 	movl	$46, %edi
 	call	compareChar
-	.loc 1 318 15
+	.loc 2 304 15
 	testb	%al, %al
-	je	.L175
-	.loc 1 319 24
+	je	.L169
+	.loc 2 305 24
 	movq	-24(%rbp), %rax
 	movl	$17, %ecx
 	movl	$18, %edx
 	movl	$46, %esi
 	movq	%rax, %rdi
 	call	makeTwoCharToken
-	jmp	.L139
-.L175:
-	.loc 1 320 27
+	jmp	.L134
+.L169:
+	.loc 2 306 27
 	movq	-24(%rbp), %rax
 	movl	$16, %esi
 	movq	%rax, %rdi
 	call	makeToken
-	jmp	.L139
-.L157:
-	.loc 1 321 26
+	jmp	.L134
+.L152:
+	.loc 2 307 26
 	movq	-24(%rbp), %rax
 	movl	$19, %esi
 	movq	%rax, %rdi
 	call	makeToken
-	jmp	.L139
-.L155:
-	.loc 1 324 26
+	jmp	.L134
+.L150:
+	.loc 2 310 26
 	movq	-24(%rbp), %rax
-	movl	$74, %ecx
-	movl	$91, %edx
+	movl	$75, %ecx
+	movl	$92, %edx
 	movl	$61, %esi
 	movq	%rax, %rdi
 	call	makeTwoCharToken
-	jmp	.L139
-.L156:
-	.loc 1 326 16
+	jmp	.L134
+.L151:
+	.loc 2 312 16
 	movl	$60, %edi
 	call	compareChar
-	.loc 1 326 15
+	.loc 2 312 15
 	testb	%al, %al
-	je	.L176
-	.loc 1 326 41 discriminator 1
+	je	.L170
+	.loc 2 312 41 discriminator 1
 	movq	-24(%rbp), %rax
 	movl	$38, %esi
 	movq	%rax, %rdi
 	call	makeToken
-	jmp	.L139
-.L176:
-	.loc 1 327 16
+	jmp	.L134
+.L170:
+	.loc 2 313 16
 	movl	$123, %edi
 	call	compareChar
-	.loc 1 327 15
+	.loc 2 313 15
 	testb	%al, %al
-	je	.L177
-	.loc 1 327 41 discriminator 1
+	je	.L171
+	.loc 2 313 41 discriminator 1
 	movq	-24(%rbp), %rax
 	movl	$6, %esi
 	movq	%rax, %rdi
 	call	makeToken
-	jmp	.L139
-.L177:
-	.loc 1 328 16
+	jmp	.L134
+.L171:
+	.loc 2 314 16
 	movl	$40, %edi
 	call	compareChar
-	.loc 1 328 15
+	.loc 2 314 15
 	testb	%al, %al
-	je	.L178
-	.loc 1 328 41 discriminator 1
+	je	.L172
+	.loc 2 314 41 discriminator 1
 	movq	-24(%rbp), %rax
 	movl	$8, %esi
 	movq	%rax, %rdi
 	call	makeToken
-	jmp	.L139
-.L178:
-	.loc 1 329 20
-	movq	-24(%rbp), %rax
-	movl	$87, %ecx
-	movl	$89, %edx
-	movl	$61, %esi
-	movq	%rax, %rdi
-	call	makeTwoCharToken
-	jmp	.L139
-.L154:
-	.loc 1 331 16
-	movl	$62, %edi
-	call	compareChar
-	.loc 1 331 15
-	testb	%al, %al
-	je	.L179
-	.loc 1 331 41 discriminator 1
-	movq	-24(%rbp), %rax
-	movl	$37, %ecx
-	movl	$36, %edx
-	movl	$62, %esi
-	movq	%rax, %rdi
-	call	makeTwoCharToken
-	jmp	.L139
-.L179:
-	.loc 1 332 20
+	jmp	.L134
+.L172:
+	.loc 2 315 20
 	movq	-24(%rbp), %rax
 	movl	$88, %ecx
 	movl	$90, %edx
 	movl	$61, %esi
 	movq	%rax, %rdi
 	call	makeTwoCharToken
-	jmp	.L139
-.L163:
-	.loc 1 334 26
+	jmp	.L134
+.L149:
+	.loc 2 317 16
+	movl	$62, %edi
+	call	compareChar
+	.loc 2 317 15
+	testb	%al, %al
+	je	.L173
+	.loc 2 317 41 discriminator 1
 	movq	-24(%rbp), %rax
-	movl	$23, %ecx
-	movl	$65, %edx
+	movl	$37, %ecx
+	movl	$36, %edx
+	movl	$62, %esi
+	movq	%rax, %rdi
+	call	makeTwoCharToken
+	jmp	.L134
+.L173:
+	.loc 2 318 20
+	movq	-24(%rbp), %rax
+	movl	$89, %ecx
+	movl	$91, %edx
 	movl	$61, %esi
 	movq	%rax, %rdi
 	call	makeTwoCharToken
-	jmp	.L139
-.L161:
-	.loc 1 335 26
+	jmp	.L134
+.L158:
+	.loc 2 321 26
 	movq	-24(%rbp), %rax
-	movl	$24, %ecx
+	movl	$23, %ecx
 	movl	$66, %edx
 	movl	$61, %esi
 	movq	%rax, %rdi
 	call	makeTwoCharToken
-	jmp	.L139
-.L164:
-	.loc 1 337 16
-	movl	$42, %edi
-	call	compareChar
-	.loc 1 337 15
-	testb	%al, %al
-	je	.L180
-	.loc 1 337 41 discriminator 1
+	jmp	.L134
+.L156:
+	.loc 2 322 26
 	movq	-24(%rbp), %rax
-	movl	$28, %esi
-	movq	%rax, %rdi
-	call	makeToken
-	jmp	.L139
-.L180:
-	.loc 1 338 20
-	movq	-24(%rbp), %rax
-	movl	$25, %ecx
+	movl	$24, %ecx
 	movl	$67, %edx
 	movl	$61, %esi
 	movq	%rax, %rdi
 	call	makeTwoCharToken
-	jmp	.L139
+	jmp	.L134
 .L159:
-	.loc 1 339 26
+	.loc 2 324 16
+	movl	$42, %edi
+	call	compareChar
+	.loc 2 324 15
+	testb	%al, %al
+	je	.L174
+	.loc 2 324 41 discriminator 1
 	movq	-24(%rbp), %rax
-	movl	$26, %ecx
+	movl	$28, %esi
+	movq	%rax, %rdi
+	call	makeToken
+	jmp	.L134
+.L174:
+	.loc 2 325 20
+	movq	-24(%rbp), %rax
+	movl	$25, %ecx
 	movl	$68, %edx
 	movl	$61, %esi
 	movq	%rax, %rdi
 	call	makeTwoCharToken
-	jmp	.L139
-.L168:
-	.loc 1 340 26
+	jmp	.L134
+.L154:
+	.loc 2 326 26
+	movq	-24(%rbp), %rax
+	movl	$26, %ecx
+	movl	$69, %edx
+	movl	$61, %esi
+	movq	%rax, %rdi
+	call	makeTwoCharToken
+	jmp	.L134
+.L163:
+	.loc 2 327 26
 	movq	-24(%rbp), %rax
 	movl	$27, %ecx
-	movl	$69, %edx
+	movl	$70, %edx
 	movl	$37, %esi
 	movq	%rax, %rdi
 	call	makeTwoCharToken
-	jmp	.L139
-.L167:
-	.loc 1 344 16
+	jmp	.L134
+.L162:
+	.loc 2 331 16
 	movl	$38, %edi
 	call	compareChar
-	.loc 1 344 15
+	.loc 2 331 15
 	testb	%al, %al
-	je	.L181
-	.loc 1 344 41 discriminator 1
+	je	.L175
+	.loc 2 331 41 discriminator 1
 	movq	-24(%rbp), %rax
 	movl	$29, %esi
 	movq	%rax, %rdi
 	call	makeToken
-	jmp	.L139
-.L181:
-	.loc 1 345 20
+	jmp	.L134
+.L175:
+	.loc 2 332 20
 	movq	-24(%rbp), %rax
 	movl	$32, %ecx
-	movl	$70, %edx
+	movl	$71, %edx
 	movl	$61, %esi
 	movq	%rax, %rdi
 	call	makeTwoCharToken
-	jmp	.L139
-.L150:
-	.loc 1 347 16
+	jmp	.L134
+.L145:
+	.loc 2 334 16
 	movl	$94, %edi
 	call	compareChar
-	.loc 1 347 15
+	.loc 2 334 15
 	testb	%al, %al
-	je	.L182
-	.loc 1 347 41 discriminator 1
+	je	.L176
+	.loc 2 334 41 discriminator 1
 	movq	-24(%rbp), %rax
 	movl	$31, %esi
 	movq	%rax, %rdi
 	call	makeToken
-	jmp	.L139
-.L182:
-	.loc 1 348 20
+	jmp	.L134
+.L176:
+	.loc 2 335 20
 	movq	-24(%rbp), %rax
 	movl	$34, %ecx
-	movl	$72, %edx
-	movl	$61, %esi
-	movq	%rax, %rdi
-	call	makeTwoCharToken
-	jmp	.L139
-.L145:
-	.loc 1 350 16
-	movl	$62, %edi
-	call	compareChar
-	.loc 1 350 15
-	testb	%al, %al
-	je	.L183
-	.loc 1 350 41 discriminator 1
-	movq	-24(%rbp), %rax
-	movl	$22, %esi
-	movq	%rax, %rdi
-	call	makeToken
-	jmp	.L139
-.L183:
-	.loc 1 351 20
-	movq	-24(%rbp), %rax
-	movl	$35, %ecx
 	movl	$73, %edx
 	movl	$61, %esi
 	movq	%rax, %rdi
 	call	makeTwoCharToken
-	jmp	.L139
-.L149:
-	.loc 1 363 20
+	jmp	.L134
+.L140:
+	.loc 2 337 16
+	movl	$62, %edi
+	call	compareChar
+	.loc 2 337 15
+	testb	%al, %al
+	je	.L177
+	.loc 2 337 41 discriminator 1
+	movq	-24(%rbp), %rax
+	movl	$22, %esi
+	movq	%rax, %rdi
+	call	makeToken
+	jmp	.L134
+.L177:
+	.loc 2 338 20
+	movq	-24(%rbp), %rax
+	movl	$35, %ecx
+	movl	$74, %edx
+	movl	$61, %esi
+	movq	%rax, %rdi
+	call	makeTwoCharToken
+	jmp	.L134
+.L144:
+	.loc 2 350 20
 	movq	-24(%rbp), %rax
 	movq	%rax, %rdi
 	movl	$0, %eax
 	call	string
-	jmp	.L139
-.L158:
-	.loc 1 367 16
+	jmp	.L134
+.L153:
+	.loc 2 354 16
 	movl	$99, %edi
 	call	compareChar
-	.loc 1 367 15
+	.loc 2 354 15
 	testb	%al, %al
-	je	.L184
-	.loc 1 367 34 discriminator 1
+	je	.L178
+	.loc 2 354 34 discriminator 1
 	movl	$0, %eax
 	call	nextChar
-	.loc 1 367 53 discriminator 1
+	.loc 2 354 53 discriminator 1
 	movq	-24(%rbp), %rax
-	movl	$41, %esi
+	movl	$42, %esi
 	movq	%rax, %rdi
 	call	makeToken
-	jmp	.L139
-.L184:
-	.loc 1 368 16
+	jmp	.L134
+.L178:
+	.loc 2 355 16
 	movl	$100, %edi
 	call	compareChar
-	.loc 1 368 15
+	.loc 2 355 15
 	testb	%al, %al
-	je	.L185
-	.loc 1 368 34 discriminator 1
+	je	.L179
+	.loc 2 355 34 discriminator 1
 	movl	$0, %eax
 	call	nextChar
-	.loc 1 368 53 discriminator 1
+	.loc 2 355 53 discriminator 1
 	movq	-24(%rbp), %rax
-	movl	$59, %esi
+	movl	$60, %esi
 	movq	%rax, %rdi
 	call	makeToken
-	jmp	.L139
-.L185:
-	.loc 1 369 16
+	jmp	.L134
+.L179:
+	.loc 2 356 16
 	movl	$102, %edi
 	call	compareChar
-	.loc 1 369 15
+	.loc 2 356 15
 	testb	%al, %al
-	je	.L186
-	.loc 1 369 34 discriminator 1
+	je	.L180
+	.loc 2 356 34 discriminator 1
 	movl	$0, %eax
 	call	nextChar
-	.loc 1 369 53 discriminator 1
+	.loc 2 356 53 discriminator 1
 	movq	-24(%rbp), %rax
-	movl	$57, %esi
+	movl	$58, %esi
 	movq	%rax, %rdi
 	call	makeToken
-	jmp	.L139
-.L186:
-	.loc 1 370 16
+	jmp	.L134
+.L180:
+	.loc 2 357 16
 	movl	$105, %edi
 	call	compareChar
-	.loc 1 370 15
+	.loc 2 357 15
 	testb	%al, %al
-	je	.L187
-	.loc 1 370 34 discriminator 1
+	je	.L181
+	.loc 2 357 34 discriminator 1
 	movl	$0, %eax
 	call	nextChar
-	.loc 1 370 53 discriminator 1
+	.loc 2 357 53 discriminator 1
 	movq	-24(%rbp), %rax
-	movl	$45, %esi
+	movl	$46, %esi
 	movq	%rax, %rdi
 	call	makeToken
-	jmp	.L139
-.L187:
-	.loc 1 371 16
+	jmp	.L134
+.L181:
+	.loc 2 358 16
 	movl	$108, %edi
 	call	compareChar
-	.loc 1 371 15
+	.loc 2 358 15
 	testb	%al, %al
-	je	.L188
-	.loc 1 372 20
+	je	.L182
+	.loc 2 359 20
 	movl	$100, %edi
 	call	compareChar
-	.loc 1 372 19
+	.loc 2 359 19
 	testb	%al, %al
-	je	.L189
-	.loc 1 372 38 discriminator 1
+	je	.L183
+	.loc 2 359 38 discriminator 1
 	movl	$0, %eax
 	call	nextChar
-	.loc 1 372 57 discriminator 1
+	.loc 2 359 57 discriminator 1
 	movq	-24(%rbp), %rax
-	movl	$61, %esi
+	movl	$62, %esi
 	movq	%rax, %rdi
 	call	makeToken
-	jmp	.L139
-.L189:
-	.loc 1 373 20
+	jmp	.L134
+.L183:
+	.loc 2 360 20
 	movl	$108, %edi
 	call	compareChar
-	.loc 1 373 19
+	.loc 2 360 19
 	testb	%al, %al
-	je	.L190
-	.loc 1 373 38 discriminator 1
+	je	.L184
+	.loc 2 360 38 discriminator 1
 	movl	$0, %eax
 	call	nextChar
-	.loc 1 373 57 discriminator 1
+	.loc 2 360 57 discriminator 1
 	movq	-24(%rbp), %rax
-	movl	$53, %esi
+	movl	$54, %esi
 	movq	%rax, %rdi
 	call	makeToken
-	jmp	.L139
-.L190:
-	.loc 1 374 20
+	jmp	.L134
+.L184:
+	.loc 2 361 20
 	movl	$61, %edi
 	call	compareChar
-	.loc 1 374 19
+	.loc 2 361 19
 	testb	%al, %al
-	je	.L188
-	.loc 1 374 45 discriminator 1
+	je	.L182
+	.loc 2 361 45 discriminator 1
 	movq	-24(%rbp), %rax
-	movl	$49, %esi
+	movl	$50, %esi
 	movq	%rax, %rdi
 	call	makeToken
-	jmp	.L139
-.L188:
-	.loc 1 376 16
+	jmp	.L134
+.L182:
+	.loc 2 363 16
 	movl	$115, %edi
 	call	compareChar
-	.loc 1 376 15
+	.loc 2 363 15
 	testb	%al, %al
-	je	.L191
-	.loc 1 376 34 discriminator 1
+	je	.L185
+	.loc 2 363 34 discriminator 1
 	movl	$0, %eax
 	call	nextChar
-	.loc 1 376 53 discriminator 1
+	.loc 2 363 53 discriminator 1
 	movq	-24(%rbp), %rax
-	movl	$63, %esi
+	movl	$64, %esi
 	movq	%rax, %rdi
 	call	makeToken
-	jmp	.L139
-.L191:
-	.loc 1 377 16
+	jmp	.L134
+.L185:
+	.loc 2 364 16
 	movl	$117, %edi
 	call	compareChar
-	.loc 1 377 15
+	.loc 2 364 15
 	testb	%al, %al
-	je	.L192
-	.loc 1 378 20
+	je	.L186
+	.loc 2 365 20
 	movl	$99, %edi
 	call	compareChar
-	.loc 1 378 19
+	.loc 2 365 19
 	testb	%al, %al
-	je	.L193
-	.loc 1 378 38 discriminator 1
+	je	.L187
+	.loc 2 365 38 discriminator 1
 	movl	$0, %eax
 	call	nextChar
-	.loc 1 378 57 discriminator 1
+	.loc 2 365 57 discriminator 1
 	movq	-24(%rbp), %rax
-	movl	$43, %esi
+	movl	$44, %esi
 	movq	%rax, %rdi
 	call	makeToken
-	jmp	.L139
-.L193:
-	.loc 1 379 20
+	jmp	.L134
+.L187:
+	.loc 2 366 20
 	movl	$105, %edi
 	call	compareChar
-	.loc 1 379 19
+	.loc 2 366 19
 	testb	%al, %al
-	je	.L194
-	.loc 1 379 38 discriminator 1
+	je	.L188
+	.loc 2 366 38 discriminator 1
 	movl	$0, %eax
 	call	nextChar
-	.loc 1 379 57 discriminator 1
+	.loc 2 366 57 discriminator 1
 	movq	-24(%rbp), %rax
-	movl	$47, %esi
+	movl	$48, %esi
 	movq	%rax, %rdi
 	call	makeToken
-	jmp	.L139
-.L194:
-	.loc 1 380 20
+	jmp	.L134
+.L188:
+	.loc 2 367 20
 	movl	$108, %edi
 	call	compareChar
-	.loc 1 380 19
+	.loc 2 367 19
 	testb	%al, %al
-	je	.L192
-	.loc 1 381 24
+	je	.L186
+	.loc 2 368 24
 	movl	$108, %edi
 	call	compareChar
-	.loc 1 381 23
+	.loc 2 368 23
 	testb	%al, %al
-	je	.L195
-	.loc 1 381 42 discriminator 1
+	je	.L189
+	.loc 2 368 42 discriminator 1
 	movl	$0, %eax
 	call	nextChar
-	.loc 1 381 61 discriminator 1
+	.loc 2 368 61 discriminator 1
 	movq	-24(%rbp), %rax
-	movl	$55, %esi
+	movl	$56, %esi
 	movq	%rax, %rdi
 	call	makeToken
-	jmp	.L139
-.L195:
-	.loc 1 382 24
+	jmp	.L134
+.L189:
+	.loc 2 369 24
 	movl	$61, %edi
 	call	compareChar
-	.loc 1 382 23
+	.loc 2 369 23
 	testb	%al, %al
-	je	.L192
-	.loc 1 382 49 discriminator 1
+	je	.L186
+	.loc 2 369 49 discriminator 1
 	movq	-24(%rbp), %rax
-	movl	$51, %esi
+	movl	$52, %esi
 	movq	%rax, %rdi
 	call	makeToken
-	jmp	.L139
-.L192:
-	.loc 1 385 16
+	jmp	.L134
+.L186:
+	.loc 2 372 16
 	movl	$58, %edi
 	call	compareChar
-	.loc 1 385 15
+	.loc 2 372 15
 	testb	%al, %al
-	je	.L196
-	.loc 1 385 41 discriminator 1
+	je	.L190
+	.loc 2 372 41 discriminator 1
 	movq	-24(%rbp), %rax
 	movl	$39, %esi
 	movq	%rax, %rdi
 	call	makeToken
-	jmp	.L139
-.L196:
-	.loc 1 386 16
+	jmp	.L134
+.L190:
+	.loc 2 373 16
 	movl	$0, %edi
 	call	compareChar
-	.loc 1 386 15
+	.loc 2 373 15
 	testb	%al, %al
-	je	.L169
-	.loc 1 386 42 discriminator 1
+	je	.L164
+	.loc 2 373 42 discriminator 1
 	movq	-24(%rbp), %rax
 	movl	$20, %esi
 	movq	%rax, %rdi
 	call	makeToken
-	jmp	.L139
-.L169:
-	.loc 1 389 23
+	jmp	.L134
+.L164:
+	.loc 2 376 23
 	movq	8+scanner(%rip), %rdx
-	.loc 1 389 41
+	.loc 2 376 41
 	movq	scanner(%rip), %rax
-	.loc 1 389 32
+	.loc 2 376 32
 	subq	%rax, %rdx
 	movq	%rdx, %rax
-	.loc 1 389 15
+	.loc 2 376 15
 	cmpq	$1, %rax
-	jle	.L216
-	.loc 1 390 31
+	jle	.L208
+	.loc 2 377 31
 	movq	scanner(%rip), %rax
-	.loc 1 390 37
+	.loc 2 377 37
 	addq	$1, %rax
 	movzbl	(%rax), %eax
 	movsbl	%al, %eax
 	subl	$61, %eax
 	cmpl	$56, %eax
-	ja	.L216
+	ja	.L208
 	movl	%eax, %eax
 	leaq	0(,%rax,4), %rdx
-	leaq	.L199(%rip), %rax
+	leaq	.L193(%rip), %rax
 	movl	(%rdx,%rax), %eax
 	cltq
-	leaq	.L199(%rip), %rdx
+	leaq	.L193(%rip), %rdx
 	addq	%rdx, %rax
 	notrack jmp	*%rax
 	.section	.rodata
 	.align 4
 	.align 4
-.L199:
-	.long	.L206-.L199
-	.long	.L216-.L199
-	.long	.L216-.L199
-	.long	.L216-.L199
-	.long	.L216-.L199
-	.long	.L216-.L199
-	.long	.L216-.L199
-	.long	.L216-.L199
-	.long	.L216-.L199
-	.long	.L216-.L199
-	.long	.L216-.L199
-	.long	.L216-.L199
-	.long	.L216-.L199
-	.long	.L216-.L199
-	.long	.L216-.L199
-	.long	.L216-.L199
-	.long	.L216-.L199
-	.long	.L216-.L199
-	.long	.L216-.L199
-	.long	.L216-.L199
-	.long	.L216-.L199
-	.long	.L216-.L199
-	.long	.L216-.L199
-	.long	.L216-.L199
-	.long	.L216-.L199
-	.long	.L216-.L199
-	.long	.L216-.L199
-	.long	.L216-.L199
-	.long	.L216-.L199
-	.long	.L216-.L199
-	.long	.L216-.L199
-	.long	.L216-.L199
-	.long	.L216-.L199
-	.long	.L216-.L199
-	.long	.L216-.L199
-	.long	.L216-.L199
-	.long	.L216-.L199
-	.long	.L216-.L199
-	.long	.L205-.L199
-	.long	.L204-.L199
-	.long	.L216-.L199
-	.long	.L203-.L199
-	.long	.L216-.L199
-	.long	.L216-.L199
-	.long	.L202-.L199
-	.long	.L216-.L199
-	.long	.L216-.L199
-	.long	.L201-.L199
-	.long	.L216-.L199
-	.long	.L216-.L199
-	.long	.L216-.L199
-	.long	.L216-.L199
-	.long	.L216-.L199
-	.long	.L216-.L199
-	.long	.L200-.L199
-	.long	.L216-.L199
-	.long	.L198-.L199
+.L193:
+	.long	.L200-.L193
+	.long	.L208-.L193
+	.long	.L208-.L193
+	.long	.L208-.L193
+	.long	.L208-.L193
+	.long	.L208-.L193
+	.long	.L208-.L193
+	.long	.L208-.L193
+	.long	.L208-.L193
+	.long	.L208-.L193
+	.long	.L208-.L193
+	.long	.L208-.L193
+	.long	.L208-.L193
+	.long	.L208-.L193
+	.long	.L208-.L193
+	.long	.L208-.L193
+	.long	.L208-.L193
+	.long	.L208-.L193
+	.long	.L208-.L193
+	.long	.L208-.L193
+	.long	.L208-.L193
+	.long	.L208-.L193
+	.long	.L208-.L193
+	.long	.L208-.L193
+	.long	.L208-.L193
+	.long	.L208-.L193
+	.long	.L208-.L193
+	.long	.L208-.L193
+	.long	.L208-.L193
+	.long	.L208-.L193
+	.long	.L208-.L193
+	.long	.L208-.L193
+	.long	.L208-.L193
+	.long	.L208-.L193
+	.long	.L208-.L193
+	.long	.L208-.L193
+	.long	.L208-.L193
+	.long	.L208-.L193
+	.long	.L199-.L193
+	.long	.L198-.L193
+	.long	.L208-.L193
+	.long	.L197-.L193
+	.long	.L208-.L193
+	.long	.L208-.L193
+	.long	.L196-.L193
+	.long	.L208-.L193
+	.long	.L208-.L193
+	.long	.L195-.L193
+	.long	.L208-.L193
+	.long	.L208-.L193
+	.long	.L208-.L193
+	.long	.L208-.L193
+	.long	.L208-.L193
+	.long	.L208-.L193
+	.long	.L194-.L193
+	.long	.L208-.L193
+	.long	.L192-.L193
 	.text
-.L205:
-	.loc 1 391 38
+.L199:
+	.loc 2 378 38
 	movq	-24(%rbp), %rax
-	movl	$42, %esi
+	movl	$43, %esi
 	movq	%rax, %rdi
 	call	makeToken
-	jmp	.L139
-.L204:
-	.loc 1 392 38
+	jmp	.L134
+.L198:
+	.loc 2 379 38
 	movq	-24(%rbp), %rax
-	movl	$60, %esi
+	movl	$61, %esi
 	movq	%rax, %rdi
 	call	makeToken
-	jmp	.L139
-.L203:
-	.loc 1 393 38
+	jmp	.L134
+.L197:
+	.loc 2 380 38
 	movq	-24(%rbp), %rax
-	movl	$58, %esi
+	movl	$59, %esi
 	movq	%rax, %rdi
 	call	makeToken
-	jmp	.L139
-.L202:
-	.loc 1 394 38
+	jmp	.L134
+.L196:
+	.loc 2 381 38
 	movq	-24(%rbp), %rax
-	movl	$46, %esi
+	movl	$47, %esi
 	movq	%rax, %rdi
 	call	makeToken
-	jmp	.L139
-.L201:
-	.loc 1 395 45 discriminator 2
+	jmp	.L134
+.L195:
+	.loc 2 382 45 discriminator 2
 	movq	scanner(%rip), %rax
-	.loc 1 395 51 discriminator 2
+	.loc 2 382 51 discriminator 2
 	addq	$2, %rax
 	movzbl	(%rax), %eax
 	movsbl	%al, %eax
 	cmpl	$108, %eax
-	je	.L207
+	je	.L201
+	cmpl	$108, %eax
+	jg	.L194
+	cmpl	$61, %eax
+	je	.L202
+	cmpl	$100, %eax
+	jne	.L194
+	.loc 2 383 42
+	movq	-24(%rbp), %rax
+	movl	$63, %esi
+	movq	%rax, %rdi
+	call	makeToken
+	jmp	.L134
+.L201:
+	.loc 2 384 42
+	movq	-24(%rbp), %rax
+	movl	$55, %esi
+	movq	%rax, %rdi
+	call	makeToken
+	jmp	.L134
+.L202:
+	.loc 2 385 42
+	movq	-24(%rbp), %rax
+	movl	$51, %esi
+	movq	%rax, %rdi
+	call	makeToken
+	jmp	.L134
+.L194:
+	.loc 2 387 38
+	movq	-24(%rbp), %rax
+	movl	$65, %esi
+	movq	%rax, %rdi
+	call	makeToken
+	jmp	.L134
+.L192:
+	.loc 2 388 45 discriminator 3
+	movq	scanner(%rip), %rax
+	.loc 2 388 51 discriminator 3
+	addq	$2, %rax
+	movzbl	(%rax), %eax
+	movsbl	%al, %eax
+	cmpl	$108, %eax
+	je	.L203
 	cmpl	$108, %eax
 	jg	.L200
-	cmpl	$61, %eax
-	je	.L208
-	cmpl	$100, %eax
-	jne	.L200
-	.loc 1 396 42
-	movq	-24(%rbp), %rax
-	movl	$62, %esi
-	movq	%rax, %rdi
-	call	makeToken
-	jmp	.L139
-.L207:
-	.loc 1 397 42
-	movq	-24(%rbp), %rax
-	movl	$54, %esi
-	movq	%rax, %rdi
-	call	makeToken
-	jmp	.L139
-.L208:
-	.loc 1 398 42
-	movq	-24(%rbp), %rax
-	movl	$50, %esi
-	movq	%rax, %rdi
-	call	makeToken
-	jmp	.L139
-.L200:
-	.loc 1 400 38
-	movq	-24(%rbp), %rax
-	movl	$64, %esi
-	movq	%rax, %rdi
-	call	makeToken
-	jmp	.L139
-.L198:
-	.loc 1 401 45 discriminator 3
-	movq	scanner(%rip), %rax
-	.loc 1 401 51 discriminator 3
-	addq	$2, %rax
-	movzbl	(%rax), %eax
-	movsbl	%al, %eax
-	cmpl	$108, %eax
-	je	.L209
-	cmpl	$108, %eax
-	jg	.L206
 	cmpl	$99, %eax
-	je	.L210
+	je	.L204
 	cmpl	$105, %eax
-	je	.L211
-	jmp	.L206
-.L210:
-	.loc 1 402 42
+	je	.L205
+	jmp	.L200
+.L204:
+	.loc 2 389 42
 	movq	-24(%rbp), %rax
-	movl	$44, %esi
+	movl	$45, %esi
 	movq	%rax, %rdi
 	call	makeToken
-	jmp	.L139
-.L211:
-	.loc 1 403 42
+	jmp	.L134
+.L205:
+	.loc 2 390 42
 	movq	-24(%rbp), %rax
-	movl	$48, %esi
+	movl	$49, %esi
 	movq	%rax, %rdi
 	call	makeToken
-	jmp	.L139
-.L209:
-	.loc 1 404 49 discriminator 4
+	jmp	.L134
+.L203:
+	.loc 2 391 49 discriminator 4
 	movq	scanner(%rip), %rax
-	.loc 1 404 55 discriminator 4
+	.loc 2 391 55 discriminator 4
 	addq	$3, %rax
 	movzbl	(%rax), %eax
 	movsbl	%al, %eax
 	cmpl	$61, %eax
-	je	.L212
+	je	.L206
 	cmpl	$108, %eax
-	jne	.L206
-	.loc 1 405 53 discriminator 5
+	jne	.L200
+	.loc 2 392 53 discriminator 5
 	movq	scanner(%rip), %rax
-	.loc 1 405 59 discriminator 5
+	.loc 2 392 59 discriminator 5
 	addq	$4, %rax
 	movzbl	(%rax), %eax
 	movsbl	%al, %eax
 	cmpl	$61, %eax
-	jne	.L212
-	.loc 1 405 81
+	jne	.L206
+	.loc 2 392 81
 	movq	-24(%rbp), %rax
-	movl	$56, %esi
+	movl	$57, %esi
 	movq	%rax, %rdi
 	call	makeToken
-	jmp	.L139
-.L212:
-	.loc 1 406 46
-	movq	-24(%rbp), %rax
-	movl	$52, %esi
-	movq	%rax, %rdi
-	call	makeToken
-	jmp	.L139
+	jmp	.L134
 .L206:
-	.loc 1 409 38
+	.loc 2 393 46
 	movq	-24(%rbp), %rax
-	movl	$40, %esi
+	movl	$53, %esi
 	movq	%rax, %rdi
 	call	makeToken
-	jmp	.L139
-.L214:
-	.loc 1 419 21
-	movl	$0, %eax
-	call	nextChar
-	.loc 1 420 28
-	movzwl	16+scanner(%rip), %eax
-	.loc 1 420 33
-	addl	$1, %eax
-	movw	%ax, 16+scanner(%rip)
-.L213:
-	.loc 1 418 23
-	movl	$0, %eax
-	call	checkChar
-	.loc 1 418 22
-	cmpb	$10, %al
-	je	.L214
-	.loc 1 422 24
+	jmp	.L134
+.L200:
+	.loc 2 396 38
 	movq	-24(%rbp), %rax
-	movl	$121, %esi
+	movl	$41, %esi
 	movq	%rax, %rdi
 	call	makeToken
-	jmp	.L139
-.L216:
-	.loc 1 414 13
+	jmp	.L134
+.L208:
+	.loc 2 401 13
 	nop
-.L144:
-	.loc 1 424 5
+.L139:
+	.loc 2 411 5
 	movzbl	-9(%rbp), %eax
 	movl	%eax, %edi
 	call	invalidToken
-	.loc 1 425 12
+	.loc 2 412 12
 	movq	-24(%rbp), %rax
 	leaq	.LC20(%rip), %rsi
 	movq	%rax, %rdi
 	call	errorToken
-.L139:
-	.loc 1 426 1
+.L134:
+	.loc 2 413 1
 	movq	-8(%rbp), %rax
 	xorq	%fs:40, %rax
-	je	.L215
+	je	.L207
 	call	__stack_chk_fail@PLT
-.L215:
+.L207:
 	movq	-24(%rbp), %rax
 	leave
 	.cfi_def_cfa 7, 8
@@ -2712,25 +2599,24 @@ scanToken:
 .LFE20:
 	.size	scanToken, .-scanToken
 .Letext0:
-	.file 2 "/usr/lib/gcc/x86_64-linux-gnu/9/include/stddef.h"
-	.file 3 "/usr/include/x86_64-linux-gnu/bits/types.h"
-	.file 4 "/usr/include/x86_64-linux-gnu/bits/stdint-intn.h"
-	.file 5 "/usr/include/x86_64-linux-gnu/bits/stdint-uintn.h"
-	.file 6 "Tokenization/scanner/scanner.h"
+	.file 3 "/usr/lib/gcc/x86_64-linux-gnu/9/include/stddef.h"
+	.file 4 "/usr/include/x86_64-linux-gnu/bits/types.h"
+	.file 5 "/usr/include/x86_64-linux-gnu/bits/stdint-intn.h"
+	.file 6 "/usr/include/x86_64-linux-gnu/bits/stdint-uintn.h"
 	.file 7 "/usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h"
 	.file 8 "/usr/include/x86_64-linux-gnu/bits/types/FILE.h"
 	.file 9 "/usr/include/stdio.h"
 	.section	.debug_info,"",@progbits
 .Ldebug_info0:
-	.long	0xa9b
+	.long	0xaab
 	.value	0x4
 	.long	.Ldebug_abbrev0
 	.byte	0x8
 	.uleb128 0x1
-	.long	.LASF920
+	.long	.LASF925
 	.byte	0xc
-	.long	.LASF921
-	.long	.LASF922
+	.long	.LASF926
+	.long	.LASF927
 	.quad	.Ltext0
 	.quad	.Letext0-.Ltext0
 	.long	.Ldebug_line0
@@ -2741,7 +2627,7 @@ scanToken:
 	.long	.LASF710
 	.uleb128 0x3
 	.long	.LASF715
-	.byte	0x2
+	.byte	0x3
 	.byte	0xd1
 	.byte	0x1b
 	.long	0x44
@@ -2767,7 +2653,7 @@ scanToken:
 	.long	.LASF714
 	.uleb128 0x3
 	.long	.LASF716
-	.byte	0x3
+	.byte	0x4
 	.byte	0x25
 	.byte	0x15
 	.long	0x73
@@ -2777,13 +2663,13 @@ scanToken:
 	.long	.LASF717
 	.uleb128 0x3
 	.long	.LASF718
-	.byte	0x3
+	.byte	0x4
 	.byte	0x26
 	.byte	0x17
 	.long	0x52
 	.uleb128 0x3
 	.long	.LASF719
-	.byte	0x3
+	.byte	0x4
 	.byte	0x27
 	.byte	0x1a
 	.long	0x92
@@ -2793,13 +2679,13 @@ scanToken:
 	.long	.LASF720
 	.uleb128 0x3
 	.long	.LASF721
-	.byte	0x3
+	.byte	0x4
 	.byte	0x98
 	.byte	0x12
 	.long	0x31
 	.uleb128 0x3
 	.long	.LASF722
-	.byte	0x3
+	.byte	0x4
 	.byte	0x99
 	.byte	0x12
 	.long	0x31
@@ -2814,7 +2700,7 @@ scanToken:
 	.long	.LASF723
 	.uleb128 0x3
 	.long	.LASF724
-	.byte	0x4
+	.byte	0x5
 	.byte	0x18
 	.byte	0x12
 	.long	0x67
@@ -2822,13 +2708,13 @@ scanToken:
 	.long	0xc0
 	.uleb128 0x3
 	.long	.LASF725
-	.byte	0x4
+	.byte	0x5
 	.byte	0x19
 	.byte	0x13
 	.long	0x86
 	.uleb128 0x3
 	.long	.LASF726
-	.byte	0x5
+	.byte	0x6
 	.byte	0x18
 	.byte	0x13
 	.long	0x7a
@@ -2836,10 +2722,10 @@ scanToken:
 	.byte	0x7
 	.byte	0x4
 	.long	0x60
-	.byte	0x6
+	.byte	0x1
 	.byte	0x6
 	.byte	0xe
-	.long	0x3da
+	.long	0x3ec
 	.uleb128 0x9
 	.long	.LASF727
 	.byte	0
@@ -3209,44 +3095,53 @@ scanToken:
 	.uleb128 0x9
 	.long	.LASF849
 	.byte	0x7a
+	.uleb128 0x9
+	.long	.LASF850
+	.byte	0x7b
+	.uleb128 0x9
+	.long	.LASF851
+	.byte	0x7c
+	.uleb128 0x9
+	.long	.LASF852
+	.byte	0x7d
 	.byte	0
 	.uleb128 0x3
-	.long	.LASF850
-	.byte	0x6
-	.byte	0x9c
+	.long	.LASF853
+	.byte	0x1
+	.byte	0xa2
 	.byte	0x3
 	.long	0xe9
 	.uleb128 0xa
 	.byte	0x18
-	.byte	0x6
-	.byte	0x9e
+	.byte	0x1
+	.byte	0xa4
 	.byte	0x9
-	.long	0x424
+	.long	0x436
 	.uleb128 0xb
-	.long	.LASF851
-	.byte	0x6
-	.byte	0x9f
+	.long	.LASF854
+	.byte	0x1
+	.byte	0xa5
 	.byte	0xf
-	.long	0x3da
+	.long	0x3ec
 	.byte	0
 	.uleb128 0xb
-	.long	.LASF852
-	.byte	0x6
-	.byte	0xa0
+	.long	.LASF855
+	.byte	0x1
+	.byte	0xa6
 	.byte	0x13
-	.long	0x424
+	.long	0x436
 	.byte	0x8
 	.uleb128 0xb
-	.long	.LASF853
-	.byte	0x6
-	.byte	0xa1
+	.long	.LASF856
+	.byte	0x1
+	.byte	0xa7
 	.byte	0xd
 	.long	0xd1
 	.byte	0x10
 	.uleb128 0xb
-	.long	.LASF854
-	.byte	0x6
-	.byte	0xa2
+	.long	.LASF857
+	.byte	0x1
+	.byte	0xa8
 	.byte	0xd
 	.long	0xd1
 	.byte	0x12
@@ -3255,356 +3150,356 @@ scanToken:
 	.byte	0x8
 	.long	0xcc
 	.uleb128 0x3
-	.long	.LASF855
-	.byte	0x6
-	.byte	0xa3
+	.long	.LASF858
+	.byte	0x1
+	.byte	0xa9
 	.byte	0x3
-	.long	0x3e6
+	.long	0x3f8
+	.uleb128 0xa
+	.byte	0x18
+	.byte	0x1
+	.byte	0xab
+	.byte	0x9
+	.long	0x479
+	.uleb128 0xb
+	.long	.LASF855
+	.byte	0x1
+	.byte	0xac
+	.byte	0x13
+	.long	0x436
+	.byte	0
+	.uleb128 0xb
+	.long	.LASF859
+	.byte	0x1
+	.byte	0xad
+	.byte	0x13
+	.long	0x436
+	.byte	0x8
+	.uleb128 0xb
+	.long	.LASF857
+	.byte	0x1
+	.byte	0xae
+	.byte	0xd
+	.long	0xd1
+	.byte	0x10
+	.byte	0
+	.uleb128 0x3
+	.long	.LASF860
+	.byte	0x1
+	.byte	0xaf
+	.byte	0x3
+	.long	0x448
 	.uleb128 0xc
-	.long	.LASF923
+	.long	.LASF894
+	.byte	0x1
+	.byte	0xb1
+	.byte	0x9
+	.long	0x479
+	.uleb128 0x9
+	.byte	0x3
+	.quad	scanner
+	.uleb128 0xd
+	.long	.LASF928
 	.byte	0xd8
 	.byte	0x7
 	.byte	0x31
 	.byte	0x8
-	.long	0x5bd
+	.long	0x622
 	.uleb128 0xb
-	.long	.LASF856
+	.long	.LASF861
 	.byte	0x7
 	.byte	0x33
 	.byte	0x7
 	.long	0x4b
 	.byte	0
 	.uleb128 0xb
-	.long	.LASF857
+	.long	.LASF862
 	.byte	0x7
 	.byte	0x36
 	.byte	0x9
 	.long	0xb3
 	.byte	0x8
 	.uleb128 0xb
-	.long	.LASF858
+	.long	.LASF863
 	.byte	0x7
 	.byte	0x37
 	.byte	0x9
 	.long	0xb3
 	.byte	0x10
 	.uleb128 0xb
-	.long	.LASF859
+	.long	.LASF864
 	.byte	0x7
 	.byte	0x38
 	.byte	0x9
 	.long	0xb3
 	.byte	0x18
 	.uleb128 0xb
-	.long	.LASF860
+	.long	.LASF865
 	.byte	0x7
 	.byte	0x39
 	.byte	0x9
 	.long	0xb3
 	.byte	0x20
 	.uleb128 0xb
-	.long	.LASF861
+	.long	.LASF866
 	.byte	0x7
 	.byte	0x3a
 	.byte	0x9
 	.long	0xb3
 	.byte	0x28
 	.uleb128 0xb
-	.long	.LASF862
+	.long	.LASF867
 	.byte	0x7
 	.byte	0x3b
 	.byte	0x9
 	.long	0xb3
 	.byte	0x30
 	.uleb128 0xb
-	.long	.LASF863
+	.long	.LASF868
 	.byte	0x7
 	.byte	0x3c
 	.byte	0x9
 	.long	0xb3
 	.byte	0x38
 	.uleb128 0xb
-	.long	.LASF864
+	.long	.LASF869
 	.byte	0x7
 	.byte	0x3d
 	.byte	0x9
 	.long	0xb3
 	.byte	0x40
 	.uleb128 0xb
-	.long	.LASF865
+	.long	.LASF870
 	.byte	0x7
 	.byte	0x40
 	.byte	0x9
 	.long	0xb3
 	.byte	0x48
 	.uleb128 0xb
-	.long	.LASF866
+	.long	.LASF871
 	.byte	0x7
 	.byte	0x41
 	.byte	0x9
 	.long	0xb3
 	.byte	0x50
 	.uleb128 0xb
-	.long	.LASF867
+	.long	.LASF872
 	.byte	0x7
 	.byte	0x42
 	.byte	0x9
 	.long	0xb3
 	.byte	0x58
 	.uleb128 0xb
-	.long	.LASF868
+	.long	.LASF873
 	.byte	0x7
 	.byte	0x44
 	.byte	0x16
-	.long	0x5d6
+	.long	0x63b
 	.byte	0x60
 	.uleb128 0xb
-	.long	.LASF869
+	.long	.LASF874
 	.byte	0x7
 	.byte	0x46
 	.byte	0x14
-	.long	0x5dc
+	.long	0x641
 	.byte	0x68
 	.uleb128 0xb
-	.long	.LASF870
+	.long	.LASF875
 	.byte	0x7
 	.byte	0x48
 	.byte	0x7
 	.long	0x4b
 	.byte	0x70
 	.uleb128 0xb
-	.long	.LASF871
+	.long	.LASF876
 	.byte	0x7
 	.byte	0x49
 	.byte	0x7
 	.long	0x4b
 	.byte	0x74
 	.uleb128 0xb
-	.long	.LASF872
+	.long	.LASF877
 	.byte	0x7
 	.byte	0x4a
 	.byte	0xb
 	.long	0x99
 	.byte	0x78
 	.uleb128 0xb
-	.long	.LASF873
+	.long	.LASF878
 	.byte	0x7
 	.byte	0x4d
 	.byte	0x12
 	.long	0x59
 	.byte	0x80
 	.uleb128 0xb
-	.long	.LASF874
+	.long	.LASF879
 	.byte	0x7
 	.byte	0x4e
 	.byte	0xf
 	.long	0x73
 	.byte	0x82
 	.uleb128 0xb
-	.long	.LASF875
+	.long	.LASF880
 	.byte	0x7
 	.byte	0x4f
 	.byte	0x8
-	.long	0x5e2
+	.long	0x647
 	.byte	0x83
 	.uleb128 0xb
-	.long	.LASF876
+	.long	.LASF881
 	.byte	0x7
 	.byte	0x51
 	.byte	0xf
-	.long	0x5f2
+	.long	0x657
 	.byte	0x88
 	.uleb128 0xb
-	.long	.LASF877
+	.long	.LASF882
 	.byte	0x7
 	.byte	0x59
 	.byte	0xd
 	.long	0xa5
 	.byte	0x90
 	.uleb128 0xb
-	.long	.LASF878
+	.long	.LASF883
 	.byte	0x7
 	.byte	0x5b
 	.byte	0x17
-	.long	0x5fd
+	.long	0x662
 	.byte	0x98
 	.uleb128 0xb
-	.long	.LASF879
+	.long	.LASF884
 	.byte	0x7
 	.byte	0x5c
 	.byte	0x19
-	.long	0x608
+	.long	0x66d
 	.byte	0xa0
 	.uleb128 0xb
-	.long	.LASF880
+	.long	.LASF885
 	.byte	0x7
 	.byte	0x5d
 	.byte	0x14
-	.long	0x5dc
+	.long	0x641
 	.byte	0xa8
 	.uleb128 0xb
-	.long	.LASF881
+	.long	.LASF886
 	.byte	0x7
 	.byte	0x5e
 	.byte	0x9
 	.long	0xb1
 	.byte	0xb0
 	.uleb128 0xb
-	.long	.LASF882
+	.long	.LASF887
 	.byte	0x7
 	.byte	0x5f
 	.byte	0xa
 	.long	0x38
 	.byte	0xb8
 	.uleb128 0xb
-	.long	.LASF883
+	.long	.LASF888
 	.byte	0x7
 	.byte	0x60
 	.byte	0x7
 	.long	0x4b
 	.byte	0xc0
 	.uleb128 0xb
-	.long	.LASF884
+	.long	.LASF889
 	.byte	0x7
 	.byte	0x62
 	.byte	0x8
-	.long	0x60e
+	.long	0x673
 	.byte	0xc4
 	.byte	0
 	.uleb128 0x3
-	.long	.LASF885
+	.long	.LASF890
 	.byte	0x8
 	.byte	0x7
 	.byte	0x19
-	.long	0x436
-	.uleb128 0xd
-	.long	.LASF924
+	.long	0x49b
+	.uleb128 0xe
+	.long	.LASF929
 	.byte	0x7
 	.byte	0x2b
 	.byte	0xe
-	.uleb128 0xe
-	.long	.LASF886
-	.uleb128 0x6
-	.byte	0x8
-	.long	0x5d1
-	.uleb128 0x6
-	.byte	0x8
-	.long	0x436
 	.uleb128 0xf
-	.long	0xb9
-	.long	0x5f2
+	.long	.LASF891
+	.uleb128 0x6
+	.byte	0x8
+	.long	0x636
+	.uleb128 0x6
+	.byte	0x8
+	.long	0x49b
 	.uleb128 0x10
+	.long	0xb9
+	.long	0x657
+	.uleb128 0x11
 	.long	0x44
 	.byte	0
 	.byte	0
 	.uleb128 0x6
 	.byte	0x8
-	.long	0x5c9
-	.uleb128 0xe
-	.long	.LASF887
-	.uleb128 0x6
-	.byte	0x8
-	.long	0x5f8
-	.uleb128 0xe
-	.long	.LASF888
-	.uleb128 0x6
-	.byte	0x8
-	.long	0x603
+	.long	0x62e
 	.uleb128 0xf
-	.long	0xb9
-	.long	0x61e
+	.long	.LASF892
+	.uleb128 0x6
+	.byte	0x8
+	.long	0x65d
+	.uleb128 0xf
+	.long	.LASF893
+	.uleb128 0x6
+	.byte	0x8
+	.long	0x668
 	.uleb128 0x10
+	.long	0xb9
+	.long	0x683
+	.uleb128 0x11
 	.long	0x44
 	.byte	0x13
 	.byte	0
-	.uleb128 0x11
-	.long	.LASF889
+	.uleb128 0x12
+	.long	.LASF895
 	.byte	0x9
 	.byte	0x89
 	.byte	0xe
-	.long	0x62a
+	.long	0x68f
 	.uleb128 0x6
 	.byte	0x8
-	.long	0x5bd
-	.uleb128 0x11
-	.long	.LASF890
+	.long	0x622
+	.uleb128 0x12
+	.long	.LASF896
 	.byte	0x9
 	.byte	0x8a
 	.byte	0xe
-	.long	0x62a
-	.uleb128 0x11
-	.long	.LASF891
+	.long	0x68f
+	.uleb128 0x12
+	.long	.LASF897
 	.byte	0x9
 	.byte	0x8b
 	.byte	0xe
-	.long	0x62a
-	.uleb128 0xa
-	.byte	0x18
-	.byte	0x1
-	.byte	0x8
-	.byte	0x9
-	.long	0x679
-	.uleb128 0xb
-	.long	.LASF852
-	.byte	0x1
-	.byte	0x9
-	.byte	0x13
-	.long	0x424
-	.byte	0
-	.uleb128 0xb
-	.long	.LASF892
-	.byte	0x1
-	.byte	0xa
-	.byte	0x13
-	.long	0x424
-	.byte	0x8
-	.uleb128 0xb
-	.long	.LASF854
-	.byte	0x1
-	.byte	0xb
-	.byte	0xd
-	.long	0xd1
-	.byte	0x10
-	.byte	0
-	.uleb128 0x3
-	.long	.LASF893
-	.byte	0x1
-	.byte	0xc
-	.byte	0x3
-	.long	0x648
-	.uleb128 0x12
-	.long	.LASF894
-	.byte	0x1
-	.byte	0xe
-	.byte	0x9
-	.long	0x679
-	.uleb128 0x9
-	.byte	0x3
-	.quad	scanner
-	.uleb128 0x12
-	.long	.LASF895
-	.byte	0x1
+	.long	0x68f
+	.uleb128 0xc
+	.long	.LASF898
+	.byte	0x2
 	.byte	0xf
 	.byte	0x7
-	.long	0x42a
+	.long	0x43c
 	.uleb128 0x9
 	.byte	0x3
 	.quad	token
 	.uleb128 0x13
-	.long	.LASF925
-	.byte	0x1
-	.value	0x120
+	.long	.LASF921
+	.byte	0x2
+	.value	0x112
 	.byte	0x7
-	.long	0x42a
+	.long	0x43c
 	.quad	.LFB20
 	.quad	.LFE20-.LFB20
 	.uleb128 0x1
 	.byte	0x9c
-	.long	0x6e3
+	.long	0x6f5
 	.uleb128 0x14
 	.string	"c"
-	.byte	0x1
-	.value	0x126
+	.byte	0x2
+	.value	0x118
 	.byte	0xd
 	.long	0xdd
 	.uleb128 0x2
@@ -3612,59 +3507,59 @@ scanToken:
 	.sleb128 -25
 	.byte	0
 	.uleb128 0x15
-	.long	.LASF896
-	.byte	0x1
-	.value	0x114
+	.long	.LASF899
+	.byte	0x2
+	.value	0x106
 	.byte	0xe
-	.long	0x42a
+	.long	0x43c
 	.quad	.LFB19
 	.quad	.LFE19-.LFB19
 	.uleb128 0x1
 	.byte	0x9c
-	.uleb128 0x15
-	.long	.LASF897
-	.byte	0x1
-	.value	0x108
+	.uleb128 0x16
+	.long	.LASF900
+	.byte	0x2
+	.byte	0xfa
 	.byte	0xe
-	.long	0x42a
+	.long	0x43c
 	.quad	.LFB18
 	.quad	.LFE18-.LFB18
 	.uleb128 0x1
 	.byte	0x9c
-	.uleb128 0x15
-	.long	.LASF898
-	.byte	0x1
-	.value	0x103
+	.uleb128 0x16
+	.long	.LASF901
+	.byte	0x2
+	.byte	0xf5
 	.byte	0xe
-	.long	0x42a
+	.long	0x43c
 	.quad	.LFB17
 	.quad	.LFE17-.LFB17
 	.uleb128 0x1
 	.byte	0x9c
 	.uleb128 0x16
-	.long	.LASF899
-	.byte	0x1
+	.long	.LASF902
+	.byte	0x2
 	.byte	0xa2
 	.byte	0x12
-	.long	0x3da
+	.long	0x3ec
 	.quad	.LFB16
 	.quad	.LFE16-.LFB16
 	.uleb128 0x1
 	.byte	0x9c
 	.uleb128 0x17
-	.long	.LASF905
-	.byte	0x1
+	.long	.LASF908
+	.byte	0x2
 	.byte	0x9b
 	.byte	0x12
-	.long	0x3da
+	.long	0x3ec
 	.quad	.LFB15
 	.quad	.LFE15-.LFB15
 	.uleb128 0x1
 	.byte	0x9c
-	.long	0x7bd
+	.long	0x7cd
 	.uleb128 0x18
-	.long	.LASF852
-	.byte	0x1
+	.long	.LASF855
+	.byte	0x2
 	.byte	0x9b
 	.byte	0x27
 	.long	0xd1
@@ -3672,8 +3567,8 @@ scanToken:
 	.byte	0x91
 	.sleb128 -20
 	.uleb128 0x18
-	.long	.LASF853
-	.byte	0x1
+	.long	.LASF856
+	.byte	0x2
 	.byte	0x9b
 	.byte	0x36
 	.long	0xd1
@@ -3681,40 +3576,40 @@ scanToken:
 	.byte	0x91
 	.sleb128 -24
 	.uleb128 0x18
-	.long	.LASF900
-	.byte	0x1
+	.long	.LASF903
+	.byte	0x2
 	.byte	0x9b
 	.byte	0x4c
-	.long	0x424
+	.long	0x436
 	.uleb128 0x2
 	.byte	0x91
 	.sleb128 -32
 	.uleb128 0x18
-	.long	.LASF851
-	.byte	0x1
+	.long	.LASF854
+	.byte	0x2
 	.byte	0x9b
 	.byte	0x5c
-	.long	0x3da
+	.long	0x3ec
 	.uleb128 0x2
 	.byte	0x91
 	.sleb128 -36
 	.byte	0
 	.uleb128 0x19
-	.long	.LASF901
-	.byte	0x1
-	.byte	0x81
+	.long	.LASF904
+	.byte	0x2
+	.byte	0x82
 	.byte	0xd
 	.quad	.LFB14
 	.quad	.LFE14-.LFB14
 	.uleb128 0x1
 	.byte	0x9c
-	.long	0x7ef
+	.long	0x7ff
 	.uleb128 0x1a
 	.long	.Ldebug_ranges0+0
 	.uleb128 0x1b
 	.string	"c"
-	.byte	0x1
-	.byte	0x83
+	.byte	0x2
+	.byte	0x84
 	.byte	0x10
 	.long	0xc0
 	.uleb128 0x2
@@ -3723,19 +3618,19 @@ scanToken:
 	.byte	0
 	.byte	0
 	.uleb128 0x19
-	.long	.LASF902
-	.byte	0x1
-	.byte	0x65
+	.long	.LASF905
+	.byte	0x2
+	.byte	0x66
 	.byte	0xd
 	.quad	.LFB13
 	.quad	.LFE13-.LFB13
 	.uleb128 0x1
 	.byte	0x9c
-	.long	0x81d
+	.long	0x82d
 	.uleb128 0x1c
-	.long	.LASF903
-	.byte	0x1
-	.byte	0x68
+	.long	.LASF906
+	.byte	0x2
+	.byte	0x69
 	.byte	0x9
 	.long	0x4b
 	.uleb128 0x2
@@ -3743,95 +3638,95 @@ scanToken:
 	.sleb128 -28
 	.byte	0
 	.uleb128 0x1d
-	.long	.LASF926
-	.byte	0x1
-	.byte	0x5f
+	.long	.LASF930
+	.byte	0x2
+	.byte	0x60
 	.byte	0xd
 	.quad	.LFB12
 	.quad	.LFE12-.LFB12
 	.uleb128 0x1
 	.byte	0x9c
 	.uleb128 0x1e
-	.long	.LASF912
-	.byte	0x1
-	.byte	0x56
+	.long	.LASF914
+	.byte	0x2
+	.byte	0x57
 	.byte	0xd
 	.quad	.LFB11
 	.quad	.LFE11-.LFB11
 	.uleb128 0x1
 	.byte	0x9c
-	.long	0x873
+	.long	0x883
 	.uleb128 0x1f
 	.string	"c"
-	.byte	0x1
-	.byte	0x56
+	.byte	0x2
+	.byte	0x57
 	.byte	0x22
 	.long	0xdd
 	.uleb128 0x3
 	.byte	0x91
 	.sleb128 -68
 	.uleb128 0x1c
-	.long	.LASF904
-	.byte	0x1
-	.byte	0x57
+	.long	.LASF907
+	.byte	0x2
+	.byte	0x58
 	.byte	0xd
-	.long	0x873
+	.long	0x883
 	.uleb128 0x2
 	.byte	0x91
 	.sleb128 -64
 	.byte	0
-	.uleb128 0xf
-	.long	0xdd
-	.long	0x883
 	.uleb128 0x10
+	.long	0xdd
+	.long	0x893
+	.uleb128 0x11
 	.long	0x44
 	.byte	0x19
 	.byte	0
 	.uleb128 0x17
-	.long	.LASF906
-	.byte	0x1
-	.byte	0x4d
+	.long	.LASF909
+	.byte	0x2
+	.byte	0x4e
 	.byte	0xe
-	.long	0x42a
+	.long	0x43c
 	.quad	.LFB10
 	.quad	.LFE10-.LFB10
 	.uleb128 0x1
 	.byte	0x9c
-	.long	0x8c4
+	.long	0x8d4
 	.uleb128 0x18
-	.long	.LASF907
-	.byte	0x1
-	.byte	0x4d
+	.long	.LASF910
+	.byte	0x2
+	.byte	0x4e
 	.byte	0x27
-	.long	0x424
+	.long	0x436
 	.uleb128 0x2
 	.byte	0x91
 	.sleb128 -64
 	.uleb128 0x1c
-	.long	.LASF895
-	.byte	0x1
-	.byte	0x4e
+	.long	.LASF898
+	.byte	0x2
+	.byte	0x4f
 	.byte	0xb
-	.long	0x42a
+	.long	0x43c
 	.uleb128 0x2
 	.byte	0x91
 	.sleb128 -48
 	.byte	0
 	.uleb128 0x17
-	.long	.LASF908
-	.byte	0x1
-	.byte	0x49
+	.long	.LASF911
+	.byte	0x2
+	.byte	0x4a
 	.byte	0xe
-	.long	0x42a
+	.long	0x43c
 	.quad	.LFB9
 	.quad	.LFE9-.LFB9
 	.uleb128 0x1
 	.byte	0x9c
-	.long	0x912
+	.long	0x922
 	.uleb128 0x1f
 	.string	"c"
-	.byte	0x1
-	.byte	0x49
+	.byte	0x2
+	.byte	0x4a
 	.byte	0x26
 	.long	0xc0
 	.uleb128 0x2
@@ -3839,67 +3734,37 @@ scanToken:
 	.sleb128 -44
 	.uleb128 0x1f
 	.string	"one"
-	.byte	0x1
-	.byte	0x49
+	.byte	0x2
+	.byte	0x4a
 	.byte	0x33
-	.long	0x3da
+	.long	0x3ec
 	.uleb128 0x2
 	.byte	0x91
 	.sleb128 -48
 	.uleb128 0x1f
 	.string	"two"
-	.byte	0x1
-	.byte	0x49
+	.byte	0x2
+	.byte	0x4a
 	.byte	0x42
-	.long	0x3da
+	.long	0x3ec
 	.uleb128 0x2
 	.byte	0x91
 	.sleb128 -52
 	.byte	0
-	.uleb128 0x20
-	.long	.LASF909
-	.byte	0x1
-	.byte	0x3e
-	.byte	0xe
-	.long	0x42a
+	.uleb128 0x17
+	.long	.LASF912
+	.byte	0x2
+	.byte	0x38
+	.byte	0xc
+	.long	0x952
 	.quad	.LFB8
 	.quad	.LFE8-.LFB8
 	.uleb128 0x1
 	.byte	0x9c
-	.long	0x953
-	.uleb128 0x18
-	.long	.LASF851
-	.byte	0x1
-	.byte	0x3e
-	.byte	0x22
-	.long	0x3da
-	.uleb128 0x2
-	.byte	0x91
-	.sleb128 -60
-	.uleb128 0x1c
-	.long	.LASF895
-	.byte	0x1
-	.byte	0x3f
-	.byte	0xb
-	.long	0x42a
-	.uleb128 0x2
-	.byte	0x91
-	.sleb128 -48
-	.byte	0
-	.uleb128 0x17
-	.long	.LASF910
-	.byte	0x1
-	.byte	0x38
-	.byte	0xc
-	.long	0x983
-	.quad	.LFB7
-	.quad	.LFE7-.LFB7
-	.uleb128 0x1
-	.byte	0x9c
-	.long	0x983
+	.long	0x952
 	.uleb128 0x1f
 	.string	"c"
-	.byte	0x1
+	.byte	0x2
 	.byte	0x38
 	.byte	0x1f
 	.long	0xc0
@@ -3910,21 +3775,21 @@ scanToken:
 	.uleb128 0x2
 	.byte	0x1
 	.byte	0x2
-	.long	.LASF911
-	.uleb128 0x21
 	.long	.LASF913
-	.byte	0x1
+	.uleb128 0x20
+	.long	.LASF915
+	.byte	0x2
 	.byte	0x31
 	.byte	0xf
 	.long	0xc0
-	.quad	.LFB6
-	.quad	.LFE6-.LFB6
+	.quad	.LFB7
+	.quad	.LFE7-.LFB7
 	.uleb128 0x1
 	.byte	0x9c
-	.long	0x9ba
+	.long	0x989
 	.uleb128 0x1b
 	.string	"c"
-	.byte	0x1
+	.byte	0x2
 	.byte	0x32
 	.byte	0xc
 	.long	0xc0
@@ -3933,49 +3798,49 @@ scanToken:
 	.sleb128 -17
 	.byte	0
 	.uleb128 0x16
-	.long	.LASF914
-	.byte	0x1
+	.long	.LASF916
+	.byte	0x2
 	.byte	0x2c
+	.byte	0xf
+	.long	0xc0
+	.quad	.LFB6
+	.quad	.LFE6-.LFB6
+	.uleb128 0x1
+	.byte	0x9c
+	.uleb128 0x21
+	.long	.LASF917
+	.byte	0x2
+	.byte	0x28
 	.byte	0xf
 	.long	0xc0
 	.quad	.LFB5
 	.quad	.LFE5-.LFB5
 	.uleb128 0x1
 	.byte	0x9c
-	.uleb128 0x22
-	.long	.LASF915
-	.byte	0x1
-	.byte	0x28
-	.byte	0xf
-	.long	0xc0
+	.uleb128 0x21
+	.long	.LASF918
+	.byte	0x2
+	.byte	0x1f
+	.byte	0xc
+	.long	0x952
 	.quad	.LFB4
 	.quad	.LFE4-.LFB4
 	.uleb128 0x1
 	.byte	0x9c
 	.uleb128 0x22
-	.long	.LASF916
-	.byte	0x1
-	.byte	0x1f
+	.long	.LASF919
+	.byte	0x2
+	.byte	0x1b
 	.byte	0xc
-	.long	0x983
+	.long	0x952
 	.quad	.LFB3
 	.quad	.LFE3-.LFB3
 	.uleb128 0x1
 	.byte	0x9c
-	.uleb128 0x20
-	.long	.LASF917
-	.byte	0x1
-	.byte	0x1b
-	.byte	0xc
-	.long	0x983
-	.quad	.LFB2
-	.quad	.LFE2-.LFB2
-	.uleb128 0x1
-	.byte	0x9c
-	.long	0xa44
+	.long	0xa13
 	.uleb128 0x1f
 	.string	"c"
-	.byte	0x1
+	.byte	0x2
 	.byte	0x1b
 	.byte	0x1b
 	.long	0xc0
@@ -3983,20 +3848,20 @@ scanToken:
 	.byte	0x91
 	.sleb128 -20
 	.byte	0
-	.uleb128 0x20
-	.long	.LASF918
-	.byte	0x1
+	.uleb128 0x22
+	.long	.LASF920
+	.byte	0x2
 	.byte	0x17
 	.byte	0xc
-	.long	0x983
-	.quad	.LFB1
-	.quad	.LFE1-.LFB1
+	.long	0x952
+	.quad	.LFB2
+	.quad	.LFE2-.LFB2
 	.uleb128 0x1
 	.byte	0x9c
-	.long	0xa74
+	.long	0xa43
 	.uleb128 0x1f
 	.string	"c"
-	.byte	0x1
+	.byte	0x2
 	.byte	0x17
 	.byte	0x1b
 	.long	0xc0
@@ -4005,23 +3870,53 @@ scanToken:
 	.sleb128 -20
 	.byte	0
 	.uleb128 0x23
-	.long	.LASF927
-	.byte	0x1
+	.long	.LASF922
+	.byte	0x2
 	.byte	0x11
 	.byte	0x6
+	.quad	.LFB1
+	.quad	.LFE1-.LFB1
+	.uleb128 0x1
+	.byte	0x9c
+	.long	0xa71
+	.uleb128 0x18
+	.long	.LASF923
+	.byte	0x2
+	.byte	0x11
+	.byte	0x20
+	.long	0x436
+	.uleb128 0x2
+	.byte	0x91
+	.sleb128 -24
+	.byte	0
+	.uleb128 0x24
+	.long	.LASF924
+	.byte	0x1
+	.byte	0xc1
+	.byte	0xe
+	.long	0x43c
 	.quad	.LFB0
 	.quad	.LFE0-.LFB0
 	.uleb128 0x1
 	.byte	0x9c
 	.uleb128 0x18
-	.long	.LASF919
+	.long	.LASF854
 	.byte	0x1
-	.byte	0x11
-	.byte	0x20
-	.long	0x424
+	.byte	0xc1
+	.byte	0x22
+	.long	0x3ec
 	.uleb128 0x2
 	.byte	0x91
-	.sleb128 -24
+	.sleb128 -60
+	.uleb128 0x1c
+	.long	.LASF898
+	.byte	0x1
+	.byte	0xc2
+	.byte	0xb
+	.long	0x43c
+	.uleb128 0x2
+	.byte	0x91
+	.sleb128 -48
 	.byte	0
 	.byte	0
 	.section	.debug_abbrev,"",@progbits
@@ -4168,63 +4063,6 @@ scanToken:
 	.byte	0
 	.byte	0
 	.uleb128 0xc
-	.uleb128 0x13
-	.byte	0x1
-	.uleb128 0x3
-	.uleb128 0xe
-	.uleb128 0xb
-	.uleb128 0xb
-	.uleb128 0x3a
-	.uleb128 0xb
-	.uleb128 0x3b
-	.uleb128 0xb
-	.uleb128 0x39
-	.uleb128 0xb
-	.uleb128 0x1
-	.uleb128 0x13
-	.byte	0
-	.byte	0
-	.uleb128 0xd
-	.uleb128 0x16
-	.byte	0
-	.uleb128 0x3
-	.uleb128 0xe
-	.uleb128 0x3a
-	.uleb128 0xb
-	.uleb128 0x3b
-	.uleb128 0xb
-	.uleb128 0x39
-	.uleb128 0xb
-	.byte	0
-	.byte	0
-	.uleb128 0xe
-	.uleb128 0x13
-	.byte	0
-	.uleb128 0x3
-	.uleb128 0xe
-	.uleb128 0x3c
-	.uleb128 0x19
-	.byte	0
-	.byte	0
-	.uleb128 0xf
-	.uleb128 0x1
-	.byte	0x1
-	.uleb128 0x49
-	.uleb128 0x13
-	.uleb128 0x1
-	.uleb128 0x13
-	.byte	0
-	.byte	0
-	.uleb128 0x10
-	.uleb128 0x21
-	.byte	0
-	.uleb128 0x49
-	.uleb128 0x13
-	.uleb128 0x2f
-	.uleb128 0xb
-	.byte	0
-	.byte	0
-	.uleb128 0x11
 	.uleb128 0x34
 	.byte	0
 	.uleb128 0x3
@@ -4239,8 +4077,65 @@ scanToken:
 	.uleb128 0x13
 	.uleb128 0x3f
 	.uleb128 0x19
+	.uleb128 0x2
+	.uleb128 0x18
+	.byte	0
+	.byte	0
+	.uleb128 0xd
+	.uleb128 0x13
+	.byte	0x1
+	.uleb128 0x3
+	.uleb128 0xe
+	.uleb128 0xb
+	.uleb128 0xb
+	.uleb128 0x3a
+	.uleb128 0xb
+	.uleb128 0x3b
+	.uleb128 0xb
+	.uleb128 0x39
+	.uleb128 0xb
+	.uleb128 0x1
+	.uleb128 0x13
+	.byte	0
+	.byte	0
+	.uleb128 0xe
+	.uleb128 0x16
+	.byte	0
+	.uleb128 0x3
+	.uleb128 0xe
+	.uleb128 0x3a
+	.uleb128 0xb
+	.uleb128 0x3b
+	.uleb128 0xb
+	.uleb128 0x39
+	.uleb128 0xb
+	.byte	0
+	.byte	0
+	.uleb128 0xf
+	.uleb128 0x13
+	.byte	0
+	.uleb128 0x3
+	.uleb128 0xe
 	.uleb128 0x3c
 	.uleb128 0x19
+	.byte	0
+	.byte	0
+	.uleb128 0x10
+	.uleb128 0x1
+	.byte	0x1
+	.uleb128 0x49
+	.uleb128 0x13
+	.uleb128 0x1
+	.uleb128 0x13
+	.byte	0
+	.byte	0
+	.uleb128 0x11
+	.uleb128 0x21
+	.byte	0
+	.uleb128 0x49
+	.uleb128 0x13
+	.uleb128 0x2f
+	.uleb128 0xb
 	.byte	0
 	.byte	0
 	.uleb128 0x12
@@ -4258,8 +4153,8 @@ scanToken:
 	.uleb128 0x13
 	.uleb128 0x3f
 	.uleb128 0x19
-	.uleb128 0x2
-	.uleb128 0x18
+	.uleb128 0x3c
+	.uleb128 0x19
 	.byte	0
 	.byte	0
 	.uleb128 0x13
@@ -4534,33 +4429,6 @@ scanToken:
 	.uleb128 0xb
 	.uleb128 0x39
 	.uleb128 0xb
-	.uleb128 0x27
-	.uleb128 0x19
-	.uleb128 0x49
-	.uleb128 0x13
-	.uleb128 0x11
-	.uleb128 0x1
-	.uleb128 0x12
-	.uleb128 0x7
-	.uleb128 0x40
-	.uleb128 0x18
-	.uleb128 0x2117
-	.uleb128 0x19
-	.uleb128 0x1
-	.uleb128 0x13
-	.byte	0
-	.byte	0
-	.uleb128 0x21
-	.uleb128 0x2e
-	.byte	0x1
-	.uleb128 0x3
-	.uleb128 0xe
-	.uleb128 0x3a
-	.uleb128 0xb
-	.uleb128 0x3b
-	.uleb128 0xb
-	.uleb128 0x39
-	.uleb128 0xb
 	.uleb128 0x49
 	.uleb128 0x13
 	.uleb128 0x11
@@ -4575,7 +4443,7 @@ scanToken:
 	.uleb128 0x13
 	.byte	0
 	.byte	0
-	.uleb128 0x22
+	.uleb128 0x21
 	.uleb128 0x2e
 	.byte	0
 	.uleb128 0x3
@@ -4596,6 +4464,33 @@ scanToken:
 	.uleb128 0x18
 	.uleb128 0x2117
 	.uleb128 0x19
+	.byte	0
+	.byte	0
+	.uleb128 0x22
+	.uleb128 0x2e
+	.byte	0x1
+	.uleb128 0x3
+	.uleb128 0xe
+	.uleb128 0x3a
+	.uleb128 0xb
+	.uleb128 0x3b
+	.uleb128 0xb
+	.uleb128 0x39
+	.uleb128 0xb
+	.uleb128 0x27
+	.uleb128 0x19
+	.uleb128 0x49
+	.uleb128 0x13
+	.uleb128 0x11
+	.uleb128 0x1
+	.uleb128 0x12
+	.uleb128 0x7
+	.uleb128 0x40
+	.uleb128 0x18
+	.uleb128 0x2117
+	.uleb128 0x19
+	.uleb128 0x1
+	.uleb128 0x13
 	.byte	0
 	.byte	0
 	.uleb128 0x23
@@ -4613,6 +4508,33 @@ scanToken:
 	.uleb128 0xb
 	.uleb128 0x27
 	.uleb128 0x19
+	.uleb128 0x11
+	.uleb128 0x1
+	.uleb128 0x12
+	.uleb128 0x7
+	.uleb128 0x40
+	.uleb128 0x18
+	.uleb128 0x2117
+	.uleb128 0x19
+	.uleb128 0x1
+	.uleb128 0x13
+	.byte	0
+	.byte	0
+	.uleb128 0x24
+	.uleb128 0x2e
+	.byte	0x1
+	.uleb128 0x3
+	.uleb128 0xe
+	.uleb128 0x3a
+	.uleb128 0xb
+	.uleb128 0x3b
+	.uleb128 0xb
+	.uleb128 0x39
+	.uleb128 0xb
+	.uleb128 0x27
+	.uleb128 0x19
+	.uleb128 0x49
+	.uleb128 0x13
 	.uleb128 0x11
 	.uleb128 0x1
 	.uleb128 0x12
@@ -4651,7 +4573,7 @@ scanToken:
 	.long	.Ldebug_line0
 	.byte	0x3
 	.uleb128 0
-	.uleb128 0x1
+	.uleb128 0x2
 	.byte	0x5
 	.uleb128 0x1
 	.long	.LASF0
@@ -5698,7 +5620,7 @@ scanToken:
 	.byte	0x4
 	.byte	0x3
 	.uleb128 0x5
-	.uleb128 0x2
+	.uleb128 0x3
 	.byte	0x7
 	.long	.Ldebug_macro4
 	.byte	0x4
@@ -5767,7 +5689,7 @@ scanToken:
 	.byte	0x4
 	.byte	0x3
 	.uleb128 0x1b
-	.uleb128 0x3
+	.uleb128 0x4
 	.byte	0x5
 	.uleb128 0x18
 	.long	.LASF541
@@ -5820,14 +5742,14 @@ scanToken:
 	.byte	0x4
 	.byte	0x3
 	.uleb128 0x22
-	.uleb128 0x4
+	.uleb128 0x5
 	.byte	0x5
 	.uleb128 0x14
 	.long	.LASF604
 	.byte	0x4
 	.byte	0x3
 	.uleb128 0x25
-	.uleb128 0x5
+	.uleb128 0x6
 	.byte	0x5
 	.uleb128 0x14
 	.long	.LASF605
@@ -5844,7 +5766,7 @@ scanToken:
 	.byte	0x4
 	.byte	0x3
 	.uleb128 0x2
-	.uleb128 0x6
+	.uleb128 0x1
 	.byte	0x5
 	.uleb128 0x2
 	.long	.LASF672
@@ -5864,7 +5786,7 @@ scanToken:
 	.long	.Ldebug_macro20
 	.byte	0x3
 	.uleb128 0x21
-	.uleb128 0x2
+	.uleb128 0x3
 	.byte	0x7
 	.long	.Ldebug_macro21
 	.byte	0x4
@@ -5956,7 +5878,7 @@ scanToken:
 	.long	.Ldebug_macro28
 	.byte	0x3
 	.uleb128 0x21
-	.uleb128 0x2
+	.uleb128 0x3
 	.byte	0x7
 	.long	.Ldebug_macro21
 	.byte	0x4
@@ -7241,6 +7163,8 @@ scanToken:
 	.section	.debug_line,"",@progbits
 .Ldebug_line0:
 	.section	.debug_str,"MS",@progbits,1
+.LASF741:
+	.string	"TK_QUESTION"
 .LASF613:
 	.string	"INT32_MAX (2147483647)"
 .LASF692:
@@ -7261,24 +7185,30 @@ scanToken:
 	.string	"__UINT32_MAX__ 0xffffffffU"
 .LASF715:
 	.string	"size_t"
+.LASF60:
+	.string	"__UINT_LEAST64_TYPE__ long unsigned int"
 .LASF228:
 	.string	"__FLT128_DECIMAL_DIG__ 36"
-.LASF706:
-	.string	"stdin stdin"
-.LASF833:
-	.string	"TOKEN_RETURN"
-.LASF852:
+.LASF829:
+	.string	"TK_IF"
+.LASF220:
+	.string	"__FLT64_HAS_INFINITY__ 1"
+.LASF855:
 	.string	"start"
 .LASF695:
 	.string	"BUFSIZ 8192"
-.LASF93:
-	.string	"__SIZE_WIDTH__ 64"
+.LASF762:
+	.string	"TK_TILDE"
+.LASF830:
+	.string	"TK_IN"
 .LASF504:
 	.string	"_Static_assert(expr,diagnostic) extern int (*__Static_assert_function (void)) [!!sizeof (struct { int __error_if_negative: (expr) ? 2 : -1; })]"
-.LASF919:
-	.string	"source"
+.LASF282:
+	.string	"__DEC128_MAX__ 9.999999999999999999999999999999999E6144DL"
 .LASF19:
 	.string	"__LP64__ 1"
+.LASF739:
+	.string	"TK_BANG"
 .LASF270:
 	.string	"__DEC32_SUBNORMAL_MIN__ 0.000001E-95DF"
 .LASF421:
@@ -7287,99 +7217,105 @@ scanToken:
 	.string	"SEEK_SET 0"
 .LASF214:
 	.string	"__FLT64_DECIMAL_DIG__ 17"
-.LASF744:
-	.string	"TOKEN_DOTDOT"
+.LASF229:
+	.string	"__FLT128_MAX__ 1.18973149535723176508575932662800702e+4932F128"
 .LASF12:
 	.string	"__ATOMIC_CONSUME 1"
-.LASF887:
+.LASF892:
 	.string	"_IO_codecvt"
-.LASF509:
-	.string	"__LDBL_REDIR1(name,proto,alias) name proto"
-.LASF469:
-	.string	"__flexarr []"
+.LASF444:
+	.string	"__GNU_LIBRARY__ 6"
+.LASF853:
+	.string	"TokenType"
 .LASF185:
 	.string	"__DECIMAL_DIG__ 21"
 .LASF589:
 	.string	"__BLKSIZE_T_TYPE __SYSCALL_SLONG_TYPE"
-.LASF782:
-	.string	"TOKEN_COLONULLEQ"
-.LASF837:
-	.string	"TOKEN_WHILE"
+.LASF659:
+	.string	"INT16_C(c) c"
 .LASF443:
 	.string	"__GNU_LIBRARY__"
 .LASF139:
 	.string	"__UINT_FAST16_MAX__ 0xffffffffffffffffUL"
-.LASF170:
-	.string	"__DBL_MAX_10_EXP__ 308"
-.LASF867:
+.LASF841:
+	.string	"TK_FIELD"
+.LASF208:
+	.string	"__FLT64_MANT_DIG__ 53"
+.LASF478:
+	.string	"__attribute_pure__ __attribute__ ((__pure__))"
+.LASF872:
 	.string	"_IO_save_end"
 .LASF136:
 	.string	"__INT_FAST64_MAX__ 0x7fffffffffffffffL"
-.LASF721:
-	.string	"__off_t"
 .LASF32:
 	.string	"__ORDER_PDP_ENDIAN__ 3412"
 .LASF273:
 	.string	"__DEC64_MAX_EXP__ 385"
-.LASF775:
-	.string	"TOKEN_USDUIEQ"
 .LASF162:
 	.string	"__FLT_HAS_DENORM__ 1"
 .LASF725:
 	.string	"int16_t"
-.LASF915:
-	.string	"checkChar"
+.LASF747:
+	.string	"TK_COLON"
+.LASF840:
+	.string	"TK_WHILE"
 .LASF200:
 	.string	"__FLT32_DECIMAL_DIG__ 9"
-.LASF792:
-	.string	"TOKEN_PLUSEQ"
+.LASF766:
+	.string	"TK_COLONCOLON"
 .LASF402:
 	.string	"offsetof(TYPE,MEMBER) __builtin_offsetof (TYPE, MEMBER)"
 .LASF36:
 	.string	"__SIZE_TYPE__ long unsigned int"
+.LASF607:
+	.string	"INT8_MIN (-128)"
 .LASF123:
 	.string	"__UINT8_C(c) c"
 .LASF46:
 	.string	"__INT16_TYPE__ short int"
+.LASF348:
+	.string	"true 1"
+.LASF782:
+	.string	"TK_USDLLEQ"
 .LASF628:
 	.string	"UINT_LEAST16_MAX (65535)"
-.LASF860:
+.LASF865:
 	.string	"_IO_write_base"
 .LASF481:
 	.string	"__attribute_noinline__ __attribute__ ((__noinline__))"
 .LASF290:
 	.string	"__GCC_HAVE_SYNC_COMPARE_AND_SWAP_1 1"
-.LASF918:
-	.string	"isAlpha"
-.LASF2:
-	.string	"__STDC_HOSTED__ 1"
-.LASF716:
-	.string	"__int8_t"
+.LASF124:
+	.string	"__UINT_LEAST16_MAX__ 0xffff"
+.LASF751:
+	.string	"TK_MINUS"
+.LASF600:
+	.string	"__STD_TYPE"
 .LASF315:
 	.string	"__x86_64 1"
 .LASF638:
 	.string	"INT_FAST64_MAX (__INT64_C(9223372036854775807))"
 .LASF457:
 	.string	"__P(args) args"
-.LASF876:
+.LASF745:
+	.string	"TK_DOTDOTDOT"
+.LASF881:
 	.string	"_lock"
 .LASF365:
 	.string	"__SIZE_T__ "
-.LASF844:
-	.string	"TOKEN_STATIC_FIELD"
-.LASF923:
+.LASF202:
+	.string	"__FLT32_MIN__ 1.17549435082228750796873653722224568e-38F32"
+.LASF928:
 	.string	"_IO_FILE"
-.LASF199:
-	.string	"__FLT32_MAX_10_EXP__ 38"
+.LASF835:
+	.string	"TK_SUPER"
 .LASF50:
 	.string	"__UINT16_TYPE__ short unsigned int"
-.LASF729:
-	.string	"TOKEN_LEFT_BRACE"
+.LASF105:
+	.string	"__INT64_MAX__ 0x7fffffffffffffffL"
 .LASF570:
 	.string	"__OFF64_T_TYPE __SQUAD_TYPE"
-.LASF731:
-	.string	"TOKEN_LEFT_BRACK"
-.LASF913:
+.LASF915:
 	.string	"nextChar"
 .LASF398:
 	.string	"__need_wchar_t"
@@ -7387,26 +7323,28 @@ scanToken:
 	.string	"__FLT32_MIN_EXP__ (-125)"
 .LASF179:
 	.string	"__LDBL_MANT_DIG__ 64"
-.LASF773:
-	.string	"TOKEN_USDIEQ"
-.LASF851:
+.LASF445:
+	.string	"__GLIBC__ 2"
+.LASF854:
 	.string	"type"
 .LASF642:
 	.string	"UINT_FAST64_MAX (__UINT64_C(18446744073709551615))"
 .LASF359:
 	.string	"_BSD_PTRDIFF_T_ "
-.LASF387:
-	.string	"__WCHAR_T "
-.LASF865:
+.LASF870:
 	.string	"_IO_save_base"
+.LASF770:
+	.string	"TK_USDCEQ"
 .LASF663:
 	.string	"UINT16_C(c) c"
 .LASF211:
 	.string	"__FLT64_MIN_10_EXP__ (-307)"
 .LASF380:
 	.string	"__size_t "
-.LASF607:
-	.string	"INT8_MIN (-128)"
+.LASF7:
+	.string	"__ATOMIC_RELAXED 0"
+.LASF215:
+	.string	"__FLT64_MAX__ 1.79769313486231570814527423731704357e+308F64"
 .LASF137:
 	.string	"__INT_FAST64_WIDTH__ 64"
 .LASF1:
@@ -7415,72 +7353,74 @@ scanToken:
 	.string	"__ULONG32_TYPE unsigned int"
 .LASF447:
 	.string	"__GLIBC_PREREQ(maj,min) ((__GLIBC__ << 16) + __GLIBC_MINOR__ >= ((maj) << 16) + (min))"
+.LASF637:
+	.string	"INT_FAST32_MAX (9223372036854775807L)"
+.LASF584:
+	.string	"__SUSECONDS_T_TYPE __SYSCALL_SLONG_TYPE"
 .LASF471:
 	.string	"__REDIRECT(name,proto,alias) name proto __asm__ (__ASMNAME (#alias))"
 .LASF369:
 	.string	"_T_SIZE "
-.LASF791:
-	.string	"TOKEN_USDSEQ"
-.LASF781:
-	.string	"TOKEN_USDLLEQ"
+.LASF168:
+	.string	"__DBL_MIN_10_EXP__ (-307)"
 .LASF31:
 	.string	"__ORDER_BIG_ENDIAN__ 4321"
-.LASF754:
-	.string	"TOKEN_MOD"
-.LASF769:
-	.string	"TOKEN_USDCEQ"
+.LASF616:
+	.string	"UINT16_MAX (65535)"
 .LASF281:
 	.string	"__DEC128_MIN__ 1E-6143DL"
-.LASF637:
-	.string	"INT_FAST32_MAX (9223372036854775807L)"
-.LASF869:
+.LASF288:
+	.string	"__NO_INLINE__ 1"
+.LASF874:
 	.string	"_chain"
-.LASF629:
-	.string	"UINT_LEAST32_MAX (4294967295U)"
+.LASF687:
+	.string	"_IO_EOF_SEEN 0x0010"
 .LASF333:
 	.string	"__CET__ 3"
 .LASF235:
 	.string	"__FLT128_HAS_QUIET_NAN__ 1"
-.LASF424:
-	.string	"__USE_FILE_OFFSET64"
+.LASF801:
+	.string	"TK_TILDEEQ"
 .LASF210:
 	.string	"__FLT64_MIN_EXP__ (-1021)"
-.LASF873:
+.LASF878:
 	.string	"_cur_column"
+.LASF748:
+	.string	"TK_LTTILDE"
+.LASF740:
+	.string	"TK_BANGBANG"
 .LASF411:
 	.string	"__USE_POSIX"
-.LASF22:
-	.string	"__SIZEOF_LONG_LONG__ 8"
+.LASF815:
+	.string	"TK_LT"
 .LASF269:
 	.string	"__DEC32_EPSILON__ 1E-6DF"
-.LASF219:
-	.string	"__FLT64_HAS_DENORM__ 1"
 .LASF399:
 	.string	"NULL"
-.LASF673:
-	.string	"_STDIO_H 1"
+.LASF796:
+	.string	"TK_SLASHEQ"
 .LASF598:
 	.string	"_BITS_TIME64_H 1"
 .LASF255:
 	.string	"__FLT64X_MAX_10_EXP__ 4932"
-.LASF584:
-	.string	"__SUSECONDS_T_TYPE __SYSCALL_SLONG_TYPE"
-.LASF69:
-	.string	"__INTPTR_TYPE__ long int"
+.LASF737:
+	.string	"TK_RBRACELPAREN"
+.LASF825:
+	.string	"TK_ENUM"
+.LASF654:
+	.string	"WCHAR_MIN __WCHAR_MIN"
 .LASF521:
 	.string	"__stub_fchflags "
-.LASF351:
-	.string	"_STDDEF_H "
 .LASF40:
 	.string	"__INTMAX_TYPE__ long int"
 .LASF579:
 	.string	"__FSFILCNT64_T_TYPE __UQUAD_TYPE"
-.LASF786:
-	.string	"TOKEN_COLONDEQ"
+.LASF833:
+	.string	"TK_PUTS"
 .LASF187:
 	.string	"__LDBL_MAX__ 1.18973149535723176502126385303097021e+4932L"
-.LASF268:
-	.string	"__DEC32_MAX__ 9.999999E96DF"
+.LASF434:
+	.string	"__GNUC_PREREQ(maj,min) ((__GNUC__ << 16) + __GNUC_MINOR__ >= ((maj) << 16) + (min))"
 .LASF386:
 	.string	"_T_WCHAR "
 .LASF138:
@@ -7489,10 +7429,12 @@ scanToken:
 	.string	"__USE_XOPEN2K8"
 .LASF248:
 	.string	"__FLT32X_HAS_INFINITY__ 1"
-.LASF757:
-	.string	"TOKEN_PIPEPIPE"
-.LASF772:
-	.string	"TOKEN_COLONIEQ"
+.LASF489:
+	.string	"__always_inline"
+.LASF367:
+	.string	"_SYS_SIZE_T_H "
+.LASF779:
+	.string	"TK_COLONULEQ"
 .LASF232:
 	.string	"__FLT128_DENORM_MIN__ 6.47517511943802511092443895822764655e-4966F128"
 .LASF57:
@@ -7503,10 +7445,8 @@ scanToken:
 	.string	"INT32_MIN (-2147483647-1)"
 .LASF319:
 	.string	"__ATOMIC_HLE_ACQUIRE 65536"
-.LASF445:
-	.string	"__GLIBC__ 2"
-.LASF434:
-	.string	"__GNUC_PREREQ(maj,min) ((__GNUC__ << 16) + __GNUC_MINOR__ >= ((maj) << 16) + (min))"
+.LASF805:
+	.string	"TK_EQI16"
 .LASF710:
 	.string	"long int"
 .LASF542:
@@ -7521,84 +7461,90 @@ scanToken:
 	.string	"__glibc_clang_prereq(maj,min) 0"
 .LASF112:
 	.string	"__INT_LEAST8_WIDTH__ 8"
+.LASF769:
+	.string	"TK_COLONCEQ"
 .LASF279:
 	.string	"__DEC128_MIN_EXP__ (-6142)"
-.LASF790:
-	.string	"TOKEN_COLONSEQ"
-.LASF431:
-	.string	"__GLIBC_USE_DEPRECATED_GETS"
+.LASF364:
+	.string	"__size_t__ "
 .LASF224:
 	.string	"__FLT128_MIN_EXP__ (-16381)"
-.LASF920:
+.LASF925:
 	.string	"GNU C99 9.3.0 -mtune=generic -march=x86-64 -g -ggdb3 -O0 -std=c99 -fasynchronous-unwind-tables -fstack-protector-strong -fstack-clash-protection -fcf-protection"
 .LASF68:
 	.string	"__UINT_FAST64_TYPE__ long unsigned int"
-.LASF337:
-	.string	"__unix 1"
+.LASF363:
+	.string	"__need_ptrdiff_t"
 .LASF53:
 	.string	"__INT_LEAST8_TYPE__ signed char"
-.LASF35:
-	.string	"__SIZEOF_POINTER__ 8"
+.LASF797:
+	.string	"TK_MODEQ"
 .LASF294:
 	.string	"__GCC_ATOMIC_BOOL_LOCK_FREE 2"
-.LASF597:
-	.string	"__FD_SETSIZE 1024"
+.LASF306:
+	.string	"__GCC_HAVE_DWARF2_CFI_ASM 1"
 .LASF261:
 	.string	"__FLT64X_HAS_DENORM__ 1"
-.LASF886:
+.LASF891:
 	.string	"_IO_marker"
-.LASF917:
+.LASF919:
 	.string	"isDigit"
 .LASF198:
 	.string	"__FLT32_MAX_EXP__ 128"
-.LASF798:
-	.string	"TOKEN_PIPEEQ"
+.LASF827:
+	.string	"TK_DEF"
 .LASF705:
 	.string	"FOPEN_MAX 16"
 .LASF67:
 	.string	"__UINT_FAST32_TYPE__ long unsigned int"
 .LASF713:
 	.string	"short unsigned int"
-.LASF812:
-	.string	"TOKEN_LDEQ"
+.LASF837:
+	.string	"TK_THIS"
 .LASF577:
 	.string	"__FSBLKCNT64_T_TYPE __UQUAD_TYPE"
 .LASF360:
 	.string	"___int_ptrdiff_t_h "
-.LASF487:
-	.string	"__attribute_warn_unused_result__ __attribute__ ((__warn_unused_result__))"
-.LASF376:
-	.string	"_SIZE_T_DECLARED "
+.LASF199:
+	.string	"__FLT32_MAX_10_EXP__ 38"
+.LASF474:
+	.string	"__ASMNAME(cname) __ASMNAME2 (__USER_LABEL_PREFIX__, cname)"
 .LASF459:
 	.string	"__CONCAT(x,y) x ## y"
 .LASF707:
 	.string	"stdout stdout"
+.LASF742:
+	.string	"TK_COMMA"
 .LASF141:
 	.string	"__UINT_FAST64_MAX__ 0xffffffffffffffffUL"
 .LASF231:
 	.string	"__FLT128_EPSILON__ 1.92592994438723585305597794258492732e-34F128"
-.LASF155:
-	.string	"__FLT_MAX_EXP__ 128"
+.LASF749:
+	.string	"TK_TILDEGT"
 .LASF342:
 	.string	"__STDC_IEC_559__ 1"
 .LASF21:
 	.string	"__SIZEOF_LONG__ 8"
-.LASF478:
-	.string	"__attribute_pure__ __attribute__ ((__pure__))"
+.LASF813:
+	.string	"TK_EQF128"
 .LASF651:
 	.string	"SIG_ATOMIC_MIN (-2147483647-1)"
+.LASF917:
+	.string	"checkChar"
 .LASF671:
 	.string	"UINT8_COUNT (UINT8_MAX + 1)"
 .LASF25:
 	.string	"__SIZEOF_DOUBLE__ 8"
 .LASF118:
 	.string	"__INT_LEAST32_WIDTH__ 32"
-.LASF914:
+.LASF916:
 	.string	"checkNextChar"
 .LASF404:
 	.string	"__GLIBC_INTERNAL_STARTING_HEADER_IMPLEMENTATION "
-.LASF761:
-	.string	"TOKEN_CARET"
+.LASF341:
+	.string	"_STDC_PREDEF_H 1"
+.LASF756:
+	.string	"TK_AMPAMP"
 .LASF16:
 	.string	"__PIE__ 2"
 .LASF218:
@@ -7609,16 +7555,24 @@ scanToken:
 	.string	"__REDIRECT_NTH(name,proto,alias) name proto __asm__ (__ASMNAME (#alias)) __THROW"
 .LASF530:
 	.string	"__GLIBC_USE_LIB_EXT2 0"
+.LASF564:
+	.string	"__INO_T_TYPE __SYSCALL_ULONG_TYPE"
 .LASF154:
 	.string	"__FLT_MIN_10_EXP__ (-37)"
 .LASF442:
 	.string	"__GLIBC_USE_DEPRECATED_SCANF 0"
-.LASF908:
+.LASF911:
 	.string	"makeTwoCharToken"
 .LASF157:
 	.string	"__FLT_DECIMAL_DIG__ 9"
+.LASF786:
+	.string	"TK_USDFEQ"
 .LASF717:
 	.string	"signed char"
+.LASF550:
+	.string	"__UQUAD_TYPE unsigned long int"
+.LASF727:
+	.string	"TK_LEFT_PAREN"
 .LASF726:
 	.string	"uint8_t"
 .LASF544:
@@ -7629,22 +7583,24 @@ scanToken:
 	.string	"__ptr_t void *"
 .LASF287:
 	.string	"__GNUC_STDC_INLINE__ 1"
-.LASF888:
+.LASF807:
+	.string	"TK_EQI32"
+.LASF893:
 	.string	"_IO_wide_data"
 .LASF5:
 	.string	"__GNUC_PATCHLEVEL__ 0"
 .LASF559:
 	.string	"__SYSCALL_SLONG_TYPE __SLONGWORD_TYPE"
-.LASF297:
-	.string	"__GCC_ATOMIC_CHAR32_T_LOCK_FREE 2"
-.LASF473:
-	.string	"__REDIRECT_NTHNL(name,proto,alias) name proto __asm__ (__ASMNAME (#alias)) __THROWNL"
-.LASF124:
-	.string	"__UINT_LEAST16_MAX__ 0xffff"
-.LASF450:
-	.string	"__LEAF , __leaf__"
-.LASF676:
-	.string	"__need___va_list "
+.LASF524:
+	.string	"__stub_revoke "
+.LASF92:
+	.string	"__PTRDIFF_WIDTH__ 64"
+.LASF382:
+	.string	"__wchar_t__ "
+.LASF207:
+	.string	"__FLT32_HAS_QUIET_NAN__ 1"
+.LASF507:
+	.string	"__SYSCALL_WORDSIZE 64"
 .LASF575:
 	.string	"__BLKCNT64_T_TYPE __SQUAD_TYPE"
 .LASF246:
@@ -7653,8 +7609,8 @@ scanToken:
 	.string	"__FLT64_MAX_10_EXP__ 308"
 .LASF133:
 	.string	"__INT_FAST16_WIDTH__ 64"
-.LASF432:
-	.string	"__GLIBC_USE_DEPRECATED_SCANF"
+.LASF535:
+	.string	"__GLIBC_USE_IEC_60559_FUNCS_EXT"
 .LASF375:
 	.string	"_BSD_SIZE_T_DEFINED_ "
 .LASF377:
@@ -7663,38 +7619,34 @@ scanToken:
 	.string	"__USE_ISOC99 1"
 .LASF203:
 	.string	"__FLT32_EPSILON__ 1.19209289550781250000000000000000000e-7F32"
+.LASF581:
+	.string	"__CLOCK_T_TYPE __SYSCALL_SLONG_TYPE"
 .LASF156:
 	.string	"__FLT_MAX_10_EXP__ 38"
 .LASF458:
 	.string	"__PMT(args) args"
-.LASF282:
-	.string	"__DEC128_MAX__ 9.999999999999999999999999999999999E6144DL"
 .LASF280:
 	.string	"__DEC128_MAX_EXP__ 6145"
-.LASF168:
-	.string	"__DBL_MIN_10_EXP__ (-307)"
-.LASF750:
-	.string	"TOKEN_PLUS"
-.LASF846:
-	.string	"TOKEN_ERROR"
+.LASF629:
+	.string	"UINT_LEAST32_MAX (4294967295U)"
+.LASF145:
+	.string	"__GCC_IEC_559 2"
 .LASF252:
 	.string	"__FLT64X_MIN_EXP__ (-16381)"
 .LASF8:
 	.string	"__ATOMIC_SEQ_CST 5"
+.LASF424:
+	.string	"__USE_FILE_OFFSET64"
+.LASF541:
+	.string	"_BITS_TYPES_H 1"
 .LASF181:
 	.string	"__LDBL_MIN_EXP__ (-16381)"
-.LASF92:
-	.string	"__PTRDIFF_WIDTH__ 64"
-.LASF169:
-	.string	"__DBL_MAX_EXP__ 1024"
-.LASF759:
-	.string	"TOKEN_AMP"
+.LASF107:
+	.string	"__UINT16_MAX__ 0xffff"
 .LASF127:
 	.string	"__UINT32_C(c) c ## U"
-.LASF758:
-	.string	"TOKEN_CARETCARET"
-.LASF330:
-	.string	"__SSE2_MATH__ 1"
+.LASF6:
+	.string	"__VERSION__ \"9.3.0\""
 .LASF95:
 	.string	"__INTMAX_C(c) c ## L"
 .LASF183:
@@ -7703,14 +7655,14 @@ scanToken:
 	.string	"INT16_MIN (-32767-1)"
 .LASF23:
 	.string	"__SIZEOF_SHORT__ 2"
-.LASF911:
+.LASF913:
 	.string	"_Bool"
 .LASF120:
 	.string	"__INT64_C(c) c ## L"
 .LASF497:
 	.string	"__restrict_arr __restrict"
-.LASF818:
-	.string	"TOKEN_EQEQ"
+.LASF519:
+	.string	"__stub___compat_bdflush "
 .LASF289:
 	.string	"__STRICT_ANSI__ 1"
 .LASF373:
@@ -7721,12 +7673,14 @@ scanToken:
 	.string	"__DADDR_T_TYPE __S32_TYPE"
 .LASF230:
 	.string	"__FLT128_MIN__ 3.36210314311209350626267781732175260e-4932F128"
-.LASF140:
-	.string	"__UINT_FAST32_MAX__ 0xffffffffffffffffUL"
+.LASF427:
+	.string	"__USE_GNU"
 .LASF441:
 	.string	"__GLIBC_USE_DEPRECATED_GETS 1"
 .LASF624:
 	.string	"INT_LEAST16_MAX (32767)"
+.LASF74:
+	.string	"__SCHAR_MAX__ 0x7f"
 .LASF723:
 	.string	"char"
 .LASF195:
@@ -7739,30 +7693,28 @@ scanToken:
 	.string	"__INT_FAST64_TYPE__ long int"
 .LASF532:
 	.string	"__GLIBC_USE_IEC_60559_BFP_EXT 0"
-.LASF674:
-	.string	"__need_size_t "
+.LASF580:
+	.string	"__ID_T_TYPE __U32_TYPE"
+.LASF819:
+	.string	"TK_EQEQ"
 .LASF547:
 	.string	"__SLONGWORD_TYPE long int"
 .LASF513:
 	.string	"__LDBL_REDIR_DECL(name) "
 .LASF29:
 	.string	"__BIGGEST_ALIGNMENT__ 16"
-.LASF600:
-	.string	"__STD_TYPE"
 .LASF494:
 	.string	"__fortify_function __extern_always_inline __attribute_artificial__"
-.LASF316:
-	.string	"__x86_64__ 1"
-.LASF924:
+.LASF337:
+	.string	"__unix 1"
+.LASF929:
 	.string	"_IO_lock_t"
-.LASF849:
-	.string	"TOKEN_ENDEXPRESSION"
-.LASF910:
+.LASF668:
+	.string	"_GCC_WRAP_STDINT_H "
+.LASF912:
 	.string	"compareChar"
 .LASF418:
 	.string	"__USE_XOPEN2K"
-.LASF788:
-	.string	"TOKEN_COLONLDEQ"
 .LASF599:
 	.string	"__TIME64_T_TYPE __TIME_T_TYPE"
 .LASF523:
@@ -7773,20 +7725,14 @@ scanToken:
 	.string	"__FLT_EPSILON__ 1.19209289550781250000000000000000000e-7F"
 .LASF253:
 	.string	"__FLT64X_MIN_10_EXP__ (-4931)"
-.LASF753:
-	.string	"TOKEN_SLASH"
 .LASF492:
 	.string	"__extern_inline extern __inline __attribute__ ((__gnu_inline__))"
-.LASF535:
-	.string	"__GLIBC_USE_IEC_60559_FUNCS_EXT"
-.LASF427:
-	.string	"__USE_GNU"
+.LASF526:
+	.string	"__stub_sigreturn "
 .LASF176:
 	.string	"__DBL_HAS_DENORM__ 1"
-.LASF743:
-	.string	"TOKEN_DOT"
-.LASF364:
-	.string	"__size_t__ "
+.LASF923:
+	.string	"source"
 .LASF331:
 	.string	"__SEG_FS 1"
 .LASF635:
@@ -7799,12 +7745,16 @@ scanToken:
 	.string	"DEBUG_PRINT_CODE "
 .LASF113:
 	.string	"__INT_LEAST16_MAX__ 0x7fff"
-.LASF857:
+.LASF862:
 	.string	"_IO_read_ptr"
 .LASF226:
 	.string	"__FLT128_MAX_EXP__ 16384"
+.LASF809:
+	.string	"TK_EQI64"
 .LASF664:
 	.string	"UINT32_C(c) c ## U"
+.LASF754:
+	.string	"TK_MOD"
 .LASF643:
 	.string	"INTPTR_MIN (-9223372036854775807L-1)"
 .LASF413:
@@ -7821,82 +7771,88 @@ scanToken:
 	.string	"__FILE_defined 1"
 .LASF686:
 	.string	"__putc_unlocked_body(_ch,_fp) (__glibc_unlikely ((_fp)->_IO_write_ptr >= (_fp)->_IO_write_end) ? __overflow (_fp, (unsigned char) (_ch)) : (unsigned char) (*(_fp)->_IO_write_ptr++ = (_ch)))"
-.LASF633:
-	.string	"INT_FAST32_MIN (-9223372036854775807L-1)"
+.LASF832:
+	.string	"TK_NIL"
 .LASF446:
 	.string	"__GLIBC_MINOR__ 31"
-.LASF889:
+.LASF895:
 	.string	"stdin"
-.LASF892:
+.LASF859:
 	.string	"current"
 .LASF646:
 	.string	"INTMAX_MIN (-__INT64_C(9223372036854775807)-1)"
-.LASF299:
-	.string	"__GCC_ATOMIC_SHORT_LOCK_FREE 2"
 .LASF417:
 	.string	"__USE_UNIX98"
 .LASF61:
 	.string	"__INT_FAST8_TYPE__ signed char"
+.LASF487:
+	.string	"__attribute_warn_unused_result__ __attribute__ ((__warn_unused_result__))"
 .LASF433:
 	.string	"__KERNEL_STRICT_NAMES "
+.LASF771:
+	.string	"TK_COLONUCEQ"
 .LASF563:
 	.string	"__GID_T_TYPE __U32_TYPE"
 .LASF691:
 	.string	"_IO_USER_LOCK 0x8000"
-.LASF807:
-	.string	"TOKEN_ULEQ"
+.LASF299:
+	.string	"__GCC_ATOMIC_SHORT_LOCK_FREE 2"
 .LASF14:
 	.string	"__PIC__ 2"
 .LASF394:
 	.string	"__INT_WCHAR_T_H "
-.LASF728:
-	.string	"TOKEN_RIGHT_PAREN"
-.LASF912:
+.LASF548:
+	.string	"__ULONGWORD_TYPE unsigned long int"
+.LASF914:
 	.string	"invalidToken"
 .LASF303:
 	.string	"__GCC_ATOMIC_TEST_AND_SET_TRUEVAL 1"
-.LASF868:
+.LASF873:
 	.string	"_markers"
 .LASF592:
 	.string	"__CPU_MASK_TYPE __SYSCALL_ULONG_TYPE"
+.LASF733:
+	.string	"TK_LTLBRACE"
 .LASF339:
 	.string	"__ELF__ 1"
-.LASF670:
-	.string	"DEBUG_TRACE_EXECUTION "
-.LASF184:
-	.string	"__LDBL_MAX_10_EXP__ 4932"
+.LASF768:
+	.string	"TK_USDEQ"
 .LASF80:
 	.string	"__WCHAR_MIN__ (-__WCHAR_MAX__ - 1)"
-.LASF207:
-	.string	"__FLT32_HAS_QUIET_NAN__ 1"
+.LASF96:
+	.string	"__UINTMAX_MAX__ 0xffffffffffffffffUL"
+.LASF674:
+	.string	"__need_size_t "
 .LASF415:
 	.string	"__USE_XOPEN"
 .LASF631:
 	.string	"INT_FAST8_MIN (-128)"
 .LASF192:
 	.string	"__LDBL_HAS_INFINITY__ 1"
-.LASF734:
-	.string	"TOKEN_RBRACEGT"
 .LASF525:
 	.string	"__stub_setlogin "
+.LASF268:
+	.string	"__DEC32_MAX__ 9.999999E96DF"
 .LASF594:
 	.string	"__INO_T_MATCHES_INO64_T 1"
 .LASF672:
 	.string	"scanner_h "
-.LASF762:
-	.string	"TOKEN_TILDE"
+.LASF241:
+	.string	"__FLT32X_MAX_10_EXP__ 308"
 .LASF538:
 	.string	"__GLIBC_USE_IEC_60559_FUNCS_EXT_C2X 0"
-.LASF749:
-	.string	"TOKEN_TILDEGT"
-.LASF842:
-	.string	"TOKEN_INTERPOLATION"
-.LASF767:
-	.string	"TOKEN_USDEQ"
-.LASF899:
+.LASF678:
+	.string	"__GNUC_VA_LIST "
+.LASF844:
+	.string	"TK_IDENTIFIER"
+.LASF902:
 	.string	"identifierType"
 .LASF347:
 	.string	"bool _Bool"
+.LASF750:
+	.string	"TK_PLUS"
+.LASF93:
+	.string	"__SIZE_WIDTH__ 64"
 .LASF718:
 	.string	"__uint8_t"
 .LASF100:
@@ -7917,6 +7873,8 @@ scanToken:
 	.string	"UINT_FAST16_MAX (18446744073709551615UL)"
 .LASF172:
 	.string	"__DBL_MAX__ ((double)1.79769313486231570814527423731704357e+308L)"
+.LASF773:
+	.string	"TK_COLONIEQ"
 .LASF533:
 	.string	"__GLIBC_USE_IEC_60559_BFP_EXT_C2X"
 .LASF506:
@@ -7925,14 +7883,12 @@ scanToken:
 	.string	"L_tmpnam 20"
 .LASF680:
 	.string	"____mbstate_t_defined 1"
-.LASF838:
-	.string	"TOKEN_FIELD"
 .LASF115:
 	.string	"__INT_LEAST16_WIDTH__ 16"
 .LASF149:
 	.string	"__DEC_EVAL_METHOD__ 2"
-.LASF810:
-	.string	"TOKEN_FEQ"
+.LASF721:
+	.string	"__off_t"
 .LASF641:
 	.string	"UINT_FAST32_MAX (18446744073709551615UL)"
 .LASF574:
@@ -7947,13 +7903,9 @@ scanToken:
 	.string	"__GLIBC_USE_IEC_60559_BFP_EXT_C2X 0"
 .LASF400:
 	.string	"NULL ((void *)0)"
-.LASF747:
-	.string	"TOKEN_COLON"
-.LASF738:
-	.string	"TOKEN_RPARENGT"
-.LASF745:
-	.string	"TOKEN_DOTDOTDOT"
-.LASF877:
+.LASF791:
+	.string	"TK_COLONSEQ"
+.LASF882:
 	.string	"_offset"
 .LASF334:
 	.string	"__gnu_linux__ 1"
@@ -7961,6 +7913,8 @@ scanToken:
 	.string	"__USER_LABEL_PREFIX__ "
 .LASF56:
 	.string	"__INT_LEAST64_TYPE__ long int"
+.LASF826:
+	.string	"TK_FALSE"
 .LASF662:
 	.string	"UINT8_C(c) c"
 .LASF553:
@@ -7973,78 +7927,92 @@ scanToken:
 	.string	"__ATOMIC_ACQUIRE 2"
 .LASF405:
 	.string	"__GLIBC_INTERNAL_STARTING_HEADER_IMPLEMENTATION"
+.LASF803:
+	.string	"TK_EQI8"
 .LASF407:
 	.string	"__USE_ISOC11"
-.LASF507:
-	.string	"__SYSCALL_WORDSIZE 64"
+.LASF795:
+	.string	"TK_STAREQ"
+.LASF483:
+	.string	"__attribute_deprecated_msg__(msg) __attribute__ ((__deprecated__ (msg)))"
 .LASF240:
 	.string	"__FLT32X_MAX_EXP__ 1024"
 .LASF71:
 	.string	"__has_include(STR) __has_include__(STR)"
-.LASF751:
-	.string	"TOKEN_MINUS"
-.LASF256:
-	.string	"__FLT64X_DECIMAL_DIG__ 21"
+.LASF531:
+	.string	"__GLIBC_USE_IEC_60559_BFP_EXT"
 .LASF121:
 	.string	"__INT_LEAST64_WIDTH__ 64"
 .LASF163:
 	.string	"__FLT_HAS_INFINITY__ 1"
 .LASF343:
 	.string	"__STDC_IEC_559_COMPLEX__ 1"
-.LASF832:
-	.string	"TOKEN_SUPER"
+.LASF35:
+	.string	"__SIZEOF_POINTER__ 8"
+.LASF102:
+	.string	"__INT8_MAX__ 0x7f"
 .LASF647:
 	.string	"INTMAX_MAX (__INT64_C(9223372036854775807))"
 .LASF576:
 	.string	"__FSBLKCNT_T_TYPE __SYSCALL_ULONG_TYPE"
-.LASF306:
-	.string	"__GCC_HAVE_DWARF2_CFI_ASM 1"
-.LASF541:
-	.string	"_BITS_TYPES_H 1"
+.LASF778:
+	.string	"TK_USDLEQ"
+.LASF711:
+	.string	"long unsigned int"
 .LASF615:
 	.string	"UINT8_MAX (255)"
 .LASF652:
 	.string	"SIG_ATOMIC_MAX (2147483647)"
-.LASF797:
-	.string	"TOKEN_AMPEQ"
+.LASF451:
+	.string	"__LEAF_ATTR __attribute__ ((__leaf__))"
 .LASF146:
 	.string	"__GCC_IEC_559_COMPLEX 2"
+.LASF817:
+	.string	"TK_LTEQ"
 .LASF15:
 	.string	"__pie__ 2"
 .LASF3:
 	.string	"__GNUC__ 9"
+.LASF783:
+	.string	"TK_COLONULLEQ"
+.LASF627:
+	.string	"UINT_LEAST8_MAX (255)"
 .LASF439:
 	.string	"__USE_ISOC95 1"
+.LASF633:
+	.string	"INT_FAST32_MIN (-9223372036854775807L-1)"
 .LASF517:
 	.string	"__glibc_macro_warning(message) __glibc_macro_warning1 (GCC warning message)"
 .LASF189:
 	.string	"__LDBL_EPSILON__ 1.08420217248550443400745280086994171e-19L"
-.LASF266:
-	.string	"__DEC32_MAX_EXP__ 97"
+.LASF876:
+	.string	"_flags2"
 .LASF368:
 	.string	"_T_SIZE_ "
 .LASF148:
 	.string	"__FLT_EVAL_METHOD_TS_18661_3__ 0"
-.LASF900:
+.LASF903:
 	.string	"rest"
 .LASF85:
 	.string	"__SCHAR_WIDTH__ 8"
+.LASF758:
+	.string	"TK_CARETCARET"
 .LASF703:
 	.string	"FILENAME_MAX 4096"
 .LASF470:
 	.string	"__glibc_c99_flexarr_available 1"
-.LASF859:
+.LASF864:
 	.string	"_IO_read_base"
+.LASF824:
+	.string	"TK_ELSIF"
 .LASF323:
 	.string	"__k8__ 1"
 .LASF18:
 	.string	"_LP64 1"
-.LASF854:
+.LASF857:
 	.string	"line"
 .LASF131:
 	.string	"__INT_FAST8_WIDTH__ 8"
-.LASF462:
-	.string	"__BEGIN_DECLS "
 .LASF44:
 	.string	"__SIG_ATOMIC_TYPE__ int"
 .LASF452:
@@ -8053,22 +8021,24 @@ scanToken:
 	.string	"__need_NULL "
 .LASF406:
 	.string	"_FEATURES_H 1"
-.LASF884:
+.LASF155:
+	.string	"__FLT_MAX_EXP__ 128"
+.LASF889:
 	.string	"_unused2"
 .LASF194:
 	.string	"__FLT32_MANT_DIG__ 24"
-.LASF834:
-	.string	"TOKEN_THIS"
+.LASF450:
+	.string	"__LEAF , __leaf__"
 .LASF603:
 	.string	"__WCHAR_MIN __WCHAR_MIN__"
-.LASF806:
-	.string	"TOKEN_LEQ"
 .LASF480:
 	.string	"__attribute_used__ __attribute__ ((__used__))"
-.LASF778:
-	.string	"TOKEN_COLONULEQ"
+.LASF822:
+	.string	"TK_CLASS"
 .LASF296:
 	.string	"__GCC_ATOMIC_CHAR16_T_LOCK_FREE 2"
+.LASF169:
+	.string	"__DBL_MAX_EXP__ 1024"
 .LASF558:
 	.string	"_BITS_TYPESIZES_H 1"
 .LASF10:
@@ -8077,32 +8047,34 @@ scanToken:
 	.string	"__FLT32X_HAS_DENORM__ 1"
 .LASF151:
 	.string	"__FLT_MANT_DIG__ 24"
-.LASF819:
-	.string	"TOKEN_BANGEQ"
+.LASF851:
+	.string	"TK_NEWLINE"
+.LASF848:
+	.string	"TK_STRING"
 .LASF94:
 	.string	"__INTMAX_MAX__ 0x7fffffffffffffffL"
 .LASF216:
 	.string	"__FLT64_MIN__ 2.22507385850720138309023271733240406e-308F64"
+.LASF17:
+	.string	"__FINITE_MATH_ONLY__ 0"
 .LASF355:
 	.string	"_T_PTRDIFF_ "
-.LASF872:
+.LASF877:
 	.string	"_old_offset"
-.LASF96:
-	.string	"__UINTMAX_MAX__ 0xffffffffffffffffUL"
-.LASF843:
-	.string	"TOKEN_LINE"
+.LASF731:
+	.string	"TK_LEFT_BRACK"
+.LASF13:
+	.string	"__pic__ 2"
 .LASF239:
 	.string	"__FLT32X_MIN_10_EXP__ (-307)"
-.LASF904:
+.LASF907:
 	.string	"errMsg"
-.LASF756:
-	.string	"TOKEN_AMPAMP"
+.LASF326:
+	.string	"__SSE__ 1"
 .LASF98:
 	.string	"__INTMAX_WIDTH__ 64"
-.LASF925:
+.LASF921:
 	.string	"scanToken"
-.LASF820:
-	.string	"TOKEN_CASE"
 .LASF305:
 	.string	"__HAVE_SPECULATION_SAFE_VALUE 1"
 .LASF293:
@@ -8113,32 +8085,32 @@ scanToken:
 	.string	"__FLT128_HAS_DENORM__ 1"
 .LASF385:
 	.string	"_T_WCHAR_ "
-.LASF785:
-	.string	"TOKEN_USDFEQ"
 .LASF116:
 	.string	"__INT_LEAST32_MAX__ 0x7fffffff"
 .LASF511:
 	.string	"__LDBL_REDIR1_NTH(name,proto,alias) name proto __THROW"
-.LASF241:
-	.string	"__FLT32X_MAX_10_EXP__ 308"
 .LASF412:
 	.string	"__USE_POSIX2"
+.LASF114:
+	.string	"__INT16_C(c) c"
 .LASF301:
 	.string	"__GCC_ATOMIC_LONG_LOCK_FREE 2"
+.LASF846:
+	.string	"TK_LINE"
 .LASF381:
 	.string	"__need_size_t"
-.LASF789:
-	.string	"TOKEN_USDLDEQ"
+.LASF918:
+	.string	"isAtEnd"
 .LASF371:
 	.string	"_SIZE_T_ "
-.LASF847:
-	.string	"TOKEN_EOF"
+.LASF920:
+	.string	"isAlpha"
 .LASF150:
 	.string	"__FLT_RADIX__ 2"
-.LASF206:
-	.string	"__FLT32_HAS_INFINITY__ 1"
-.LASF735:
-	.string	"TOKEN_LTLPAREN"
+.LASF821:
+	.string	"TK_CASE"
+.LASF930:
+	.string	"skipLineComment"
 .LASF43:
 	.string	"__CHAR32_TYPE__ unsigned int"
 .LASF193:
@@ -8151,49 +8123,39 @@ scanToken:
 	.string	"__amd64__ 1"
 .LASF89:
 	.string	"__LONG_LONG_WIDTH__ 64"
+.LASF743:
+	.string	"TK_DOT"
 .LASF354:
 	.string	"_PTRDIFF_T "
 .LASF403:
 	.string	"_STDINT_H 1"
 .LASF132:
 	.string	"__INT_FAST16_MAX__ 0x7fffffffffffffffL"
-.LASF742:
-	.string	"TOKEN_COMMA"
-.LASF880:
+.LASF885:
 	.string	"_freeres_list"
 .LASF302:
 	.string	"__GCC_ATOMIC_LLONG_LOCK_FREE 2"
-.LASF787:
-	.string	"TOKEN_USDDEQ"
-.LASF105:
-	.string	"__INT64_MAX__ 0x7fffffffffffffffL"
 .LASF486:
 	.string	"__nonnull(params) __attribute__ ((__nonnull__ params))"
 .LASF502:
 	.string	"__attribute_copy__"
 .LASF212:
 	.string	"__FLT64_MAX_EXP__ 1024"
-.LASF627:
-	.string	"UINT_LEAST8_MAX (255)"
-.LASF793:
-	.string	"TOKEN_MINUSEQ"
-.LASF548:
-	.string	"__ULONGWORD_TYPE unsigned long int"
+.LASF316:
+	.string	"__x86_64__ 1"
+.LASF387:
+	.string	"__WCHAR_T "
 .LASF134:
 	.string	"__INT_FAST32_MAX__ 0x7fffffffffffffffL"
-.LASF803:
-	.string	"TOKEN_UCEQ"
-.LASF831:
-	.string	"TOKEN_PUTS"
 .LASF455:
 	.string	"__NTHNL(fct) __attribute__ ((__nothrow__)) fct"
 .LASF41:
 	.string	"__UINTMAX_TYPE__ long unsigned int"
 .LASF153:
 	.string	"__FLT_MIN_EXP__ (-125)"
-.LASF862:
-	.string	"_IO_write_end"
-.LASF897:
+.LASF91:
+	.string	"__WINT_WIDTH__ 32"
+.LASF900:
 	.string	"number"
 .LASF28:
 	.string	"__CHAR_BIT__ 8"
@@ -8205,24 +8167,22 @@ scanToken:
 	.string	"__INT_FAST8_MAX__ 0x7f"
 .LASF501:
 	.string	"__attribute_nonstring__ __attribute__ ((__nonstring__))"
+.LASF834:
+	.string	"TK_STRUCT"
 .LASF449:
 	.string	"__PMT"
-.LASF659:
-	.string	"INT16_C(c) c"
-.LASF341:
-	.string	"_STDC_PREDEF_H 1"
 .LASF308:
 	.string	"__SSP_STRONG__ 3"
-.LASF783:
-	.string	"TOKEN_USDULLEQ"
-.LASF836:
-	.string	"TOKEN_WHEN"
-.LASF545:
-	.string	"__S32_TYPE int"
-.LASF784:
-	.string	"TOKEN_COLONFEQ"
-.LASF580:
-	.string	"__ID_T_TYPE __U32_TYPE"
+.LASF780:
+	.string	"TK_USDULEQ"
+.LASF729:
+	.string	"TK_LEFT_BRACE"
+.LASF140:
+	.string	"__UINT_FAST32_MAX__ 0xffffffffffffffffUL"
+.LASF775:
+	.string	"TK_COLONUIEQ"
+.LASF763:
+	.string	"TK_GTGTGT"
 .LASF549:
 	.string	"__SQUAD_TYPE long int"
 .LASF33:
@@ -8251,15 +8211,13 @@ scanToken:
 	.string	"__ferror_unlocked_body(_fp) (((_fp)->_flags & _IO_ERR_SEEN) != 0)"
 .LASF516:
 	.string	"__glibc_macro_warning1(message) _Pragma (#message)"
-.LASF863:
+.LASF839:
+	.string	"TK_WHEN"
+.LASF868:
 	.string	"_IO_buf_base"
-.LASF835:
-	.string	"TOKEN_TRUE"
-.LASF760:
-	.string	"TOKEN_PIPE"
-.LASF896:
+.LASF899:
 	.string	"string"
-.LASF855:
+.LASF858:
 	.string	"Token"
 .LASF59:
 	.string	"__UINT_LEAST32_TYPE__ unsigned int"
@@ -8277,8 +8235,10 @@ scanToken:
 	.string	"__FLT64_HAS_QUIET_NAN__ 1"
 .LASF500:
 	.string	"__glibc_has_attribute(attr) __has_attribute (attr)"
-.LASF668:
-	.string	"_GCC_WRAP_STDINT_H "
+.LASF806:
+	.string	"TK_EQU16"
+.LASF679:
+	.string	"_____fpos_t_defined 1"
 .LASF425:
 	.string	"__USE_MISC"
 .LASF243:
@@ -8291,17 +8251,17 @@ scanToken:
 	.string	"_STDBOOL_H "
 .LASF396:
 	.string	"_WCHAR_T_DECLARED "
-.LASF905:
+.LASF908:
 	.string	"checkKeyword"
 .LASF147:
 	.string	"__FLT_EVAL_METHOD__ 0"
-.LASF586:
-	.string	"__KEY_T_TYPE __S32_TYPE"
+.LASF838:
+	.string	"TK_TRUE"
 .LASF158:
 	.string	"__FLT_MAX__ 3.40282346638528859811704183484516925e+38F"
-.LASF74:
-	.string	"__SCHAR_MAX__ 0x7f"
-.LASF882:
+.LASF760:
+	.string	"TK_PIPE"
+.LASF887:
 	.string	"__pad5"
 .LASF546:
 	.string	"__U32_TYPE unsigned int"
@@ -8311,18 +8271,10 @@ scanToken:
 	.string	"__LONG_WIDTH__ 64"
 .LASF477:
 	.string	"__attribute_alloc_size__(params) __attribute__ ((__alloc_size__ params))"
-.LASF829:
-	.string	"TOKEN_LET"
 .LASF227:
 	.string	"__FLT128_MAX_10_EXP__ 4932"
-.LASF489:
-	.string	"__always_inline"
-.LASF145:
-	.string	"__GCC_IEC_559 2"
-.LASF893:
+.LASF860:
 	.string	"Scanner"
-.LASF830:
-	.string	"TOKEN_NIL"
 .LASF97:
 	.string	"__UINTMAX_C(c) c ## UL"
 .LASF499:
@@ -8345,30 +8297,34 @@ scanToken:
 	.string	"_GCC_WCHAR_T "
 .LASF539:
 	.string	"__GLIBC_USE_IEC_60559_TYPES_EXT"
-.LASF730:
-	.string	"TOKEN_RIGHT_BRACE"
+.LASF781:
+	.string	"TK_COLONLLEQ"
 .LASF488:
 	.string	"__wur "
-.LASF732:
-	.string	"TOKEN_RIGHT_BRACK"
-.LASF349:
-	.string	"false 0"
+.LASF22:
+	.string	"__SIZEOF_LONG_LONG__ 8"
+.LASF847:
+	.string	"TK_STATIC_FIELD"
 .LASF86:
 	.string	"__SHRT_WIDTH__ 16"
+.LASF728:
+	.string	"TK_RIGHT_PAREN"
 .LASF278:
 	.string	"__DEC128_MANT_DIG__ 34"
-.LASF856:
+.LASF861:
 	.string	"_flags"
-.LASF348:
-	.string	"true 1"
+.LASF219:
+	.string	"__FLT64_HAS_DENORM__ 1"
 .LASF362:
 	.string	"_PTRDIFF_T_DECLARED "
 .LASF552:
 	.string	"__UWORD_TYPE unsigned long int"
 .LASF324:
 	.string	"__code_model_small__ 1"
-.LASF444:
-	.string	"__GNU_LIBRARY__ 6"
+.LASF811:
+	.string	"TK_EQF32"
+.LASF820:
+	.string	"TK_BANGEQ"
 .LASF562:
 	.string	"__UID_T_TYPE __U32_TYPE"
 .LASF238:
@@ -8377,7 +8333,9 @@ scanToken:
 	.string	"__FLT_HAS_QUIET_NAN__ 1"
 .LASF295:
 	.string	"__GCC_ATOMIC_CHAR_LOCK_FREE 2"
-.LASF883:
+.LASF170:
+	.string	"__DBL_MAX_10_EXP__ 308"
+.LASF888:
 	.string	"_mode"
 .LASF569:
 	.string	"__OFF_T_TYPE __SYSCALL_SLONG_TYPE"
@@ -8387,41 +8345,35 @@ scanToken:
 	.string	"__LDBL_REDIR(name,proto) name proto"
 .LASF104:
 	.string	"__INT32_MAX__ 0x7fffffff"
+.LASF509:
+	.string	"__LDBL_REDIR1(name,proto,alias) name proto"
 .LASF460:
 	.string	"__STRING(x) #x"
-.LASF825:
-	.string	"TOKEN_DEF"
 .LASF712:
 	.string	"unsigned char"
 .LASF503:
 	.string	"__attribute_copy__(arg) __attribute__ ((__copy__ (arg)))"
-.LASF878:
+.LASF883:
 	.string	"_codecvt"
 .LASF45:
 	.string	"__INT8_TYPE__ signed char"
-.LASF755:
-	.string	"TOKEN_STARSTAR"
 .LASF197:
 	.string	"__FLT32_MIN_10_EXP__ (-37)"
-.LASF678:
-	.string	"__GNUC_VA_LIST "
 .LASF384:
 	.string	"_WCHAR_T "
 .LASF161:
 	.string	"__FLT_DENORM_MIN__ 1.40129846432481707092372958328991613e-45F"
 .LASF264:
 	.string	"__DEC32_MANT_DIG__ 7"
-.LASF679:
-	.string	"_____fpos_t_defined 1"
-.LASF765:
-	.string	"TOKEN_LTLT"
+.LASF808:
+	.string	"TK_EQU32"
 .LASF361:
 	.string	"_GCC_PTRDIFF_T "
-.LASF524:
-	.string	"__stub_revoke "
-.LASF770:
-	.string	"TOKEN_COLONUCEQ"
-.LASF922:
+.LASF676:
+	.string	"__need___va_list "
+.LASF706:
+	.string	"stdin stdin"
+.LASF927:
 	.string	"/mnt/d/coding portfolio/fortissimolanguage"
 .LASF454:
 	.string	"__NTH(fct) __attribute__ ((__nothrow__ __LEAF)) fct"
@@ -8431,26 +8383,22 @@ scanToken:
 	.string	"_SIZE_T "
 .LASF392:
 	.string	"_WCHAR_T_H "
-.LASF693:
-	.string	"_IOLBF 1"
+.LASF266:
+	.string	"__DEC32_MAX_EXP__ 97"
 .LASF694:
 	.string	"_IONBF 2"
 .LASF621:
 	.string	"INT_LEAST32_MIN (-2147483647-1)"
 .LASF78:
 	.string	"__LONG_LONG_MAX__ 0x7fffffffffffffffLL"
-.LASF874:
-	.string	"_vtable_offset"
-.LASF91:
-	.string	"__WINT_WIDTH__ 32"
+.LASF469:
+	.string	"__flexarr []"
 .LASF682:
 	.string	"____FILE_defined 1"
-.LASF474:
-	.string	"__ASMNAME(cname) __ASMNAME2 (__USER_LABEL_PREFIX__, cname)"
 .LASF571:
 	.string	"__PID_T_TYPE __S32_TYPE"
-.LASF779:
-	.string	"TOKEN_USDULEQ"
+.LASF765:
+	.string	"TK_LTLT"
 .LASF263:
 	.string	"__FLT64X_HAS_QUIET_NAN__ 1"
 .LASF223:
@@ -8459,18 +8407,20 @@ scanToken:
 	.string	"__INT8_C(c) c"
 .LASF201:
 	.string	"__FLT32_MAX__ 3.40282346638528859811704183484516925e+38F32"
-.LASF352:
-	.string	"_STDDEF_H_ "
+.LASF767:
+	.string	"TK_COLONEQ"
 .LASF167:
 	.string	"__DBL_MIN_EXP__ (-1021)"
 .LASF370:
 	.string	"__SIZE_T "
-.LASF903:
+.LASF906:
 	.string	"nesting"
-.LASF885:
+.LASF890:
 	.string	"FILE"
 .LASF47:
 	.string	"__INT32_TYPE__ int"
+.LASF297:
+	.string	"__GCC_ATOMIC_CHAR32_T_LOCK_FREE 2"
 .LASF590:
 	.string	"__FSID_T_TYPE struct { int __val[2]; }"
 .LASF409:
@@ -8479,10 +8429,8 @@ scanToken:
 	.string	"PTRDIFF_MIN (-9223372036854775807L-1)"
 .LASF408:
 	.string	"__USE_ISOC99"
-.LASF850:
-	.string	"TokenType"
-.LASF766:
-	.string	"TOKEN_COLONCOLON"
+.LASF735:
+	.string	"TK_LTLPAREN"
 .LASF416:
 	.string	"__USE_XOPEN_EXTENDED"
 .LASF191:
@@ -8493,40 +8441,38 @@ scanToken:
 	.string	"__GCC_HAVE_SYNC_COMPARE_AND_SWAP_4 1"
 .LASF244:
 	.string	"__FLT32X_MIN__ 2.22507385850720138309023271733240406e-308F32x"
-.LASF6:
-	.string	"__VERSION__ \"9.3.0\""
+.LASF462:
+	.string	"__BEGIN_DECLS "
+.LASF843:
+	.string	"TK_NUMBER"
 .LASF630:
 	.string	"UINT_LEAST64_MAX (__UINT64_C(18446744073709551615))"
-.LASF794:
-	.string	"TOKEN_STAREQ"
-.LASF801:
-	.string	"TOKEN_EQ"
-.LASF234:
-	.string	"__FLT128_HAS_INFINITY__ 1"
+.LASF673:
+	.string	"_STDIO_H 1"
+.LASF716:
+	.string	"__int8_t"
 .LASF606:
 	.string	"__intptr_t_defined "
+.LASF597:
+	.string	"__FD_SETSIZE 1024"
 .LASF48:
 	.string	"__INT64_TYPE__ long int"
-.LASF841:
-	.string	"TOKEN_IDENTIFIER"
-.LASF901:
+.LASF757:
+	.string	"TK_PIPEPIPE"
+.LASF904:
 	.string	"skipWhitespace"
 .LASF30:
 	.string	"__ORDER_LITTLE_ENDIAN__ 1234"
-.LASF871:
-	.string	"_flags2"
-.LASF746:
-	.string	"TOKEN_SEMICOLON"
 .LASF271:
 	.string	"__DEC64_MANT_DIG__ 16"
 .LASF250:
 	.string	"__FLT64X_MANT_DIG__ 64"
 .LASF605:
 	.string	"_BITS_STDINT_UINTN_H 1"
+.LASF793:
+	.string	"TK_PLUSEQ"
 .LASF698:
 	.string	"SEEK_CUR 1"
-.LASF777:
-	.string	"TOKEN_USDLEQ"
 .LASF75:
 	.string	"__SHRT_MAX__ 0x7fff"
 .LASF410:
@@ -8535,45 +8481,45 @@ scanToken:
 	.string	"_SIZE_T_DEFINED "
 .LASF81:
 	.string	"__WINT_MAX__ 0xffffffffU"
-.LASF573:
-	.string	"__RLIM64_T_TYPE __UQUAD_TYPE"
-.LASF853:
+.LASF856:
 	.string	"length"
+.LASF850:
+	.string	"TK_EOF"
 .LASF556:
 	.string	"__U64_TYPE unsigned long int"
 .LASF357:
 	.string	"__PTRDIFF_T "
 .LASF257:
 	.string	"__FLT64X_MAX__ 1.18973149535723176502126385303097021e+4932F64x"
-.LASF826:
-	.string	"TOKEN_FOR"
-.LASF921:
+.LASF69:
+	.string	"__INTPTR_TYPE__ long int"
+.LASF926:
 	.string	"Tokenization/scanner/scanner.c"
-.LASF822:
-	.string	"TOKEN_ELSE"
-.LASF916:
-	.string	"isAtEnd"
+.LASF746:
+	.string	"TK_SEMICOLON"
+.LASF845:
+	.string	"TK_INTERPOLATION"
+.LASF812:
+	.string	"TK_EQF64"
 .LASF58:
 	.string	"__UINT_LEAST16_TYPE__ short unsigned int"
 .LASF42:
 	.string	"__CHAR16_TYPE__ short unsigned int"
-.LASF736:
-	.string	"TOKEN_RPARENLBRACE"
 .LASF237:
 	.string	"__FLT32X_DIG__ 15"
-.LASF483:
-	.string	"__attribute_deprecated_msg__(msg) __attribute__ ((__deprecated__ (msg)))"
+.LASF431:
+	.string	"__GLIBC_USE_DEPRECATED_GETS"
 .LASF414:
 	.string	"__USE_POSIX199506"
 .LASF660:
 	.string	"INT32_C(c) c"
 .LASF142:
 	.string	"__INTPTR_MAX__ 0x7fffffffffffffffL"
-.LASF17:
-	.string	"__FINITE_MATH_ONLY__ 0"
+.LASF772:
+	.string	"TK_USDUCEQ"
 .LASF665:
 	.string	"UINT64_C(c) c ## UL"
-.LASF881:
+.LASF886:
 	.string	"_freeres_buf"
 .LASF317:
 	.string	"__SIZEOF_FLOAT80__ 16"
@@ -8581,22 +8527,24 @@ scanToken:
 	.string	"SEEK_END 2"
 .LASF328:
 	.string	"__FXSR__ 1"
-.LASF505:
-	.string	"__WORDSIZE 64"
+.LASF823:
+	.string	"TK_ELSE"
 .LASF391:
 	.string	"_WCHAR_T_DEFINED "
 .LASF508:
 	.string	"__LONG_DOUBLE_USES_FLOAT128 0"
-.LASF805:
-	.string	"TOKEN_UIEQ"
+.LASF184:
+	.string	"__LDBL_MAX_10_EXP__ 4932"
 .LASF309:
 	.string	"__SIZEOF_INT128__ 16"
-.LASF13:
-	.string	"__pic__ 2"
+.LASF810:
+	.string	"TK_EQU64"
 .LASF528:
 	.string	"__stub_stty "
 .LASF467:
 	.string	"__warnattr(msg) __attribute__((__warning__ (msg)))"
+.LASF836:
+	.string	"TK_RETURN"
 .LASF119:
 	.string	"__INT_LEAST64_MAX__ 0x7fffffffffffffffL"
 .LASF555:
@@ -8605,44 +8553,44 @@ scanToken:
 	.string	"_BSD_SIZE_T_ "
 .LASF465:
 	.string	"__bos0(ptr) __builtin_object_size (ptr, 0)"
-.LASF906:
+.LASF909:
 	.string	"errorToken"
 .LASF388:
 	.string	"_WCHAR_T_ "
-.LASF325:
-	.string	"__MMX__ 1"
-.LASF845:
-	.string	"TOKEN_STRING"
-.LASF776:
-	.string	"TOKEN_COLONLEQ"
+.LASF545:
+	.string	"__S32_TYPE int"
+.LASF744:
+	.string	"TK_DOTDOT"
 .LASF617:
 	.string	"UINT32_MAX (4294967295U)"
-.LASF809:
-	.string	"TOKEN_ULLEQ"
 .LASF84:
 	.string	"__SIZE_MAX__ 0xffffffffffffffffUL"
 .LASF719:
 	.string	"__int16_t"
-.LASF866:
+.LASF871:
 	.string	"_IO_backup_base"
-.LASF875:
+.LASF880:
 	.string	"_shortbuf"
+.LASF787:
+	.string	"TK_COLONDEQ"
 .LASF129:
 	.string	"__UINT64_C(c) c ## UL"
 .LASF572:
 	.string	"__RLIM_T_TYPE __SYSCALL_ULONG_TYPE"
 .LASF655:
 	.string	"WCHAR_MAX __WCHAR_MAX"
-.LASF159:
-	.string	"__FLT_MIN__ 1.17549435082228750796873653722224568e-38F"
 .LASF709:
 	.string	"_STRING_H 1"
+.LASF852:
+	.string	"TK_ENDEXPRESSION"
 .LASF601:
 	.string	"_BITS_WCHAR_H 1"
+.LASF784:
+	.string	"TK_USDULLEQ"
 .LASF661:
 	.string	"INT64_C(c) c ## L"
-.LASF60:
-	.string	"__UINT_LEAST64_TYPE__ long unsigned int"
+.LASF785:
+	.string	"TK_COLONFEQ"
 .LASF173:
 	.string	"__DBL_MIN__ ((double)2.22507385850720138309023271733240406e-308L)"
 .LASF258:
@@ -8651,58 +8599,48 @@ scanToken:
 	.string	"UINTMAX_C(c) c ## UL"
 .LASF527:
 	.string	"__stub_sstk "
-.LASF823:
-	.string	"TOKEN_ELSIF"
-.LASF799:
-	.string	"TOKEN_CARETEQ"
 .LASF79:
 	.string	"__WCHAR_MAX__ 0x7fffffff"
 .LASF722:
 	.string	"__off64_t"
 .LASF55:
 	.string	"__INT_LEAST32_TYPE__ int"
-.LASF802:
-	.string	"TOKEN_CEQ"
 .LASF259:
 	.string	"__FLT64X_EPSILON__ 1.08420217248550443400745280086994171e-19F64x"
 .LASF4:
 	.string	"__GNUC_MINOR__ 3"
+.LASF814:
+	.string	"TK_EQS"
 .LASF182:
 	.string	"__LDBL_MIN_10_EXP__ (-4931)"
 .LASF300:
 	.string	"__GCC_ATOMIC_INT_LOCK_FREE 2"
-.LASF741:
-	.string	"TOKEN_QUESTION"
+.LASF234:
+	.string	"__FLT128_HAS_INFINITY__ 1"
 .LASF245:
 	.string	"__FLT32X_EPSILON__ 2.22044604925031308084726333618164062e-16F32x"
 .LASF520:
 	.string	"__stub_chflags "
 .LASF688:
 	.string	"__feof_unlocked_body(_fp) (((_fp)->_flags & _IO_EOF_SEEN) != 0)"
-.LASF821:
-	.string	"TOKEN_CLASS"
-.LASF927:
+.LASF922:
 	.string	"initScanner"
 .LASF588:
 	.string	"__TIMER_T_TYPE void *"
 .LASF178:
 	.string	"__DBL_HAS_QUIET_NAN__ 1"
-.LASF220:
-	.string	"__FLT64_HAS_INFINITY__ 1"
-.LASF808:
-	.string	"TOKEN_LLEQ"
 .LASF596:
 	.string	"__STATFS_MATCHES_STATFS64 1"
+.LASF831:
+	.string	"TK_LET"
 .LASF327:
 	.string	"__SSE2__ 1"
-.LASF848:
-	.string	"TOKEN_NEWLINE"
-.LASF864:
+.LASF804:
+	.string	"TK_EQU8"
+.LASF869:
 	.string	"_IO_buf_end"
 .LASF582:
 	.string	"__TIME_T_TYPE __SYSCALL_SLONG_TYPE"
-.LASF733:
-	.string	"TOKEN_LTLBRACE"
 .LASF514:
 	.string	"__REDIRECT_LDBL(name,proto,alias) __REDIRECT (name, proto, alias)"
 .LASF493:
@@ -8713,34 +8651,32 @@ scanToken:
 	.string	"__DEC128_SUBNORMAL_MIN__ 0.000000000000000000000000000000001E-6143DL"
 .LASF166:
 	.string	"__DBL_DIG__ 15"
-.LASF704:
-	.string	"FOPEN_MAX"
 .LASF485:
 	.string	"__attribute_format_strfmon__(a,b) __attribute__ ((__format__ (__strfmon__, a, b)))"
+.LASF734:
+	.string	"TK_RBRACEGT"
+.LASF788:
+	.string	"TK_USDDEQ"
 .LASF27:
 	.string	"__SIZEOF_SIZE_T__ 8"
-.LASF816:
-	.string	"TOKEN_LTEQ"
-.LASF752:
-	.string	"TOKEN_STAR"
 .LASF639:
 	.string	"UINT_FAST8_MAX (255)"
 .LASF217:
 	.string	"__FLT64_EPSILON__ 2.22044604925031308084726333618164062e-16F64"
-.LASF827:
-	.string	"TOKEN_IF"
+.LASF573:
+	.string	"__RLIM64_T_TYPE __UQUAD_TYPE"
 .LASF463:
 	.string	"__END_DECLS "
 .LASF332:
 	.string	"__SEG_GS 1"
-.LASF202:
-	.string	"__FLT32_MIN__ 1.17549435082228750796873653722224568e-38F32"
-.LASF739:
-	.string	"TOKEN_BANG"
+.LASF704:
+	.string	"FOPEN_MAX"
 .LASF340:
 	.string	"__DECIMAL_BID_FORMAT__ 1"
-.LASF828:
-	.string	"TOKEN_IN"
+.LASF774:
+	.string	"TK_USDIEQ"
+.LASF432:
+	.string	"__GLIBC_USE_DEPRECATED_SCANF"
 .LASF653:
 	.string	"SIZE_MAX (18446744073709551615UL)"
 .LASF320:
@@ -8751,74 +8687,72 @@ scanToken:
 	.string	"__UINT_FAST8_TYPE__ unsigned char"
 .LASF109:
 	.string	"__UINT64_MAX__ 0xffffffffffffffffUL"
-.LASF891:
+.LASF849:
+	.string	"TK_ERROR"
+.LASF897:
 	.string	"stderr"
 .LASF329:
 	.string	"__SSE_MATH__ 1"
 .LASF720:
 	.string	"short int"
-.LASF448:
-	.string	"_SYS_CDEFS_H 1"
-.LASF763:
-	.string	"TOKEN_GTGTGT"
-.LASF367:
-	.string	"_SYS_SIZE_T_H "
+.LASF351:
+	.string	"_STDDEF_H "
+.LASF83:
+	.string	"__PTRDIFF_MAX__ 0x7fffffffffffffffL"
 .LASF125:
 	.string	"__UINT16_C(c) c"
-.LASF727:
-	.string	"TOKEN_LEFT_PAREN"
+.LASF790:
+	.string	"TK_USDLDEQ"
+.LASF505:
+	.string	"__WORDSIZE 64"
 .LASF436:
 	.string	"__GLIBC_USE(F) __GLIBC_USE_ ## F"
 .LASF496:
 	.string	"__va_arg_pack_len() __builtin_va_arg_pack_len ()"
-.LASF288:
-	.string	"__NO_INLINE__ 1"
+.LASF752:
+	.string	"TK_STAR"
+.LASF792:
+	.string	"TK_USDSEQ"
 .LASF658:
 	.string	"INT8_C(c) c"
 .LASF611:
 	.string	"INT8_MAX (127)"
 .LASF254:
 	.string	"__FLT64X_MAX_EXP__ 16384"
-.LASF7:
-	.string	"__ATOMIC_RELAXED 0"
+.LASF798:
+	.string	"TK_AMPEQ"
 .LASF475:
 	.string	"__ASMNAME2(prefix,cname) __STRING (prefix) cname"
 .LASF894:
 	.string	"scanner"
 .LASF177:
 	.string	"__DBL_HAS_INFINITY__ 1"
-.LASF531:
-	.string	"__GLIBC_USE_IEC_60559_BFP_EXT"
 .LASF99:
 	.string	"__SIG_ATOMIC_MAX__ 0x7fffffff"
-.LASF208:
-	.string	"__FLT64_MANT_DIG__ 53"
+.LASF759:
+	.string	"TK_AMP"
 .LASF66:
 	.string	"__UINT_FAST16_TYPE__ long unsigned int"
 .LASF62:
 	.string	"__INT_FAST16_TYPE__ long int"
-.LASF839:
-	.string	"TOKEN_NAME"
-.LASF771:
-	.string	"TOKEN_USDUCEQ"
-.LASF550:
-	.string	"__UQUAD_TYPE unsigned long int"
+.LASF448:
+	.string	"_SYS_CDEFS_H 1"
 .LASF24:
 	.string	"__SIZEOF_FLOAT__ 4"
 .LASF274:
 	.string	"__DEC64_MIN__ 1E-383DD"
-.LASF363:
-	.string	"__need_ptrdiff_t"
+.LASF879:
+	.string	"_vtable_offset"
 .LASF171:
 	.string	"__DBL_DECIMAL_DIG__ 17"
-.LASF526:
-	.string	"__stub_sigreturn "
 .LASF358:
 	.string	"_PTRDIFF_T_ "
 .LASF587:
 	.string	"__CLOCKID_T_TYPE __S32_TYPE"
-.LASF774:
-	.string	"TOKEN_COLONUIEQ"
+.LASF473:
+	.string	"__REDIRECT_NTHNL(name,proto,alias) name proto __asm__ (__ASMNAME (#alias)) __THROWNL"
+.LASF755:
+	.string	"TK_STARSTAR"
 .LASF567:
 	.string	"__NLINK_T_TYPE __SYSCALL_ULONG_TYPE"
 .LASF103:
@@ -8835,34 +8769,40 @@ scanToken:
 	.string	"__attribute_deprecated__ __attribute__ ((__deprecated__))"
 .LASF222:
 	.string	"__FLT128_MANT_DIG__ 113"
-.LASF564:
-	.string	"__INO_T_TYPE __SYSCALL_ULONG_TYPE"
+.LASF842:
+	.string	"TK_NAME"
 .LASF648:
 	.string	"UINTMAX_MAX (__UINT64_C(18446744073709551615))"
 .LASF645:
 	.string	"UINTPTR_MAX (18446744073709551615UL)"
 .LASF101:
 	.string	"__SIG_ATOMIC_WIDTH__ 32"
-.LASF909:
+.LASF761:
+	.string	"TK_CARET"
+.LASF730:
+	.string	"TK_RIGHT_BRACE"
+.LASF924:
 	.string	"makeToken"
+.LASF794:
+	.string	"TK_MINUSEQ"
+.LASF732:
+	.string	"TK_RIGHT_BRACK"
 .LASF267:
 	.string	"__DEC32_MIN__ 1E-95DF"
+.LASF349:
+	.string	"false 0"
+.LASF2:
+	.string	"__STDC_HOSTED__ 1"
 .LASF543:
 	.string	"__S16_TYPE short int"
 .LASF311:
 	.string	"__SIZEOF_WINT_T__ 4"
 .LASF657:
 	.string	"WINT_MAX (4294967295u)"
-.LASF654:
-	.string	"WCHAR_MIN __WCHAR_MIN"
 .LASF0:
 	.string	"__STDC__ 1"
 .LASF618:
 	.string	"UINT64_MAX (__UINT64_C(18446744073709551615))"
-.LASF817:
-	.string	"TOKEN_GTEQ"
-.LASF815:
-	.string	"TOKEN_GT"
 .LASF144:
 	.string	"__UINTPTR_MAX__ 0xffffffffffffffffUL"
 .LASF491:
@@ -8875,108 +8815,100 @@ scanToken:
 	.string	"__UINT64_TYPE__ long unsigned int"
 .LASF393:
 	.string	"___int_wchar_t_h "
+.LASF867:
+	.string	"_IO_write_end"
 .LASF26:
 	.string	"__SIZEOF_LONG_DOUBLE__ 16"
 .LASF512:
 	.string	"__LDBL_REDIR_NTH(name,proto) name proto __THROW"
-.LASF902:
+.LASF905:
 	.string	"skipBlockComment"
-.LASF581:
-	.string	"__CLOCK_T_TYPE __SYSCALL_SLONG_TYPE"
+.LASF376:
+	.string	"_SIZE_T_DECLARED "
 .LASF495:
 	.string	"__va_arg_pack() __builtin_va_arg_pack ()"
 .LASF37:
 	.string	"__PTRDIFF_TYPE__ long int"
-.LASF229:
-	.string	"__FLT128_MAX__ 1.18973149535723176508575932662800702e+4932F128"
-.LASF858:
+.LASF325:
+	.string	"__MMX__ 1"
+.LASF863:
 	.string	"_IO_read_end"
-.LASF687:
-	.string	"_IO_EOF_SEEN 0x0010"
-.LASF796:
-	.string	"TOKEN_MODEQ"
-.LASF616:
-	.string	"UINT16_MAX (65535)"
-.LASF215:
-	.string	"__FLT64_MAX__ 1.79769313486231570814527423731704357e+308F64"
+.LASF802:
+	.string	"TK_EQ"
+.LASF799:
+	.string	"TK_PIPEEQ"
+.LASF330:
+	.string	"__SSE2_MATH__ 1"
+.LASF818:
+	.string	"TK_GTEQ"
 .LASF378:
 	.string	"_GCC_SIZE_T "
-.LASF740:
-	.string	"TOKEN_BANGBANG"
 .LASF77:
 	.string	"__LONG_MAX__ 0x7fffffffffffffffL"
 .LASF20:
 	.string	"__SIZEOF_INT__ 4"
 .LASF397:
 	.string	"_BSD_WCHAR_T_"
-.LASF519:
-	.string	"__stub___compat_bdflush "
 .LASF625:
 	.string	"INT_LEAST32_MAX (2147483647)"
-.LASF780:
-	.string	"TOKEN_COLONLLEQ"
+.LASF586:
+	.string	"__KEY_T_TYPE __S32_TYPE"
 .LASF437:
 	.string	"__GLIBC_USE_ISOC2X 0"
 .LASF561:
 	.string	"__DEV_T_TYPE __UQUAD_TYPE"
 .LASF620:
 	.string	"INT_LEAST16_MIN (-32767-1)"
-.LASF83:
-	.string	"__PTRDIFF_MAX__ 0x7fffffffffffffffL"
+.LASF828:
+	.string	"TK_FOR"
 .LASF426:
 	.string	"__USE_ATFILE"
 .LASF321:
 	.string	"__GCC_ASM_FLAG_OUTPUTS__ 1"
-.LASF870:
+.LASF875:
 	.string	"_fileno"
 .LASF464:
 	.string	"__bos(ptr) __builtin_object_size (ptr, __USE_FORTIFY_LEVEL > 1)"
 .LASF313:
 	.string	"__amd64 1"
-.LASF814:
-	.string	"TOKEN_LT"
+.LASF736:
+	.string	"TK_RPARENLBRACE"
 .LASF188:
 	.string	"__LDBL_MIN__ 3.36210314311209350626267781732175260e-4932L"
 .LASF338:
 	.string	"__unix__ 1"
 .LASF456:
 	.string	"__glibc_clang_has_extension(ext) 0"
-.LASF800:
-	.string	"TOKEN_TILDEEQ"
 .LASF518:
 	.string	"__HAVE_GENERIC_SELECTION 1"
 .LASF612:
 	.string	"INT16_MAX (32767)"
-.LASF748:
-	.string	"TOKEN_LTTILDE"
 .LASF656:
 	.string	"WINT_MIN (0u)"
-.LASF879:
+.LASF884:
 	.string	"_wide_data"
 .LASF180:
 	.string	"__LDBL_DIG__ 18"
 .LASF565:
 	.string	"__INO64_T_TYPE __UQUAD_TYPE"
-.LASF895:
+.LASF898:
 	.string	"token"
-.LASF795:
-	.string	"TOKEN_SLASHEQ"
 .LASF82:
 	.string	"__WINT_MIN__ 0U"
 .LASF566:
 	.string	"__MODE_T_TYPE __U32_TYPE"
-.LASF102:
-	.string	"__INT8_MAX__ 0x7f"
 .LASF209:
 	.string	"__FLT64_DIG__ 15"
 .LASF276:
 	.string	"__DEC64_EPSILON__ 1E-15DD"
-.LASF737:
-	.string	"TOKEN_RBRACELPAREN"
-.LASF926:
-	.string	"skipLineComment"
+.LASF159:
+	.string	"__FLT_MIN__ 1.17549435082228750796873653722224568e-38F"
+.LASF738:
+	.string	"TK_RPARENGT"
 .LASF689:
 	.string	"_IO_ERR_SEEN 0x0020"
+.LASF776:
+	.string	"TK_USDUIEQ"
 .LASF54:
 	.string	"__INT_LEAST16_TYPE__ short int"
 .LASF578:
@@ -8985,23 +8917,19 @@ scanToken:
 	.string	"_BITS_STDINT_INTN_H 1"
 .LASF186:
 	.string	"__LDBL_DECIMAL_DIG__ 21"
-.LASF890:
+.LASF896:
 	.string	"stdout"
-.LASF382:
-	.string	"__wchar_t__ "
-.LASF768:
-	.string	"TOKEN_COLONCEQ"
+.LASF206:
+	.string	"__FLT32_HAS_INFINITY__ 1"
 .LASF636:
 	.string	"INT_FAST16_MAX (9223372036854775807L)"
 .LASF536:
 	.string	"__GLIBC_USE_IEC_60559_FUNCS_EXT 0"
-.LASF326:
-	.string	"__SSE__ 1"
 .LASF336:
 	.string	"__linux__ 1"
 .LASF440:
 	.string	"__USE_FORTIFY_LEVEL 0"
-.LASF907:
+.LASF910:
 	.string	"message"
 .LASF540:
 	.string	"__GLIBC_USE_IEC_60559_TYPES_EXT 0"
@@ -9009,15 +8937,15 @@ scanToken:
 	.string	"__GLIBC_USE_IEC_60559_FUNCS_EXT_C2X"
 .LASF350:
 	.string	"__bool_true_false_are_defined 1"
-.LASF764:
-	.string	"TOKEN_GTGT"
+.LASF670:
+	.string	"DEBUG_TRACE_EXECUTION "
 .LASF591:
 	.string	"__SSIZE_T_TYPE __SWORD_TYPE"
 .LASF174:
 	.string	"__DBL_EPSILON__ ((double)2.22044604925031308084726333618164062e-16L)"
 .LASF677:
 	.string	"__need___va_list"
-.LASF861:
+.LASF866:
 	.string	"_IO_write_ptr"
 .LASF318:
 	.string	"__SIZEOF_FLOAT128__ 16"
@@ -9029,12 +8957,14 @@ scanToken:
 	.string	"INTPTR_MAX (9223372036854775807L)"
 .LASF468:
 	.string	"__errordecl(name,msg) extern void name (void) __attribute__((__error__ (msg)))"
-.LASF451:
-	.string	"__LEAF_ATTR __attribute__ ((__leaf__))"
-.LASF840:
-	.string	"TOKEN_NUMBER"
+.LASF816:
+	.string	"TK_GT"
 .LASF568:
 	.string	"__FSWORD_T_TYPE __SYSCALL_SLONG_TYPE"
+.LASF764:
+	.string	"TK_GTGT"
+.LASF352:
+	.string	"_STDDEF_H_ "
 .LASF429:
 	.string	"__KERNEL_STRICT_NAMES"
 .LASF49:
@@ -9043,18 +8973,18 @@ scanToken:
 	.string	"__FLT32X_MANT_DIG__ 53"
 .LASF90:
 	.string	"__WCHAR_WIDTH__ 32"
+.LASF753:
+	.string	"TK_SLASH"
 .LASF423:
 	.string	"__USE_LARGEFILE64"
 .LASF685:
 	.string	"__getc_unlocked_body(_fp) (__glibc_unlikely ((_fp)->_IO_read_ptr >= (_fp)->_IO_read_end) ? __uflow (_fp) : *(unsigned char *) (_fp)->_IO_read_ptr++)"
-.LASF114:
-	.string	"__INT16_C(c) c"
+.LASF800:
+	.string	"TK_CARETEQ"
 .LASF251:
 	.string	"__FLT64X_DIG__ 18"
-.LASF811:
-	.string	"TOKEN_DEQ"
-.LASF824:
-	.string	"TOKEN_FALSE"
+.LASF777:
+	.string	"TK_COLONLEQ"
 .LASF272:
 	.string	"__DEC64_MIN_EXP__ (-382)"
 .LASF11:
@@ -9065,26 +8995,26 @@ scanToken:
 	.string	"__linux 1"
 .LASF390:
 	.string	"_WCHAR_T_DEFINED_ "
-.LASF804:
-	.string	"TOKEN_IEQ"
 .LASF135:
 	.string	"__INT_FAST32_WIDTH__ 64"
 .LASF175:
 	.string	"__DBL_DENORM_MIN__ ((double)4.94065645841246544176568792868221372e-324L)"
+.LASF256:
+	.string	"__FLT64X_DECIMAL_DIG__ 21"
 .LASF529:
 	.string	"__GLIBC_USE_LIB_EXT2"
-.LASF898:
+.LASF789:
+	.string	"TK_COLONLDEQ"
+.LASF901:
 	.string	"identifier"
 .LASF650:
 	.string	"PTRDIFF_MAX (9223372036854775807L)"
+.LASF693:
+	.string	"_IOLBF 1"
 .LASF165:
 	.string	"__DBL_MANT_DIG__ 53"
 .LASF666:
 	.string	"INTMAX_C(c) c ## L"
-.LASF711:
-	.string	"long unsigned int"
-.LASF813:
-	.string	"TOKEN_SEQ"
 .LASF560:
 	.string	"__SYSCALL_ULONG_TYPE __ULONGWORD_TYPE"
 .LASF498:
@@ -9093,8 +9023,6 @@ scanToken:
 	.string	"__INT_MAX__ 0x7fffffff"
 .LASF128:
 	.string	"__UINT_LEAST64_MAX__ 0xffffffffffffffffUL"
-.LASF107:
-	.string	"__UINT16_MAX__ 0xffff"
 .LASF702:
 	.string	"TMP_MAX 238328"
 	.ident	"GCC: (Ubuntu 9.3.0-17ubuntu1~20.04) 9.3.0"
