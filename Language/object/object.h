@@ -33,7 +33,7 @@ ObjString* takeString(int8_t* chars, int16_t length);
 ObjString* copyString(const int8_t* chars, int16_t length);
 void printObject(Value value);
 
-static inline bool isObjType(Value value, ObjType type){
+static bool isObjType(Value value, ObjType type){
     return IS_OBJ(value) && AS_OBJ(value)->type == type;
 }
 

@@ -29,14 +29,15 @@ static ObjString* allocateString(int8_t* chars, int16_t length, uint32_t hash){
     return string;
 }
 
-//FNV-1 Hash Function
+/*FNV-1 Hash Function*/
 static uint32_t hashString(const int8_t* key, int16_t length){
     uint32_t hash = 216613626lu;
-    for(int16_t i=0; i<length; i++){
+    int16_t i;
+    for(i = 0; i<length; i++){
         hash *= 16777619;
         hash ^= (uint8_t)key[i];
-        // hash ^= (uint8_t)key[i]; //Change these two lines with the above to
-        // hash *= 16777619;        //use FNV-1a hash function
+        /* hash ^= (uint8_t)key[i]; /*Change these two lines with the above to*/
+        /* hash *= 16777619;        /*use FNV-1a hash function*/
     }
     return hash;
 }

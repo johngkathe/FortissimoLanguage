@@ -4,155 +4,166 @@
 #include <stdint.h>
 
 typedef enum {
-    //Parentheses+
-    TOKEN_LEFT_PAREN,   //'('                       @@@@@@@@@@@@@@@@@@@@
-    TOKEN_RIGHT_PAREN,  //')'                       @@@@@@@@@@@@@@@@@@@@
-    TOKEN_LEFT_BRACE,   //'{'                       @@@@@@@@@@@@@@@@@@@@
-    TOKEN_RIGHT_BRACE,  //'}'                       @@@@@@@@@@@@@@@@@@@@
-    TOKEN_LEFT_BRACK,   //'['                       @@@@@@@@@@@@@@@@@@@@
-    TOKEN_RIGHT_BRACK,  //']'                       @@@@@@@@@@@@@@@@@@@@
-    TOKEN_LTLBRACE,     //'<{': Start parameterless function. @@@@@@@@@@
-    TOKEN_RBRACEGT,     //'}>': End void function.  @@@@@@@@@@@@@@@@@@@@
-    TOKEN_LTLPAREN,     //'<(': Start of parameterized function. @@@@@@@
-    TOKEN_RPARENLBRACE, //'){': Second half of start of parameterized function.
-    TOKEN_RBRACELPAREN, //'}(': Start of non-void return parameter of function.
-    TOKEN_RPARENGT,     //')>': Second half of return parameter of function.
+    /*Parentheses+*/
+    TK_LEFT_PAREN,   /*'('*/
+    TK_RIGHT_PAREN,  /*')'*/
+    TK_LEFT_BRACE,   /*'{'*/
+    TK_RIGHT_BRACE,  /*'}'*/
+    TK_LEFT_BRACK,   /*'['*/
+    TK_RIGHT_BRACK,  /*']'*/
+    TK_LTLBRACE,     /*'<{': Start parameterless function.*/
+    TK_RBRACEGT,     /*'}>': End void function.*/
+    TK_LTLPAREN,     /*'<(': Start of parameterized function.*/
+    TK_RPARENLBRACE, /*'){': Second half of start of parameterized function.*/
+    TK_RBRACELPAREN, /*'}(': Start of non-void return parameter of function.*/
+    TK_RPARENGT,     /*')>': Second half of return parameter of function.*/
 
-    //Punctuation.
-    TOKEN_BANG,         //'!'                       @@@@@@@@@@@@@@@@@@@@
-    TOKEN_BANGBANG,     //'!!': For returning truthiness of statement @@
-    TOKEN_QUESTION,     //'?':                      @@@@@@@@@@@@@@@@@@@@                                 
-    TOKEN_COMMA,        //','                       @@@@@@@@@@@@@@@@@@@@
-    TOKEN_DOT,          //'.'                       @@@@@@@@@@@@@@@@@@@@
-    TOKEN_DOTDOT,       //'..'                      @@@@@@@@@@@@@@@@@@@@
-    TOKEN_DOTDOTDOT,    //'...'                     @@@@@@@@@@@@@@@@@@@@
-    TOKEN_SEMICOLON,    //';'                       @@@@@@@@@@@@@@@@@@@@
-    TOKEN_COLON,        //':'                       @@@@@@@@@@@@@@@@@@@@
+    /*Punctuation.*/
+    TK_BANG,         /*'!'*/
+    TK_BANGBANG,     /*'!!': For returning truthiness of statement.*/
+    TK_QUESTION,     /*'?'*/                                
+    TK_COMMA,        /*','*/
+    TK_DOT,          /*'.'*/
+    TK_DOTDOT,       /*'..'*/
+    TK_DOTDOTDOT,    /*'...'*/
+    TK_SEMICOLON,    /*';'*/
+    TK_COLON,        /*':'*/
 
-    //Inheritance.
-    TOKEN_LTTILDE,      //'<~': Export/Pass Down
-    TOKEN_TILDEGT,      //'~>': Import              @@@@@@@@@@@@@@@@@@@@
+    /*Inheritance.*/
+    TK_LTTILDE,      /*'<~': Export/Pass Down*/
+    TK_TILDEGT,      /*'~>': Import*/
 
-    //Math.
-    TOKEN_PLUS,         //'+'                       @@@@@@@@@@@@@@@@@@@@
-    TOKEN_MINUS,        //'-'                       @@@@@@@@@@@@@@@@@@@@
-    TOKEN_STAR,         //'*'                       @@@@@@@@@@@@@@@@@@@@
-    TOKEN_SLASH,        //'/'                       @@@@@@@@@@@@@@@@@@@@
-    TOKEN_MOD,          //'%'                       @@@@@@@@@@@@@@@@@@@@
-    TOKEN_STARSTAR,     //'**': For exponentiation. @@@@@@@@@@@@@@@@@@@@
+    /*Math.*/
+    TK_PLUS,         /*'+'*/
+    TK_MINUS,        /*'-'*/
+    TK_STAR,         /*'*'*/
+    TK_SLASH,        /*'/'*/
+    TK_MOD,          /*'%'*/
+    TK_STARSTAR,     /*'**': For exponentiation.*/
 
-    //Comparison.
-    TOKEN_AMPAMP,       //'&&'                      @@@@@@@@@@@@@@@@@@@@
-    TOKEN_PIPEPIPE,     //'||'
-    TOKEN_CARETCARET,   //'^^' Logical XOR          @@@@@@@@@@@@@@@@@@@@
+    /*Comparison.*/
+    TK_AMPAMP,       /*'&&'*/
+    TK_PIPEPIPE,     /*'||'*/
+    TK_CARETCARET,   /*'^^' Logical XOR*/
+    TK_BANGAMP,     /*'!&' Logical NAND*/
 
-    //Bitwise operations.
-    TOKEN_AMP,          //'&': AND                  @@@@@@@@@@@@@@@@@@@@
-    TOKEN_PIPE,         //'|': OR
-    TOKEN_CARET,        //'^': XOR                  @@@@@@@@@@@@@@@@@@@@
-    TOKEN_TILDE,        //'~': NOT/Complement       @@@@@@@@@@@@@@@@@@@@
-    TOKEN_GTGTGT,       //'>>>': For signed right shift.
-    TOKEN_GTGT,         //'>>': For unsigned right shift.
-    TOKEN_LTLT,         //'<<': For unsigned left shift.
+    /*Bitwise operations.*/
+    TK_AMP,          /*'&': AND*/
+    TK_PIPE,         /*'|': OR&*/
+    TK_CARET,        /*'^': XOR*/
+    TK_TILDE,        /*'~': NOT/Complement*/
+    TK_GTGTGT,       /*'>>>': For signed right shift.*/
+    TK_GTGT,         /*'>>': For unsigned right shift.*/
+    TK_LTLT,         /*'<<': For unsigned left shift.*/
 
-    //Variable Declaration. (Adding $ at end of declaration makes variable static.)
-    TOKEN_COLONCOLON,   //'::': Used to declare a new typless variable. @@@@@@@@@@@@@@@@@@@@@@@
-    TOKEN_USDEQ,        //'$=': Used to make a new static typless variable. @@@@@@@@@@@@@@@@@@@
-    TOKEN_COLONCEQ,     //':c=': Used to declare a new 8-bit, signed int. @@@@@@@@@@@@@@@@@@@@@
-    TOKEN_USDCEQ,       //'$c=': Used to declare a new static 8-bit, signed int. @@@@@@@@@@@@@@
-    TOKEN_COLONUCEQ,    //':uc=': Used to declare a new 8-bit, unsigned int. @@@@@@@@@@@@@@@@@@
-    TOKEN_USDUCEQ,      //'$uc=': Used to declare a new static 8-bit, unsigned int. @@@@@@@@@@@
-    TOKEN_COLONIEQ,     //':i=': Used to declare a new 16-bit, signed int. @@@@@@@@@@@@@@@@@@@@
-    TOKEN_USDIEQ,       //'$i=': Used to declare a new static 16-bit, signed int. @@@@@@@@@@@@@
-    TOKEN_COLONUIEQ,    //':ui=': Used to declare a new 16-bit, unsigned int. @@@@@@@@@@@@@@@@@
-    TOKEN_USDUIEQ,      //'$ui=': Used to declare a new static 16-bit, unsigned int. @@@@@@@@@@
-    TOKEN_COLONLEQ,     //':l=': Used to declare a new 32-bit, signed int. @@@@@@@@@@@@@@@@@@@@
-    TOKEN_USDLEQ,       //'$l=': Used to declare a new static 32-bit, signed int. @@@@@@@@@@@@@
-    TOKEN_COLONULEQ,    //':ul=': Used to declare a new 32-bit, unsigned int. @@@@@@@@@@@@@@@@@
-    TOKEN_USDULEQ,      //'$ul=': Used to declare a new static 32-bit, unsigned int. @@@@@@@@@@
-    TOKEN_COLONLLEQ,    //':ll=': Used to declare a new 64-bit, signed int. @@@@@@@@@@@@@@@@@@@
-    TOKEN_USDLLEQ,      //'$ll=': Used to declare a new static 64-bit, signed int. @@@@@@@@@@@@
-    TOKEN_COLONULLEQ,   //':ull=': Used to declare a new 64-bit, unsigned int. @@@@@@@@@@@@@@@@
-    TOKEN_USDULLEQ,     //'$ull=': Used to declare a new static 64-bit, unsigned int. @@@@@@@@@
-    TOKEN_COLONFEQ,     //':f=': Used to declare a new 32-bit, unsigned float. @@@@@@@@@@@@@@@@
-    TOKEN_USDFEQ,       //'$f=': Used to declare a new static 32-bit, unsigned float. @@@@@@@@@
-    TOKEN_COLONDEQ,     //':d=': Used to declare a new 64-bit, unsigned float. @@@@@@@@@@@@@@@@
-    TOKEN_USDDEQ,       //'$d=': Used to declare a new static 64-bit, unsigned float. @@@@@@@@@
-    TOKEN_COLONLDEQ,    //':ld=': Used to declare a new 80-128 bit, unsigned float. @@@@@@@@@@@
-    TOKEN_USDLDEQ,      //'$ld=': Used to declare a new static 80-128 bit, unsigned float. @@@@
-    TOKEN_COLONSEQ,     //':s=': Used to declare a new string. @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-    TOKEN_USDSEQ,       //'$s=': Used to declare a new static string. @@@@@@@@@@@@@@@@@@@@@@@@@
+    /*Declaration. (Adding $ at end of declaration makes variable static.)*/
+    TK_COLONCOLON,  /*'::': Used to declare a variable/function or infer an operation.*/
+    TK_COLONEQ,     /*':='*/
 
-    //Assignment.
-    TOKEN_PLUSEQ,       //'+='                      @@@@@@@@@@@@@@@@@@@@
-    TOKEN_MINUSEQ,      //'-='                      @@@@@@@@@@@@@@@@@@@@
-    TOKEN_STAREQ,       //'*='                      @@@@@@@@@@@@@@@@@@@@
-    TOKEN_SLASHEQ,      //'/='                      @@@@@@@@@@@@@@@@@@@@
-    TOKEN_MODEQ,        //'%='                      @@@@@@@@@@@@@@@@@@@@
-    TOKEN_AMPEQ,        //'&=' AND Equals           @@@@@@@@@@@@@@@@@@@@
-    TOKEN_PIPEEQ,       //'|=' OR Equals
-    TOKEN_CARETEQ,      //'^=' XOR Equals           @@@@@@@@@@@@@@@@@@@@
-    TOKEN_TILDEEQ,      //'~=' Complement Equals    @@@@@@@@@@@@@@@@@@@@
-    TOKEN_EQ,           //'='                       @@@@@@@@@@@@@@@@@@@@
+    /*Likely will remove these ~~vvv~~*/
+    TK_USDEQ,        /*'$=': Used to make a new static typless variable.*/
+    TK_COLONCEQ,     /*':c=': Used to declare a new 8-bit, signed int.*/
+    TK_USDCEQ,       /*'$c=': Used to declare a new static 8-bit, signed int.*/
+    TK_COLONUCEQ,    /*':uc=': Used to declare a new 8-bit, unsigned int.*/
+    TK_USDUCEQ,      /*'$uc=': Used to declare a new static 8-bit, unsigned int.*/
+    TK_COLONIEQ,     /*':i=': Used to declare a new 16-bit, signed int.*/
+    TK_USDIEQ,       /*'$i=': Used to declare a new static 16-bit, signed int.*/
+    TK_COLONUIEQ,    /*':ui=': Used to declare a new 16-bit, unsigned int.*/
+    TK_USDUIEQ,      /*'$ui=': Used to declare a new static 16-bit, unsigned int.*/
+    TK_COLONLEQ,     /*':l=': Used to declare a new 32-bit, signed int.*/
+    TK_USDLEQ,       /*'$l=': Used to declare a new static 32-bit, signed int.*/
+    TK_COLONULEQ,    /*':ul=': Used to declare a new 32-bit, unsigned int.*/
+    TK_USDULEQ,      /*'$ul=': Used to declare a new static 32-bit, unsigned int.*/
+    TK_COLONLLEQ,    /*':ll=': Used to declare a new 64-bit, signed int.*/
+    TK_USDLLEQ,      /*'$ll=': Used to declare a new static 64-bit, signed int.*/
+    TK_COLONULLEQ,   /*':ull=': Used to declare a new 64-bit, unsigned int.*/
+    TK_USDULLEQ,     /*'$ull=': Used to declare a new static 64-bit, unsigned int.*/
+    TK_COLONFEQ,     /*':f=': Used to declare a new 32-bit, unsigned float.*/
+    TK_USDFEQ,       /*'$f=': Used to declare a new static 32-bit, unsigned float.*/
+    TK_COLONDEQ,     /*':d=': Used to declare a new 64-bit, unsigned float.*/
+    TK_USDDEQ,       /*'$d=': Used to declare a new static 64-bit, unsigned float.*/
+    TK_COLONLDEQ,    /*':ld=': Used to declare a new 80-128 bit, unsigned float.*/
+    TK_USDLDEQ,      /*'$ld=': Used to declare a new static 80-128 bit, unsigned float.*/
+    TK_COLONSEQ,     /*':s=': Used to declare a new string.*/
+    TK_USDSEQ,       /*'$s=': Used to declare a new static string.*/
+    /*Likely will remove these ~~^^^~~*/
+
+    /*Assignment.*/
+    TK_PLUSEQ,       /*'+='*/
+    TK_MINUSEQ,      /*'-='*/
+    TK_STAREQ,       /*'*='*/
+    TK_SLASHEQ,      /*'/='*/
+    TK_MODEQ,        /*'%='*/
+    TK_AMPEQ,        /*'&=' AND Equals*/
+    TK_PIPEEQ,       /*'|=' OR Equals*/
+    TK_CARETEQ,      /*'^=' XOR Equals*/
+    TK_TILDEEQ,      /*'~=' Complement Equals*/
+    TK_EQ,           /*'='*/
     
-    //Type Conversion.
-    TOKEN_CEQ,          //'c='                      @@@@@@@@@@@@@@@@@@@@
-    TOKEN_UCEQ,         //'uc='                     @@@@@@@@@@@@@@@@@@@@
-    TOKEN_IEQ,          //'i='                      @@@@@@@@@@@@@@@@@@@@
-    TOKEN_UIEQ,         //'ui='                     @@@@@@@@@@@@@@@@@@@@
-    TOKEN_LEQ,          //'l='                      @@@@@@@@@@@@@@@@@@@@
-    TOKEN_ULEQ,         //'ul='                     @@@@@@@@@@@@@@@@@@@@
-    TOKEN_LLEQ,         //'ll='                     @@@@@@@@@@@@@@@@@@@@
-    TOKEN_ULLEQ,        //'ull='                    @@@@@@@@@@@@@@@@@@@@
-    TOKEN_FEQ,          //'f='                      @@@@@@@@@@@@@@@@@@@@
-    TOKEN_DEQ,          //'d='                      @@@@@@@@@@@@@@@@@@@@
-    TOKEN_LDEQ,         //'ld='                     @@@@@@@@@@@@@@@@@@@@
-    TOKEN_SEQ,          //'s='                      @@@@@@@@@@@@@@@@@@@@
+    /*Type Conversion.*/
+    TK_EQI8,        /*'=i8'*/
+    TK_EQU8,        /*'=u8'*/
+    TK_EQI16,       /*'=i16'*/
+    TK_EQU16,       /*'=u16'*/
+    TK_EQI32,       /*'=i32'*/
+    TK_EQU32,       /*'=u32'*/
+    TK_EQI64,       /*'=i64'*/
+    TK_EQU64,       /*'=u64'*/
+    TK_EQF32,       /*'=f32'*/
+    TK_EQF64,       /*'=f64'*/
+    TK_EQF128,      /*'=f128'*/
+    TK_EQS,         /*'=s'*/
 
-    //Checking equality.
-    TOKEN_LT,       //'<'
-    TOKEN_GT,       //'<'
-    TOKEN_LTEQ,     //'<='
-    TOKEN_GTEQ,     //'>='
-    TOKEN_EQEQ,     //'=='                          @@@@@@@@@@@@@@@@@@@@
-    TOKEN_BANGEQ,   //'!='                          @@@@@@@@@@@@@@@@@@@@
+    /*Checking equality.*/
+    TK_LT,          /*'<'*/
+    TK_GT,          /*'<'*/
+    TK_LTEQ,        /*'<='*/
+    TK_GTEQ,        /*'>='*/
+    TK_EQEQ,        /*'=='*/
+    TK_BANGEQ,      /*'!='*/
 
-    //Keywords.     (Alphabetical order)
-    TOKEN_CASE,     //'case': for switch statements @@@@@@@@@@@@@@@@@@@@
-    TOKEN_CLASS,    //'class': MIGHT TOKENIZE       @@@@@@@@@@@@@@@@@@@@
-    TOKEN_ELSE,     //'else'                        @@@@@@@@@@@@@@@@@@@@
-    TOKEN_ELSIF,    //'elsif'                       @@@@@@@@@@@@@@@@@@@@
-    TOKEN_FALSE,    //'false'                       @@@@@@@@@@@@@@@@@@@@
-    TOKEN_DEF,       //'fn':TEMP??                   @@@@@@@@@@@@@@@@@@@@
-    TOKEN_FOR,      //'for'                         @@@@@@@@@@@@@@@@@@@@
-    TOKEN_IF,       //'if'                          @@@@@@@@@@@@@@@@@@@@
-    TOKEN_IN,       //'in'                          @@@@@@@@@@@@@@@@@@@@
-    TOKEN_LET,      //'let':TEMP??                  @@@@@@@@@@@@@@@@@@@@
-    TOKEN_NIL,      //'nil' (NULL)                  @@@@@@@@@@@@@@@@@@@@
-    TOKEN_PUTS,     //'puts': print function        @@@@@@@@@@@@@@@@@@@@
-    TOKEN_SUPER,    //'super'                       @@@@@@@@@@@@@@@@@@@@
-    TOKEN_RETURN,   //'return': Will try to remove via expression orientation
-    TOKEN_THIS,     //'this'                        @@@@@@@@@@@@@@@@@@@@
-    TOKEN_TRUE,     //'true'                        @@@@@@@@@@@@@@@@@@@@
-    TOKEN_WHEN,     //'when': for individual switch statements @@@@@@@@@
-    TOKEN_WHILE,    //'while'                       @@@@@@@@@@@@@@@@@@@@
+    /*Keywords.     (Alphabetical order)*/
+    TK_BREAK,   /*'break': break out of loop*/
+    TK_CASE,     /*'case': for switch statements*/
+    TK_CLASS,    /*'class': MIGHT TOKENIZE*/
+    TK_CONTINUE, /*'continue': go to top of loop*/
+    TK_DO,      /*'do': used in do and do-while loops*/
+    TK_EACH,    /*'each': used in for each loops*/
+    TK_ELSE,     /*'else'*/
+    TK_ELSIF,    /*'elsif'*/
+    TK_ENUM,    /*'enum'*/
+    TK_FALSE,    /*'false'*/
+    TK_DEF,       /*'fn':TEMP??*/
+    TK_FOR,      /*'for'*/
+    TK_IF,       /*'if'*/
+    TK_IN,       /*'in'*/
+    TK_LET,      /*'let':TEMP??*/
+    TK_NIL,      /*'nil' (NULL)*/
+    TK_PUTS,     /*'puts': print function*/
+    TK_STRUCT,  /*'struct':*/
+    TK_SUPER,    /*'super'*/
+    TK_RETURN,   /*'return': Will try to remove via expression orientation*/
+    TK_THIS,     /*'this'*/
+    TK_TRUE,     /*'true'*/
+    TK_WHEN,     /*'when': for individual switch statements*/
+    TK_WHILE,    /*'while'*/
     
 
-    //Literals.
-    TOKEN_FIELD,                                  //@@@@@@@@@@@@@@@@@@@@
-    TOKEN_NAME,
-    TOKEN_NUMBER,
-    TOKEN_IDENTIFIER,                             //@@@@@@@@@@@@@@@@@@@@
-    TOKEN_INTERPOLATION,
-    TOKEN_LINE,
-    TOKEN_STATIC_FIELD,
-    TOKEN_STRING,                                 //@@@@@@@@@@@@@@@@@@@@
+    /*Literals.*/
+    TK_FIELD,
+    TK_NAME,
+    TK_NUMBER,
+    TK_IDENTIFIER,
+    TK_INTERPOLATION,
+    TK_LINE,
+    TK_STATIC_FIELD,
+    TK_STRING,
 
-    //Others.
-    TOKEN_ERROR,                                  //@@@@@@@@@@@@@@@@@@@@
-    TOKEN_EOF,                                    //@@@@@@@@@@@@@@@@@@@@
-    TOKEN_NEWLINE,  //'\n': terminates an expression@@@@@@@@@@@@@@@@@@@@
-    TOKEN_ENDEXPRESSION             
+    /*Others.*/
+    TK_ERROR,
+    TK_EOF,
+    TK_NEWLINE,  /*'\n': terminates an expression*/
+    TK_ENDEXPRESSION             
 } TokenType;
 
 typedef struct {
@@ -162,6 +173,14 @@ typedef struct {
     int16_t line;
 } Token;
 
+typedef struct {
+    const int8_t* start;
+    const int8_t* current;
+    int16_t line;
+} Scanner;
+
+Scanner scanner;
+
 void initScanner(const int8_t* source);
 
 static bool isAlpha(int8_t c);
@@ -169,17 +188,25 @@ static bool isDigit(int8_t c);
 
 static bool isAtEnd();
 
-//static char advance();
+/*static char advance();*/
 
 static int8_t checkChar();
 static int8_t checkNextChar();
 static int8_t nextChar();
 static bool compareChar(int8_t c);
 
-static Token makeToken(TokenType type);
+static Token makeToken(TokenType type){
+    Token token;
+    token.type = type;
+    token.start = scanner.start;
+    token.length = (int16_t)(scanner.current - scanner.start);
+    token.line = scanner.line;
+    return token;
+}
 static Token makeTwoCharToken(int8_t c, TokenType one, TokenType two);
 
 static Token errorToken(const int8_t* message);
 Token scanToken();
 
 #endif
+

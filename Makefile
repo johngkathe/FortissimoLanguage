@@ -2,7 +2,7 @@
 
 #Compiler and Flags
 CXX = gcc
-CXXFLAGS = -std=c99 -g -Wall -Wextra -ggdb3 -O0 -save-temps
+CXXFLAGS = -std=c89 -g -Wall -Wextra -ggdb3 -O0 -save-temps
 LDFLAGS = -lm 
 
 #Executable

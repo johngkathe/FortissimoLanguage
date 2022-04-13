@@ -8,11 +8,13 @@
 
 typedef enum {
     OP_CONSTANT,
-    OP_CONSTANT_LONG,   //Might need a better solution than its own opcode
+    /*Might need a better solution than its own opcode*/
+    OP_CONSTANT_LONG,
     OP_NIL,
     OP_TRUE,
     OP_FALSE,
     OP_POP,
+    OP_CLOSE_UPVALUE,
     OP_DEFINE_GLOBAL,
     OP_SET_GLOBAL,
     OP_GET_GLOBAL,
@@ -30,7 +32,10 @@ typedef enum {
     OP_NOT,
     OP_NEGATE,
     OP_PUTS,
+    OP_JUMP,
     OP_JUMP_IF_FALSE,
+    OP_JUMP_IF_TRUE,
+    OP_LOOP,
     OP_RETURN,
 } OpCode;
 ;

@@ -22,7 +22,7 @@ void freeTable(Table* table){
 }
 
 static Entry* findEntry(Entry* entries, size_t capacity, ObjString* key){
-    size_t index = key->hash % capacity;    //size_t since unsigned
+    size_t index = key->hash % capacity;    /*size_t since unsigned*/
     Entry* tombstone = NULL;
 
     for(;;){
@@ -43,13 +43,15 @@ static Entry* findEntry(Entry* entries, size_t capacity, ObjString* key){
 
 static void adjustCapacity(Table* table, size_t capacity){
     Entry* entries = ALLOCATE(Entry, capacity);
-    for(ptrdiff_t i = 0; i < capacity; i++){
+    ptrdiff_t i;
+
+    for(i = 0; i < capacity; i++){
         entries[i].key = NULL;
         entries[i].value = NIL_VAL;
     }
 
     table->count = 0;
-    for(ptrdiff_t i = 0; i < table->capacity; i++){
+    for(i = 0; i < table->capacity; i++){
         Entry* entry = &table->entries[i];
         if(entry->key == NULL) continue;
 
@@ -80,7 +82,8 @@ bool tableSet(Table* table, ObjString* key, Value value){
 }
 
 void tableAddAll(Table* from, Table* to){
-    for(ptrdiff_t i = 0; i < from->capacity; i++){
+    ptrdiff_t i;
+    for(i = 0; i < from->capacity; i++){
         Entry* entry = &from->entries[i];
         if(entry->key != NULL) tableSet(to, entry->key, entry->value);
     }
@@ -92,7 +95,7 @@ ObjString* tableFindString(Table* table, const int8_t* chars, int16_t length, ui
     size_t index = hash % table->capacity;
     for(;;){
         Entry* entry = &table->entries[index];
-        if(entry->key == NULL){ //Stop if we find an empty non-tombstone entry
+        if(entry->key == NULL){ /*Stop if we find an empty non-tombstone entry*/
             if(IS_NIL(entry->value)) return NULL;
         } else if(entry->key->length == length && entry->key->hash == hash && 
                   memcmp(entry->key->chars, chars, length) == 0){
@@ -115,11 +118,11 @@ bool tableGet(Table* table, ObjString* key, Value* value){
 bool tableDelete(Table* table, ObjString* key){
     if(table->count == 0) return false;
 
-    //Find the entry.
+    /*Find the entry.*/
     Entry* entry = findEntry(table->entries, table->capacity, key);
     if(entry->key == NULL) return false;
 
-    //Place tombstone in the entry.
+    /*Place tombstone in the entry.*/
     entry->key = NULL;
     entry->value = BOOL_VAL(true);
     return true;

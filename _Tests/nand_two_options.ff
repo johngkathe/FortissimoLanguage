@@ -1,0 +1,4 @@
+if true !& true ~> puts 1   else puts 0
+if false !& true ~> puts 1  else puts 0
+if true !& false ~> puts 1  else puts 0 #!!
+if false !& false ~> puts 1 else puts 0

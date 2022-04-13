@@ -9,7 +9,8 @@
 void disassembleChunk(Chunk* chunk, const int8_t* name){
     printf("== %s ==\n", name);
 
-    for(int offset = 0; offset < chunk->count;){
+    int16_t offset;
+    for(offset = 0; offset < chunk->count;){
         offset = disassembleInstruction(chunk, offset);
     }
 }
@@ -37,6 +38,8 @@ int16_t disassembleInstruction(Chunk* chunk, int16_t offset){
             return simpleInstruction("OP_FALSE", offset);
         case OP_POP:
             return simpleInstruction("OP_POP", offset);
+        case OP_CLOSE_UPVALUE:
+            printf("CLOSE_UPVALUE\n"); break;
         case OP_DEFINE_GLOBAL:
             return constantInstruction("OP_DEFINE_GLOBAL", chunk, offset);
         case OP_SET_GLOBAL:
@@ -71,6 +74,14 @@ int16_t disassembleInstruction(Chunk* chunk, int16_t offset){
             return simpleInstruction("OP_NEGATE", offset);
         case OP_PUTS:
             return simpleInstruction("OP_PUTS", offset);
+        case OP_JUMP:
+            return jumpInstruction("OP_JUMP", 1, chunk, offset);
+        case OP_JUMP_IF_FALSE:
+            return jumpInstruction("OP_JUMP_IF_FALSE", 1, chunk, offset);
+        case OP_JUMP_IF_TRUE:
+            return jumpInstruction("OP_JUMP_IF_TRUE", 1, chunk, offset);
+        case OP_LOOP:
+            return jumpInstruction("OP_LOOP", -1, chunk, offset);
         case OP_RETURN:
             return simpleInstruction("OP_RETURN", offset);
         default:
@@ -109,4 +120,11 @@ static int16_t byteInstruction(const int8_t* name, Chunk* chunk, int16_t offset)
     uint8_t slot = chunk->code[offset + 1];
     printf("%-16s %4d\n", name, slot);
     return offset + 2;
+}
+
+static int16_t jumpInstruction(const int8_t* name, int16_t sign, Chunk* chunk, int16_t offset){
+    uint16_t jump = (uint16_t)(chunk->code[offset + 1] << 8);
+    jump |= chunk->code[offset  + 2];
+    printf("%-16s %4d -> %d\n", name, offset, offset + 3 + sign * jump);
+    return offset + 3;
 }

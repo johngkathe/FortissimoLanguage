@@ -9,21 +9,21 @@
 bool valuesEqual(Value a, Value b){
     if(a.type != b.type) return false;
     switch(a.type){
-        case VAL_NIL:        return true;
-        case VAL_BOOL:       return AS_BOOL(a) == AS_BOOL(b);
-        case VAL_OBJ:        return AS_OBJ(a) == AS_OBJ(b);
-        case VAL_CHAR:       return AS_CHAR(a) == AS_CHAR(b);
-        case VAL_UCHAR:      return AS_UCHAR(a) == AS_UCHAR(b);
-        case VAL_INT:        return AS_INT(a) == AS_INT(b);
-        case VAL_UINT:       return AS_UINT(a) == AS_UINT(b);
-        case VAL_LONG:       return AS_LONG(a) == AS_LONG(b);
-        case VAL_ULONG:      return AS_ULONG(a) == AS_ULONG(b);
-        case VAL_FLOAT:      return AS_FLOAT(a) == AS_FLOAT(b);
-        case VAL_LONGLONG:   return AS_LONGLONG(a) == AS_LONGLONG(b);
-        case VAL_ULONGLONG:  return AS_ULONGLONG(a) == AS_ULONGLONG(b);
-        case VAL_DOUBLE:     return AS_DOUBLE(a) == AS_DOUBLE(b);
-        case VAL_DOUBLELONG: return AS_DOUBLELONG(a) == AS_DOUBLELONG(b);
-        default:             return false; //Unreachable.
+        case VAL_NIL:   return true;
+        case VAL_BOOL:  return AS_BOOL(a) == AS_BOOL(b);
+        case VAL_OBJ:   return AS_OBJ(a) == AS_OBJ(b);
+        case VAL_I8:    return AS_I8(a) == AS_I8(b);
+        case VAL_U8:    return AS_U8(a) == AS_U8(b);
+        case VAL_I16:   return AS_I16(a) == AS_I16(b);
+        case VAL_U16:   return AS_U16(a) == AS_U16(b);
+        case VAL_I32:   return AS_I32(a) == AS_I32(b);
+        case VAL_U32:   return AS_U32(a) == AS_U32(b);
+        case VAL_I64:   return AS_I64(a) == AS_I64(b);
+        case VAL_U64:   return AS_U64(a) == AS_U64(b);
+        case VAL_F32:   return AS_F32(a) == AS_F32(b);
+        case VAL_F64:   return AS_F64(a) == AS_F64(b);
+        case VAL_F128:  return AS_F128(a) == AS_F128(b);
+        default:        return false; /*Unreachable.*/
     }
 }
 
@@ -54,19 +54,19 @@ void printValue(Value value){
         case VAL_BOOL:
             printf(AS_BOOL(value) ? "true" : "false");
             break;
-        case VAL_NIL:    printf("nil"); break;
-        case VAL_OBJ:    printObject(value); break;
-        case VAL_CHAR:   printf("%c", AS_CHAR(value)); break;
-        case VAL_UCHAR:  printf("%u", AS_UCHAR(value)); break;
-        case VAL_INT:    printf("%d", AS_INT(value)); break;
-        case VAL_UINT:   printf("%u", AS_UINT(value)); break;
-        case VAL_LONG:   printf("%u", AS_LONG(value)); break;
-        case VAL_ULONG:  printf("%u", AS_ULONG(value)); break;
-        case VAL_LONGLONG:   printf("%lu", AS_LONGLONG(value)); break;
-        case VAL_ULONGLONG:  printf("%lu", AS_ULONGLONG(value)); break;
-        case VAL_FLOAT:  printf("%f", AS_FLOAT(value)); break;
-        case VAL_DOUBLE: printf("%g", AS_DOUBLE(value)); break;
-        case VAL_DOUBLELONG: printf("%Lf", AS_DOUBLELONG(value)); break;
+        case VAL_NIL:   printf("nil"); break;
+        case VAL_OBJ:   printObject(value); break;
+        case VAL_I8:    printf("%c", AS_I8(value)); break;
+        case VAL_U8:    printf("%u", AS_U8(value)); break;
+        case VAL_I16:   printf("%d", AS_I16(value)); break;
+        case VAL_U16:   printf("%u", AS_U16(value)); break;
+        case VAL_I32:   printf("%u", AS_I32(value)); break;
+        case VAL_U32:   printf("%u", AS_U32(value)); break;
+        case VAL_I64:   printf("%lu", AS_I64(value)); break;
+        case VAL_U64:   printf("%lu", AS_U64(value)); break;
+        case VAL_F32:   printf("%f", AS_F32(value)); break;
+        case VAL_F64:   printf("%g", AS_F64(value)); break;
+        case VAL_F128:  printf("%Lf", AS_F128(value)); break;
     }
     
 }

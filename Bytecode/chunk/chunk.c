@@ -12,10 +12,10 @@ int16_t addConstant(Chunk* chunk, Value value){
 void initChunk(Chunk* chunk){
     chunk->count = 0;
     chunk->capacity = 0;
-    chunk->code = NULL;     //HERE
+    chunk->code = NULL;     /*HERE*/
     chunk->lineCount = 0;
     chunk->lineCapacity = 0;
-    chunk->lines = NULL;    //HERE
+    chunk->lines = NULL;    /*HERE*/
     initValueArray(&chunk->constants);
 }
 
