@@ -4,5 +4,6 @@ Fortissimo is a gradually typed (well, I'm working towards that part), C-based l
 ## Introduction to Fortissimo Syntax and Grammar
 ### Note: 
   *: broken feature
+  
   **: umimplemented feature
  
