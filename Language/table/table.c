@@ -89,7 +89,7 @@ void tableAddAll(Table* from, Table* to){
     }
 }
 
-ObjString* tableFindString(Table* table, const int8_t* chars, int16_t length, uint32_t hash){
+ObjString* tableFindString(Table* table, const int8_t* chars, int32_t length, uint32_t hash){
     if(table->count == 0) return NULL;
 
     size_t index = hash % table->capacity;

@@ -468,13 +468,12 @@ static int8_t whileStatement(){
 
 static void doStatement(){  /*equivalent to for(;;) or while(true)*/
     int16_t loopStart = currentChunk()->count;
-    consume(TK_TILDEGT, "Expected '~>' after condition.");
 
     int16_t exitJump = emitJump(OP_JUMP_IF_FALSE);
     emitByte(OP_POP);
     statement();
     emitLoop(loopStart);
-
+    
     patchJump(exitJump);
     emitByte(OP_POP);
 }

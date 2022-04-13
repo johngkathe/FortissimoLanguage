@@ -9,8 +9,8 @@
 bool valuesEqual(Value a, Value b){
     if(a.type != b.type) return false;
     switch(a.type){
-        case VAL_NIL:   return true;
         case VAL_BOOL:  return AS_BOOL(a) == AS_BOOL(b);
+        case VAL_NIL:   return true;
         case VAL_OBJ:   return AS_OBJ(a) == AS_OBJ(b);
         case VAL_I8:    return AS_I8(a) == AS_I8(b);
         case VAL_U8:    return AS_U8(a) == AS_U8(b);
@@ -35,7 +35,7 @@ void initValueArray(ValueArray* array){
 
 void writeValueArray(ValueArray* array, Value value){
     if(array->capacity < array->count + 1){
-        int16_t oldCapacity = array->capacity;
+        int32_t oldCapacity = array->capacity;
         array->capacity = GROW_CAPACITY(oldCapacity);
         array->values = GROW_ARRAY(Value, array->values, oldCapacity, array->capacity);
     }
@@ -67,6 +67,5 @@ void printValue(Value value){
         case VAL_F32:   printf("%f", AS_F32(value)); break;
         case VAL_F64:   printf("%g", AS_F64(value)); break;
         case VAL_F128:  printf("%Lf", AS_F128(value)); break;
-    }
-    
+    }  
 }

@@ -9,15 +9,15 @@
 void disassembleChunk(Chunk* chunk, const int8_t* name){
     printf("== %s ==\n", name);
 
-    int16_t offset;
+    int32_t offset;
     for(offset = 0; offset < chunk->count;){
         offset = disassembleInstruction(chunk, offset);
     }
 }
 
-int16_t disassembleInstruction(Chunk* chunk, int16_t offset){
+int32_t disassembleInstruction(Chunk* chunk, int32_t offset){
     printf("%04d ", offset);
-    int16_t line = getLine(chunk, offset);
+    int32_t line = getLine(chunk, offset);
     if(offset > 0 && line == getLine(chunk, offset - 1)){
         printf("   | ");
     } else {
@@ -90,7 +90,7 @@ int16_t disassembleInstruction(Chunk* chunk, int16_t offset){
     }
 }
 
-static int16_t constantInstruction(const int8_t* name, Chunk* chunk, int16_t offset){
+static int32_t constantInstruction(const int8_t* name, Chunk* chunk, int32_t offset){
     uint8_t constant = chunk->code[offset + 1];
     printf("%-16s %4d '", name, constant);
     if(!chunk->constants.values || &chunk->constants.values[constant] == NULL)
@@ -100,7 +100,7 @@ static int16_t constantInstruction(const int8_t* name, Chunk* chunk, int16_t off
     return offset + 2;
 }
 
-static int16_t longConstantInstruction(const int8_t* name, Chunk* chunk, int16_t offset){
+static int32_t longConstantInstruction(const int8_t* name, Chunk* chunk, int32_t offset){
     uint32_t constant = chunk->code[offset + 1] | (chunk->code[offset + 2] << 8)
                                                | (chunk->code[offset + 3] << 16);
     printf("%-16s %4d '", name, constant);
@@ -111,19 +111,19 @@ static int16_t longConstantInstruction(const int8_t* name, Chunk* chunk, int16_t
     return offset + 4;
 }
 
-static int16_t simpleInstruction(const int8_t* name, int16_t offset){
+static int32_t simpleInstruction(const int8_t* name, int32_t offset){
     printf("%s\n", name);
     return offset + 2;
 }
 
-static int16_t byteInstruction(const int8_t* name, Chunk* chunk, int16_t offset){
+static int32_t byteInstruction(const int8_t* name, Chunk* chunk, int32_t offset){
     uint8_t slot = chunk->code[offset + 1];
     printf("%-16s %4d\n", name, slot);
     return offset + 2;
 }
 
-static int16_t jumpInstruction(const int8_t* name, int16_t sign, Chunk* chunk, int16_t offset){
-    uint16_t jump = (uint16_t)(chunk->code[offset + 1] << 8);
+static int32_t jumpInstruction(const int8_t* name, int32_t sign, Chunk* chunk, int32_t offset){
+    uint32_t jump = (uint32_t)(chunk->code[offset + 1] << 8);
     jump |= chunk->code[offset  + 2];
     printf("%-16s %4d -> %d\n", name, offset, offset + 3 + sign * jump);
     return offset + 3;

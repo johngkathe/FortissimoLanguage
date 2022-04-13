@@ -60,7 +60,7 @@ static Token errorToken(const int8_t* message){
     Token token;
     token.type = TK_ERROR;
     token.start = message;
-    token.length = (int16_t)strlen(message);
+    token.length = (int32_t)strlen(message);
     token.line = scanner.line;
     return token;
 }
@@ -133,7 +133,7 @@ static void skipWhitespace(){
 
 /*start: location in token, length: remaining # of chars in token
   rest: remaining chars in token, type: type of token*/
-static TokenType checkKeyword(int16_t start, int16_t length, const int8_t* rest, TokenType type){
+static TokenType checkKeyword(int32_t start, int32_t length, const int8_t* rest, TokenType type){
     if(scanner.current - scanner.start == start + length && memcmp(scanner.start + start, rest, length) == 0){
         return type;
     }
@@ -335,26 +335,14 @@ Token scanToken(){
 
         /*Assignment Operations*/
         case ':':   /*Check for variable declaration tokens*/
-            if(compareChar('c')){nextChar(); return makeToken(TK_COLONCEQ);}
-            if(compareChar('d')){nextChar(); return makeToken(TK_COLONDEQ);}
+            /*
             if(compareChar('f')){nextChar(); return makeToken(TK_COLONFEQ);}
             if(compareChar('i')){nextChar(); return makeToken(TK_COLONIEQ);}
-            if(compareChar('l')){
-                if(compareChar('d')){nextChar(); return makeToken(TK_COLONLDEQ);}
-                if(compareChar('l')){nextChar(); return makeToken(TK_COLONLLEQ);}
-                if(compareChar('=')) return makeToken(TK_COLONLEQ);
-            } 
             if(compareChar('s')){nextChar(); return makeToken(TK_COLONSEQ);}
-            if(compareChar('u')){
-                if(compareChar('c')){nextChar(); return makeToken(TK_COLONUCEQ);}
-                if(compareChar('i')){nextChar(); return makeToken(TK_COLONUIEQ);}
-                if(compareChar('l')){
-                    if(compareChar('l')){nextChar(); return makeToken(TK_COLONULLEQ);}
-                    if(compareChar('=')) return makeToken(TK_COLONULEQ);
-                }            
-            }
-            if(compareChar(':')) return makeToken(TK_COLONCOLON); 
-            if(compareChar('\0')) return makeToken(TK_COLON);  /*Return normal colon*/
+            if(compareChar('u'))           
+            }*/
+            if(compareChar('=')) return makeToken(TK_COLONEQ);
+            return makeTwoCharToken(':', TK_COLONCOLON, TK_COLON);
 
         case '$':   /*Check for constant declaration tokens*/
             if(scanner.current - scanner.start > 1){

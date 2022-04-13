@@ -37,7 +37,7 @@ static InterpretResult run();
 InterpretResult interpret(const int8_t* source);
 void push(Value value);
 Value pop();
-static Value check(int16_t distance);
+static Value check(int32_t distance);
 static bool isFalsey(Value value);
 
 #endif

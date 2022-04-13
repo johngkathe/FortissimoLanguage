@@ -1,6 +1,11 @@
 #|Truth table for OR|#
-$puts "OR TRUTH TABLE"
+#puts "OR TRUTH TABLE"
 #if true || true ~> puts 1   else puts 0
 #if true || false ~> puts 1  else puts 0
 #if false || true ~> puts 1  else puts 0    #!!
 #if false || false ~> puts 1 else puts 0    #!!
+
+if true || true ~> puts 1
+if true || false ~> puts 1
+if false || true ~> puts 1
+if false || false ~> puts 1

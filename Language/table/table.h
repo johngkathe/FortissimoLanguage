@@ -24,6 +24,6 @@ bool tableSet(Table* table, ObjString* key, Value value);
 void tableAddAll(Table* from, Table* to);
 bool tableGet(Table* table, ObjString* key, Value* value);
 bool tableDelete(Table* table, ObjString* key);
-ObjString* tableFindString(Table* table, const int8_t* chars, int16_t length, uint32_t hash);
+ObjString* tableFindString(Table* table, const int8_t* chars, int32_t length, uint32_t hash);
 
 #endif

@@ -40,26 +40,26 @@ typedef enum {
 } OpCode;
 ;
 typedef struct {
-    int16_t offset;
-    uint16_t line;
+    int32_t offset;
+    uint32_t line;
 } LineStart;
 
 typedef struct {
-    int16_t count;
-    int16_t capacity;
+    int32_t count;
+    int32_t capacity;
     uint8_t* code;
     ValueArray constants;
-    int16_t lineCount;
-    int16_t lineCapacity;
+    int32_t lineCount;
+    int32_t lineCapacity;
     LineStart* lines;
 } Chunk;
 
-int16_t addConstant(Chunk* chunk, Value value);
+int32_t addConstant(Chunk* chunk, Value value);
 void initChunk(Chunk* chunk);
 void freeChunk(Chunk* chunk);
-int16_t getLine(Chunk* chunk, int16_t instruction);
-void writeConstant(Chunk* chunk, Value value, int16_t line);
-void writeChunk(Chunk* chunk, uint8_t byte, int16_t line);
+int32_t getLine(Chunk* chunk, int16_t instruction);
+void writeConstant(Chunk* chunk, Value value, int32_t line);
+void writeChunk(Chunk* chunk, uint8_t byte, int32_t line);
 
 
 #endif

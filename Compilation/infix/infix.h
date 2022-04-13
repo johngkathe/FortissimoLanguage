@@ -8,25 +8,18 @@
 
 /*PREC_LOGIC*/
 static void and_(bool canAssign){
-    int16_t endJump = emitJump(OP_JUMP_IF_FALSE);   /*Jump if not both*/
+    int32_t elseJump = emitJump(OP_JUMP_IF_TRUE);
+    int32_t endJump = emitJump(OP_JUMP);
 
+    patchJump(elseJump);
     emitByte(OP_POP);
-    parsePrecedence(PREC_LOGIC);    /*Check &&.*/
 
-    patchJump(endJump); /*Jump if the subsequent case is false.*/
-}
-/*
-static void nand_(bool canAssign){
-    int16_t endJump = emitJump(OP_JUMP_IF_TRUE);
-
-    emitByte(OP_POP);
-    parsePrecedence(PREC_LOGIC);    /*Check !&.
-
+    parsePrecedence(PREC_LOGIC);
     patchJump(endJump);
-}*/
+}
 
-static void or_(bool canAssign){
-    int16_t endJump = emitJump(OP_JUMP_IF_TRUE);
+static void nand_(bool canAssign){
+    int32_t endJump = emitJump(OP_JUMP_IF_TRUE);
 
     emitByte(OP_POP);
     parsePrecedence(PREC_LOGIC);    /*Check !&.*/
@@ -34,9 +27,9 @@ static void or_(bool canAssign){
     patchJump(endJump);
 }
 
-static void nand_(bool canAssign){
-    int16_t elseJump = emitJump(OP_JUMP_IF_FALSE);
-    int16_t endJump = emitJump(OP_JUMP);
+static void or_(bool canAssign){
+    int32_t elseJump = emitJump(OP_JUMP_IF_FALSE);
+    int32_t endJump = emitJump(OP_JUMP);
 
     patchJump(elseJump);
     emitByte(OP_POP);
@@ -46,8 +39,8 @@ static void nand_(bool canAssign){
 }
 
 static void xor_(bool canAssign){
-    int16_t elseJump = emitJump(OP_JUMP_IF_FALSE);
-    int16_t endJump = emitJump(OP_JUMP);
+    int32_t elseJump = emitJump(OP_JUMP_IF_FALSE);
+    int32_t endJump = emitJump(OP_JUMP);
 
     printf("%u\t%u\n", elseJump, endJump);
 

@@ -20,7 +20,7 @@ static Obj* allocateObject(size_t size, ObjType type){
     return object;
 }
 
-static ObjString* allocateString(int8_t* chars, int16_t length, uint32_t hash){
+static ObjString* allocateString(int8_t* chars, int32_t length, uint32_t hash){
     ObjString* string = ALLOCATE_OBJ(ObjString, OBJ_STRING);
     string->length = length;
     string->chars = chars;
@@ -30,9 +30,9 @@ static ObjString* allocateString(int8_t* chars, int16_t length, uint32_t hash){
 }
 
 /*FNV-1 Hash Function*/
-static uint32_t hashString(const int8_t* key, int16_t length){
+static uint32_t hashString(const int8_t* key, int32_t length){
     uint32_t hash = 216613626lu;
-    int16_t i;
+    ptrdiff_t i;
     for(i = 0; i<length; i++){
         hash *= 16777619;
         hash ^= (uint8_t)key[i];
@@ -42,7 +42,7 @@ static uint32_t hashString(const int8_t* key, int16_t length){
     return hash;
 }
 
-ObjString* takeString(int8_t* chars, int16_t length){
+ObjString* takeString(int8_t* chars, int32_t length){
     uint32_t hash = hashString(chars, length);
     ObjString* interned = tableFindString(&vm.strings, chars, length, hash);
     if(interned != NULL){
@@ -53,7 +53,7 @@ ObjString* takeString(int8_t* chars, int16_t length){
     return allocateString(chars, length, hash);
 }
 
-ObjString* copyString(const int8_t* chars, int16_t length){
+ObjString* copyString(const int8_t* chars, int32_t length){
     uint32_t hash = hashString(chars, length);
     ObjString* interned = tableFindString(&vm.strings, chars, length, hash);
     if(interned != NULL) return interned;

@@ -16,17 +16,17 @@ static void emitBytes(uint8_t byte1, uint8_t byte2){
     emitByte(byte2);
 }
 
-static void emitLoop(int16_t loopStart){
+static void emitLoop(int32_t loopStart){
     emitByte(OP_LOOP);
 
-    int16_t offset = currentChunk()->count - loopStart + 2;
+    int32_t offset = currentChunk()->count - loopStart + 2;
     if(offset > UINT16_MAX) error("Loop body is too large.");
 
     emitByte((offset >> 8) & 0xff);
     emitByte(offset & 0xff);
 }
 
-static int16_t emitJump(uint8_t instruction){
+static int32_t emitJump(uint8_t instruction){
     emitByte(instruction);
     /*this is 2**16 bytes of code.  Might have to adjust.*/
     emitByte(0xff);
@@ -34,16 +34,16 @@ static int16_t emitJump(uint8_t instruction){
     return currentChunk()->count - 2;
 }
 
-static int16_t emitJumpPlus(uint8_t instruction1, uint8_t instruction2){
+static int32_t emitJumpPlus(uint8_t instruction1, uint8_t instruction2){
     emitBytes(instruction1, instruction2);
     emitByte(0xff);
     emitByte(0xff);
     return currentChunk()->count - 2;
 }
 
-static void patchJump(int16_t offset){ /*Pertains to emitJump*/
+static void patchJump(int32_t offset){ /*Pertains to emitJump*/
     /*-2 to addjust for the bytecode for the jump offset itself.*/
-    int16_t jump = currentChunk()->count - offset - 2;
+    int32_t jump = currentChunk()->count - offset - 2;
 
     if(jump > UINT16_MAX){
         error("Too much code to jump over.");

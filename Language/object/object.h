@@ -24,13 +24,13 @@ struct Obj {
 
 struct ObjString {
     Obj obj;
-    int16_t length;
+    int32_t length;
     int8_t* chars;
     uint32_t hash;
 };
 
-ObjString* takeString(int8_t* chars, int16_t length);
-ObjString* copyString(const int8_t* chars, int16_t length);
+ObjString* takeString(int8_t* chars, int32_t length);
+ObjString* copyString(const int8_t* chars, int32_t length);
 void printObject(Value value);
 
 static bool isObjType(Value value, ObjType type){

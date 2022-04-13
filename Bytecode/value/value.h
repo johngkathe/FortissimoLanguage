@@ -22,7 +22,7 @@ typedef uint64_t Value;
 
 #define IS_NIL(value)       ((value) == NIL_VAL)
 #define IS_BOOL(value)      (((value) | 1) == TRUE_VAL)
-#define IS_F64(value)    (((value) & QNAN) != QNAN)
+#define IS_F64(value)       (((value) & QNAN) != QNAN)
 #define IS_OBJ(value) \
     (((value) & (QNAN | SIGN_BIT)) == (QNAN | SIGN_BIT))
 
@@ -36,7 +36,7 @@ typedef uint64_t Value;
 #define TRUE_VAL            ((Value)(uint64_t)(QNAN | TAG_TRUE))
 #define NIL_VAL             ((Value)(uint64_t)(QNAN | TAG_NIL))
 #define UNDEFINED_VAL
-#define F64_VAL(dbl)     dblToValue(dbl)
+#define F64_VAL(dbl)        dblToValue(dbl)
 #define OBJ_VAL(obj) \
     (Value)(SIGN_BIT | QNAN | (uint64_t)(uintptr_t)(obj))
 
@@ -54,9 +54,9 @@ static inline Value f64ToValue(double f64){
 #else
 
 typedef enum {
+    VAL_BOOL,
     VAL_UNDEFINED,
     VAL_NIL,
-    VAL_BOOL,
     VAL_I8,
     VAL_U8,
     VAL_I16,
@@ -90,9 +90,9 @@ typedef struct {
     } as;  
 } Value;
 
+#define IS_BOOL(value)      ((value).type == VAL_BOOL)
 #define IS_UNDEFINED(value) ((value).type == VAL_UNDEFINED)
 #define IS_NIL(value)       ((value).type == VAL_NIL)
-#define IS_BOOL(value)      ((value).type == VAL_BOOL)
 #define IS_NUMBER(value)    ((value).type != VAL_NIL && (value).type != VAL_BOOL);
 #define IS_I8(value)        ((value).type == VAL_I8)
 #define IS_U8(value)        ((value).type == VAL_U8)
@@ -121,27 +121,27 @@ typedef struct {
 #define AS_F128(value)      ((value).as.f128)
 #define AS_OBJ(value)       ((value).as.obj)
 
+#define BOOL_VAL(value)     ((Value){VAL_BOOL, {.boolean = value}})
 #define UNDEFINED_VAL       ((Value){VAL_UNDEFINED})
 #define NIL_VAL             ((Value){VAL_NIL, {.f64 = 0}})
-#define BOOL_VAL(value)     ((Value){VAL_BOOL, {.boolean = value}})
-#define I8_VAL(value)     ((Value){VAL_I8, {.i8 = value}})
-#define U8_VAL(value)    ((Value){VAL_U8, {.u8 = value}})
+#define I8_VAL(value)       ((Value){VAL_I8, {.i8 = value}})
+#define U8_VAL(value)       ((Value){VAL_U8, {.u8 = value}})
 #define I16_VAL(value)      ((Value){VAL_I16, {.i16 = value}})
-#define U16_VAL(value)     ((Value){VAL_U16, {.u16 = value}})
-#define I32_VAL(value)     ((Value){VAL_I32, {.i32 = value}})
-#define U32_VAL(value)    ((Value){VAL_U32, {.u32 = value}})
-#define I64_VAL(value) ((Value){VAL_I64, {.i64 = value}})
-#define U64_VAL(value) ((Value){VAL_U64, {.u64 = value}})
-#define F32_VAL(value)    ((Value){VAL_F32, {.f32 = value}})
-#define F64_VAL(value)   ((Value){VAL_F64, {.f64 = value}})
-#define F128_VAL(value) ((Value){VAL_F128, {.f128 = value}})
+#define U16_VAL(value)      ((Value){VAL_U16, {.u16 = value}})
+#define I32_VAL(value)      ((Value){VAL_I32, {.i32 = value}})
+#define U32_VAL(value)      ((Value){VAL_U32, {.u32 = value}})
+#define I64_VAL(value)      ((Value){VAL_I64, {.i64 = value}})
+#define U64_VAL(value)      ((Value){VAL_U64, {.u64 = value}})
+#define F32_VAL(value)      ((Value){VAL_F32, {.f32 = value}})
+#define F64_VAL(value)      ((Value){VAL_F64, {.f64 = value}})
+#define F128_VAL(value)     ((Value){VAL_F128, {.f128 = value}})
 #define OBJ_VAL(object)     ((Value){VAL_OBJ, {.obj = (Obj*)object}})     
 
 #endif
 
 typedef struct{
-    int16_t capacity;
-    int16_t count;
+    int32_t capacity;
+    int32_t count;
     Value* values;
 } ValueArray;
 

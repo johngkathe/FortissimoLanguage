@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <stdint.h>
 
-int16_t addConstant(Chunk* chunk, Value value){
+int32_t addConstant(Chunk* chunk, Value value){
     writeValueArray(&chunk->constants, value);
     return chunk->constants.count - 1;
 }
@@ -27,12 +27,12 @@ void freeChunk(Chunk* chunk){
     FREE_ARRAY(LineStart, chunk->lines, chunk->lineCapacity);
 }
 
-int16_t getLine(Chunk* chunk, int16_t instruction){
-    int16_t start = 0;
-    int16_t end = chunk->lineCount - 1;
+int32_t getLine(Chunk* chunk, int16_t instruction){
+    int32_t start = 0;
+    int32_t end = chunk->lineCount - 1;
 
     for(;;){
-        int16_t mid = (start + end)/2;
+        int32_t mid = (start + end)/2;
         LineStart* line = &chunk->lines[mid];
         if(instruction < line->offset){
             end = mid - 1;
@@ -44,7 +44,7 @@ int16_t getLine(Chunk* chunk, int16_t instruction){
     }
 }
 
-void writeConstant(Chunk* chunk, Value value, int16_t line){
+void writeConstant(Chunk* chunk, Value value, int32_t line){
     int index = addConstant(chunk, value);
     if(index < 256){
         writeChunk(chunk, OP_CONSTANT, line);
@@ -57,9 +57,9 @@ void writeConstant(Chunk* chunk, Value value, int16_t line){
     }
 }
 
-void writeChunk(Chunk* chunk, uint8_t byte, int16_t line){
+void writeChunk(Chunk* chunk, uint8_t byte, int32_t line){
     if(chunk->capacity < chunk->count + 1){
-        int16_t oldCapacity = chunk->capacity;
+        int32_t oldCapacity = chunk->capacity;
         chunk->capacity = GROW_CAPACITY(oldCapacity);
         chunk->code = GROW_ARRAY(uint8_t, chunk->code, oldCapacity, chunk->capacity);
     }
@@ -70,7 +70,7 @@ void writeChunk(Chunk* chunk, uint8_t byte, int16_t line){
     if(chunk->lineCount > 0 && chunk->lines[chunk->lineCount - 1].line == line) return;
 
     if(chunk->lineCapacity < chunk->lineCount + 1){
-        int16_t oldCapacity = chunk->lineCapacity;
+        int32_t oldCapacity = chunk->lineCapacity;
         chunk->lineCapacity = GROW_CAPACITY(oldCapacity);
         chunk->lines = GROW_ARRAY(LineStart, chunk->lines, oldCapacity, chunk->lineCapacity);
     }

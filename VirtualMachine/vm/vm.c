@@ -112,7 +112,7 @@ static InterpretResult run(){
         printf(" ]");
     }
     printf("\n");
-    disassembleInstruction(vm.chunk, (int16_t)(vm.ip - vm.chunk->code));
+    disassembleInstruction(vm.chunk, (int32_t)(vm.ip - vm.chunk->code));
 #endif
 
         uint8_t instruction;
@@ -262,7 +262,7 @@ Value pop(){
     /* return vm.stack[vm.stackCount];*/
 }
 
-static Value check(int16_t distance){
+static Value check(int32_t distance){
     return vm.stackTop[-1 - distance];
 }
 

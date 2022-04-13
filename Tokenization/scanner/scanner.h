@@ -169,14 +169,14 @@ typedef enum {
 typedef struct {
     TokenType type;
     const int8_t* start;
-    int16_t length;
-    int16_t line;
+    int32_t length;
+    int32_t line;
 } Token;
 
 typedef struct {
     const int8_t* start;
     const int8_t* current;
-    int16_t line;
+    int32_t line;
 } Scanner;
 
 Scanner scanner;
@@ -199,7 +199,7 @@ static Token makeToken(TokenType type){
     Token token;
     token.type = type;
     token.start = scanner.start;
-    token.length = (int16_t)(scanner.current - scanner.start);
+    token.length = (int32_t)(scanner.current - scanner.start);
     token.line = scanner.line;
     return token;
 }
