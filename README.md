@@ -28,5 +28,6 @@ Fortissimo is a gradually typed (well, I'm working towards that part), C-based l
  ### Variable Declarations*
 
 myImmut: i8 :: 0       #Immutable variable declaration of an 8-bit, signed integer called 'myImmut'.
+
 myMut: u16 := 1000     #Mutable variable declaration of a 16-bit, unsigned integer called 'myMut'.
 
