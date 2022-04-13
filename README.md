@@ -12,10 +12,15 @@ Comments:
  #This is a line comment
  
  #|This
+ 
    Is
+   
    A
+   
    Block
+   
    Comment
+   
    #|That can be nested!|#
    
  |#
