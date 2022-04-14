@@ -33,6 +33,8 @@ Fortissimo is a gradually typed (well, I'm working towards that part), C-based l
  
  puts var  #Prints the contents of var to the console.
  
+ puts !!varSetTo1==1  #Prints the (boolean)truthiness of an expression.*
+ 
  ### Variable Declarations*
 
 myImmut: i8 :: 0       #Immutable variable declaration of an 8-bit, signed integer called 'myImmut'.
